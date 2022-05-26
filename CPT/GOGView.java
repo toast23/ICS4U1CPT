@@ -114,7 +114,7 @@ public class GOGView extends JPanel{
 		
 		theTextArea = new JTextArea();
 		theScroll = new JScrollPane(theTextArea);
-		theScroll.setBounds(650,150,620,500);
+		theScroll.setBounds(720,150,550,500);
 		this.add(theScroll);
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
