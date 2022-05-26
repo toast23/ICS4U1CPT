@@ -16,10 +16,13 @@ public class GOGServer implements ActionListener{
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Methods
 	public void actionPerformed(ActionEvent evt){
+		//Ever 1/60th of a second, repaint
 		if(evt.getSource() == theTimer){
+			//we update the panel's array with the model array data
 			thePanel.strChessboardArray=theModel.strArray;
 			thePanel.repaint();
 		}
+		
 		if(evt.getSource()==theGameClockTimer){
 			theModel.updateTime();
 			//This line has no purpose. I just wanted to save this so we know how to append the thing later

@@ -49,7 +49,7 @@ public class GOGView extends JPanel{
 		int intColumn;
 		g.setColor(Color.WHITE);
 		for(intRow=0;intRow<8;intRow++){
-			for(intColumn=0;intColumn<8;intColumn++){
+			for(intColumn=0;intColumn<9;intColumn++){
 				if(strChessboardArray[intRow][intColumn] == null){
 				}else if(strChessboardArray[intRow][intColumn].equals("P1p")){
 					g.drawString("p",110+70*intColumn,120+70*intRow);
