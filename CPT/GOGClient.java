@@ -3,7 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-public class ClientChess implements ActionListener{
+public class GOGClient implements ActionListener{
 	//Properties
 	JFrame theFrame = new JFrame("Client Chess");
 	JPanel thePanel = new JPanel();
