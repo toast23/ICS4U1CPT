@@ -151,7 +151,7 @@ public interface GOGUtilities{
 		//If it's null, it crashes so the first if statement checks if you say null
 		if(strArray[intOGPosY][intOGPosX]==null){
 		}else if(strArray[intOGPosY][intOGPosX].equals("P1p")){
-			//If it's moves in any of the cardinal directions, it works
+			//If it's moves in any of the cardinal directions, move the pices
 			if((intOGPosY+1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY-1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX+1==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX-1==intNewPosX)){
 				//remove pawn from previous spot
 				strArray[intOGPosY][intOGPosX]=null;
