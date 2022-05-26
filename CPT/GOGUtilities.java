@@ -27,7 +27,7 @@ public interface GOGUtilities{
 		}catch(IOException e){
 			System.out.println("Unable to print");
 		}
-		strArray = new String[intRow][8];
+		strArray = new String[intRow][9];
 		strTempArray = new String[8];
 		//Load it
 		try{
@@ -45,7 +45,7 @@ public interface GOGUtilities{
 					 strTempArray[intCnt] = "0";
 				 }
 			}
-			for(intCnt2 = 0; intCnt2 < 8; intCnt2++){
+			for(intCnt2 = 0; intCnt2 < 9; intCnt2++){
 				strArray[intCnt][intCnt2] = strTempArray[intCnt2];
 			}
 		}
@@ -71,6 +71,8 @@ public interface GOGUtilities{
 			intOriginalPositionX=6;
 		}else if(chrCharacter=='H'){
 			intOriginalPositionX=7;
+		}else if(chrCharacter=='I'){
+			intOriginalPositionX=8;
 		}
 		return intOriginalPositionX;
 	}
@@ -117,6 +119,8 @@ public interface GOGUtilities{
 			intNewPositionX=6;
 		}else if(chrCharacter=='H'){
 			intNewPositionX=7;
+		}else if(chrCharacter=='I'){
+			intNewPositionX=8;
 		}
 		return intNewPositionX;
 	}
@@ -143,18 +147,34 @@ public interface GOGUtilities{
 		}
 		return intNewPositionY;
 	}
-	public static String[][] pawnMovement(String strArray[][], int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY){
-		//First condition states that if the thing on the tile is pawn
-		//Second condition is that if you tell the pawn to move up by 1 row
-		//Third condition is that if you tell the pawn it’s in the same column since it can’t move diagonally for now
+	public static String[][] privateMovement(String strArray[][], int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY){
+		//If it's null, it crashes so the first if statement checks if you say null
 		if(strArray[intOGPosY][intOGPosX]==null){
 			//in case it's null, skip
+		//If it's moving down 1, then let it go down
 		}else if(strArray[intOGPosY][intOGPosX].equals("p") && intOGPosY+1==intNewPosY && intOGPosX==intNewPosX){
-		//remove pawn from previous spot
-		strArray[intOGPosY][intOGPosX]=null;
-
-		//make the pawn move to new position
-		strArray[intNewPosY][intNewPosX]="p";
+			//remove pawn from previous spot
+			strArray[intOGPosY][intOGPosX]=null;
+			//make the pawn move to new position
+			strArray[intNewPosY][intNewPosX]="p";
+		//If it's moving up 1, then let it go up
+		}else if(strArray[intOGPosY][intOGPosX].equals("p") && intOGPosY-1==intNewPosY && intOGPosX==intNewPosX){
+			//remove pawn from previous spot
+			strArray[intOGPosY][intOGPosX]=null;
+			//make the pawn move to new position
+			strArray[intNewPosY][intNewPosX]="p";
+		//If it's moving to the right 1, then let it go right
+		}else if(strArray[intOGPosY][intOGPosX].equals("p") && intOGPosY==intNewPosY && intOGPosX+1==intNewPosX){
+			//remove pawn from previous spot
+			strArray[intOGPosY][intOGPosX]=null;
+			//make the pawn move to new position
+			strArray[intNewPosY][intNewPosX]="p";
+		//If it's moving to the left 1, then let it go left
+		}else if(strArray[intOGPosY][intOGPosX].equals("p") && intOGPosY==intNewPosY && intOGPosX-1==intNewPosX){
+			//remove pawn from previous spot
+			strArray[intOGPosY][intOGPosX]=null;
+			//make the pawn move to new position
+			strArray[intNewPosY][intNewPosX]="p";
 		}
 		return strArray;
 	}
