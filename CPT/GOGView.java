@@ -10,11 +10,11 @@ import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class GOGView extends JPanel{
 	//Properties
-	public String strChessboardArray[][] = new String[9][8];
+	public String strChessboardArray[][] = new String[8][9];
 	public BufferedImage imgChessboard = null;
 	
 	//Timer stuff
-	public JLabel theGameClockLabel=new JLabel("OwO");
+	public JLabel theGameClockLabel=new JLabel("Time");
 	
 	//Text area stuff
 	public JTextArea theTextArea;

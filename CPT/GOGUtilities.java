@@ -156,7 +156,7 @@ public interface GOGUtilities{
 				//remove pawn from previous spot
 				strArray[intOGPosY][intOGPosX]=null;
 				//make the pawn move to new position
-				strArray[intNewPosY][intNewPosX]="p";
+				strArray[intNewPosY][intNewPosX]="P1p";
 			}
 		}
 		return strArray;
