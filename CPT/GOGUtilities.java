@@ -150,31 +150,14 @@ public interface GOGUtilities{
 	public static String[][] privateMovement(String strArray[][], int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY){
 		//If it's null, it crashes so the first if statement checks if you say null
 		if(strArray[intOGPosY][intOGPosX]==null){
-			//in case it's null, skip
-		//If it's moving down 1, then let it go down
-		}else if(strArray[intOGPosY][intOGPosX].equals("p") && intOGPosY+1==intNewPosY && intOGPosX==intNewPosX){
-			//remove pawn from previous spot
-			strArray[intOGPosY][intOGPosX]=null;
-			//make the pawn move to new position
-			strArray[intNewPosY][intNewPosX]="p";
-		//If it's moving up 1, then let it go up
-		}else if(strArray[intOGPosY][intOGPosX].equals("p") && intOGPosY-1==intNewPosY && intOGPosX==intNewPosX){
-			//remove pawn from previous spot
-			strArray[intOGPosY][intOGPosX]=null;
-			//make the pawn move to new position
-			strArray[intNewPosY][intNewPosX]="p";
-		//If it's moving to the right 1, then let it go right
-		}else if(strArray[intOGPosY][intOGPosX].equals("p") && intOGPosY==intNewPosY && intOGPosX+1==intNewPosX){
-			//remove pawn from previous spot
-			strArray[intOGPosY][intOGPosX]=null;
-			//make the pawn move to new position
-			strArray[intNewPosY][intNewPosX]="p";
-		//If it's moving to the left 1, then let it go left
-		}else if(strArray[intOGPosY][intOGPosX].equals("p") && intOGPosY==intNewPosY && intOGPosX-1==intNewPosX){
-			//remove pawn from previous spot
-			strArray[intOGPosY][intOGPosX]=null;
-			//make the pawn move to new position
-			strArray[intNewPosY][intNewPosX]="p";
+		}else if(strArray[intOGPosY][intOGPosX].equals("P1p")){
+			//If it's moves in any of the cardinal directions, it works
+			if((intOGPosY+1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY-1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX+1==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX-1==intNewPosX)){
+				//remove pawn from previous spot
+				strArray[intOGPosY][intOGPosX]=null;
+				//make the pawn move to new position
+				strArray[intNewPosY][intNewPosX]="p";
+			}
 		}
 		return strArray;
 	}
