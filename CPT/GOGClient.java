@@ -5,7 +5,7 @@ import javax.swing.event.*;
 
 public class GOGClient implements ActionListener{
 	//Properties
-	JFrame theFrame = new JFrame("Client Chess");
+	JFrame theFrame = new JFrame("Game of the Generals Client");
 	JPanel thePanel = new JPanel();
 	JButton theEnterButton = new JButton("Enter");
 	JTextField theField = new JTextField("");
@@ -19,7 +19,7 @@ public class GOGClient implements ActionListener{
 	}
 	
 	//Constructor
-	public ClientChess(){
+	public GOGClient(){
 		theFrame.setLayout(null);
 		thePanel.setLayout(null);
 		thePanel.setPreferredSize(new Dimension(400, 300));
@@ -43,7 +43,7 @@ public class GOGClient implements ActionListener{
 	
 	//Main Method
 	public static void main(String[] args){
-		new ClientChess();
+		new GOGClient();
 	}
 	
 }
