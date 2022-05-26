@@ -154,7 +154,7 @@ public interface GOGUtilities{
 			//If it's moves in any of the cardinal directions, move the pices
 			if((intOGPosY+1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY-1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX+1==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX-1==intNewPosX)){
 				//if there's nothing in the way, let private go to new position
-				if(strArray[intNewPosY][intNewPosX]==null){
+				if(strArray[intNewPosY][intNewPosX]==null || strArray[intNewPosY][intNewPosX].equals(" ")){
 					//remove pawn from previous spot
 					strArray[intOGPosY][intOGPosX]=null;
 					//make the pawn move to new position
