@@ -10,7 +10,7 @@ import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class GOGView extends JPanel{
 	//Properties
-	public String strChessboardArray[][] = new String[8][8];
+	public String strChessboardArray[][] = new String[9][8];
 	public BufferedImage imgChessboard = null;
 	
 	//Timer stuff
