@@ -33,23 +33,15 @@ public class GOGView extends JPanel{
 	
 	public void paintCharacters(Graphics g){
 		g.setColor(Color.BLACK);
-		g.drawString("1",50,120+70*0);
-		g.drawString("2",50,120+70*1);
-		g.drawString("3",50,120+70*2);
-		g.drawString("4",50,120+70*3);
-		g.drawString("5",50,120+70*4);
-		g.drawString("6",50,120+70*5);
-		g.drawString("7",50,120+70*6);
-		g.drawString("8",50,120+70*7);
-		
-		g.drawString("A",110+70*0,50);
-		g.drawString("B",110+70*1,50);
-		g.drawString("C",110+70*2,50);
-		g.drawString("D",110+70*3,50);
-		g.drawString("E",110+70*4,50);
-		g.drawString("F",110+70*5,50);
-		g.drawString("G",110+70*6,50);
-		g.drawString("H",110+70*7,50);
+		g.drawString("1",110+70*0,50);
+		g.drawString("2",110+70*1,50);
+		g.drawString("3",110+70*2,50);
+		g.drawString("4",110+70*3,50);
+		g.drawString("5",110+70*4,50);
+		g.drawString("6",110+70*5,50);
+		g.drawString("7",110+70*6,50);
+		g.drawString("8",110+70*7,50);
+		g.drawString("9",110+70*8,50);
 	}
 	
 	public void paintPieces(Graphics g){
