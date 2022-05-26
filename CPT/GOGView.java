@@ -55,9 +55,13 @@ public class GOGView extends JPanel{
 					g.drawString("p",110+70*intColumn,120+70*intRow);
 				}else if(strChessboardArray[intRow][intColumn].equals("P1s")){
 					g.drawString("s",110+70*intColumn,120+70*intRow);
+				}else if(strChessboardArray[intRow][intColumn].equals("P1f")){
+					g.drawString("f",110+70*intColumn,120+70*intRow);
 				}else if(strChessboardArray[intRow][intColumn].equals("P2p")){
 					g.drawString("???",110+70*intColumn,120+70*intRow);
 				}else if(strChessboardArray[intRow][intColumn].equals("P2s")){
+					g.drawString("???",110+70*intColumn,120+70*intRow);
+				}else if(strChessboardArray[intRow][intColumn].equals("P2f")){
 					g.drawString("???",110+70*intColumn,120+70*intRow);
 				}
 			}
