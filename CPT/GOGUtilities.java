@@ -153,10 +153,25 @@ public interface GOGUtilities{
 		}else if(strArray[intOGPosY][intOGPosX].equals("P1p")){
 			//If it's moves in any of the cardinal directions, move the pices
 			if((intOGPosY+1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY-1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX+1==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX-1==intNewPosX)){
-				//remove pawn from previous spot
-				strArray[intOGPosY][intOGPosX]=null;
-				//make the pawn move to new position
-				strArray[intNewPosY][intNewPosX]="P1p";
+				//if there's nothing in the way, let private go to new position
+				if(strArray[intNewPosY][intNewPosX]==null){
+					//remove pawn from previous spot
+					strArray[intOGPosY][intOGPosX]=null;
+					//make the pawn move to new position
+					strArray[intNewPosY][intNewPosX]="P1p";
+				//if there's a private there, kill both
+				}else if(strArray[intNewPosY][intNewPosX].equals("P2p")){
+					strArray[intOGPosY][intOGPosX]=null;
+					strArray[intNewPosY][intNewPosX]=null;
+				//if the flag is there, kill the flag
+				}else if(strArray[intNewPosY][intNewPosX].equals("P2f")){
+					//remove pawn from previous spot
+					strArray[intOGPosY][intOGPosX]=null;
+					//make the pawn move to new position
+					strArray[intNewPosY][intNewPosX]="P1p";
+				}
+				System.out.println(strArray[intOGPosY][intOGPosX]+""+intOGPosY+""+intOGPosX);
+				System.out.println(strArray[intNewPosY][intNewPosX]+""+intNewPosY+""+intNewPosX);
 			}
 		}
 		return strArray;

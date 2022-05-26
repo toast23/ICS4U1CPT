@@ -29,9 +29,13 @@ public class GOGServer implements ActionListener{
 			thePanel.drawNewTime(theModel.strPlayerTurn, theModel.intP1TimeLeft, theModel.intP2TimeLeft);
 		}
 		if(evt.getSource() == ssm){
+			//get text from player 2
 			String strText = ssm.readText();
+			//get positions with this method
 			theModel.getPositions(strText);
+			//move the pices
 			theModel.checkPieceMovement();
+			//show this on the scroll plane
 			thePanel.theTextArea.append(strText + "\n");
 		}
 	}
