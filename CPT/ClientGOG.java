@@ -3,9 +3,9 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-public class ClientChess implements ActionListener{
+public class ClientGOG implements ActionListener{
 	//Properties
-	JFrame theFrame = new JFrame("Client Chess");
+	JFrame theFrame = new JFrame("Client Game of Generals");
 	JPanel thePanel = new JPanel();
 	JButton theEnterButton = new JButton("Enter");
 	JTextField theField = new JTextField("");
@@ -19,7 +19,7 @@ public class ClientChess implements ActionListener{
 	}
 	
 	//Constructor
-	public ClientChess(){
+	public ClientGOG(){
 		theFrame.setLayout(null);
 		thePanel.setLayout(null);
 		thePanel.setPreferredSize(new Dimension(400, 300));
@@ -43,7 +43,7 @@ public class ClientChess implements ActionListener{
 	
 	//Main Method
 	public static void main(String[] args){
-		new ClientChess();
+		new ClientGOG();
 	}
 	
 }
