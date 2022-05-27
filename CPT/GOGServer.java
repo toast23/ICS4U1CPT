@@ -49,6 +49,7 @@ public class GOGServer implements ActionListener{
 		theFrame.pack();
 		theFrame.setResizable(false);
 		theFrame.setVisible(true);
+		
 		theTimer.start();
 		theGameClockTimer.start();
 		ssm = new SuperSocketMaster(9001,this); //Server Constructor

@@ -3,7 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-public class GOGClient implements ActionListener{
+public class GOGClient implements ActionListener, MouseMotionListener, MouseListener {
 	//Properties
 	JFrame theFrame = new JFrame("Game of the Generals Client");
 	JPanel thePanel = new JPanel();
@@ -11,11 +11,38 @@ public class GOGClient implements ActionListener{
 	JTextField theField = new JTextField("");
 	SuperSocketMaster ssm;
 	
+	int intMouseX;
+	int intMouseY;
+	
+	
 	//Methods
 	public void actionPerformed(ActionEvent evt){
 		if(evt.getSource() == theEnterButton){
 			ssm.sendText(theField.getText());
 		}
+	}
+	public void mouseMoved(MouseEvent evt) {
+
+	}
+	public void mouseDragged(MouseEvent evt) {
+		intMouseX = evt.getX();
+		intMouseY = evt.getY();
+		System.out.println("dragged");	
+	}
+	public void mouseExited(MouseEvent evt) {
+
+	}
+	public void mouseEntered(MouseEvent evt) {
+
+	}
+	public void mouseReleased(MouseEvent evt) {	
+		System.out.println("released");	
+	}
+	public void mouseClicked(MouseEvent evt) {
+
+	}
+	public void mousePressed(MouseEvent evt) {	
+		
 	}
 	
 	//Constructor
@@ -32,13 +59,14 @@ public class GOGClient implements ActionListener{
 		
 		theFrame.setContentPane(thePanel);
 		theFrame.pack();
+		theFrame.addMouseMotionListener(this);
+		theFrame.addMouseListener(this);
 		theFrame.setVisible(true);
 		theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		theFrame.setResizable(false);
 		
 		ssm = new SuperSocketMaster("127.0.0.1",9001,this); //Client Constructor
 		ssm.connect();
-		System.out.println(ssm.connect()); //Attempt to connect
 	}
 	
 	//Main Method
