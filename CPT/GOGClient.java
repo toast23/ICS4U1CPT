@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import java.awt.Graphics.*;
 
 public class GOGClient implements ActionListener, MouseMotionListener, MouseListener {
 	//Properties
@@ -27,7 +28,7 @@ public class GOGClient implements ActionListener, MouseMotionListener, MouseList
 	public void mouseDragged(MouseEvent evt) {
 		intMouseX = evt.getX();
 		intMouseY = evt.getY();
-		System.out.println("dragged");	
+		image_corner.translate(X, Y);	
 	}
 	public void mouseExited(MouseEvent evt) {
 
