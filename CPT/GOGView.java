@@ -10,7 +10,7 @@ import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class GOGView extends JPanel{
 	//Properties
-	public String strChessboardArray[][] = new String[8][9];
+	public String strGOGArray[][] = new String[8][9];
 	public BufferedImage imgChessboard = null;
 	
 	//Timer stuff
@@ -50,18 +50,22 @@ public class GOGView extends JPanel{
 		g.setColor(Color.WHITE);
 		for(intRow=0;intRow<8;intRow++){
 			for(intColumn=0;intColumn<9;intColumn++){
-				if(strChessboardArray[intRow][intColumn] == null){
-				}else if(strChessboardArray[intRow][intColumn].equals("P1Private")){
+				if(strGOGArray[intRow][intColumn] == null){
+				}else if(strGOGArray[intRow][intColumn].equals("P1Private")){
 					g.drawString("p",110+70*intColumn,120+70*intRow);
-				}else if(strChessboardArray[intRow][intColumn].equals("P1Spy")){
+				}else if(strGOGArray[intRow][intColumn].equals("P1Spy")){
 					g.drawString("s",110+70*intColumn,120+70*intRow);
-				}else if(strChessboardArray[intRow][intColumn].equals("P1Flag")){
+				}else if(strGOGArray[intRow][intColumn].equals("P1Flag")){
 					g.drawString("f",110+70*intColumn,120+70*intRow);
-				}else if(strChessboardArray[intRow][intColumn].equals("P2Private")){
+				}else if(strGOGArray[intRow][intColumn].equals("P1 Lieutenant 1st")){
+					g.drawString("L1",110+70*intColumn,120+70*intRow);
+				}else if(strGOGArray[intRow][intColumn].equals("P1 Lieutenant 2nd")){
+					g.drawString("L2",110+70*intColumn,120+70*intRow);
+				}else if(strGOGArray[intRow][intColumn].equals("P2Private")){
 					g.drawString("???",110+70*intColumn,120+70*intRow);
-				}else if(strChessboardArray[intRow][intColumn].equals("P2Spy")){
+				}else if(strGOGArray[intRow][intColumn].equals("P2Spy")){
 					g.drawString("???",110+70*intColumn,120+70*intRow);
-				}else if(strChessboardArray[intRow][intColumn].equals("P2Flag")){
+				}else if(strGOGArray[intRow][intColumn].equals("P2Flag")){
 					g.drawString("???",110+70*intColumn,120+70*intRow);
 				}
 			}
