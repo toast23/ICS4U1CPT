@@ -53,13 +53,7 @@ public interface GOGUtilities{
 	}
 	public static int getOriginalPositionX(String strMessage){
 		int intOriginalPositionX=0;
-		char chrCharacter = ' ';
-		try {
-			chrCharacter = strMessage.charAt(0);
-		}
-		catch (StringIndexOutOfBoundsException e) {
-			System.out.println("string index 0 out of bounds");
-		}
+		char chrCharacter=strMessage.charAt(0);
 		//Format will be like this A1_A2
 		if(chrCharacter=='A'){
 			intOriginalPositionX=0;
@@ -84,13 +78,7 @@ public interface GOGUtilities{
 	}
 	public static int getOriginalPositionY(String strMessage){
 		int intOriginalPositionY=0;
-		char chrCharacter = ' ';
-		try {
-			chrCharacter = strMessage.charAt(1);
-		}
-		catch (StringIndexOutOfBoundsException e) {
-			System.out.println("string index 1 out of bounds");
-		}
+		char chrCharacter=strMessage.charAt(1);
 		//Format will be like this A1_A2
 		if(chrCharacter=='1'){
 			intOriginalPositionY=0;
@@ -113,13 +101,7 @@ public interface GOGUtilities{
 	}
 	public static int getNewPositionX(String strMessage){
 		int intNewPositionX=0;
-		char chrCharacter = ' ';
-		try {
-			chrCharacter = strMessage.charAt(3);
-		}
-		catch (StringIndexOutOfBoundsException e) {
-			System.out.println("string index 3 out of bounds");
-		}
+		char chrCharacter=strMessage.charAt(3);
 		//Format will be like this A1_A2
 		if(chrCharacter=='A'){
 			intNewPositionX=0;
@@ -144,13 +126,7 @@ public interface GOGUtilities{
 	}
 	public static int getNewPositionY(String strMessage){
 		int intNewPositionY=0;
-		char chrCharacter = ' ';
-		try {
-			chrCharacter = strMessage.charAt(4);
-		}
-		catch (StringIndexOutOfBoundsException e) {
-			System.out.println("string index 4 out of bounds");
-		}
+		char chrCharacter=strMessage.charAt(4);
 		//Format will be like this A1_A2
 		if(chrCharacter=='1'){
 			intNewPositionY=0;
@@ -171,10 +147,22 @@ public interface GOGUtilities{
 		}
 		return intNewPositionY;
 	}
+	public static int rankConversion(String strArray[][], int intPosX, int intPosY){
+		String strRank = strArray[intPosY][intPosX];
+		int intRank=0;
+		if(strRank.equals("P1Flag") || strRank.equals("P2Flag")){
+			intRank = 0;
+		}else if(strRank.equals("P1Private") || strRank.equals("P2Private")){
+			intRank = 1;
+		}else if(strRank.equals("P1Spy") || strRank.equals("P2Spy")){
+			intRank = 2;
+		}
+		return intRank;
+	}
 	public static String[][] flagMovement(String strArray[][], int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY){
 		//If it's null, it crashes so the first if statement checks if you say null
 		if(strArray[intOGPosY][intOGPosX]==null){
-		}else if(strArray[intOGPosY][intOGPosX].equals("P1f")){
+		}else if(strArray[intOGPosY][intOGPosX].equals("P1Flag")){
 			//If it's moves in any of the cardinal directions, move the pices
 			if((intOGPosY+1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY-1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX+1==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX-1==intNewPosX)){
 				//if there's nothing in the way, let flag go to new position
@@ -182,13 +170,13 @@ public interface GOGUtilities{
 					//remove flag from previous spot
 					strArray[intOGPosY][intOGPosX]=null;
 					//make the flag move to new position
-					strArray[intNewPosY][intNewPosX]="P1f";
+					strArray[intNewPosY][intNewPosX]="P1Flag";
 				//if the enemy flag is in the way, kill it
-				}else if(strArray[intNewPosY][intNewPosX].equals("P2f")){
+				}else if(strArray[intNewPosY][intNewPosX].equals("P2Flag")){
 					//remove flag from previous spot
 					strArray[intOGPosY][intOGPosX]=null;
 					//make the flag move to new position
-					strArray[intNewPosY][intNewPosX]="P1f";
+					strArray[intNewPosY][intNewPosX]="P1Flag";
 				//if there's ANYTHING ELSE there, kill the flag
 				}else{
 					strArray[intOGPosY][intOGPosX]=null;
@@ -202,7 +190,7 @@ public interface GOGUtilities{
 	public static String[][] privateMovement(String strArray[][], int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY){
 		//If it's null, it crashes so the first if statement checks if you say null
 		if(strArray[intOGPosY][intOGPosX]==null){
-		}else if(strArray[intOGPosY][intOGPosX].equals("P1p")){
+		}else if(strArray[intOGPosY][intOGPosX].equals("P1Private")){
 			//If it's moves in any of the cardinal directions, move the pices
 			if((intOGPosY+1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY-1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX+1==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX-1==intNewPosX)){
 				//if there's nothing in the way, let private go to new position
@@ -210,23 +198,23 @@ public interface GOGUtilities{
 					//remove pawn from previous spot
 					strArray[intOGPosY][intOGPosX]=null;
 					//make the pawn move to new position
-					strArray[intNewPosY][intNewPosX]="P1p";
+					strArray[intNewPosY][intNewPosX]="P1Private";
 				//if the flag is there, kill the flag
-				}else if(strArray[intNewPosY][intNewPosX].equals("P2f")){
+				}else if(strArray[intNewPosY][intNewPosX].equals("P2Flag")){
 					//remove pawn from previous spot
 					strArray[intOGPosY][intOGPosX]=null;
 					//make the pawn move to new position
-					strArray[intNewPosY][intNewPosX]="P1p";
+					strArray[intNewPosY][intNewPosX]="P1Private";
 				//if there's a private there, kill both
-				}else if(strArray[intNewPosY][intNewPosX].equals("P2p")){
+				}else if(strArray[intNewPosY][intNewPosX].equals("P2Private")){
 					strArray[intOGPosY][intOGPosX]=null;
 					strArray[intNewPosY][intNewPosX]=null;
 				//if there's a spy there, kill the spy!
-				}else if(strArray[intNewPosY][intNewPosX].equals("P2s")){
+				}else if(strArray[intNewPosY][intNewPosX].equals("P2Spy")){
 					//remove pawn from previous spot
 					strArray[intOGPosY][intOGPosX]=null;
 					//make the pawn move to new position
-					strArray[intNewPosY][intNewPosX]="P1p";
+					strArray[intNewPosY][intNewPosX]="P1Private";
 				}
 				System.out.println(strArray[intOGPosY][intOGPosX]+""+intOGPosY+""+intOGPosX);
 				System.out.println(strArray[intNewPosY][intNewPosX]+""+intNewPosY+""+intNewPosX);
@@ -237,7 +225,7 @@ public interface GOGUtilities{
 	public static String[][] spyMovement(String strArray[][], int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY){
 		//If it's null, it crashes so the first if statement checks if you say null
 		if(strArray[intOGPosY][intOGPosX]==null){
-		}else if(strArray[intOGPosY][intOGPosX].equals("P1s")){
+		}else if(strArray[intOGPosY][intOGPosX].equals("P1Spy")){
 			//If it's moves in any of the cardinal directions, move the pices
 			if((intOGPosY+1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY-1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX+1==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX-1==intNewPosX)){
 				//if there's nothing in the way, let spy go to new position
@@ -245,18 +233,18 @@ public interface GOGUtilities{
 					//remove spy from previous spot
 					strArray[intOGPosY][intOGPosX]=null;
 					//make the spy move to new position
-					strArray[intNewPosY][intNewPosX]="P1s";
+					strArray[intNewPosY][intNewPosX]="P1Spy";
 				//if the flag is there, kill the flag!
-				}else if(strArray[intNewPosY][intNewPosX].equals("P2f")){
+				}else if(strArray[intNewPosY][intNewPosX].equals("P2Flag")){
 					//remove pawn from previous spot
 					strArray[intOGPosY][intOGPosX]=null;
 					//make the pawn move to new position
 					strArray[intNewPosY][intNewPosX]="P1s";
 				//if there's a private there, kill the spy
-				}else if(strArray[intNewPosY][intNewPosX].equals("P2p")){
+				}else if(strArray[intNewPosY][intNewPosX].equals("P2Private")){
 					strArray[intOGPosY][intOGPosX]=null;
 				//if there's a spy there, both die!
-				}else if(strArray[intNewPosY][intNewPosX].equals("P2s")){
+				}else if(strArray[intNewPosY][intNewPosX].equals("P2Spy")){
 					strArray[intOGPosY][intOGPosX]=null;
 					strArray[intNewPosY][intNewPosX]=null;
 				}

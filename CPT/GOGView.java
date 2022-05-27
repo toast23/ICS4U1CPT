@@ -51,17 +51,17 @@ public class GOGView extends JPanel{
 		for(intRow=0;intRow<8;intRow++){
 			for(intColumn=0;intColumn<9;intColumn++){
 				if(strChessboardArray[intRow][intColumn] == null){
-				}else if(strChessboardArray[intRow][intColumn].equals("P1p")){
+				}else if(strChessboardArray[intRow][intColumn].equals("P1Private")){
 					g.drawString("p",110+70*intColumn,120+70*intRow);
-				}else if(strChessboardArray[intRow][intColumn].equals("P1s")){
+				}else if(strChessboardArray[intRow][intColumn].equals("P1Spy")){
 					g.drawString("s",110+70*intColumn,120+70*intRow);
-				}else if(strChessboardArray[intRow][intColumn].equals("P1f")){
+				}else if(strChessboardArray[intRow][intColumn].equals("P1Flag")){
 					g.drawString("f",110+70*intColumn,120+70*intRow);
-				}else if(strChessboardArray[intRow][intColumn].equals("P2p")){
+				}else if(strChessboardArray[intRow][intColumn].equals("P2Private")){
 					g.drawString("???",110+70*intColumn,120+70*intRow);
-				}else if(strChessboardArray[intRow][intColumn].equals("P2s")){
+				}else if(strChessboardArray[intRow][intColumn].equals("P2Spy")){
 					g.drawString("???",110+70*intColumn,120+70*intRow);
-				}else if(strChessboardArray[intRow][intColumn].equals("P2f")){
+				}else if(strChessboardArray[intRow][intColumn].equals("P2Flag")){
 					g.drawString("???",110+70*intColumn,120+70*intRow);
 				}
 			}

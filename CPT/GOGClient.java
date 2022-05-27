@@ -11,7 +11,8 @@ public class GOGClient implements ActionListener, MouseMotionListener, MouseList
 	JTextField theField = new JTextField("");
 	SuperSocketMaster ssm;
 	
-	boolean boolPieceDragging;
+	int intMouseX;
+	int intMouseY;
 	
 	
 	//Methods
@@ -24,7 +25,8 @@ public class GOGClient implements ActionListener, MouseMotionListener, MouseList
 
 	}
 	public void mouseDragged(MouseEvent evt) {
-		boolPieceDragging = true;
+		intMouseX = evt.getX();
+		intMouseY = evt.getY();
 		System.out.println("dragged");	
 	}
 	public void mouseExited(MouseEvent evt) {
@@ -34,12 +36,6 @@ public class GOGClient implements ActionListener, MouseMotionListener, MouseList
 
 	}
 	public void mouseReleased(MouseEvent evt) {	
-		if (boolPieceDragging) {
-			//ssm.sendText("a1");
-			//ssm.sendText(""+evt.getX());
-			//ssm.sendText(""+evt.getY());		
-		}
-		boolPieceDragging = false;
 		System.out.println("released");	
 	}
 	public void mouseClicked(MouseEvent evt) {

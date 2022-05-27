@@ -1,8 +1,8 @@
- , , , ,P2f, , , , 
+ , , , ,P2Flag, , , , 
  , , , , , , , , 
-P2s,P2p,P2p,P2p, ,P2p,P2p,P2p,P2s
+P2Spy,P2Private,P2Private,P2Private, ,P2Private,P2Private,P2Private,P2Spy
  , , , , , , , , 
  , , , , , , , , 
-P1s,P1p,P1p,P1p, ,P1p,P1p,P1p,P1s
+P1Spy,P1Private,P1Private,P1Private, ,P1Private,P1Private,P1Private,P1Spy
  , , , , , , , , 
- , , , ,P1f, , , , 
+ , , , ,P1Flag, , , , 

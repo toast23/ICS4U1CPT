@@ -40,6 +40,5 @@ public class GOGModel{
 	//Constructor
 	public GOGModel(){
 		this.strArray = GOGUtilities.loadArray("Board.csv");
-		this.intRankArray =  GOGUtilities.loadArray("RankingData.csv");
 	}
 }
