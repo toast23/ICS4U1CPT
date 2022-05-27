@@ -1,6 +1,7 @@
 public class GOGModel{
 	//Properties
 	public String strArray[][];
+	public String intRankArray[][];
 	public int intOriginalPositionX;
 	public int intOriginalPositionY;
 	public int intNewPositionX;
@@ -39,5 +40,6 @@ public class GOGModel{
 	//Constructor
 	public GOGModel(){
 		this.strArray = GOGUtilities.loadArray("Board.csv");
+		this.intRankArray =  GOGUtilities.loadArray("RankingData.csv");
 	}
 }
