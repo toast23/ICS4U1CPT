@@ -156,6 +156,32 @@ public interface GOGUtilities{
 			intRank = 1;
 		}else if(strRank.equals("P1Spy") || strRank.equals("P2Spy")){
 			intRank = 2;
+		}else if(strRank.equals("P1Seargent") || strRank.equals("P1Seargent")){
+			intRank = 3;
+		}else if(strRank.equals("P12nd_Lieutenant") || strRank.equals("P22nd_Lieutenant")){
+			intRank = 4;
+		}else if(strRank.equals("P11st_Lieutenant") || strRank.equals("P21st_Lieutenant")){
+			intRank = 5;
+		}else if(strRank.equals("P1Captain") || strRank.equals("P2Captain")){
+			intRank = 6;
+		}else if(strRank.equals("P1Major") || strRank.equals("P2Major")){
+			intRank = 7;
+		}else if(strRank.equals("P1Lieutenant_Colonel") || strRank.equals("P2Lieutenant_Colonel")){
+			intRank = 8;
+		}else if(strRank.equals("P1Colonel") || strRank.equals("P2Colonel")){
+			intRank = 9;
+		}else if(strRank.equals("P1Colonel") || strRank.equals("P2Colonel")){
+			intRank = 10;
+		}else if(strRank.equals("P1Brigadier_General") || strRank.equals("P2Brigadier_General")){
+			intRank = 11;
+		}else if(strRank.equals("P1Major_General") || strRank.equals("P2Major_General")){
+			intRank = 12;
+		}else if(strRank.equals("P1Lieutenant") || strRank.equals("P2Lieutenant")){
+			intRank = 13;
+		}else if(strRank.equals("P1General") || strRank.equals("P2General")){
+			intRank = 14;
+		}else if(strRank.equals("P1General_of_the_Army") || strRank.equals("P2General_of_the_Army")){
+			intRank = 15;
 		}
 		return intRank;
 	}
