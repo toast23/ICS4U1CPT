@@ -171,6 +171,34 @@ public interface GOGUtilities{
 		}
 		return intNewPositionY;
 	}
+	public static String[][] flagMovement(String strArray[][], int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY){
+		//If it's null, it crashes so the first if statement checks if you say null
+		if(strArray[intOGPosY][intOGPosX]==null){
+		}else if(strArray[intOGPosY][intOGPosX].equals("P1f")){
+			//If it's moves in any of the cardinal directions, move the pices
+			if((intOGPosY+1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY-1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX+1==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX-1==intNewPosX)){
+				//if there's nothing in the way, let flag go to new position
+				if(strArray[intNewPosY][intNewPosX]==null || strArray[intNewPosY][intNewPosX].equals(" ")){
+					//remove flag from previous spot
+					strArray[intOGPosY][intOGPosX]=null;
+					//make the flag move to new position
+					strArray[intNewPosY][intNewPosX]="P1f";
+				//if the enemy flag is in the way, kill it
+				}else if(strArray[intNewPosY][intNewPosX].equals("P2f")){
+					//remove flag from previous spot
+					strArray[intOGPosY][intOGPosX]=null;
+					//make the flag move to new position
+					strArray[intNewPosY][intNewPosX]="P1f";
+				//if there's ANYTHING ELSE there, kill the flag
+				}else{
+					strArray[intOGPosY][intOGPosX]=null;
+				}
+				System.out.println(strArray[intOGPosY][intOGPosX]+""+intOGPosY+""+intOGPosX);
+				System.out.println(strArray[intNewPosY][intNewPosX]+""+intNewPosY+""+intNewPosX);
+			}
+		}
+		return strArray;
+	}
 	public static String[][] privateMovement(String strArray[][], int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY){
 		//If it's null, it crashes so the first if statement checks if you say null
 		if(strArray[intOGPosY][intOGPosX]==null){
@@ -183,16 +211,54 @@ public interface GOGUtilities{
 					strArray[intOGPosY][intOGPosX]=null;
 					//make the pawn move to new position
 					strArray[intNewPosY][intNewPosX]="P1p";
-				//if there's a private there, kill both
-				}else if(strArray[intNewPosY][intNewPosX].equals("P2p")){
-					strArray[intOGPosY][intOGPosX]=null;
-					strArray[intNewPosY][intNewPosX]=null;
 				//if the flag is there, kill the flag
 				}else if(strArray[intNewPosY][intNewPosX].equals("P2f")){
 					//remove pawn from previous spot
 					strArray[intOGPosY][intOGPosX]=null;
 					//make the pawn move to new position
 					strArray[intNewPosY][intNewPosX]="P1p";
+				//if there's a private there, kill both
+				}else if(strArray[intNewPosY][intNewPosX].equals("P2p")){
+					strArray[intOGPosY][intOGPosX]=null;
+					strArray[intNewPosY][intNewPosX]=null;
+				//if there's a spy there, kill the spy!
+				}else if(strArray[intNewPosY][intNewPosX].equals("P2s")){
+					//remove pawn from previous spot
+					strArray[intOGPosY][intOGPosX]=null;
+					//make the pawn move to new position
+					strArray[intNewPosY][intNewPosX]="P1p";
+				}
+				System.out.println(strArray[intOGPosY][intOGPosX]+""+intOGPosY+""+intOGPosX);
+				System.out.println(strArray[intNewPosY][intNewPosX]+""+intNewPosY+""+intNewPosX);
+			}
+		}
+		return strArray;
+	}
+	public static String[][] spyMovement(String strArray[][], int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY){
+		//If it's null, it crashes so the first if statement checks if you say null
+		if(strArray[intOGPosY][intOGPosX]==null){
+		}else if(strArray[intOGPosY][intOGPosX].equals("P1s")){
+			//If it's moves in any of the cardinal directions, move the pices
+			if((intOGPosY+1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY-1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX+1==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX-1==intNewPosX)){
+				//if there's nothing in the way, let spy go to new position
+				if(strArray[intNewPosY][intNewPosX]==null || strArray[intNewPosY][intNewPosX].equals(" ")){
+					//remove spy from previous spot
+					strArray[intOGPosY][intOGPosX]=null;
+					//make the spy move to new position
+					strArray[intNewPosY][intNewPosX]="P1s";
+				//if the flag is there, kill the flag!
+				}else if(strArray[intNewPosY][intNewPosX].equals("P2f")){
+					//remove pawn from previous spot
+					strArray[intOGPosY][intOGPosX]=null;
+					//make the pawn move to new position
+					strArray[intNewPosY][intNewPosX]="P1s";
+				//if there's a private there, kill the spy
+				}else if(strArray[intNewPosY][intNewPosX].equals("P2p")){
+					strArray[intOGPosY][intOGPosX]=null;
+				//if there's a spy there, both die!
+				}else if(strArray[intNewPosY][intNewPosX].equals("P2s")){
+					strArray[intOGPosY][intOGPosX]=null;
+					strArray[intNewPosY][intNewPosX]=null;
 				}
 				System.out.println(strArray[intOGPosY][intOGPosX]+""+intOGPosY+""+intOGPosX);
 				System.out.println(strArray[intNewPosY][intNewPosX]+""+intNewPosY+""+intNewPosX);

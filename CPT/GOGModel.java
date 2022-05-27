@@ -1,6 +1,7 @@
 public class GOGModel{
 	//Properties
 	public String strArray[][];
+	public String intRankArray[][];
 	public int intOriginalPositionX;
 	public int intOriginalPositionY;
 	public int intNewPositionX;
@@ -32,10 +33,13 @@ public class GOGModel{
 	
 	public void checkPieceMovement(){
 		//update array file
+		strArray = GOGUtilities.flagMovement(strArray,intOriginalPositionX,intOriginalPositionY,intNewPositionX,intNewPositionY);
 		strArray = GOGUtilities.privateMovement(strArray,intOriginalPositionX,intOriginalPositionY,intNewPositionX,intNewPositionY);
+		strArray = GOGUtilities.spyMovement(strArray,intOriginalPositionX,intOriginalPositionY,intNewPositionX,intNewPositionY);
 	}
 	//Constructor
 	public GOGModel(){
 		this.strArray = GOGUtilities.loadArray("Board.csv");
+		this.intRankArray =  GOGUtilities.loadArray("RankingData.csv");
 	}
 }
