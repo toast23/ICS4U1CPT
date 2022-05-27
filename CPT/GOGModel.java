@@ -32,7 +32,9 @@ public class GOGModel{
 	
 	public void checkPieceMovement(){
 		//update array file
+		strArray = GOGUtilities.flagMovement(strArray,intOriginalPositionX,intOriginalPositionY,intNewPositionX,intNewPositionY);
 		strArray = GOGUtilities.privateMovement(strArray,intOriginalPositionX,intOriginalPositionY,intNewPositionX,intNewPositionY);
+		strArray = GOGUtilities.spyMovement(strArray,intOriginalPositionX,intOriginalPositionY,intNewPositionX,intNewPositionY);
 	}
 	//Constructor
 	public GOGModel(){
