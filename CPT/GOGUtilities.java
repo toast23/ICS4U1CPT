@@ -53,7 +53,13 @@ public interface GOGUtilities{
 	}
 	public static int getOriginalPositionX(String strMessage){
 		int intOriginalPositionX=0;
-		char chrCharacter=strMessage.charAt(0);
+		char chrCharacter = ' ';
+		try {
+			chrCharacter = strMessage.charAt(0);
+		}
+		catch (StringIndexOutOfBoundsException e) {
+			System.out.println("string index 0 out of bounds");
+		}
 		//Format will be like this A1_A2
 		if(chrCharacter=='A'){
 			intOriginalPositionX=0;
@@ -78,7 +84,13 @@ public interface GOGUtilities{
 	}
 	public static int getOriginalPositionY(String strMessage){
 		int intOriginalPositionY=0;
-		char chrCharacter=strMessage.charAt(1);
+		char chrCharacter = ' ';
+		try {
+			chrCharacter = strMessage.charAt(1);
+		}
+		catch (StringIndexOutOfBoundsException e) {
+			System.out.println("string index 1 out of bounds");
+		}
 		//Format will be like this A1_A2
 		if(chrCharacter=='1'){
 			intOriginalPositionY=0;
@@ -101,7 +113,13 @@ public interface GOGUtilities{
 	}
 	public static int getNewPositionX(String strMessage){
 		int intNewPositionX=0;
-		char chrCharacter=strMessage.charAt(3);
+		char chrCharacter = ' ';
+		try {
+			chrCharacter = strMessage.charAt(3);
+		}
+		catch (StringIndexOutOfBoundsException e) {
+			System.out.println("string index 3 out of bounds");
+		}
 		//Format will be like this A1_A2
 		if(chrCharacter=='A'){
 			intNewPositionX=0;
@@ -126,7 +144,13 @@ public interface GOGUtilities{
 	}
 	public static int getNewPositionY(String strMessage){
 		int intNewPositionY=0;
-		char chrCharacter=strMessage.charAt(4);
+		char chrCharacter = ' ';
+		try {
+			chrCharacter = strMessage.charAt(4);
+		}
+		catch (StringIndexOutOfBoundsException e) {
+			System.out.println("string index 4 out of bounds");
+		}
 		//Format will be like this A1_A2
 		if(chrCharacter=='1'){
 			intNewPositionY=0;
