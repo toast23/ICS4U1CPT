@@ -19,7 +19,7 @@ public class GOGServer implements ActionListener{
 		//Ever 1/60th of a second, repaint
 		if(evt.getSource() == theTimer){
 			//we update the panel's array with the model array data
-			thePanel.strChessboardArray=theModel.strArray;
+			thePanel.strGOGArray=theModel.strArray;
 			thePanel.repaint();
 		}
 		
