@@ -36,6 +36,7 @@ public class GOGModel{
 		strArray = GOGUtilities.flagMovement(strArray,intOriginalPositionX,intOriginalPositionY,intNewPositionX,intNewPositionY);
 		strArray = GOGUtilities.privateMovement(strArray,intOriginalPositionX,intOriginalPositionY,intNewPositionX,intNewPositionY);
 		strArray = GOGUtilities.spyMovement(strArray,intOriginalPositionX,intOriginalPositionY,intNewPositionX,intNewPositionY);
+		strArray = GOGUtilities.otherPieceMovement(strArray,intOriginalPositionX,intOriginalPositionY,intNewPositionX,intNewPositionY);
 	}
 	//Constructor
 	public GOGModel(){
