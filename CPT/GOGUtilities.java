@@ -197,18 +197,16 @@ public interface GOGUtilities{
 					strArray[intOGPosY][intOGPosX]=null;
 					//make the flag move to new position
 					strArray[intNewPosY][intNewPosX]="P1Flag";
-				//if the enemy flag is in the way, kill it
-				}else if(strArray[intNewPosY][intNewPosX].equals("P2Flag")){
+				//if the enemy flag(value of 0) is in the way, kill it
+				}else if(rankConversion(strArray, intOGPosX, intOGPosY) == rankConversion(strArray, intOGPosX, intOGPosY)){
 					//remove flag from previous spot
 					strArray[intOGPosY][intOGPosX]=null;
 					//make the flag move to new position
 					strArray[intNewPosY][intNewPosX]="P1Flag";
 				//if there's ANYTHING ELSE there, kill the flag
-				}else{
+				}else if(rankConversion(strArray, intOGPosX, intOGPosY)<rankConversion(strArray, intNewPosX, intNewPosY)){
 					strArray[intOGPosY][intOGPosX]=null;
 				}
-				System.out.println(strArray[intOGPosY][intOGPosX]+""+intOGPosY+""+intOGPosX);
-				System.out.println(strArray[intNewPosY][intNewPosX]+""+intNewPosY+""+intNewPosX);
 			}
 		}
 		return strArray;
@@ -225,25 +223,26 @@ public interface GOGUtilities{
 					strArray[intOGPosY][intOGPosX]=null;
 					//make the pawn move to new position
 					strArray[intNewPosY][intNewPosX]="P1Private";
-				//if the flag is there, kill the flag
-				}else if(strArray[intNewPosY][intNewPosX].equals("P2Flag")){
+				//if the flag is there, kill it
+				}else if(rankConversion(strArray, intOGPosX, intOGPosY) > rankConversion(strArray, intNewPosX, intNewPosY)){
 					//remove pawn from previous spot
 					strArray[intOGPosY][intOGPosX]=null;
 					//make the pawn move to new position
 					strArray[intNewPosY][intNewPosX]="P1Private";
 				//if there's a private there, kill both
-				}else if(strArray[intNewPosY][intNewPosX].equals("P2Private")){
+				}else if(rankConversion(strArray, intOGPosX, intOGPosY) == rankConversion(strArray, intNewPosX, intNewPosY)){
 					strArray[intOGPosY][intOGPosX]=null;
 					strArray[intNewPosY][intNewPosX]=null;
-				//if there's a spy there, kill the spy!
-				}else if(strArray[intNewPosY][intNewPosX].equals("P2Spy")){
+				//if there's a spy(value of 2) there, kill the spy!
+				}else if(rankConversion(strArray, intNewPosX, intNewPosY) == 2){
 					//remove pawn from previous spot
 					strArray[intOGPosY][intOGPosX]=null;
 					//make the pawn move to new position
 					strArray[intNewPosY][intNewPosX]="P1Private";
+				//if there's anything of higher rank, kill the private
+				}else if(rankConversion(strArray, intOGPosX, intOGPosY) < rankConversion(strArray, intNewPosX, intNewPosY)){
+					strArray[intOGPosY][intOGPosX]=null;
 				}
-				System.out.println(strArray[intOGPosY][intOGPosX]+""+intOGPosY+""+intOGPosX);
-				System.out.println(strArray[intNewPosY][intNewPosX]+""+intNewPosY+""+intNewPosX);
 			}
 		}
 		return strArray;
@@ -260,22 +259,48 @@ public interface GOGUtilities{
 					strArray[intOGPosY][intOGPosX]=null;
 					//make the spy move to new position
 					strArray[intNewPosY][intNewPosX]="P1Spy";
-				//if the flag is there, kill the flag!
-				}else if(strArray[intNewPosY][intNewPosX].equals("P2Flag")){
+				//if another spy is there, both die
+				}else if(rankConversion(strArray, intNewPosX, intNewPosY)==2){
 					//remove pawn from previous spot
 					strArray[intOGPosY][intOGPosX]=null;
 					//make the pawn move to new position
-					strArray[intNewPosY][intNewPosX]="P1s";
-				//if there's a private there, kill the spy
-				}else if(strArray[intNewPosY][intNewPosX].equals("P2Private")){
-					strArray[intOGPosY][intOGPosX]=null;
-				//if there's a spy there, both die!
-				}else if(strArray[intNewPosY][intNewPosX].equals("P2Spy")){
+					strArray[intNewPosY][intNewPosX]=null;
+				//if there's anything else is there, kill it
+				}else if(16 > rankConversion(strArray, intNewPosX, intNewPosY)){
 					strArray[intOGPosY][intOGPosX]=null;
 					strArray[intNewPosY][intNewPosX]=null;
+				//if there's anything of lower rank, kill it
 				}
-				System.out.println(strArray[intOGPosY][intOGPosX]+""+intOGPosY+""+intOGPosX);
-				System.out.println(strArray[intNewPosY][intNewPosX]+""+intNewPosY+""+intNewPosX);
+			}
+		}
+		return strArray;
+	}
+	public static String[][] otherPieceMovement(String strArray[][], int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY){
+		//If it's null, it crashes so the first if statement checks if you say null
+		if(strArray[intOGPosY][intOGPosX]==null){
+		}else if(!strArray[intOGPosY][intOGPosX].equals("P1Flag") && !strArray[intOGPosY][intOGPosX].equals("P2Flag") && !strArray[intOGPosY][intOGPosX].equals("P1Private") && !strArray[intOGPosY][intOGPosX].equals("P2Private") && !strArray[intOGPosY][intOGPosX].equals("P1Spy") && !strArray[intOGPosY][intOGPosX].equals("P2Spy")){
+			//If it's moves in any of the cardinal directions, move the pices
+			if((intOGPosY+1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY-1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX+1==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX-1==intNewPosX)){
+				//if there's nothing in the way, let the piece go to new position
+				if(strArray[intNewPosY][intNewPosX]==null || strArray[intNewPosY][intNewPosX].equals(" ")){
+					strArray[intNewPosY][intNewPosX]=strArray[intOGPosY][intOGPosX];
+					strArray[intOGPosY][intOGPosX]=null;
+				//if there's a spy there, kill the piece
+				}else if(rankConversion(strArray, intNewPosX, intNewPosY)==2){
+					//remove piece from spot
+					strArray[intOGPosY][intOGPosX]=null;
+				//if there's a piece higher than you, it dies
+				}else if(rankConversion(strArray, intOGPosX, intOGPosY) < rankConversion(strArray, intNewPosX, intNewPosY)){
+					strArray[intOGPosY][intOGPosX]=null;
+				//if there's the same rank, both die
+				}else if(rankConversion(strArray, intOGPosX, intOGPosY) == rankConversion(strArray, intNewPosX, intNewPosY)){
+					strArray[intOGPosY][intOGPosX]=null;
+					strArray[intNewPosY][intNewPosX]=null;
+				//if there's anything of lower rank, kill it
+				}else if(rankConversion(strArray, intOGPosX, intOGPosY) > rankConversion(strArray, intNewPosX, intNewPosY)){
+					strArray[intNewPosY][intNewPosX]=strArray[intOGPosY][intOGPosX];
+					strArray[intOGPosY][intOGPosX]=null;
+				}
 			}
 		}
 		return strArray;
