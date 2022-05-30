@@ -24,9 +24,7 @@ public class lobbyPanel extends JPanel implements ActionListener{
 	//These 2 buttons are for who wants to be the server and who wants to be the client
 	JButton theServerButton = new JButton("Server");
 	JButton theClientButton = new JButton("Client");
-	
-	//If they need help, they can click this button
-	JButton theHelpButton = new JButton("Help!");
+
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	//Methods
@@ -80,8 +78,5 @@ public class lobbyPanel extends JPanel implements ActionListener{
 		theClientButton.addActionListener(this);
 		theClientButton.setBounds(1070,10,200,50);
 		this.add(theClientButton);
-		
-		theHelpButton.setBounds(490,500,300,50);
-		this.add(theHelpButton);
 	}
 } 

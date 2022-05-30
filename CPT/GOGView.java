@@ -8,7 +8,7 @@ import javax.imageio.*;
 import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-public class GOGView extends JPanel implements ActionListener {
+public class GOGView implements ActionListener {
 	//Properties
 	public JFrame theFrame = new JFrame("Game of the Generals");
 	public CardLayout card = new CardLayout(); 
@@ -19,6 +19,9 @@ public class GOGView extends JPanel implements ActionListener {
 	public Timer theTimer = new Timer(1000/60, this);
 	public Timer theGameClockTimer=new Timer(1000,this);
 	public GOGModel theModel = new GOGModel();
+	public JButton theHelpButton = new JButton("Help!");
+	public JButton theReturnButton = new JButton("Return");
+	public String panelToReturn = "lobby";
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	// Methods 
@@ -27,15 +30,42 @@ public class GOGView extends JPanel implements ActionListener {
 		if(evt.getSource() == theTimer){
 			//we update the panel's array with the model array data
 			theGamePanel.strGOGArray=theModel.strArray;
-			theGamePanel.repaint();
+			theViewPanel.repaint();
 		}
-		
 		if(evt.getSource()==theGameClockTimer){
 			theModel.updateTime();
 			//This line has no purpose. I just wanted to save this so we know how to append the thing later
 			theGamePanel.drawNewTime(theModel.strPlayerTurn, theModel.intP1TimeLeft, theModel.intP2TimeLeft);
 		}
+		
+		// Buttons
+		if (evt.getSource() == theHelpButton) {
+			helpSetup();
+		}
+		if (evt.getSource() == theReturnButton) {
+			if (panelToReturn.equals("lobby")) {
+				lobbySetup();
+			}
+			else if (panelToReturn.equals("game")) {
+				gameSetup();
+			}
+		}
 	}	
+	
+	public void lobbySetup() {
+		card.show(theViewPanel, "lobby");
+		theFrame.requestFocus();
+	}
+	
+	public void gameSetup() {
+		card.show(theViewPanel, "game");
+		theFrame.requestFocus();
+	}
+	
+	public void helpSetup() {
+		card.show(theViewPanel, "help");
+		theFrame.requestFocus();
+	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////	
 	//Constructor
@@ -47,13 +77,19 @@ public class GOGView extends JPanel implements ActionListener {
 		theViewPanel.add(theHelpPanel, "help");
 		theViewPanel.setPreferredSize(new Dimension(1280,720));
 		
+		theHelpButton.setBounds(490,500,300,50);
+		theHelpButton.addActionListener(this);
+		theLobbyPanel.add(theHelpButton);
+		
+		theReturnButton.setBounds(1100, 20, 120, 50);
+		theReturnButton.addActionListener(this);
+		theHelpPanel.add(theReturnButton);
+		
 		theFrame.setContentPane(theViewPanel);
 		theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		theFrame.pack();
 		theFrame.setResizable(false);
 		theFrame.setVisible(true);
-		
-		card.show(theViewPanel, "lobby");
 		
 		theTimer.start();
 		theGameClockTimer.start();
