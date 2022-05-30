@@ -53,7 +53,7 @@ public class GOGView extends JPanel implements ActionListener {
 		theFrame.setResizable(false);
 		theFrame.setVisible(true);
 		
-		card.show(theViewPanel, "game");
+		card.show(theViewPanel, "lobby");
 		
 		theTimer.start();
 		theGameClockTimer.start();
