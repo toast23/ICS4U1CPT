@@ -72,11 +72,12 @@ public class gamePanel extends JPanel{
 	}
 	
 	public void drawNewTime(String strPlayerTurn, int intP1TimeLeft, int intP2TimeLeft){
-		if(strPlayerTurn.equals("P1")){
+		if(strPlayerTurn.equals("P1Turn")){
+			System.out.println("bruh");
 			int intMinutes = intP1TimeLeft/60;
 			int intSeconds = intP1TimeLeft%60;
 			theGameClockLabel.setText("Player 1 Time: "+intMinutes+":"+intSeconds);
-		}else if(strPlayerTurn.equals("P2")){
+		}else if(strPlayerTurn.equals("P2Turn")){
 			int intMinutes = intP2TimeLeft/60;
 			int intSeconds = intP2TimeLeft%60;
 			theGameClockLabel.setText("Player 2 Time: "+intMinutes+":"+intSeconds);
@@ -115,6 +116,9 @@ public class gamePanel extends JPanel{
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 }
+
+
+
 
 
 
