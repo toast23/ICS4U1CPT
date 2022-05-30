@@ -8,13 +8,13 @@ public class GOGModel{
 	public int intNewPositionY;
 	public int intP1TimeLeft=600;
 	public int intP2TimeLeft=600;
-	public String strPlayerTurn="P1";
+	public String strPlayerTurn="P1Turn";
 	public String strVictor = null;
 	//Methods
 	public void updateTime(){
-		if(strPlayerTurn.equals("P1")){
+		if(strPlayerTurn.equals("P1Turn")){
 			intP1TimeLeft--;
-		}else if(strPlayerTurn.equals("P2")){
+		}else if(strPlayerTurn.equals("P2Turn")){
 			intP2TimeLeft--;
 		}
 		
