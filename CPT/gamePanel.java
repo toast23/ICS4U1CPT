@@ -73,7 +73,6 @@ public class gamePanel extends JPanel{
 	
 	public void drawNewTime(String strPlayerTurn, int intP1TimeLeft, int intP2TimeLeft){
 		if(strPlayerTurn.equals("P1Turn")){
-			System.out.println("bruh");
 			int intMinutes = intP1TimeLeft/60;
 			int intSeconds = intP1TimeLeft%60;
 			theGameClockLabel.setText("Player 1 Time: "+intMinutes+":"+intSeconds);
