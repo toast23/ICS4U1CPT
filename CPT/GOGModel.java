@@ -33,10 +33,10 @@ public class GOGModel{
 	
 	public void checkPieceMovement(){
 		//update array file
-		strArray = GOGUtilities.flagMovement(strArray,intOriginalPositionX,intOriginalPositionY,intNewPositionX,intNewPositionY);
-		strArray = GOGUtilities.privateMovement(strArray,intOriginalPositionX,intOriginalPositionY,intNewPositionX,intNewPositionY);
-		strArray = GOGUtilities.spyMovement(strArray,intOriginalPositionX,intOriginalPositionY,intNewPositionX,intNewPositionY);
-		strArray = GOGUtilities.otherPieceMovement(strArray,intOriginalPositionX,intOriginalPositionY,intNewPositionX,intNewPositionY);
+		strArray = GOGUtilities.flagMovement(strArray,"P1",intOriginalPositionX,intOriginalPositionY,intNewPositionX,intNewPositionY);
+		strArray = GOGUtilities.privateMovement(strArray,"P1",intOriginalPositionX,intOriginalPositionY,intNewPositionX,intNewPositionY);
+		strArray = GOGUtilities.spyMovement(strArray,"P1",intOriginalPositionX,intOriginalPositionY,intNewPositionX,intNewPositionY);
+		strArray = GOGUtilities.otherPieceMovement(strArray,"P1",intOriginalPositionX,intOriginalPositionY,intNewPositionX,intNewPositionY);
 	}
 	//Constructor
 	public GOGModel(){
