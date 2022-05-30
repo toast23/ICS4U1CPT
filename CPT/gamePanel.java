@@ -1,6 +1,7 @@
 //We import necessary libraries for functionality
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.color.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.image.*;
@@ -10,7 +11,7 @@ import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class gamePanel extends JPanel{  
 	public String strGOGArray[][] = new String[8][9];
-	public BufferedImage imgChessboard = null;
+	public BufferedImage imgBoard = null;
 	
 	//Timer stuff
 	public JLabel theGameClockLabel=new JLabel("Time");
@@ -21,13 +22,8 @@ public class gamePanel extends JPanel{
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Method
-	public void paintBackground(Graphics g){
-		g.setColor(Color.WHITE);
-		g.fillRect(0,0,1280,720);
-	}
-	
-	public void paintChessboard(Graphics g){
-		g.drawImage(imgChessboard,80,80,null);
+	public void paintBoard(Graphics g){
+		g.drawImage(imgBoard,80,80,null);
 	}
 	
 	public void paintCharacters(Graphics g){
@@ -86,9 +82,7 @@ public class gamePanel extends JPanel{
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		//Background
-		paintBackground(g);
-		paintChessboard(g);	
+		paintBoard(g);	
 		paintCharacters(g);	
 		paintPieces(g);
 	}
@@ -98,11 +92,13 @@ public class gamePanel extends JPanel{
 	public gamePanel(){
 		super();
 		try{
-			imgChessboard = ImageIO.read(new File("board.png"));
+			imgBoard = ImageIO.read(new File("board.png"));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
+		
 		this.setLayout(null);
+		this.setBackground(Color.WHITE);
 		
 		theGameClockLabel.setBounds(860,50,200,50);
 		this.add(theGameClockLabel);
