@@ -21,6 +21,8 @@ public class GOGView implements ActionListener {
 	public GOGModel theModel = new GOGModel();
 	public JButton theHelpButton = new JButton("Help!");
 	public JButton theReturnButton = new JButton("Return");
+	public JButton theServerButton = new JButton("Server");
+	public JButton theClientButton = new JButton("Client");	
 	public String panelToReturn = "lobby";
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,6 +41,26 @@ public class GOGView implements ActionListener {
 		}
 		
 		// Buttons
+		if(evt.getSource()==theServerButton || evt.getSource()==theClientButton){
+			//Get the name of the player
+			theLobbyPanel.strName = theLobbyPanel.theNameTextField.getText();
+			
+			//Get the port number
+			try{
+				theLobbyPanel.intPortNumber = Integer.parseInt(theLobbyPanel.thePortTextField.getText());
+			}
+			catch(NumberFormatException e){
+				theLobbyPanel.thePortTextField.setText("Invalid Number");
+			}
+			
+			//Get the IP Address in string form
+			theLobbyPanel.strIPAddress = theLobbyPanel.theIPAddressTextField.getText();
+			
+			gameSetup();
+		}
+		System.out.println(theLobbyPanel.strName);
+		System.out.println(""+theLobbyPanel.intPortNumber);
+		System.out.println(theLobbyPanel.strIPAddress);
 		if (evt.getSource() == theHelpButton) {
 			helpSetup();
 		}
@@ -77,6 +99,14 @@ public class GOGView implements ActionListener {
 		theViewPanel.add(theHelpPanel, "help");
 		theViewPanel.setPreferredSize(new Dimension(1280,720));
 		
+		theServerButton.addActionListener(this);
+		theServerButton.setBounds(10,10,200,50);
+		theLobbyPanel.add(theServerButton);
+		
+		theClientButton.addActionListener(this);
+		theClientButton.setBounds(1070,10,200,50);
+		theLobbyPanel.add(theClientButton);
+		
 		theHelpButton.setBounds(490,500,300,50);
 		theHelpButton.addActionListener(this);
 		theLobbyPanel.add(theHelpButton);
@@ -90,6 +120,8 @@ public class GOGView implements ActionListener {
 		theFrame.pack();
 		theFrame.setResizable(false);
 		theFrame.setVisible(true);
+		
+
 		
 		theTimer.start();
 		theGameClockTimer.start();
