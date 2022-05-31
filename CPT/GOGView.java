@@ -16,14 +16,17 @@ public class GOGView implements ActionListener {
 	public lobbyPanel theLobbyPanel = new lobbyPanel();
 	public gamePanel theGamePanel = new gamePanel(); 
 	public helpPanel theHelpPanel = new helpPanel();
+	public ranksPanel theRanksPanel = new ranksPanel();
 	public Timer theTimer = new Timer(1000/60, this);
 	public Timer theGameClockTimer=new Timer(1000,this);
 	public GOGModel theModel = new GOGModel();
 	public JButton theLobbyHelpButton = new JButton("Help!");
 	public JButton theGameHelpButton = new JButton("Help!");
-	public JButton theReturnButton = new JButton("Return");
+	public JButton theHelpReturnButton = new JButton("Return");
+	public JButton theRanksReturnButton = new JButton("Return");
 	public JButton theServerButton = new JButton("Server");
 	public JButton theClientButton = new JButton("Client");	
+	public JButton theHelpRanksButton = new JButton("Ranks");
 	public String panelToReturn = "lobby";
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,16 +65,23 @@ public class GOGView implements ActionListener {
 		System.out.println(theLobbyPanel.strName);
 		System.out.println(""+theLobbyPanel.intPortNumber);
 		System.out.println(theLobbyPanel.strIPAddress);
+		
 		if (evt.getSource() == theLobbyHelpButton || evt.getSource() == theGameHelpButton) {
 			helpSetup();
 		}
-		if (evt.getSource() == theReturnButton) {
+		if (evt.getSource() == theHelpReturnButton || evt.getSource() == theRanksReturnButton) {
 			if (panelToReturn.equals("lobby")) {
 				lobbySetup();
 			}
 			else if (panelToReturn.equals("game")) {
 				gameSetup();
 			}
+			else if (panelToReturn.equals("help")) {
+				helpSetup();
+			}	
+		}
+		if (evt.getSource() == theHelpRanksButton) {	
+				ranksSetup();
 		}
 	}	
 	
@@ -90,6 +100,11 @@ public class GOGView implements ActionListener {
 		theFrame.requestFocus();
 		card.show(theViewPanel, "help");
 	}
+	
+	public void ranksSetup() {
+		theFrame.requestFocus();
+		card.show(theViewPanel, "ranks");
+	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////	
 	//Constructor
@@ -99,6 +114,7 @@ public class GOGView implements ActionListener {
 		theViewPanel.add(theLobbyPanel, "lobby");
 		theViewPanel.add(theGamePanel, "game");
 		theViewPanel.add(theHelpPanel, "help");
+		theViewPanel.add(theRanksPanel, "ranks");
 		theViewPanel.setPreferredSize(new Dimension(1280,720));
 		
 		theServerButton.addActionListener(this);
@@ -117,17 +133,23 @@ public class GOGView implements ActionListener {
 		theGameHelpButton.addActionListener(this);
 		theGamePanel.add(theGameHelpButton);
 		
-		theReturnButton.setBounds(1100, 20, 120, 50);
-		theReturnButton.addActionListener(this);
-		theHelpPanel.add(theReturnButton);
+		theHelpReturnButton.setBounds(1100, 20, 120, 50);
+		theHelpReturnButton.addActionListener(this);
+		theHelpPanel.add(theHelpReturnButton);
+		
+		theRanksReturnButton.setBounds(1100, 20, 120, 50);
+		theRanksReturnButton.addActionListener(this);
+		theRanksPanel.add(theRanksReturnButton);
+		
+		theHelpRanksButton.setBounds(1100, 600, 120, 50);
+		theHelpRanksButton.addActionListener(this);
+		theHelpPanel.add(theHelpRanksButton);
 		
 		theFrame.setContentPane(theViewPanel);
 		theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		theFrame.pack();
 		theFrame.setResizable(false);
 		theFrame.setVisible(true);
-		
-
 		
 		theTimer.start();
 		theGameClockTimer.start();
