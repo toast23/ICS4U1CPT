@@ -19,7 +19,8 @@ public class GOGView implements ActionListener {
 	public Timer theTimer = new Timer(1000/60, this);
 	public Timer theGameClockTimer=new Timer(1000,this);
 	public GOGModel theModel = new GOGModel();
-	public JButton theHelpButton = new JButton("Help!");
+	public JButton theLobbyHelpButton = new JButton("Help!");
+	public JButton theGameHelpButton = new JButton("Help!");
 	public JButton theReturnButton = new JButton("Return");
 	public JButton theServerButton = new JButton("Server");
 	public JButton theClientButton = new JButton("Client");	
@@ -61,7 +62,7 @@ public class GOGView implements ActionListener {
 		System.out.println(theLobbyPanel.strName);
 		System.out.println(""+theLobbyPanel.intPortNumber);
 		System.out.println(theLobbyPanel.strIPAddress);
-		if (evt.getSource() == theHelpButton) {
+		if (evt.getSource() == theLobbyHelpButton || evt.getSource() == theGameHelpButton) {
 			helpSetup();
 		}
 		if (evt.getSource() == theReturnButton) {
@@ -75,18 +76,19 @@ public class GOGView implements ActionListener {
 	}	
 	
 	public void lobbySetup() {
-		card.show(theViewPanel, "lobby");
 		theFrame.requestFocus();
+		card.show(theViewPanel, "lobby");
 	}
 	
 	public void gameSetup() {
-		card.show(theViewPanel, "game");
 		theFrame.requestFocus();
+		panelToReturn = "game";
+		card.show(theViewPanel, "game");
 	}
 	
 	public void helpSetup() {
-		card.show(theViewPanel, "help");
 		theFrame.requestFocus();
+		card.show(theViewPanel, "help");
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////	
@@ -107,9 +109,13 @@ public class GOGView implements ActionListener {
 		theClientButton.setBounds(1070,10,200,50);
 		theLobbyPanel.add(theClientButton);
 		
-		theHelpButton.setBounds(490,500,300,50);
-		theHelpButton.addActionListener(this);
-		theLobbyPanel.add(theHelpButton);
+		theLobbyHelpButton.setBounds(490,500,300,50);
+		theLobbyHelpButton.addActionListener(this);
+		theLobbyPanel.add(theLobbyHelpButton);
+		
+		theGameHelpButton.setBounds(900,90,110,50);
+		theGameHelpButton.addActionListener(this);
+		theGamePanel.add(theGameHelpButton);
 		
 		theReturnButton.setBounds(1100, 20, 120, 50);
 		theReturnButton.addActionListener(this);

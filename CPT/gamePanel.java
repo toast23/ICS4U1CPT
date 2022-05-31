@@ -12,6 +12,7 @@ import java.io.*;
 public class gamePanel extends JPanel implements ActionListener {  
 	public String strGOGArray[][] = new String[8][9];
 	public BufferedImage imgBoard = null;
+	public JButton theReadyButton = new JButton("Ready");
 	
 	//Timer stuff
 	public JLabel theGameClockLabel=new JLabel("Time");
@@ -23,7 +24,10 @@ public class gamePanel extends JPanel implements ActionListener {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Method
 	public void actionPerformed(ActionEvent evt) {
-		
+		if (evt.getSource() == theReadyButton) {
+			// temp print statement to test button activation
+			System.out.println("ready");
+		}
 	}
 	
 	public void paintBoard(Graphics g){
@@ -111,6 +115,10 @@ public class gamePanel extends JPanel implements ActionListener {
 		theScroll = new JScrollPane(theTextArea);
 		theScroll.setBounds(720,150,550,500);
 		this.add(theScroll);
+		
+		theReadyButton.setBounds(750,90,110,50);
+		theReadyButton.addActionListener(this);
+		this.add(theReadyButton);
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
