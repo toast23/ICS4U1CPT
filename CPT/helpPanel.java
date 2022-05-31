@@ -10,8 +10,6 @@ import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class helpPanel extends JPanel{  
-
-	
 	//Text area stuff
 	public JTextArea theTextArea;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -24,6 +22,25 @@ public class helpPanel extends JPanel{
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		//Draw boxes
+		g.setColor(Color.LIGHT_GRAY);
+		g.fillRect(100,50,1080,180);
+		g.fillRect(100,250,1080,180);
+		g.fillRect(100,450,1080,180);
+		
+		//Then place the words on top
+		g.setColor(Color.BLACK);
+		g.drawString("Set Up:",100,100);
+		g.drawString("-Put your pieces in the first 3 rows of your side",100,140);
+		g.drawString("-You cannot see your enemy’s piece ranks and they cannot see yours",100,180);
+		
+		g.drawString("Gameplay:",100,300);
+		g.drawString("-Drag pieces up, down, left or right",100,340);
+		g.drawString("-The spy outranks everyone except the private and other spies",100,380);
+		
+		g.drawString("Win Condition:",100,500);
+		g.drawString("Take down the Enemy Flag",100,540);
+		
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
