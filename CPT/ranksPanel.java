@@ -23,6 +23,22 @@ public class ranksPanel extends JPanel{
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		g.drawString("Pieces              Ranks",100,100);
+		g.drawString("Flag                  1",100,130);
+		g.drawString("Spy                   2",100,160);
+		g.drawString("Private               3",100,190);
+		g.drawString("Seargent              4",100,220);
+		g.drawString("2nd_Lieutenant        5",100,250);
+		g.drawString("1st_Lieutenant        6",100,280);
+		g.drawString("Captain               7",100,310);
+		g.drawString("Major                 8",100,340);
+		g.drawString("Lieutenant_Colonel    9",100,370);
+		g.drawString("Colonel               10",100,400);
+		g.drawString("Brigadier_General     11",100,430);
+		g.drawString("Major_General         12",100,460);
+		g.drawString("Lieutenant General    13",100,490);
+		g.drawString("General               14",100,520);
+		g.drawString("General_of_the_Army   15",100,550);
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
