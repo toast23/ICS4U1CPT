@@ -9,9 +9,10 @@ import javax.imageio.*;
 import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-public class helpPanel extends JPanel{  
-	//Text area stuff
-	public JTextArea theTextArea;
+public class ranksPanel extends JPanel{  
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Method
@@ -22,30 +23,27 @@ public class helpPanel extends JPanel{
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		//Draw boxes
-		g.setColor(Color.LIGHT_GRAY);
-		g.fillRect(100,50,1080,180);
-		g.fillRect(100,250,1080,180);
-		g.fillRect(100,450,1080,180);
-		
-		//Then place the words on top
-		g.setColor(Color.BLACK);
-		g.drawString("Set Up:",100,100);
-		g.drawString("-Put your pieces in the first 3 rows of your side",100,140);
-		g.drawString("-You cannot see your enemy’s piece ranks and they cannot see yours",100,180);
-		
-		g.drawString("Gameplay:",100,300);
-		g.drawString("-Drag pieces up, down, left or right",100,340);
-		g.drawString("-The spy outranks everyone except the private and other spies",100,380);
-		
-		g.drawString("Win Condition:",100,500);
-		g.drawString("Take down the Enemy Flag",100,540);
-		
+		g.drawString("Pieces              Ranks",100,100);
+		g.drawString("Flag                  1",100,130);
+		g.drawString("Spy                   2",100,160);
+		g.drawString("Private               3",100,190);
+		g.drawString("Seargent              4",100,220);
+		g.drawString("2nd_Lieutenant        5",100,250);
+		g.drawString("1st_Lieutenant        6",100,280);
+		g.drawString("Captain               7",100,310);
+		g.drawString("Major                 8",100,340);
+		g.drawString("Lieutenant_Colonel    9",100,370);
+		g.drawString("Colonel               10",100,400);
+		g.drawString("Brigadier_General     11",100,430);
+		g.drawString("Major_General         12",100,460);
+		g.drawString("Lieutenant General    13",100,490);
+		g.drawString("General               14",100,520);
+		g.drawString("General_of_the_Army   15",100,550);
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Constructor
-	public helpPanel(){
+	public ranksPanel(){
 		super();
 		this.setLayout(null);
 		this.setBackground(Color.WHITE);
@@ -53,6 +51,3 @@ public class helpPanel extends JPanel{
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 }
-
-
-
