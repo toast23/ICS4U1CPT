@@ -36,6 +36,20 @@ public class gamePanel extends JPanel implements ActionListener {
 			System.out.println("ready");
 		}
 	}
+	public void mouseDragged(MouseEvent evt) {
+				Point currentPt = evt.getPoint();
+				
+				imageLocation.translate(
+					(int)(currentPt.getX() - prevPt.getX()),
+					(int)(currentPt.getY() - prevPt.getY())
+				
+				);
+				prevPt = currentPt;
+				repaint();
+		}
+		public void mousePressed(MouseEvent evt){
+			prevPt = evt.getPoint();
+	}
 	
 	public void paintBoard(Graphics g){
 		g.drawImage(imgBoard,80,80,null);
@@ -129,7 +143,7 @@ public class gamePanel extends JPanel implements ActionListener {
 		theReadyButton.addActionListener(this);
 		this.add(theReadyButton);
 		
-		imageLocation = new Point(500,400);
+		imageLocation = new Point(400,400);
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////

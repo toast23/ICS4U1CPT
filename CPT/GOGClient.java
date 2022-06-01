@@ -26,9 +26,7 @@ public class GOGClient implements ActionListener, MouseMotionListener, MouseList
 
 	}
 	public void mouseDragged(MouseEvent evt) {
-		intMouseX = evt.getX();
-		intMouseY = evt.getY();
-		// image_corner.translate(X, Y);	
+	
 	}
 	public void mouseExited(MouseEvent evt) {
 
