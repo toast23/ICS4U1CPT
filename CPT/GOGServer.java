@@ -9,10 +9,17 @@ public class GOGServer implements ActionListener{
 	public GOGView theGOGView = new GOGView();
 	public GOGModel theModel = new GOGModel();
 	public SuperSocketMaster ssm;
+	public int intPortNumber=0;
+	public String strIPAddress=null;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Methods
 	public void actionPerformed(ActionEvent evt){
+		/*if(intPortNumber!=0 && strIPAddress!=null){
+			this.intPortNumber=theGOGView.theLobbyPanel.intPortNumber;
+			this.strIPAddress=theGOGView.theLobbyPanel.strIPAddress;
+		}*/
+		
 		if(evt.getSource() == ssm){
 			//get text from player 2
 			String strText = ssm.readText();
