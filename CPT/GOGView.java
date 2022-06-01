@@ -192,10 +192,7 @@ public class GOGView extends JPanel implements ActionListener, MouseMotionListen
 		theFrame.setResizable(false);
 		theFrame.setVisible(true);
 		
-<<<<<<< HEAD
 		
-=======
->>>>>>> a33455bea75ced29f19fcd941b7b7c3860c8272b
 		theTimer.start();
 		theGameClockTimer.start();
 	}
