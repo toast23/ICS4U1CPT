@@ -14,6 +14,10 @@ public class GOGServer extends GOGView implements ActionListener{
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Methods
 	public void actionPerformed(ActionEvent evt){
+		if(evt.getSource()==theTimer){
+			theViewPanel.repaint();
+		}
+		
 		// Network
 		if(evt.getSource() == ssm){
 			//get text from player 2
@@ -35,9 +39,13 @@ public class GOGServer extends GOGView implements ActionListener{
 			setSSM("client");
 			gameSetup();
 		}
+		
+		//If they click the help button, switch the screen to the help panel
 		if (evt.getSource() == theLobbyHelpButton || evt.getSource() == theGameHelpButton) {
 			helpSetup();
 		}
+		
+		//if they click the return button, return to lobby or game
 		if (evt.getSource() == theHelpReturnButton || evt.getSource() == theRanksReturnButton) {
 			if (panelToReturn.equals("lobby")) {
 				lobbySetup();
@@ -49,6 +57,8 @@ public class GOGServer extends GOGView implements ActionListener{
 				helpSetup();
 			}	
 		}
+		
+		//If they clickt the ranks button, show them ranks
 		if (evt.getSource() == theHelpRanksButton) {	
 				ranksSetup();
 		}

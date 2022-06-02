@@ -10,6 +10,8 @@ import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class GOGView extends JPanel implements MouseMotionListener, MouseListener {
 	//Properties
+	
+	//Frame and Window Stuff
 	public JFrame theFrame = new JFrame("Game of the Generals");
 	public CardLayout card = new CardLayout(); 
 	public JPanel theViewPanel = new JPanel(); 
@@ -18,6 +20,8 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	public helpPanel theHelpPanel = new helpPanel();
 	public ranksPanel theRanksPanel = new ranksPanel();
 	public GOGModel theModel = new GOGModel();
+	
+	//Button Stuff
 	public JButton theLobbyHelpButton = new JButton("Help!");
 	public JButton theGameHelpButton = new JButton("Help!");
 	public JButton theHelpReturnButton = new JButton("Return");
@@ -34,23 +38,6 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	// Methods
-	/*public void actionPerformed(ActionEvent evt){
-		if(evt.getSource() == theTimer){
-			//repaint=paintComponent method
-			thePanel.repaint();
-		}
-	} */	
-	public void mouseDragged(MouseEvent evt) {
-		if(evt.getSource()==theGamePanel){
-			//Get the x and y coordinates
-			//In the repaint command, we will paint with these coordinates in the panel
-			if(theGamePanel.blnActive==true){
-				theGamePanel.intX = evt.getX()-100;
-				theGamePanel.intY = evt.getY()-100;
-			}
-		}
-	}
-	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		//image.paintIcon(this,g, 500, 400);
@@ -60,30 +47,36 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		theFrame.requestFocus();
 		card.show(theViewPanel, "lobby");
 	}
-	
 	public void gameSetup() {
 		theFrame.requestFocus();
 		panelToReturn = "game";
 		card.show(theViewPanel, "game");
 	}
-	
 	public void helpSetup() {
 		theFrame.requestFocus();
 		card.show(theViewPanel, "help");
 	}
-	
 	public void ranksSetup() {
 		theFrame.requestFocus();
 		card.show(theViewPanel, "ranks");
 	}
 	
-	public void mouseExited(MouseEvent evt){}
-	public void mouseEntered(MouseEvent evt){}
 	public void mousePressed(MouseEvent evt){
 		if(evt.getSource()==theGamePanel){
 			if(theGamePanel.blnActive==false){
 				//Get rid of the block in that spot so we can paint another block that we can move
 				theGamePanel.ridBlock(evt.getX(), evt.getY());
+			}
+		}
+	}
+	public void mouseDragged(MouseEvent evt) {
+		if(evt.getSource()==theGamePanel){
+			//Get the x and y coordinates
+			//In the repaint command, we will paint with these coordinates in the panel
+			if(theGamePanel.blnActive==true){
+				theGamePanel.intX = evt.getX()-35;
+				theGamePanel.intY = evt.getY()-35;
+				System.out.println("oof");
 			}
 		}
 	}
@@ -98,6 +91,8 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	}
 	public void mouseClicked(MouseEvent evt){}
 	public void mouseMoved(MouseEvent evt) {}
+	public void mouseExited(MouseEvent evt){}
+	public void mouseEntered(MouseEvent evt){}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////	
 	//Constructor

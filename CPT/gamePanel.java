@@ -43,7 +43,7 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Method
-		public void paintBlocks(Graphics g){
+	public void paintBlocks(Graphics g){
 		int intClm;
 		int intRow;
 		for(intRow=0;intRow<8;intRow++){
@@ -51,7 +51,7 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 				//if in a certain row and certain column, a block is there(true), then...
 				if(blnArray[intRow][intClm]==true){
 					//Paint the block at that location
-					g.fillRect(intClm*200,intRow*200,200,200);
+					g.fillRect(intClm*70+80,intRow*70+80,70,70);
 				}
 			}
 		}
@@ -71,7 +71,7 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 				//-more than the top side wall
 				//-less than the bottom side wall
 				//then...
-				if(IntPosX>intClm*200 && IntPosX<(intClm+1)*200 && IntPosY>intRow*200 && IntPosY<(intRow+1)*200){
+				if(IntPosX>intClm*70+80 && IntPosX<(intClm+1)*70+80 && IntPosY>intRow*70+80 && IntPosY<(intRow+1)*70+80){
 					//If in that spot, there is already a block there(true), then...
 					if(this.blnArray[intRow][intClm]==true){
 						//Get rid of that block so we can replace it with an active block that we paint
@@ -101,7 +101,7 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 				//-more than the top side wall
 				//-less than the bottom side wall
 				//then...
-				if(intX+100>intClm*200 && intX+100<(intClm+1)*200 && intY+100>intRow*200 && intY+100<(intRow+1)*200){
+				if(intX+35>intClm*70+80 && intX+35<(intClm+1)*70+80 && intY+35>intRow*70+80 && intY+35<(intRow+1)*70+80){
 					//we note this new row and column
 					intNewRow=intRow;
 					intNewClm=intClm;
@@ -140,15 +140,10 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 		if(blnActive==true){
 			//We draw the block
 			g.setColor(Color.BLACK);
-			g.drawRect(intX,intY,70,70);
-			
-			//We draw white dot to let them know where they are
-			g.setColor(Color.WHITE);
-			g.fillRect(intX+95,intY+95,10,10);
-			
-			//Meh
-			g.setColor(Color.BLACK);
+			g.fillRect(intX,intY,70,70);
+			System.out.println("Active block");
 		}
+		System.out.println("meh");
 	}
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getSource() == theReadyButton) {
@@ -156,28 +151,13 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 			System.out.println("ready");
 		}
 	}
-	public void mouseDragged(MouseEvent evt) {
-
-		}
-	public void mousePressed(MouseEvent evt){
-	
-	}
-	
-	public void mouseMoved(MouseEvent evt){
-		
-	}
-	public void mouseExited(MouseEvent evt) {
-
-	}
-	public void mouseEntered(MouseEvent evt) {
-
-	}
-	public void mouseClicked(MouseEvent evt) {
-
-	}
-	public void mouseReleased(MouseEvent evt) {	
-
-	}
+	public void mouseDragged(MouseEvent evt) {}
+	public void mousePressed(MouseEvent evt){}
+	public void mouseMoved(MouseEvent evt){}
+	public void mouseExited(MouseEvent evt) {}
+	public void mouseEntered(MouseEvent evt) {}
+	public void mouseClicked(MouseEvent evt) {}
+	public void mouseReleased(MouseEvent evt) {	}
 	public void paintBoard(Graphics g){
 		g.drawImage(imgBoard,80,80,null);
 	}
@@ -242,10 +222,9 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 		paintCharacters(g);	
 		paintPieces(g);
 		paintBlocks(g);
-		
 		paintActiveBlock(g);
 		g.drawImage(imgPrivate, 80,150, null); 
- 
+		System.out.println("Painting");
 }
 		
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -287,7 +266,7 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
-		
+		blnArray[5][5] = true;
 
 	}
 
