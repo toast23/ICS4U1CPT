@@ -35,6 +35,7 @@ public class GOGView extends JPanel implements ActionListener, MouseMotionListen
 	final int Height = image.getIconHeight();
 	Point imageLocation;
 	Point prevPt;
+	String strSocketType;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	// Methods 
@@ -52,7 +53,22 @@ public class GOGView extends JPanel implements ActionListener, MouseMotionListen
 		}
 		
 		// Buttons
-		if(evt.getSource()==theServerButton || evt.getSource()==theClientButton){
+		if(evt.getSource()==theServerButton){
+			strSocketType="Server";
+			//Get the name of the player
+			theLobbyPanel.strName = theLobbyPanel.theNameTextField.getText();
+			
+			//Get the port number
+			try{
+				theLobbyPanel.intPortNumber = Integer.parseInt(theLobbyPanel.thePortTextField.getText());
+			}
+			catch(NumberFormatException e){
+				theLobbyPanel.thePortTextField.setText("Invalid Number");
+			}
+			
+			gameSetup();
+		}else if(evt.getSource()==theClientButton){
+			strSocketType="Client";
 			//Get the name of the player
 			theLobbyPanel.strName = theLobbyPanel.theNameTextField.getText();
 			
@@ -69,9 +85,6 @@ public class GOGView extends JPanel implements ActionListener, MouseMotionListen
 			
 			gameSetup();
 		}
-		System.out.println(theLobbyPanel.strName);
-		System.out.println(""+theLobbyPanel.intPortNumber);
-		System.out.println(theLobbyPanel.strIPAddress);
 		
 		if (evt.getSource() == theLobbyHelpButton || evt.getSource() == theGameHelpButton) {
 			helpSetup();

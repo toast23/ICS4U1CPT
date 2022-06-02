@@ -6,21 +6,23 @@ import javax.swing.event.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class GOGServer implements ActionListener{
 	//Properties
-	public GOGView theGOGView = new GOGView();
-	public GOGModel theModel = new GOGModel();
 	public SuperSocketMaster ssm;
-	public int intPortNumber=0;
 	public String strIPAddress=null;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Methods
-	public void actionPerformed(ActionEvent evt){
-		/*if(intPortNumber!=0 && strIPAddress!=null){
-			this.intPortNumber=theGOGView.theLobbyPanel.intPortNumber;
-			this.strIPAddress=theGOGView.theLobbyPanel.strIPAddress;
-		}*/
+	public void activateServer(int intPortNumber){
+		this.ssm = new SuperSocketMaster(intPortNumber,this); //Server Constructor
+		this.ssm.connect();
+	}
+	public void activateClient(String strIPAddress, int intPortNumber){
+		this.ssm = new SuperSocketMaster("127.0.0.1",intPortNumber,this); //Client Constructor
+		this.ssm.connect();
+	}
 		
-		if(evt.getSource() == ssm){
+		
+	public void actionPerformed(ActionEvent evt){	
+		/*if(evt.getSource() == ssm){
 			//get text from player 2
 			String strText = ssm.readText();
 			//get positions with this method
@@ -29,20 +31,12 @@ public class GOGServer implements ActionListener{
 			theModel.checkPieceMovement();
 			//show this on the scroll plane
 			theGOGView.theGamePanel.theTextArea.append(strText + "\n");
-		}
+		}*/
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////	
 	//Constructor
 	public GOGServer(){
-		ssm = new SuperSocketMaster(9001,this); //Server Constructor
-		ssm.connect();
-	}
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
-	//MainMethod
-	public static void main(String[] args){
-		new GOGServer();
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////

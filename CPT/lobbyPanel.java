@@ -13,10 +13,10 @@ public class lobbyPanel extends JPanel {
 	//This set of JComponents is for labels and ipAddress
 	JLabel theNameLabel = new JLabel("Enter Name Below");
 	TextField theNameTextField = new TextField("");
-	String strName = "Seamus";
+	String strName;
 	JLabel thePortLabel = new JLabel("Enter Port Number Below");
 	TextField thePortTextField = new TextField("");
-	int intPortNumber = 0;
+	int intPortNumber;
 	JLabel theIPAddressLabel = new JLabel("Enter IP Address Below");
 	TextField theIPAddressTextField = new TextField("");
 	String strIPAddress = "127.0.0.1";
