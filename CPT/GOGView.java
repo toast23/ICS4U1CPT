@@ -34,27 +34,10 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	// Methods 	
-	public void mouseMoved(MouseEvent evt) {
-
-	}
 	public void mouseDragged(MouseEvent evt) {
 		
 	}
-	public void mouseExited(MouseEvent evt) {
-
-	}
-	public void mouseEntered(MouseEvent evt) {
-
-	}
-	public void mouseReleased(MouseEvent evt) {	
-		System.out.println("released");	
-	}
-	public void mouseClicked(MouseEvent evt) {
-
-	}
-	public void mousePressed(MouseEvent evt) {	
-		
-	}
+	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		//image.paintIcon(this,g, 500, 400);
@@ -80,6 +63,13 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		theFrame.requestFocus();
 		card.show(theViewPanel, "ranks");
 	}
+	
+	public void mouseExited(MouseEvent evt){}
+	public void mouseEntered(MouseEvent evt){}
+	public void mousePressed(MouseEvent evt){}
+	public void mouseReleased(MouseEvent evt){}
+	public void mouseClicked(MouseEvent evt){}
+	public void mouseMoved(MouseEvent evt) {}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////	
 	//Constructor
