@@ -27,12 +27,10 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	public JButton theHelpRanksButton = new JButton("Ranks");
 	public String panelToReturn = "lobby";
 	
-	ImageIcon image = new ImageIcon("private.png");
-	final int Width = image.getIconWidth();
-	final int Height = image.getIconHeight();
-	Point imageLocation;
-	Point prevPt;
-	String strSocketType;
+	
+	int intX;
+	int intY;
+	
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	// Methods 	
@@ -40,14 +38,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 
 	}
 	public void mouseDragged(MouseEvent evt) {
-		Point currentPt = evt.getPoint();
 		
-		imageLocation.translate(
-			(int)(currentPt.getX() - prevPt.getX()),
-			(int)(currentPt.getY() - prevPt.getY())
-		
-		);
-		prevPt = currentPt;
 	}
 	public void mouseExited(MouseEvent evt) {
 
@@ -66,7 +57,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	}
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		image.paintIcon(this,g, 500, 400);
+		//image.paintIcon(this,g, 500, 400);
 	} 
 	
 	public void lobbySetup() {

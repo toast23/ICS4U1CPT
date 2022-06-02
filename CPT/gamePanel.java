@@ -20,20 +20,12 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 	//Text area stuff
 	public JTextArea theTextArea;
 	public JScrollPane theScroll;
+	public JTextField theTextField=new JTextField("Enter Code here");
 	
 	//Chess Pieces
-	ImageIcon imagep1 = new ImageIcon("private.png");
-	ImageIcon imagep2 = new ImageIcon("private.png");
-	final int Width = imagep1.getIconWidth();
-	final int Height = imagep1.getIconHeight();
-	final int Widthp2 = imagep2.getIconWidth();
-	final int Heightp2 = imagep2.getIconHeight();
-	
-	Point imageLocationp1;
-	Point imageLocationp2;
-	
-	
-	Point prevPt;
+	ImageIcon image = new ImageIcon("private.png");
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Method
@@ -44,28 +36,10 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 		}
 	}
 	public void mouseDragged(MouseEvent evt) {
-				Point currentPt = evt.getPoint();
-				
-				imageLocationp1.translate(
-					(int)(currentPt.getX() - prevPt.getX()),
-					(int)(currentPt.getY() - prevPt.getY())
-				
-				);
-				
-				prevPt = currentPt;
-				repaint();
-				
-				imageLocationp2.translate(
-					(int)(currentPt.getX() - prevPt.getX()),
-					(int)(currentPt.getY() - prevPt.getY())
-				
-				);
-				
-				prevPt = currentPt;
-				repaint();
+
 		}
 	public void mousePressed(MouseEvent evt){
-			prevPt = evt.getPoint();
+	
 	}
 	
 	public void mouseMoved(MouseEvent evt){
@@ -81,7 +55,7 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 
 	}
 	public void mouseReleased(MouseEvent evt) {	
-		//System.out.println("released");	
+
 	}
 	public void paintBoard(Graphics g){
 		g.drawImage(imgBoard,80,80,null);
@@ -146,9 +120,8 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 		paintBoard(g);	
 		paintCharacters(g);	
 		paintPieces(g);
-		imagep1.paintIcon(this,g, (int)imageLocationp1.getX(), (int)imageLocationp1.getY()); 
-		imagep2.paintIcon(this,g, (int)imageLocationp2.getX(), (int)imageLocationp2.getY()); 
-	 
+		 
+ 
 }
 		
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -170,21 +143,21 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 		
 		theTextArea = new JTextArea();
 		theScroll = new JScrollPane(theTextArea);
-		theScroll.setBounds(720,150,550,500);
+		theScroll.setBounds(720,150,550,400);
 		this.add(theScroll);
 		
+		
+		theTextField.setBounds(720,550,550,100);
+		this.add(theTextField);
 		theReadyButton.setBounds(750,90,110,50);
 		theReadyButton.addActionListener(this);
 		this.add(theReadyButton);
-		
-		imageLocationp1 = new Point(500,400);
-		imageLocationp2 = new Point(100,400);
-		
+	
 
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
 		
-	
+
 	}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
