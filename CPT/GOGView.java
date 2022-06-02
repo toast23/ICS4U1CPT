@@ -33,9 +33,22 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-	// Methods 	
+	// Methods
+	/*public void actionPerformed(ActionEvent evt){
+		if(evt.getSource() == theTimer){
+			//repaint=paintComponent method
+			thePanel.repaint();
+		}
+	} */	
 	public void mouseDragged(MouseEvent evt) {
-		
+		if(evt.getSource()==theGamePanel){
+			//Get the x and y coordinates
+			//In the repaint command, we will paint with these coordinates in the panel
+			if(theGamePanel.blnActive==true){
+				theGamePanel.intX = evt.getX()-100;
+				theGamePanel.intY = evt.getY()-100;
+			}
+		}
 	}
 	
 	public void paintComponent(Graphics g){
@@ -66,8 +79,23 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	
 	public void mouseExited(MouseEvent evt){}
 	public void mouseEntered(MouseEvent evt){}
-	public void mousePressed(MouseEvent evt){}
-	public void mouseReleased(MouseEvent evt){}
+	public void mousePressed(MouseEvent evt){
+		if(evt.getSource()==theGamePanel){
+			if(theGamePanel.blnActive==false){
+				//Get rid of the block in that spot so we can paint another block that we can move
+				theGamePanel.ridBlock(evt.getX(), evt.getY());
+			}
+		}
+	}
+	public void mouseReleased(MouseEvent evt){
+		if(evt.getSource()==theGamePanel){
+			if(theGamePanel.blnActive==true){
+				//check which area in the grid your piece is in
+				//make that area true in the array to signify that part of the grid is filled
+				theGamePanel.placeInSlot();
+			}
+		}
+	}
 	public void mouseClicked(MouseEvent evt){}
 	public void mouseMoved(MouseEvent evt) {}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -108,6 +136,9 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		theFrame.pack();
 		theFrame.setResizable(false);
 		theFrame.setVisible(true);
+		
+		theGamePanel.addMouseMotionListener(this);
+		theGamePanel.addMouseListener(this);
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////

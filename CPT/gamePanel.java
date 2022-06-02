@@ -12,6 +12,7 @@ import java.io.*;
 public class gamePanel extends JPanel implements ActionListener, MouseMotionListener, MouseListener {  
 	public String strGOGArray[][] = new String[8][9];
 	public BufferedImage imgBoard = null;
+	public BufferedImage imgPrivate = null;
 	public JButton theReadyButton = new JButton("Ready");
 	
 	//Timer stuff
@@ -22,13 +23,133 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 	public JScrollPane theScroll;
 	public JTextField theTextField=new JTextField("Enter Code here");
 	
-	//Chess Pieces
-	ImageIcon image = new ImageIcon("private.png");
+	int intX;
+	int intY;
+
+	
+	//We create an array. Imagine this as a mini GOGBoard array
+	boolean blnArray[][] = new boolean[8][9];
+	
+	//This variable tells us that no piece movement is currently happening
+	boolean blnActive=false;
+	
+	//This will help us determine whether we can move to new row or not
+	int intOGRow;
+	int intOGClm;
+	int intNewRow;
+	int intNewClm;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Method
+		public void paintBlocks(Graphics g){
+		int intClm;
+		int intRow;
+		for(intRow=0;intRow<8;intRow++){
+			for(intClm=0;intClm<9;intClm++){
+				//if in a certain row and certain column, a block is there(true), then...
+				if(blnArray[intRow][intClm]==true){
+					//Paint the block at that location
+					g.fillRect(intClm*200,intRow*200,200,200);
+				}
+			}
+		}
+	}
+	
+	//When they press on an area with a block, we do the following...
+	public void ridBlock(int IntPosX, int IntPosY){
+		int intClm;
+		int intRow;
+		
+		//Inside a certain row and column...
+		for(intRow=0;intRow<8;intRow++){
+			for(intClm=0;intClm<9;intClm++){
+				//if the x and y position is...
+				//-more than the left side wall
+				//-less than the right side wall
+				//-more than the top side wall
+				//-less than the bottom side wall
+				//then...
+				if(IntPosX>intClm*200 && IntPosX<(intClm+1)*200 && IntPosY>intRow*200 && IntPosY<(intRow+1)*200){
+					//If in that spot, there is already a block there(true), then...
+					if(this.blnArray[intRow][intClm]==true){
+						//Get rid of that block so we can replace it with an active block that we paint
+						this.blnArray[intRow][intClm]=false;
+						//We set the boolean active to true because we are now moving a block
+						this.blnActive=true;
+						//We note the original row and column
+						intOGRow=intRow;
+						intOGClm=intClm;
+					}
+				}
+			}
+		}
+	}
+	
+	//When they release their mouse, we use this method
+	public void placeInSlot(){
+		int intClm;
+		int intRow;
+		
+		//Inside a certain row and column...
+		for(intRow=0;intRow<8;intRow++){
+			for(intClm=0;intClm<9;intClm++){
+				//if the x and y position is...
+				//-more than the left side wall
+				//-less than the right side wall
+				//-more than the top side wall
+				//-less than the bottom side wall
+				//then...
+				if(intX+100>intClm*200 && intX+100<(intClm+1)*200 && intY+100>intRow*200 && intY+100<(intRow+1)*200){
+					//we note this new row and column
+					intNewRow=intRow;
+					intNewClm=intClm;
+					
+					//If it's in the same row but moves right by 1, then...
+					if(intOGRow==intNewRow && intOGClm+1==intNewClm){
+						//place the block in the new row and column
+						blnArray[intRow][intClm]=true;
+					//If it's in the same row but moves left by 1, then...
+					}else if(intOGRow==intNewRow && intOGClm-1==intNewClm){
+						//place the block in the new row and column
+						blnArray[intRow][intClm]=true;
+					//If it's in the same column but moves down by 1, then...
+					}else if(intOGRow+1==intNewRow && intOGClm==intNewClm){
+						//place the block in the new row and column
+						blnArray[intRow][intClm]=true;
+					//If it's in the same column but moves up by 1, then...
+					}else if(intOGRow-1==intNewRow && intOGClm==intNewClm){
+						//place the block in the new row and column
+						blnArray[intRow][intClm]=true;
+					//If none of this is true, then move it back to the original position before
+					//it was pressed
+					}else{
+						blnArray[intOGRow][intOGClm]=true;
+					}
+					//Either way, we use this method when they let go so once they let go, no more drag
+					//that means it's inative(false)
+					this.blnActive=false;
+				}
+			}
+		}
+	}
+	//We call this in our repaint method
+	public void paintActiveBlock(Graphics g){
+		//If active is true, which means user is dragging, then we draw the moving block
+		if(blnActive==true){
+			//We draw the block
+			g.setColor(Color.BLACK);
+			g.drawRect(intX,intY,70,70);
+			
+			//We draw white dot to let them know where they are
+			g.setColor(Color.WHITE);
+			g.fillRect(intX+95,intY+95,10,10);
+			
+			//Meh
+			g.setColor(Color.BLACK);
+		}
+	}
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getSource() == theReadyButton) {
 			// temp print statement to test button activation
@@ -120,7 +241,10 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 		paintBoard(g);	
 		paintCharacters(g);	
 		paintPieces(g);
-		 
+		paintBlocks(g);
+		
+		paintActiveBlock(g);
+		g.drawImage(imgPrivate, 80,150, null); 
  
 }
 		
@@ -134,6 +258,13 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
+		
+		try{
+			imgPrivate = ImageIO.read(new File("private.png"));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		
 		
 		this.setLayout(null);
 		this.setBackground(Color.WHITE);
