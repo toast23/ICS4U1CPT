@@ -55,7 +55,7 @@ public class GOGModel{
 					strArray = GOGUtilities.flagMovement(      strArray,strPlayerTurn,intOGClm,intOGRow,intNewClm,intNewRow,strActivePiece,strNextPositionPiece);
 				}else if(strActivePiece.equalsIgnoreCase(strPlayerTurn+"Private")){
 					System.out.println("Private is active");
-					strArray = GOGUtilities.privateMovement(   strArray,strPlayerTurn,intOGClm,intOGRow,intNewClm,intNewRow,strActivePiece,strNextPositionPiece);
+					strArray = GOGUtilities.privateMovement(strArray,strPlayerTurn,intOGClm,intOGRow,intNewClm,intNewRow,strActivePiece,strNextPositionPiece);
 				}else if(strActivePiece.equalsIgnoreCase(strPlayerTurn+"Spy")){
 					System.out.println("Spy is active");
 					strArray = GOGUtilities.spyMovement(       strArray,strPlayerTurn,intOGClm,intOGRow,intNewClm,intNewRow,strActivePiece,strNextPositionPiece);

@@ -9,7 +9,7 @@ import javax.imageio.*;
 import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-public class gamePanel extends JPanel implements ActionListener, MouseMotionListener, MouseListener {  
+public class gamePanel extends JPanel implements ActionListener {  
 	public String strGOGArray[][] = new String[8][9];
 	public BufferedImage imgBoard = null;
 	public BufferedImage imgFlag = null;
@@ -45,12 +45,12 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 	public void updateModel(String[][] strArray){
 		this.strGOGArray=strArray;
 	}
+	
 	public void paintPieces(Graphics g){
-		int intRow;
-		int intColumn;
 		g.setColor(Color.WHITE);
-		for(intRow=0;intRow<8;intRow++){
-			for(intColumn=0;intColumn<9;intColumn++){
+		
+		for(int intRow=0;intRow<8;intRow++){
+			for(int intColumn=0;intColumn<9;intColumn++){
 				if(strGOGArray[intRow][intColumn] == null){
 				}else if(strGOGArray[intRow][intColumn].equals("P1Flag")){
 					g.drawImage(imgFlag, 80+70*intColumn,80+70*intRow, null); 
@@ -106,13 +106,10 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 	}
 	
 	//When they release their mouse, we use this method
-	public void getNewPosition(){
-		int intClm;
-		int intRow;
-		
+	public void getNewPosition(){	
 		//Inside a certain row and column...
-		for(intRow=0;intRow<8;intRow++){
-			for(intClm=0;intClm<9;intClm++){
+		for(int intRow=0;intRow<8;intRow++){
+			for(int intClm=0;intClm<9;intClm++){
 				//if the x and y position is...
 				//-more than the left side wall
 				//-less than the right side wall
@@ -139,9 +136,9 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 			}else if(strActivePiece.equals("P1Private") || strActivePiece.equals("P2Private")){
 				g.drawImage(imgPrivate, intImgX, intImgY,null);
 			}
-			
 		}
 	}
+	
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getSource() == theReadyButton) {
 			// temp print statement to test button activation
@@ -150,13 +147,7 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 			blnMessageSending=true;
 		}
 	}
-	public void mouseDragged(MouseEvent evt) {}
-	public void mousePressed(MouseEvent evt){}
-	public void mouseMoved(MouseEvent evt){}
-	public void mouseExited(MouseEvent evt) {}
-	public void mouseEntered(MouseEvent evt) {}
-	public void mouseClicked(MouseEvent evt) {}
-	public void mouseReleased(MouseEvent evt) {	}
+
 	public void paintBoard(Graphics g){
 		g.drawImage(imgBoard,80,80,null);
 	}
@@ -184,10 +175,8 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 			int intSeconds = intP2TimeLeft%60;
 			theGameClockLabel.setText("Player 2 Time: "+intMinutes+":"+intSeconds);
 		}
-		System.out.println("Shows time");
 	}
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		paintBoard(g);	
@@ -236,10 +225,6 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 		theReadyButton.setBounds(750,90,110,50);
 		theReadyButton.addActionListener(this);
 		this.add(theReadyButton);
-	
-
-		this.addMouseListener(this);
-		this.addMouseMotionListener(this);
 
 	}
 
