@@ -31,10 +31,6 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	public JButton theHelpRanksButton = new JButton("Ranks");
 	public String panelToReturn = "lobby";
 	
-	
-	int intX;
-	int intY;
-	
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	// Methods
@@ -65,7 +61,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		if(evt.getSource()==theGamePanel){
 			if(theGamePanel.blnActive==false){
 				//Get rid of the block in that spot so we can paint another block that we can move
-				theGamePanel.ridBlock(evt.getX(), evt.getY());
+				theModel.strActivePiece=theGamePanel.ridBlock(evt.getX(), evt.getY());
 			}
 		}
 	}
@@ -74,9 +70,8 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 			//Get the x and y coordinates
 			//In the repaint command, we will paint with these coordinates in the panel
 			if(theGamePanel.blnActive==true){
-				theGamePanel.intX = evt.getX()-35;
-				theGamePanel.intY = evt.getY()-35;
-				System.out.println("oof");
+				theGamePanel.intImgX = evt.getX()-35;
+				theGamePanel.intImgY = evt.getY()-35;
 			}
 		}
 	}
@@ -85,7 +80,14 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 			if(theGamePanel.blnActive==true){
 				//check which area in the grid your piece is in
 				//make that area true in the array to signify that part of the grid is filled
-				theGamePanel.placeInSlot();
+				theGamePanel.getNewPosition();
+				theModel.intOGClm=theGamePanel.intOGClm;
+				theModel.intOGRow=theGamePanel.intOGRow;
+				theModel.intNewClm=theGamePanel.intNewClm;
+				theModel.intNewRow=theGamePanel.intNewRow;
+				theModel.checkPieceMovement();
+				System.out.println(theModel.strArray[theModel.intNewRow][theModel.intNewClm]);
+				theGamePanel.strGOGArray=theModel.strArray;
 			}
 		}
 	}

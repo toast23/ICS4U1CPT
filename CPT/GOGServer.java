@@ -6,7 +6,6 @@ import javax.swing.event.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class GOGServer extends GOGView implements ActionListener{
 	//Properties
-	public GOGModel theModel = new GOGModel();
 	public SuperSocketMaster ssm;
 	public Timer theTimer = new Timer(1000/60, this);
 	public Timer theGameClockTimer=new Timer(1000,this);
@@ -22,8 +21,6 @@ public class GOGServer extends GOGView implements ActionListener{
 		if(evt.getSource() == ssm){
 			//get text from player 2
 			String strText = ssm.readText();
-			//get positions with this method
-			theModel.getPositions(strText);
 			//move the pices
 			theModel.checkPieceMovement();
 			//show this on the scroll plane
@@ -34,10 +31,13 @@ public class GOGServer extends GOGView implements ActionListener{
 		if (evt.getSource()==theServerButton){
 			setSSM("server");
 			gameSetup();
+			this.theGamePanel.strGOGArray=this.theModel.strArray;
+			
 		}
 		else if(evt.getSource()==theClientButton){
 			setSSM("client");
 			gameSetup();
+			this.theGamePanel.strGOGArray=(theModel.strArray);
 		}
 		
 		//If they click the help button, switch the screen to the help panel

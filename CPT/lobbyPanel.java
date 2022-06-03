@@ -18,7 +18,7 @@ public class lobbyPanel extends JPanel {
 	TextField thePortTextField = new TextField("");
 	int intPortNumber;
 	JLabel theIPAddressLabel = new JLabel("Enter IP Address Below");
-	TextField theIPAddressTextField = new TextField("");
+	TextField theIPAddressTextField = new TextField("127.0.0.1");
 	String strIPAddress = "";
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////

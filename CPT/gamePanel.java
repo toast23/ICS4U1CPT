@@ -12,6 +12,7 @@ import java.io.*;
 public class gamePanel extends JPanel implements ActionListener, MouseMotionListener, MouseListener {  
 	public String strGOGArray[][] = new String[8][9];
 	public BufferedImage imgBoard = null;
+	public BufferedImage imgFlag = null;
 	public BufferedImage imgPrivate = null;
 	public JButton theReadyButton = new JButton("Ready");
 	
@@ -23,15 +24,13 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 	public JScrollPane theScroll;
 	public JTextField theTextField=new JTextField("Enter Code here");
 	
-	int intX;
-	int intY;
-
+	int intImgX;
+	int intImgY;
 	
-	//We create an array. Imagine this as a mini GOGBoard array
-	boolean blnArray[][] = new boolean[8][9];
 	
 	//This variable tells us that no piece movement is currently happening
 	boolean blnActive=false;
+	String strActivePiece;
 	
 	//This will help us determine whether we can move to new row or not
 	int intOGRow;
@@ -43,22 +42,39 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Method
-	public void paintBlocks(Graphics g){
-		int intClm;
+	public void updateModel(String[][] strArray){
+		this.strGOGArray=strArray;
+	}
+	public void paintPieces(Graphics g){
 		int intRow;
+		int intColumn;
+		g.setColor(Color.WHITE);
 		for(intRow=0;intRow<8;intRow++){
-			for(intClm=0;intClm<9;intClm++){
-				//if in a certain row and certain column, a block is there(true), then...
-				if(blnArray[intRow][intClm]==true){
-					//Paint the block at that location
-					g.fillRect(intClm*70+80,intRow*70+80,70,70);
+			for(intColumn=0;intColumn<9;intColumn++){
+				if(strGOGArray[intRow][intColumn] == null){
+				}else if(strGOGArray[intRow][intColumn].equals("P1Flag")){
+					g.drawImage(imgFlag, 80+70*intColumn,80+70*intRow, null); 
+				}else if(strGOGArray[intRow][intColumn].equals("P1Private")){
+					g.drawImage(imgPrivate, 80+70*intColumn,80+70*intRow, null); 
+				}else if(strGOGArray[intRow][intColumn].equals("P1Spy")){
+					g.drawString("s",110+70*intColumn,120+70*intRow);
+				}else if(strGOGArray[intRow][intColumn].equals("P1 Lieutenant 1st")){
+					g.drawString("L1",110+70*intColumn,120+70*intRow);
+				}else if(strGOGArray[intRow][intColumn].equals("P1 Lieutenant 2nd")){
+					g.drawString("L2",110+70*intColumn,120+70*intRow);
+				}else if(strGOGArray[intRow][intColumn].equals("P2Private")){
+					g.drawString("???",110+70*intColumn,120+70*intRow);
+				}else if(strGOGArray[intRow][intColumn].equals("P2Spy")){
+					g.drawString("???",110+70*intColumn,120+70*intRow);
+				}else if(strGOGArray[intRow][intColumn].equals("P2Flag")){
+					g.drawString("???",110+70*intColumn,120+70*intRow);
 				}
 			}
 		}
 	}
 	
 	//When they press on an area with a block, we do the following...
-	public void ridBlock(int IntPosX, int IntPosY){
+	public String ridBlock(int IntPosX, int IntPosY){
 		int intClm;
 		int intRow;
 		
@@ -73,9 +89,10 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 				//then...
 				if(IntPosX>intClm*70+80 && IntPosX<(intClm+1)*70+80 && IntPosY>intRow*70+80 && IntPosY<(intRow+1)*70+80){
 					//If in that spot, there is already a block there(true), then...
-					if(this.blnArray[intRow][intClm]==true){
+					if(this.strGOGArray[intRow][intClm]!=null && !this.strGOGArray[intRow][intClm].equals("")){
 						//Get rid of that block so we can replace it with an active block that we paint
-						this.blnArray[intRow][intClm]=false;
+						this.strActivePiece=this.strGOGArray[intRow][intClm];
+						this.strGOGArray[intRow][intClm]=null;
 						//We set the boolean active to true because we are now moving a block
 						this.blnActive=true;
 						//We note the original row and column
@@ -85,10 +102,11 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 				}
 			}
 		}
+		return strActivePiece;
 	}
 	
 	//When they release their mouse, we use this method
-	public void placeInSlot(){
+	public void getNewPosition(){
 		int intClm;
 		int intRow;
 		
@@ -101,34 +119,10 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 				//-more than the top side wall
 				//-less than the bottom side wall
 				//then...
-				if(intX+35>intClm*70+80 && intX+35<(intClm+1)*70+80 && intY+35>intRow*70+80 && intY+35<(intRow+1)*70+80){
+				if(intImgX+35>intClm*70+80 && intImgX+35<(intClm+1)*70+80 && intImgY+35>intRow*70+80 && intImgY+35<(intRow+1)*70+80){
 					//we note this new row and column
-					intNewRow=intRow;
-					intNewClm=intClm;
-					
-					//If it's in the same row but moves right by 1, then...
-					if(intOGRow==intNewRow && intOGClm+1==intNewClm){
-						//place the block in the new row and column
-						blnArray[intRow][intClm]=true;
-					//If it's in the same row but moves left by 1, then...
-					}else if(intOGRow==intNewRow && intOGClm-1==intNewClm){
-						//place the block in the new row and column
-						blnArray[intRow][intClm]=true;
-					//If it's in the same column but moves down by 1, then...
-					}else if(intOGRow+1==intNewRow && intOGClm==intNewClm){
-						//place the block in the new row and column
-						blnArray[intRow][intClm]=true;
-					//If it's in the same column but moves up by 1, then...
-					}else if(intOGRow-1==intNewRow && intOGClm==intNewClm){
-						//place the block in the new row and column
-						blnArray[intRow][intClm]=true;
-					//If none of this is true, then move it back to the original position before
-					//it was pressed
-					}else{
-						blnArray[intOGRow][intOGClm]=true;
-					}
-					//Either way, we use this method when they let go so once they let go, no more drag
-					//that means it's inative(false)
+						intNewRow=intRow;
+						intNewClm=intClm;
 					this.blnActive=false;
 				}
 			}
@@ -140,15 +134,17 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 		if(blnActive==true){
 			//We draw the block
 			g.setColor(Color.BLACK);
-			g.fillRect(intX,intY,70,70);
-			System.out.println("Active block");
+			if(strActivePiece.equals("P1Flag") || strActivePiece.equals("P2Flag")){
+				g.drawImage(imgFlag, intImgX, intImgY,null);
+			}else if(strActivePiece.equals("P1Private") || strActivePiece.equals("P2Private")){
+				g.drawImage(imgPrivate, intImgX, intImgY,null);
+			}
+			
 		}
-		System.out.println("meh");
 	}
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getSource() == theReadyButton) {
 			// temp print statement to test button activation
-			System.out.println("ready");
 		}
 	}
 	public void mouseDragged(MouseEvent evt) {}
@@ -175,40 +171,12 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 		g.drawString("9",110+70*8,50);
 	}
 	
-	public void paintPieces(Graphics g){
-		int intRow;
-		int intColumn;
-		g.setColor(Color.WHITE);
-		for(intRow=0;intRow<8;intRow++){
-			for(intColumn=0;intColumn<9;intColumn++){
-				if(strGOGArray[intRow][intColumn] == null){
-				}else if(strGOGArray[intRow][intColumn].equals("P1Private")){
-					g.drawString("p",110+70*intColumn,120+70*intRow);
-				}else if(strGOGArray[intRow][intColumn].equals("P1Spy")){
-					g.drawString("s",110+70*intColumn,120+70*intRow);
-				}else if(strGOGArray[intRow][intColumn].equals("P1Flag")){
-					g.drawString("f",110+70*intColumn,120+70*intRow);
-				}else if(strGOGArray[intRow][intColumn].equals("P1 Lieutenant 1st")){
-					g.drawString("L1",110+70*intColumn,120+70*intRow);
-				}else if(strGOGArray[intRow][intColumn].equals("P1 Lieutenant 2nd")){
-					g.drawString("L2",110+70*intColumn,120+70*intRow);
-				}else if(strGOGArray[intRow][intColumn].equals("P2Private")){
-					g.drawString("???",110+70*intColumn,120+70*intRow);
-				}else if(strGOGArray[intRow][intColumn].equals("P2Spy")){
-					g.drawString("???",110+70*intColumn,120+70*intRow);
-				}else if(strGOGArray[intRow][intColumn].equals("P2Flag")){
-					g.drawString("???",110+70*intColumn,120+70*intRow);
-				}
-			}
-		}
-	}
-	
 	public void drawNewTime(String strPlayerTurn, int intP1TimeLeft, int intP2TimeLeft){
-		if(strPlayerTurn.equals("P1Turn")){
+		if(strPlayerTurn.equals("P1")){
 			int intMinutes = intP1TimeLeft/60;
 			int intSeconds = intP1TimeLeft%60;
 			theGameClockLabel.setText("Player 1 Time: "+intMinutes+":"+intSeconds);
-		}else if(strPlayerTurn.equals("P2Turn")){
+		}else if(strPlayerTurn.equals("P2")){
 			int intMinutes = intP2TimeLeft/60;
 			int intSeconds = intP2TimeLeft%60;
 			theGameClockLabel.setText("Player 2 Time: "+intMinutes+":"+intSeconds);
@@ -221,10 +189,7 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 		paintBoard(g);	
 		paintCharacters(g);	
 		paintPieces(g);
-		paintBlocks(g);
 		paintActiveBlock(g);
-		g.drawImage(imgPrivate, 80,150, null); 
-		System.out.println("Painting");
 }
 		
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -244,6 +209,11 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 			System.out.println("Error finding image");
 		}
 		
+		try{
+			imgFlag = ImageIO.read(new File("flag.png"));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
 		
 		this.setLayout(null);
 		this.setBackground(Color.WHITE);
@@ -266,7 +236,6 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
-		blnArray[5][5] = true;
 
 	}
 
