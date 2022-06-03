@@ -93,7 +93,8 @@ public class GOGServer extends GOGView implements ActionListener{
 				theGamePanel.drawNewTime(theModel.strPlayerTurn, theModel.intP1TimeLeft, theModel.intP2TimeLeft);
 			}
 		}
-		
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
 		//This is used for receiving network messages
 		if(evt.getSource() == ssm){
 			//We create a local variable that will help us store the sent message
@@ -157,18 +158,36 @@ public class GOGServer extends GOGView implements ActionListener{
 			}
 		}
 		
-		// Buttons
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+		//If the server button is clicked, then...
 		if(evt.getSource()==theServerButton){
+			//We will set up the supersocketmaster server
 			setSSM("server");
+			
+			//We will also switch to game panel
 			gameSetup();
+			
+			//We will also make the game panel's array board the same as the model's
 			this.theGamePanel.strGOGArray=this.theModel.strArray;
+			
+			//Last, the server is always player 1
 			strPlayer="P1";
 			
 		}
+		
+		//If the client button is clicked
 		else if(evt.getSource()==theClientButton){
+			//We will set up the supersocketmaster client
 			setSSM("client");
+			
+			//We will also switch to game panel
 			gameSetup();
+			
+			//We will also make the game panel's array board the same as the model's
 			this.theGamePanel.strGOGArray=(theModel.strArray);
+			
+			//Last, the client is always player 2
 			strPlayer="P2";
 		}
 		
@@ -190,12 +209,14 @@ public class GOGServer extends GOGView implements ActionListener{
 			}	
 		}
 		
-		//If they clickt the ranks button, show them ranks
-		if (evt.getSource() == theHelpRanksButton) {	
-				ranksSetup();
+		//If they click the ranks button, then...
+		if (evt.getSource() == theHelpRanksButton){	
+			//Set up the panel with the marks
+			ranksSetup();
 		}
 	}
 	
+	//This method sets up the server based on the SSMType
 	public void setSSM(String strSSMType) {
 		// Get the name of the player
 		theLobbyPanel.strName = theLobbyPanel.theNameTextField.getText();
@@ -207,11 +228,14 @@ public class GOGServer extends GOGView implements ActionListener{
 		catch(NumberFormatException e){
 			theLobbyPanel.thePortTextField.setText("Invalid Number");
 		}
+		
+		//If this is a server, then...
 		if (strSSMType.equals("server")) {
-
+			//set up the server using the port number
 			ssm = new SuperSocketMaster(theLobbyPanel.intPortNumber, this);
-		}
-		else if (strSSMType.equals("client")) {
+			
+		//If this is a client, then...
+		}else if (strSSMType.equals("client")) {
 			// Get ip address
 			try{
 				theLobbyPanel.strIPAddress = theLobbyPanel.theIPAddressTextField.getText();
@@ -219,18 +243,16 @@ public class GOGServer extends GOGView implements ActionListener{
 			catch(NumberFormatException e){
 				theLobbyPanel.thePortTextField.setText("Invalid Number");
 			}
+			//Set up the client using the port number and IP Address
 			ssm = new SuperSocketMaster(theLobbyPanel.strIPAddress, theLobbyPanel.intPortNumber, this);
 		}
-		
-
-		
-		
-		
+		//After we are done setting up ssm, we may onnect
 		ssm.connect();
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	public GOGServer() {
+		//Here, we set up action listeners
 		theServerButton.addActionListener(this);
 		theClientButton.addActionListener(this);
 		theLobbyHelpButton.addActionListener(this);
@@ -239,6 +261,7 @@ public class GOGServer extends GOGView implements ActionListener{
 		theRanksReturnButton.addActionListener(this);	
 		theHelpRanksButton.addActionListener(this);
 		
+		//We start the clock here
 		theTimer.start();
 		theGameClockTimer.start();
 	}
