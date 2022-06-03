@@ -62,6 +62,8 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 			if(theGamePanel.blnActive==false){
 				//Get rid of the block in that spot so we can paint another block that we can move
 				theModel.strActivePiece=theGamePanel.ridBlock(evt.getX(), evt.getY());
+				theGamePanel.intImgX = evt.getX()-35;
+				theGamePanel.intImgY = evt.getY()-35;
 			}
 		}
 	}
@@ -85,8 +87,19 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 				theModel.intOGRow=theGamePanel.intOGRow;
 				theModel.intNewClm=theGamePanel.intNewClm;
 				theModel.intNewRow=theGamePanel.intNewRow;
-				theModel.checkPieceMovement();
+				if(theModel.intOGRow==theModel.intNewRow && theModel.intOGClm==theModel.intNewClm){
+					//if they didn't move anywhere, then nothing happens here
+				}else{
+					theModel.checkPieceMovement();
+				}
+				
+				/*
+				theGamePanel.strGOGArray[theModel.intOGRow][theModel.intOGClm]=theModel.strArray[theModel.intOGRow][theModel.intOGClm];
+				theGamePanel.strGOGArray[theModel.intNewRow][theModel.intNewClm]=theModel.strArray[theModel.intNewClm][theModel.intNewClm];
+				*/
+				/*
 				theGamePanel.strGOGArray=theModel.strArray;
+				*/
 			}
 		}
 	}

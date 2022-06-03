@@ -49,7 +49,6 @@ public class GOGModel{
 		
 		//if they're not on the same team, then compare and move
 		if(blnOnSameTeam == false){
-			System.out.println("the heck?");
 			if((intOGRow+1==intNewRow && intOGClm==intNewClm) || (intOGRow-1==intNewRow && intOGClm==intNewClm) || (intOGRow==intNewRow && intOGClm+1==intNewClm) || (intOGRow==intNewRow && intOGClm-1==intNewClm)){
 				if(strActivePiece.equalsIgnoreCase(strPlayerTurn+"Flag")){
 					System.out.println("Flag is active");
