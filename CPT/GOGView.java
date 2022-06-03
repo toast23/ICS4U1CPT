@@ -30,17 +30,15 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	public JButton theClientButton = new JButton("Client");	
 	public JButton theHelpRanksButton = new JButton("Ranks");
 	public String panelToReturn = "lobby";
-	public String theCurrentPanel = "lobby";
 	public String strPlayer;
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-	// Methods
+	//These methods mainly pertain to setting up and switching between panels
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		//image.paintIcon(this,g, 500, 400);
 	} 
-	
 	public void lobbySetup() {
 		theFrame.requestFocus();
 		card.show(theViewPanel, "lobby");
@@ -58,44 +56,61 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		theFrame.requestFocus();
 		card.show(theViewPanel, "ranks");
 	}
-	
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+	//These methods pertain mouse interaction in the game panel 
 	public void mousePressed(MouseEvent evt){
+		//If they press the mouse in game panel, then...
 		if(evt.getSource()==theGamePanel){
+			//If they are player 1 and it is player 1's turn, then...
+			//or they are player 2 and it is player 2's turn, then...
 			if((strPlayer.equals("P1") && theModel.strPlayerTurn.equals("P1"))||(strPlayer.equals("P2") && theModel.strPlayerTurn.equals("P2"))){
+				//If there is not active movement prior, then...
 				if(theGamePanel.blnActive==false){
-					//Get rid of the block in that spot so we can paint another block that we can move
+					//Get rid of the block in that spot
 					theModel.strActivePiece=theGamePanel.ridBlock(evt.getX(), evt.getY());
+					//These will be the coordinates of the actively moved block
 					theGamePanel.intImgX = evt.getX()-35;
 					theGamePanel.intImgY = evt.getY()-35;
 				}
 			}
 		}
 	}
+	
 	public void mouseDragged(MouseEvent evt) {
+		//If they drag acorss the game panel, then...
 		if(evt.getSource()==theGamePanel){
-			//Get the x and y coordinates
-			//In the repaint command, we will paint with these coordinates in the panel
+			//If it is actively being moved, then...
 			if(theGamePanel.blnActive==true){
+				//Get the x and y coordinates
 				theGamePanel.intImgX = evt.getX()-35;
 				theGamePanel.intImgY = evt.getY()-35;
+				//In the repaint command, we will paint with these coordinates in the panel
 			}
 		}
 	}
 	public void mouseReleased(MouseEvent evt){
+		//If they release the mouse in the game panel, then...
 		if(evt.getSource()==theGamePanel){
+			//If a piece is actively being moved, then...
 			if(theGamePanel.blnActive==true){
-				//check which area in the grid your piece is in
-				//make that area true in the array to signify that part of the grid is filled
+				//get the new row and column in game panel's row and column
 				theGamePanel.getNewPosition();
+				//We will update the coordinates for the model here
 				theModel.intOGClm=theGamePanel.intOGClm;
 				theModel.intOGRow=theGamePanel.intOGRow;
 				theModel.intNewClm=theGamePanel.intNewClm;
 				theModel.intNewRow=theGamePanel.intNewRow;
+				
+				//If the model has not moved from its original row to a new row and has not moved from its original column to a new column, then...
 				if(theModel.intOGRow==theModel.intNewRow && theModel.intOGClm==theModel.intNewClm){
-					//System.out.println("didnt move");
-					// restore removed block to previous block
+					//Don't change anything. Just restore removed block to previous spot
 					theGamePanel.strGOGArray[theGamePanel.intOGRow][theGamePanel.intOGClm]=theGamePanel.strActivePiece;
+				
+				//If that isn't the case, then...
 				}else{
+					//Check where the piece has moved and make the appropriate edits to the
+					//model's array with the checkPieceMovement method
 					theModel.checkPieceMovement();
 					
 					//After their turn, switch player turn
@@ -106,8 +121,11 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 						theModel.strPlayerTurn="P1";
 						System.out.println("Just switched to p1");
 					}
+					
+					//Because it is time to switch turns, we make blnSwitchTurn true
 					theGamePanel.blnSwitchTurn=true;
 				}
+				//At the end of the day, we make the game panel's array the same as the model's array
 				theGamePanel.strGOGArray=theModel.strArray;
 			}
 		}
@@ -119,6 +137,8 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 			}
 		}*/
 	}
+	
+	//These are unused commands that we need to override
 	public void mouseClicked(MouseEvent evt){}
 	public void mouseMoved(MouseEvent evt) {}
 	public void mouseExited(MouseEvent evt){}
