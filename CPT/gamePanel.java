@@ -38,7 +38,7 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 	int intNewRow;
 	int intNewClm;
 
-
+	public boolean blnMessageSending = false;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Method
@@ -146,6 +146,9 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 		if (evt.getSource() == theReadyButton) {
 			// temp print statement to test button activation
 		}
+		if(evt.getSource()==theTextField){
+			blnMessageSending=true;
+		}
 	}
 	public void mouseDragged(MouseEvent evt) {}
 	public void mousePressed(MouseEvent evt){}
@@ -226,7 +229,7 @@ public class gamePanel extends JPanel implements ActionListener, MouseMotionList
 		theScroll.setBounds(720,150,550,400);
 		this.add(theScroll);
 		
-		
+		theTextField.addActionListener(this);
 		theTextField.setBounds(720,550,550,100);
 		this.add(theTextField);
 		theReadyButton.setBounds(750,90,110,50);

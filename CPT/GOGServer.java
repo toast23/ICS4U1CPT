@@ -15,6 +15,11 @@ public class GOGServer extends GOGView implements ActionListener{
 	public void actionPerformed(ActionEvent evt){
 		if(evt.getSource()==theTimer){
 			theViewPanel.repaint();
+			if(theGamePanel.blnMessageSending==true){
+				theGamePanel.theTextArea.append(theGamePanel.theTextField.getText() + "\n");
+				ssm.sendText(theGamePanel.theTextField.getText());
+				theGamePanel.blnMessageSending=false;
+			}
 		}
 		
 		// Network
