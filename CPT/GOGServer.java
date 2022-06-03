@@ -27,6 +27,7 @@ public class GOGServer extends GOGView implements ActionListener{
 				theGamePanel.drawNewTime(theModel.strPlayerTurn, theModel.intP1TimeLeft, theModel.intP2TimeLeft);
 			}
 		}
+		
 		// Network
 		if(evt.getSource() == ssm){
 			//get text from player 2
@@ -42,12 +43,14 @@ public class GOGServer extends GOGView implements ActionListener{
 			setSSM("server");
 			gameSetup();
 			this.theGamePanel.strGOGArray=this.theModel.strArray;
+			strSocketType="P1";
 			
 		}
 		else if(evt.getSource()==theClientButton){
 			setSSM("client");
 			gameSetup();
 			this.theGamePanel.strGOGArray=(theModel.strArray);
+			strSocketType="P2";
 		}
 		
 		//If they click the help button, switch the screen to the help panel

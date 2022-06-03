@@ -30,6 +30,8 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	public JButton theClientButton = new JButton("Client");	
 	public JButton theHelpRanksButton = new JButton("Ranks");
 	public String panelToReturn = "lobby";
+	public String theCurrentPanel = "lobby";
+	public String strSocketType;
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,11 +61,13 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	
 	public void mousePressed(MouseEvent evt){
 		if(evt.getSource()==theGamePanel){
-			if(theGamePanel.blnActive==false){
-				//Get rid of the block in that spot so we can paint another block that we can move
-				theModel.strActivePiece=theGamePanel.ridBlock(evt.getX(), evt.getY());
-				theGamePanel.intImgX = evt.getX()-35;
-				theGamePanel.intImgY = evt.getY()-35;
+			if((strSocketType.equals("P1") && theModel.strPlayerTurn.equals("P1"))||(strSocketType.equals("P2") && theModel.strPlayerTurn.equals("P2"))){
+				if(theGamePanel.blnActive==false){
+					//Get rid of the block in that spot so we can paint another block that we can move
+					theModel.strActivePiece=theGamePanel.ridBlock(evt.getX(), evt.getY());
+					theGamePanel.intImgX = evt.getX()-35;
+					theGamePanel.intImgY = evt.getY()-35;
+				}
 			}
 		}
 	}
@@ -91,15 +95,16 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 					//if they didn't move anywhere, then nothing happens here
 				}else{
 					theModel.checkPieceMovement();
+					
+					//After their turn, switch player turn
+					if(theModel.strPlayerTurn.equals("P1")){
+						theModel.strPlayerTurn="P2";
+					}else if(theModel.strPlayerTurn=="P2"){
+						theModel.strPlayerTurn="P1";
+					}
+					theGamePanel.theTextArea.append(theModel.strPlayerTurn+" Turn"+"\n");
 				}
-				
-				/*
-				theGamePanel.strGOGArray[theModel.intOGRow][theModel.intOGClm]=theModel.strArray[theModel.intOGRow][theModel.intOGClm];
-				theGamePanel.strGOGArray[theModel.intNewRow][theModel.intNewClm]=theModel.strArray[theModel.intNewClm][theModel.intNewClm];
-				*/
-				/*
 				theGamePanel.strGOGArray=theModel.strArray;
-				*/
 			}
 		}
 	}
