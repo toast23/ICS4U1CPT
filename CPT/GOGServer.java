@@ -21,7 +21,12 @@ public class GOGServer extends GOGView implements ActionListener{
 				theGamePanel.blnMessageSending=false;
 			}
 		}
-		
+		if(evt.getSource()==theGameClockTimer){
+			if(panelToReturn.equals("game")){
+				theModel.updateTime();
+				theGamePanel.drawNewTime(theModel.strPlayerTurn, theModel.intP1TimeLeft, theModel.intP2TimeLeft);
+			}
+		}
 		// Network
 		if(evt.getSource() == ssm){
 			//get text from player 2
