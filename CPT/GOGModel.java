@@ -13,6 +13,8 @@ public class GOGModel{
 	public String strActivePiece;
 	public String strNextPositionPiece;
 	public boolean blnOnSameTeam;
+	public boolean blnSendArrayData;
+	public boolean blnReceiveArrayData;
 	//Methods
 	public void updateTime(){
 		if(strPlayerTurn.equals("P1")){

@@ -39,13 +39,10 @@ public class gamePanel extends JPanel implements ActionListener {
 	int intNewClm;
 
 	public boolean blnMessageSending = false;
+	public boolean blnSwitchTurn = false;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Method
-	public void updateModel(String[][] strArray){
-		this.strGOGArray=strArray;
-	}
-	
 	public void paintPieces(Graphics g){
 		g.setColor(Color.WHITE);
 		

@@ -31,7 +31,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	public JButton theHelpRanksButton = new JButton("Ranks");
 	public String panelToReturn = "lobby";
 	public String theCurrentPanel = "lobby";
-	public String strSocketType;
+	public String strPlayer;
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -61,7 +61,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	
 	public void mousePressed(MouseEvent evt){
 		if(evt.getSource()==theGamePanel){
-			if((strSocketType.equals("P1") && theModel.strPlayerTurn.equals("P1"))||(strSocketType.equals("P2") && theModel.strPlayerTurn.equals("P2"))){
+			if((strPlayer.equals("P1") && theModel.strPlayerTurn.equals("P1"))||(strPlayer.equals("P2") && theModel.strPlayerTurn.equals("P2"))){
 				if(theGamePanel.blnActive==false){
 					//Get rid of the block in that spot so we can paint another block that we can move
 					theModel.strActivePiece=theGamePanel.ridBlock(evt.getX(), evt.getY());
@@ -101,10 +101,12 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 					//After their turn, switch player turn
 					if(theModel.strPlayerTurn.equals("P1")){
 						theModel.strPlayerTurn="P2";
-					}else if(theModel.strPlayerTurn=="P2"){
+						System.out.println("Just switched to p2");
+					}else if(theModel.strPlayerTurn.equals("P2")){
 						theModel.strPlayerTurn="P1";
+						System.out.println("Just switched to p1");
 					}
-					theGamePanel.theTextArea.append(theModel.strPlayerTurn+" Turn"+"\n");
+					theGamePanel.blnSwitchTurn=true;
 				}
 				theGamePanel.strGOGArray=theModel.strArray;
 			}
