@@ -92,7 +92,9 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 				theModel.intNewClm=theGamePanel.intNewClm;
 				theModel.intNewRow=theGamePanel.intNewRow;
 				if(theModel.intOGRow==theModel.intNewRow && theModel.intOGClm==theModel.intNewClm){
-					//if they didn't move anywhere, then nothing happens here
+					//System.out.println("didnt move");
+					// restore removed block to previous block
+					theGamePanel.strGOGArray[theGamePanel.intOGRow][theGamePanel.intOGClm]=theGamePanel.strActivePiece;
 				}else{
 					theModel.checkPieceMovement();
 					
@@ -107,6 +109,13 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 				theGamePanel.strGOGArray=theModel.strArray;
 			}
 		}
+		/*System.out.println();
+		for (int i=0;i<theGamePanel.strGOGArray.length;i++) {
+			System.out.println();
+			for (int j=0;j<theGamePanel.strGOGArray[0].length;j++) {
+				System.out.print("|"+theGamePanel.strGOGArray[i][j]);
+			}
+		}*/
 	}
 	public void mouseClicked(MouseEvent evt){}
 	public void mouseMoved(MouseEvent evt) {}
