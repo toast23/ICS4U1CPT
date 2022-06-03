@@ -86,7 +86,6 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 				theModel.intNewClm=theGamePanel.intNewClm;
 				theModel.intNewRow=theGamePanel.intNewRow;
 				theModel.checkPieceMovement();
-				System.out.println(theModel.strArray[theModel.intNewRow][theModel.intNewClm]);
 				theGamePanel.strGOGArray=theModel.strArray;
 			}
 		}

@@ -104,7 +104,9 @@ public interface GOGUtilities{
 	}
 	public static int rankConversion(String strPiece){
 		int intRank=0;
-		if(strPiece.equals("P1Flag") || strPiece.equals("P2Flag")){
+		/*if(strPiece==null){
+			intRank = 0;
+		}else*/ if(strPiece.equals("P1Flag") || strPiece.equals("P2Flag")){
 			intRank = 0;
 		}else if(strPiece.equals("P1Private") || strPiece.equals("P2Private")){
 			intRank = 1;
@@ -139,127 +141,119 @@ public interface GOGUtilities{
 		}
 		return intRank;
 	}
-	public static String[][] flagMovement(String strArray[][], String strPlayerTurn, int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY,String strActivePiece){
+	public static String[][] flagMovement(String strArray[][],       String strPlayerTurn, int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY, String strActivePiece, String strNextPositionPiece){
 		//If it's null, it crashes so the first if statement checks if you say null
-		if(strArray[intOGPosY][intOGPosX]==null){
-		}else if(strArray[intOGPosY][intOGPosX].equals(strPlayerTurn+"Flag")){
+		if(strActivePiece==null){
+		}else if(strActivePiece.equals(strPlayerTurn+"Flag")){
 			//If it's moves in any of the cardinal directions, move the pices
-			if((intOGPosY+1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY-1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX+1==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX-1==intNewPosX)){
-				//if there's nothing in the way, let flag go to new position
-				if(strArray[intNewPosY][intNewPosX]==null || strArray[intNewPosY][intNewPosX].equals(" ")){
-					//remove flag from previous spot
-					strArray[intOGPosY][intOGPosX]=null;
-					//make the flag move to new position
-					strArray[intNewPosY][intNewPosX]=strActivePiece;
-				//if the enemy flag(value of 0) is in the way, kill it
-				}else if(rankConversion(strArray[intOGPosY][intOGPosX]) == rankConversion(strArray[intNewPosY][intNewPosX])){
-					//remove flag from previous spot
-					strArray[intOGPosY][intOGPosX]=null;
-					//make the flag move to new position
-					strArray[intNewPosY][intNewPosX]=strActivePiece;
-				//if there's ANYTHING ELSE there, kill the flag
-				}else if(rankConversion(strArray[intOGPosY][intOGPosX])<rankConversion(strArray[intNewPosY][intNewPosX])){
-					strArray[intOGPosY][intOGPosX]=null;
-				}
-				System.out.println("flag");
+			//if there's nothing in the way, let flag go to new position
+			if(strArray[intNewPosY][intNewPosX]==null || strArray[intNewPosY][intNewPosX].equals(" ")){
+				//remove flag from previous spot
+				strArray[intOGPosY][intOGPosX]=null;
+				//make the flag move to new position
+				strArray[intNewPosY][intNewPosX]=strActivePiece;
+			//if the enemy flag(value of 0) is in the way, kill it
+			}else if(rankConversion(strActivePiece) == rankConversion(strNextPositionPiece)){
+				//remove flag from previous spot
+				strArray[intOGPosY][intOGPosX]=null;
+				//make the flag move to new position
+				strArray[intNewPosY][intNewPosX]=strActivePiece;
+			//if there's ANYTHING ELSE there, kill the flag
+			}else if(rankConversion(strActivePiece)<rankConversion(strNextPositionPiece)){
+				strArray[intOGPosY][intOGPosX]=null;
 			}
+			System.out.println("flag");
 		}
 		return strArray;
 	}
-	public static String[][] privateMovement(String strArray[][], String strPlayerTurn, int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY, String strActivePiece){
+	public static String[][] privateMovement(String strArray[][],    String strPlayerTurn, int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY, String strActivePiece, String strNextPositionPiece){
 		//If it's null, it crashes so the first if statement checks if you say null
 		if(strActivePiece==null){
 		}else if(strActivePiece.equals(strPlayerTurn+"Private")){
 			//If it's moves in any of the cardinal directions, move the pices
-			if((intOGPosY+1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY-1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX+1==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX-1==intNewPosX)){
-				//if there's nothing in the way, let private go to new position
-				if(strArray[intNewPosY][intNewPosX]==null || strArray[intNewPosY][intNewPosX].equals(" ")){
-					//remove pawn from previous spot
-					strArray[intOGPosY][intOGPosX]=null;
-					//make the pawn move to new position
-					strArray[intNewPosY][intNewPosX]=strActivePiece;
-				//if the flag is there, kill it
-				}else if(rankConversion(strArray[intNewPosY][intNewPosX])==0){
-					//remove pawn from previous spot
-					strArray[intOGPosY][intOGPosX]=null;
-					//make the pawn move to new position
-					strArray[intNewPosY][intNewPosX]=strActivePiece;
-				//if there's a private there, kill both
-				}else if(rankConversion(strArray[intOGPosY][intOGPosX]) == rankConversion(strArray[intNewPosY][intNewPosX])){
-					strArray[intOGPosY][intOGPosX]=null;
-					strArray[intNewPosY][intNewPosX]=null;
-				//if there's a spy(value of 2) there, kill the spy!
-				}else if(rankConversion(strArray[intNewPosY][intNewPosX]) == 2){
-					//remove pawn from previous spot
-					strArray[intOGPosY][intOGPosX]=null;
-					//make the pawn move to new position
-					strArray[intNewPosY][intNewPosX]=strActivePiece;
-				//if there's anything of higher rank, kill the private
-				}else if(rankConversion(strArray[intOGPosY][intOGPosX]) < rankConversion(strArray[intNewPosY][intNewPosX])){
-					strArray[intOGPosY][intOGPosX]=null;
-				}
-				System.out.println(strArray[intNewPosY][intNewPosX]);
+			//if there's nothing in the way, let private go to new position
+			if(strArray[intNewPosY][intNewPosX]==null || strArray[intNewPosY][intNewPosX].equals(" ")){
+				//remove pawn from previous spot
+				strArray[intOGPosY][intOGPosX]=null;
+				//make the pawn move to new position
+				strArray[intNewPosY][intNewPosX]=strActivePiece;
+			//if the flag is there, kill it
+			}else if(rankConversion(strNextPositionPiece)==0){
+				//remove pawn from previous spot
+				strArray[intOGPosY][intOGPosX]=null;
+				//make the pawn move to new position
+				strArray[intNewPosY][intNewPosX]=strActivePiece;
+			//if there's a private there, kill both
+			}else if(rankConversion(strActivePiece) == rankConversion(strNextPositionPiece)){
+				strArray[intOGPosY][intOGPosX]=null;
+				strArray[intNewPosY][intNewPosX]=null;
+			//if there's a spy(value of 2) there, kill the spy!
+			}else if(rankConversion(strNextPositionPiece) == 2){
+				//remove pawn from previous spot
+				strArray[intOGPosY][intOGPosX]=null;
+				//make the pawn move to new position
+				strArray[intNewPosY][intNewPosX]=strActivePiece;
+			//if there's anything of higher rank, kill the private
+			}else if(rankConversion(strArray[intOGPosY][intOGPosX]) < rankConversion(strNextPositionPiece)){
+				strArray[intOGPosY][intOGPosX]=null;
 			}
+			System.out.println(strArray[intNewPosY][intNewPosX]);
 		}
 		return strArray;
 	}
-	public static String[][] spyMovement(String strArray[][], String strPlayerTurn, int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY, String strActivePiece){
+	public static String[][] spyMovement(String strArray[][],        String strPlayerTurn, int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY, String strActivePiece, String strNextPositionPiece){
 		//If it's null, it crashes so the first if statement checks if you say null
 		if(strActivePiece==null){
 		}else if(strActivePiece.equals(strPlayerTurn+"Spy")){
 			//If it's moves in any of the cardinal directions, move the pices
-			if((intOGPosY+1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY-1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX+1==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX-1==intNewPosX)){
-				//if there's nothing in the way, let spy go to new position
-				if(strArray[intNewPosY][intNewPosX]==null || strArray[intNewPosY][intNewPosX].equals(" ")){
-					//remove spy from previous spot
-					strArray[intOGPosY][intOGPosX]=null;
-					//make the spy move to new position
-					strArray[intNewPosY][intNewPosX]=strPlayerTurn+"Spy";
-				//if another spy is there, both die
-				}else if(2==rankConversion(strArray[intNewPosY][intNewPosX])){
-					//remove pawn from previous spot
-					strArray[intOGPosY][intOGPosX]=null;
-					//make the pawn move to new position
-					strArray[intNewPosY][intNewPosX]=null;
-				//if there's anything else is there, kill it
-				}else if(16 > rankConversion(strArray[intNewPosY][intNewPosX])){
-					strArray[intOGPosY][intOGPosX]=null;
-					strArray[intNewPosY][intNewPosX]=strPlayerTurn+"Spy";
-				}
-				System.out.println("spy");
+			//if there's nothing in the way, let spy go to new position
+			if(strArray[intNewPosY][intNewPosX]==null || strArray[intNewPosY][intNewPosX].equals(" ")){
+				//remove spy from previous spot
+				strArray[intOGPosY][intOGPosX]=null;
+				//make the spy move to new position
+				strArray[intNewPosY][intNewPosX]=strPlayerTurn+"Spy";
+			//if another spy is there, both die
+			}else if(rankConversion(strNextPositionPiece)==2){
+				//remove pawn from previous spot
+				strArray[intOGPosY][intOGPosX]=null;
+				//make the pawn move to new position
+				strArray[intNewPosY][intNewPosX]=null;
+			//if there's anything else is there, kill it
+			}else if(16 > rankConversion(strNextPositionPiece)){
+				strArray[intOGPosY][intOGPosX]=null;
+				strArray[intNewPosY][intNewPosX]=strPlayerTurn+"Spy";
 			}
+			System.out.println("spy");
 		}
 		return strArray;
 	}
-	public static String[][] otherPieceMovement(String strArray[][], String strPlayerTurn, int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY, String strActivePiece){
+	public static String[][] otherPieceMovement(String strArray[][], String strPlayerTurn, int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY, String strActivePiece, String strNextPositionPiece){
 		//If it's null, it crashes so the first if statement checks if you say null
 		if(strActivePiece==null){
 		}else if(!strActivePiece.equals(strPlayerTurn+"Flag") && !strActivePiece.equals(strPlayerTurn+"Private") && strActivePiece.equals(strPlayerTurn+"Spy")){
 			//If it's moves in any of the cardinal directions, move the pices
-			if((intOGPosY+1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY-1==intNewPosY && intOGPosX==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX+1==intNewPosX) || (intOGPosY==intNewPosY && intOGPosX-1==intNewPosX)){
-				//if there's nothing in the way, let the piece go to new position
-				if(strArray[intNewPosY][intNewPosX]==null || strArray[intNewPosY][intNewPosX].equals(" ")){
-					strArray[intNewPosY][intNewPosX]=strActivePiece;
-					strArray[intOGPosY][intOGPosX]=null;
-					System.out.println(strArray[intNewPosY][intNewPosX]);
-				//if there's a spy there, kill the piece
-				}else if(rankConversion(strArray[intNewPosY][intNewPosX])==2){
-					//remove piece from spot
-					strArray[intOGPosY][intOGPosX]=null;
-				//if there's a piece higher than you, it dies
-				}else if(rankConversion(strArray[intOGPosY][intOGPosX]) < rankConversion(strArray[intNewPosY][intNewPosX])){
-					strArray[intOGPosY][intOGPosX]=null;
-				//if there's the same rank, both die
-				}else if(rankConversion(strArray[intOGPosY][intOGPosX]) == rankConversion(strArray[intNewPosY][intNewPosX])){
-					strArray[intOGPosY][intOGPosX]=null;
-					strArray[intNewPosY][intNewPosX]=null;
-				//if there's anything of lower rank, kill it
-				}else if(rankConversion(strArray[intOGPosY][intOGPosX]) > rankConversion(strArray[intNewPosY][intNewPosX])){
-					strArray[intNewPosY][intNewPosX]=strActivePiece;
-					strArray[intOGPosY][intOGPosX]=null;
-				}
-				System.out.println("Moving other pieces");
+			//if there's nothing in the way, let the piece go to new position
+			if(strArray[intNewPosY][intNewPosX]==null || strArray[intNewPosY][intNewPosX].equals(" ")){
+				strArray[intNewPosY][intNewPosX]=strActivePiece;
+				strArray[intOGPosY][intOGPosX]=null;
+				System.out.println(strArray[intNewPosY][intNewPosX]);
+			//if there's a spy there, kill the piece
+			}else if(rankConversion(strNextPositionPiece)==2){
+				//remove piece from spot
+				strArray[intOGPosY][intOGPosX]=null;
+			//if there's a piece higher than you, it dies
+			}else if(rankConversion(strActivePiece) < rankConversion(strNextPositionPiece)){
+				strArray[intOGPosY][intOGPosX]=null;
+			//if there's the same rank, both die
+			}else if(rankConversion(strActivePiece) == rankConversion(strNextPositionPiece)){
+				strArray[intOGPosY][intOGPosX]=null;
+				strArray[intNewPosY][intNewPosX]=null;
+			//if there's anything of lower rank, kill it
+			}else if(rankConversion(strActivePiece) > rankConversion(strNextPositionPiece)){
+				strArray[intNewPosY][intNewPosX]=strActivePiece;
+				strArray[intOGPosY][intOGPosX]=null;
 			}
+			System.out.println("Moving other pieces");
 		}
 		return strArray;
 	}
