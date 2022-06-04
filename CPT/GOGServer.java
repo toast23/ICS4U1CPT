@@ -58,8 +58,8 @@ public class GOGServer extends GOGView implements ActionListener{
 				
 				//We create a loop that will send data in each column
 				int intRow;
+				int intRowInverse=7;
 				int intClm;
-				int intLength;
 				for(intRow=0;intRow<8;intRow++){
 					for(intClm=0;intClm<9;intClm++){
 						//For them to know which index it is, we send the row and column to
@@ -67,11 +67,12 @@ public class GOGServer extends GOGView implements ActionListener{
 						ssm.sendText("Row:"+intRow);
 						ssm.sendText("Clm:"+intClm);
 						//then we send them information
-						ssm.sendText("Index:"+theModel.strArray[intRow][intClm]);
+						ssm.sendText("Index:"+theModel.strArray[intRowInverse][intClm]);
 						
 						//This isn't needed but it can be used to check
 						System.out.println("Index:"+theModel.strArray[intRow][intClm]);
 					}
+					intRowInverse--;
 				}
 				
 				//Now that we are done updating the other player's array, we can stop sending data
