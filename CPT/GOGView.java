@@ -68,7 +68,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 				//If there is not active movement prior, then...
 				if(theGamePanel.blnActive==false){
 					//Get rid of the block in that spot
-					theModel.strActivePiece=theGamePanel.ridBlock(evt.getX(), evt.getY());
+					theModel.strActivePiece=theGamePanel.checkBlock(evt.getX(), evt.getY(),theModel.strPlayerTurn, strPlayer);
 					//These will be the coordinates of the actively moved block
 					theGamePanel.intImgX = evt.getX()-35;
 					theGamePanel.intImgY = evt.getY()-35;

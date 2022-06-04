@@ -14,6 +14,7 @@ public class gamePanel extends JPanel implements ActionListener {
 	public BufferedImage imgBoard = null;
 	public BufferedImage imgFlag = null;
 	public BufferedImage imgPrivate = null;
+	public BufferedImage imgFogOfWar = null;
 	public JButton theReadyButton = new JButton("Ready");
 	
 	//Timer stuff
@@ -41,6 +42,7 @@ public class gamePanel extends JPanel implements ActionListener {
 	int intOGClm;
 	int intNewRow;
 	int intNewClm;
+	String strPiecesToPaint;
 
 	public boolean blnMessageSending = false;
 	public boolean blnSwitchTurn = false;
@@ -52,30 +54,44 @@ public class gamePanel extends JPanel implements ActionListener {
 		
 		for(int intRow=0;intRow<8;intRow++){
 			for(int intColumn=0;intColumn<9;intColumn++){
-				if(strGOGArray[intRow][intColumn] == null){
-				}else if(strGOGArray[intRow][intColumn].equals("P1Flag")){
-					g.drawImage(imgFlag, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("P1Private")){
-					g.drawImage(imgPrivate, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("P1Spy")){
-					g.drawString("s",110+70*intColumn,120+70*intRow);
-				}else if(strGOGArray[intRow][intColumn].equals("P1 Lieutenant 1st")){
-					g.drawString("L1",110+70*intColumn,120+70*intRow);
-				}else if(strGOGArray[intRow][intColumn].equals("P1 Lieutenant 2nd")){
-					g.drawString("L2",110+70*intColumn,120+70*intRow);
-				}else if(strGOGArray[intRow][intColumn].equals("P2Private")){
-					g.drawString("???",110+70*intColumn,120+70*intRow);
-				}else if(strGOGArray[intRow][intColumn].equals("P2Spy")){
-					g.drawString("???",110+70*intColumn,120+70*intRow);
-				}else if(strGOGArray[intRow][intColumn].equals("P2Flag")){
-					g.drawString("???",110+70*intColumn,120+70*intRow);
+				//if it's player 1, paint player 2 pieces foggy
+				if(strPiecesToPaint.equals("P1")){
+					if(strGOGArray[intRow][intColumn] == null){
+					}else if(strGOGArray[intRow][intColumn].equals("P1Flag")){
+						g.drawImage(imgFlag, 80+70*intColumn,80+70*intRow, null); 
+					}else if(strGOGArray[intRow][intColumn].equals("P1Private")){
+						g.drawImage(imgPrivate, 80+70*intColumn,80+70*intRow, null); 
+					}else if(strGOGArray[intRow][intColumn].equals("P1Spy")){
+						g.drawString("s",110+70*intColumn,120+70*intRow);
+					}else if(strGOGArray[intRow][intColumn].equals("P2Flag")){
+						g.drawImage(imgFogOfWar, 80+70*intColumn,80+70*intRow, null); 
+					}else if(strGOGArray[intRow][intColumn].equals("P2Private")){
+						g.drawImage(imgFogOfWar, 80+70*intColumn,80+70*intRow, null); 
+					}else if(strGOGArray[intRow][intColumn].equals("P2Spy")){
+						g.drawImage(imgFogOfWar, 80+70*intColumn,80+70*intRow, null); 
+					}
+				}else if(strPiecesToPaint.equals("P2")){
+					if(strGOGArray[intRow][intColumn] == null){
+					}else if(strGOGArray[intRow][intColumn].equals("P1Flag")){
+						g.drawImage(imgFogOfWar, 80+70*intColumn,80+70*intRow, null); 
+					}else if(strGOGArray[intRow][intColumn].equals("P1Private")){
+						g.drawImage(imgFogOfWar, 80+70*intColumn,80+70*intRow, null); 
+					}else if(strGOGArray[intRow][intColumn].equals("P1Spy")){
+						g.drawImage(imgFogOfWar, 80+70*intColumn,80+70*intRow, null); 
+					}else if(strGOGArray[intRow][intColumn].equals("P2Flag")){
+						g.drawImage(imgFlag, 80+70*intColumn,80+70*intRow, null); 
+					}else if(strGOGArray[intRow][intColumn].equals("P2Private")){
+						g.drawImage(imgPrivate, 80+70*intColumn,80+70*intRow, null); 
+					}else if(strGOGArray[intRow][intColumn].equals("P2Spy")){
+						g.drawString("s",110+70*intColumn,120+70*intRow);
+					}
 				}
 			}
 		}
 	}
 	
 	//When they press on an area with a block, we do the following...
-	public String ridBlock(int IntPosX, int IntPosY){
+	public String checkBlock(int IntPosX, int IntPosY, String strPlayerTurn, String strPlayer){
 		int intClm;
 		int intRow;
 		
@@ -102,6 +118,21 @@ public class gamePanel extends JPanel implements ActionListener {
 					}
 				}
 			}
+		}
+		//if they try to move the enemy pieces, they aren't allowed to, then...
+		if(this.strActivePiece.equals(null) || this.strActivePiece==null || this.strActivePiece.equals(" ") || this.strActivePiece.equals("")){
+			this.blnActive=false;
+			this.strGOGArray[intOGRow][intOGClm]=this.strActivePiece;
+		}else if(this.strActivePiece.substring(0,2).equals("P1") && strPlayerTurn.equals("P2") && strPlayer.equals("P2")){
+			//don't let them move it
+			this.blnActive=false;
+			this.strGOGArray[intOGRow][intOGClm]=this.strActivePiece;
+		}else if(this.strActivePiece.substring(0,2).equals("P2") && strPlayerTurn.equals("P1") && strPlayer.equals("P1")){
+			//don't let them move it
+			this.blnActive=false;
+			this.strGOGArray[intOGRow][intOGClm]=this.strActivePiece;
+		}else{
+			System.out.println("Something not right");
 		}
 		return strActivePiece;
 	}
@@ -205,6 +236,12 @@ public class gamePanel extends JPanel implements ActionListener {
 		
 		try{
 			imgFlag = ImageIO.read(new File("flag.png"));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		
+		try{
+			imgFogOfWar = ImageIO.read(new File("FogOfWar.png"));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}

@@ -159,7 +159,6 @@ public class GOGServer extends GOGView implements ActionListener{
 					//Now that the server is done getting a name, it falsifies
 					theModel.blnGetName=false;
 				}
-				System.out.println("Meh");
 			}else{
 				//Read the text that was sent
 				strText = ssm.readText();
@@ -205,7 +204,7 @@ public class GOGServer extends GOGView implements ActionListener{
 			
 			//Last, the server is always player 1
 			strPlayer="P1";
-			
+			theGamePanel.strPiecesToPaint="P1";
 		}
 		
 		//If the client button is clicked
@@ -221,6 +220,7 @@ public class GOGServer extends GOGView implements ActionListener{
 			
 			//Last, the client is always player 2
 			strPlayer="P2";
+			theGamePanel.strPiecesToPaint="P2";
 		}
 		
 		//If they click the help button, switch the screen to the help panel
@@ -267,6 +267,7 @@ public class GOGServer extends GOGView implements ActionListener{
 			theGamePanel.thePlayer1Label.setText("Player 1:"+theModel.strPlayer1Name);
 			//After we are done setting up ssm, we may connect
 			ssm.connect();
+			strPlayer="P1";
 			
 		//If this is a client, then...
 		}else if (strSSMType.equals("client")) {
@@ -288,6 +289,7 @@ public class GOGServer extends GOGView implements ActionListener{
 			theGamePanel.thePlayer2Label.setText("PLayer 2:"+theModel.strPlayer2Name);
 			ssm.sendText("Get Name");
 			ssm.sendText(theModel.strPlayer2Name);
+			strPlayer="P2";
 		}
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
