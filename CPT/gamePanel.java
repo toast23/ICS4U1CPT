@@ -131,8 +131,6 @@ public class gamePanel extends JPanel implements ActionListener {
 			//don't let them move it
 			this.blnActive=false;
 			this.strGOGArray[intOGRow][intOGClm]=this.strActivePiece;
-		}else{
-			System.out.println("Something not right");
 		}
 		return strActivePiece;
 	}
