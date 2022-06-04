@@ -149,7 +149,7 @@ public class GOGServer extends GOGView implements ActionListener{
 					//Now that the server is done getting a name, it falsifies
 					theModel.blnGetName=false;
 					//Last, we set the label
-					theGamePanel.thePlayer2Label.setText("Player 2:"+strText);
+					theGamePanel.thePlayer2Label.setText("Player 2: "+strText);
 				
 				//If this is player 2, then...
 				}else if(strPlayer.equals("P2")){
@@ -265,7 +265,7 @@ public class GOGServer extends GOGView implements ActionListener{
 			ssm = new SuperSocketMaster(theLobbyPanel.intPortNumber, this);
 			// Get the name of the player
 			theModel.strPlayer1Name = theLobbyPanel.theNameTextField.getText();
-			theGamePanel.thePlayer1Label.setText("Player 1:"+theModel.strPlayer1Name);
+			theGamePanel.thePlayer1Label.setText("Player 1: "+theModel.strPlayer1Name);
 			//After we are done setting up ssm, we may connect
 			ssm.connect();
 			strPlayer="P1";
@@ -287,7 +287,7 @@ public class GOGServer extends GOGView implements ActionListener{
 			
 			// Get the name of the player
 			theModel.strPlayer2Name = theLobbyPanel.theNameTextField.getText();
-			theGamePanel.thePlayer2Label.setText("PLayer 2:"+theModel.strPlayer2Name);
+			theGamePanel.thePlayer2Label.setText("Player 2: "+theModel.strPlayer2Name);
 			ssm.sendText("Get Name");
 			ssm.sendText(theModel.strPlayer2Name);
 			strPlayer="P2";

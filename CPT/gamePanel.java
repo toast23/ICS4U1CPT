@@ -21,8 +21,8 @@ public class gamePanel extends JPanel implements ActionListener {
 	public JLabel theGameClockLabel=new JLabel("Time");
 	
 	//Information about player names
-	public JLabel thePlayer1Label = new JLabel("Player 1");
-	public JLabel thePlayer2Label = new JLabel("Player 2");
+	public JLabel thePlayer1Label = new JLabel("Player 1:");
+	public JLabel thePlayer2Label = new JLabel("Player 2:");
 	
 	//Text area stuff
 	public JTextArea theTextArea;
