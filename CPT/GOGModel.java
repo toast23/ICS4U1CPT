@@ -12,9 +12,12 @@ public class GOGModel{
 	public String strVictor = null;
 	public String strActivePiece;
 	public String strNextPositionPiece;
-	public boolean blnOnSameTeam;
-	public boolean blnSendArrayData;
-	public boolean blnReceiveArrayData;
+	public boolean blnOnSameTeam=false;
+	public boolean blnSendArrayData=false;
+	public boolean blnReceiveArrayData=false;
+	public boolean blnGetName=false;
+	public String strPlayer1Name;
+	public String strPlayer2Name;
 	//Methods
 	public void updateTime(){
 		if(strPlayerTurn.equals("P1")){

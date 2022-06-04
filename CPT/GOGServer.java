@@ -134,7 +134,32 @@ public class GOGServer extends GOGView implements ActionListener{
 					System.out.println(strText);
 				}
 			
-			//If it's not time to receive data, then...
+			//if it's time to get a name, then...
+			}else if(theModel.blnGetName==true){
+				//Load the name into a variable
+				strText = ssm.readText();
+				//If this is player 1, then...
+				if(strPlayer.equals("P1")){
+					//get player 2's name
+					theModel.strPlayer2Name=strText;
+					//Now it's the client's turn to catch player 1's name
+					ssm.sendText("Get Name");
+					ssm.sendText(theModel.strPlayer1Name);
+					//Now that the server is done getting a name, it falsifies
+					theModel.blnGetName=false;
+					//Last, we set the label
+					theGamePanel.thePlayer2Label.setText("Player 2:"+strText);
+				
+				//If this is player 2, then...
+				}else if(strPlayer.equals("P2")){
+					//load player 2's name in
+					theModel.strPlayer1Name=strText;
+					//Last, we set the label
+					theGamePanel.thePlayer1Label.setText("Player 1: "+strText);
+					//Now that the server is done getting a name, it falsifies
+					theModel.blnGetName=false;
+				}
+				System.out.println("Meh");
 			}else{
 				//Read the text that was sent
 				strText = ssm.readText();
@@ -151,6 +176,10 @@ public class GOGServer extends GOGView implements ActionListener{
 				}else if(strText.equals("Sending Data")){
 					//We turn receivedata on
 					theModel.blnReceiveArrayData=true;
+				//If none of this is the case, then we will put what is said in chatbox
+				}else if(strText.equals("Get Name")){
+					//We turn receivedata on
+					theModel.blnGetName=true;
 				//If none of this is the case, then we will put what is said in chatbox
 				}else{
 					theGamePanel.theTextArea.append(strText + "\n");
@@ -170,6 +199,9 @@ public class GOGServer extends GOGView implements ActionListener{
 			
 			//We will also make the game panel's array board the same as the model's
 			this.theGamePanel.strGOGArray=this.theModel.strArray;
+			
+			//we also get the name of the player
+			
 			
 			//Last, the server is always player 1
 			strPlayer="P1";
@@ -218,9 +250,6 @@ public class GOGServer extends GOGView implements ActionListener{
 	
 	//This method sets up the server based on the SSMType
 	public void setSSM(String strSSMType) {
-		// Get the name of the player
-		theLobbyPanel.strName = theLobbyPanel.theNameTextField.getText();
-		
 		// Get the port number
 		try{
 			theLobbyPanel.intPortNumber = Integer.parseInt(theLobbyPanel.thePortTextField.getText());
@@ -233,6 +262,11 @@ public class GOGServer extends GOGView implements ActionListener{
 		if (strSSMType.equals("server")) {
 			//set up the server using the port number
 			ssm = new SuperSocketMaster(theLobbyPanel.intPortNumber, this);
+			// Get the name of the player
+			theModel.strPlayer1Name = theLobbyPanel.theNameTextField.getText();
+			theGamePanel.thePlayer1Label.setText("Player 1:"+theModel.strPlayer1Name);
+			//After we are done setting up ssm, we may connect
+			ssm.connect();
 			
 		//If this is a client, then...
 		}else if (strSSMType.equals("client")) {
@@ -245,9 +279,16 @@ public class GOGServer extends GOGView implements ActionListener{
 			}
 			//Set up the client using the port number and IP Address
 			ssm = new SuperSocketMaster(theLobbyPanel.strIPAddress, theLobbyPanel.intPortNumber, this);
+			
+			//After we are done setting up ssm, we may connect
+			ssm.connect();
+			
+			// Get the name of the player
+			theModel.strPlayer2Name = theLobbyPanel.theNameTextField.getText();
+			theGamePanel.thePlayer2Label.setText("PLayer 2:"+theModel.strPlayer2Name);
+			ssm.sendText("Get Name");
+			ssm.sendText(theModel.strPlayer2Name);
 		}
-		//After we are done setting up ssm, we may onnect
-		ssm.connect();
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////

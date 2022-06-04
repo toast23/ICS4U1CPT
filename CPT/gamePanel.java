@@ -19,6 +19,10 @@ public class gamePanel extends JPanel implements ActionListener {
 	//Timer stuff
 	public JLabel theGameClockLabel=new JLabel("Time");
 	
+	//Information about player names
+	public JLabel thePlayer1Label = new JLabel("Player 1");
+	public JLabel thePlayer2Label = new JLabel("Player 2");
+	
 	//Text area stuff
 	public JTextArea theTextArea;
 	public JScrollPane theScroll;
@@ -208,21 +212,27 @@ public class gamePanel extends JPanel implements ActionListener {
 		this.setLayout(null);
 		this.setBackground(Color.WHITE);
 		
-		theGameClockLabel.setBounds(860,50,200,50);
+		theGameClockLabel.setBounds(960,50,200,50);
 		this.add(theGameClockLabel);
+		
+		theReadyButton.setBounds(720,90,280,50);
+		theReadyButton.addActionListener(this);
+		this.add(theReadyButton);
+		
+		thePlayer1Label.setBounds(750,160,200,50);
+		this.add(thePlayer1Label);
+		
+		thePlayer2Label.setBounds(1040,160,200,50);
+		this.add(thePlayer2Label);
 		
 		theTextArea = new JTextArea();
 		theScroll = new JScrollPane(theTextArea);
-		theScroll.setBounds(720,150,550,400);
+		theScroll.setBounds(720,200,550,350);
 		this.add(theScroll);
 		
 		theTextField.addActionListener(this);
 		theTextField.setBounds(720,550,550,100);
 		this.add(theTextField);
-		theReadyButton.setBounds(750,90,110,50);
-		theReadyButton.addActionListener(this);
-		this.add(theReadyButton);
-
 	}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
