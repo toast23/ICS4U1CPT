@@ -123,6 +123,29 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 		return strActivePiece;
 	}
 	
+	public void takeStock(int intPosX, int intPosY){
+		//if they click on the flag stock area, then...
+		if(intPosX>720 && intPosX<790 && intPosY<270 && intPosY>200){
+			this.strActivePiece="Flag";
+			//We set the boolean active to true because we are now moving a block
+			this.blnActive=true;
+			
+		
+		//if they click on the private stock area, then...
+		}else if(intPosX>720 && intPosX<790 && intPosY<470 && intPosY>400){
+			this.strActivePiece="Private";
+			//We set the boolean active to true because we are now moving a block
+			this.blnActive=true;
+			
+		
+		//if they click on the spy stock area, then...
+		}else if(intPosX>720 && intPosX<790 && intPosY<670 && intPosY>600){
+			this.strActivePiece="Spy";
+			//We set the boolean active to true because we are now moving a block
+			this.blnActive=true;
+		}
+	}
+	
 	//When they release their mouse, we use this method
 	public void getNewPosition(){	
 		//Inside a certain row and column...

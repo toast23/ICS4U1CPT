@@ -16,6 +16,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	public CardLayout card = new CardLayout(); 
 	public JPanel theViewPanel = new JPanel(); 
 	public lobbyPanel theLobbyPanel = new lobbyPanel();
+	public GOGPrepPanel thePrepPanel = new GOGPrepPanel();
 	public gamePanel theGamePanel = new gamePanel(); 
 	public helpPanel theHelpPanel = new helpPanel();
 	public ranksPanel theRanksPanel = new ranksPanel();
@@ -73,6 +74,16 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 					theGamePanel.intImgX = evt.getX()-35;
 					theGamePanel.intImgY = evt.getY()-35;
 				}
+			}
+		
+		//If they press the mouse in the prep panel, then...
+		}else if(evt.getSource()==thePrepPanel){
+			if(theGamePanel.blnActive==false){
+				//Get rid of the block in that spot
+				thePrepPanel.strActivePiece=thePrepPanel.checkBlock(evt.getX(), evt.getY());
+				//These will be the coordinates of the actively moved block
+				thePrepPanel.intImgX = evt.getX()-35;
+				thePrepPanel.intImgY = evt.getY()-35;
 			}
 		}
 	}
@@ -150,6 +161,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		super();
 		theViewPanel.setLayout(card); 
 		theViewPanel.add(theLobbyPanel, "lobby");
+		theViewPanel.add(thePrepPanel, "prep");
 		theViewPanel.add(theGamePanel, "game");
 		theViewPanel.add(theHelpPanel, "help");
 		theViewPanel.add(theRanksPanel, "ranks");
@@ -184,6 +196,8 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		
 		theGamePanel.addMouseMotionListener(this);
 		theGamePanel.addMouseListener(this);
+		thePrepPanel.addMouseMotionListener(this);
+		thePrepPanel.addMouseListener(this);
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
