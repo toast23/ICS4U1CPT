@@ -22,7 +22,11 @@ public class GOGServer extends GOGView implements ActionListener{
 			//If it's time to send a message, then.....
 			if(theGamePanel.blnMessageSending==true){
 				//Put that message in our chatbox
-				theGamePanel.theTextArea.append(theGamePanel.theTextField.getText() + "\n");
+				if(strPlayer.equals("P1")){
+					theGamePanel.theTextArea.append(theModel.strPlayer1Name + "," + theGamePanel.theTextField.getText() + "\n");
+				}else if(strPlayer.equals("P2")){
+					theGamePanel.theTextArea.append(theModel.strPlayer2Name + "," + theGamePanel.theTextField.getText() + "\n");
+				}
 				
 				//Then send the message inside the spot we entered
 				ssm.sendText(theGamePanel.theTextField.getText());
@@ -182,7 +186,11 @@ public class GOGServer extends GOGView implements ActionListener{
 					theModel.blnGetName=true;
 				//If none of this is the case, then we will put what is said in chatbox
 				}else{
-					theGamePanel.theTextArea.append(strText + "\n");
+					if(strPlayer.equals("P1")){
+						theGamePanel.theTextArea.append(theModel.strPlayer2Name + "," + strText + "\n");
+					} else if(strPlayer.equals("P2")){
+						theGamePanel.theTextArea.append(theModel.strPlayer1Name + "," + strText + "\n");
+					}
 				}
 			}
 		}
