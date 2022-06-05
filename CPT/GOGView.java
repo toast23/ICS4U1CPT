@@ -84,6 +84,12 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 				//These will be the coordinates of the actively moved block
 				thePrepPanel.intImgX = evt.getX()-35;
 				thePrepPanel.intImgY = evt.getY()-35;
+				
+				//if after all that, it's not being moved from a slot, we can
+				//check if we're taking from the stock
+				if(theGamePanel.blnActive==false){
+					thePrepPanel.takeStock(evt.getX(), evt.getY());
+				}
 			}
 		}
 	}
@@ -96,6 +102,17 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 				//Get the x and y coordinates
 				theGamePanel.intImgX = evt.getX()-35;
 				theGamePanel.intImgY = evt.getY()-35;
+				//In the repaint command, we will paint with these coordinates in the panel
+			}
+			
+			
+		//If they press the drag in the prep panel, then...
+		}else if(evt.getSource()==thePrepPanel){
+			//If it is actively being moved, then...
+			if(thePrepPanel.blnActive==true){
+				//Get the x and y coordinates
+				thePrepPanel.intImgX = evt.getX()-35;
+				thePrepPanel.intImgY = evt.getY()-35;
 				//In the repaint command, we will paint with these coordinates in the panel
 			}
 		}
@@ -135,6 +152,30 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 					
 					//Because it is time to switch turns, we make blnSwitchTurn true
 					theGamePanel.blnSwitchTurn=true;
+				}
+				//At the end of the day, we make the game panel's array the same as the model's array
+				theGamePanel.strGOGArray=theModel.strArray;
+			}
+		
+		//If they press on the prep panel instead, then...
+		}else if(evt.getSource()==thePrepPanel){
+			//If a piece is actively being moved, then...
+			if(thePrepPanel.blnActive==true){
+				//get the new row and column in prep panel's row and column
+				thePrepPanel.getNewPosition();
+				//We will update the coordinates for the model here
+				
+				//If the model has not moved from its original row to a new row and has not moved from its original column to a new column, then...
+				if(thePrepPanel.intOGRow==thePrepPanel.intNewRow && thePrepPanel.intOGClm==thePrepPanel.intNewClm){
+					//Don't change anything. 
+				
+								
+				//If that isn't the case, then...
+				}else{
+					//Check where the piece has moved and make the appropriate edits to the
+					//model's array with the checkPieceMovement method
+					theModel.checkPieceMovement();
+					
 				}
 				//At the end of the day, we make the game panel's array the same as the model's array
 				theGamePanel.strGOGArray=theModel.strArray;

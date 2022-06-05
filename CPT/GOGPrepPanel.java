@@ -32,10 +32,10 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 	String strActivePiece;
 	
 	//This will help us determine whether we can move to new row or not
-	int intOGRow;
-	int intOGClm;
-	int intNewRow;
-	int intNewClm;
+	int intOGRow=0;
+	int intOGClm=0;
+	int intNewRow=0;
+	int intNewClm=0;
 	
 	boolean blnPlayer1Ready=false;
 	boolean blnPlayer2Ready=false;
