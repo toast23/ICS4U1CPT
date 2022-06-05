@@ -44,6 +44,10 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		theFrame.requestFocus();
 		card.show(theViewPanel, "lobby");
 	}
+	public void prepSetup() {
+		theFrame.requestFocus();
+		card.show(theViewPanel, "prep");
+	}
 	public void gameSetup() {
 		theFrame.requestFocus();
 		panelToReturn = "game";

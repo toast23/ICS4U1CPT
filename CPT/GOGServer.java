@@ -203,7 +203,8 @@ public class GOGServer extends GOGView implements ActionListener{
 			setSSM("server");
 			
 			//We will also switch to game panel
-			gameSetup();
+			prepSetup();
+			//gameSetup();
 			
 			//We will also make the game panel's array board the same as the model's
 			this.theGamePanel.strGOGArray=this.theModel.strArray;
@@ -222,7 +223,8 @@ public class GOGServer extends GOGView implements ActionListener{
 			setSSM("client");
 			
 			//We will also switch to game panel
-			gameSetup();
+			prepSetup();
+			//gameSetup();
 			
 			//We will also make the game panel's array board the same as the model's
 			this.theGamePanel.strGOGArray=(theModel.strArray);
