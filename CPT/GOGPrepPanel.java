@@ -107,13 +107,13 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 		for(int intRow=5;intRow<8;intRow++){
 			for(int intColumn=0;intColumn<9;intColumn++){
 				if(strGOGArray[intRow][intColumn] == null){
-				}else if(strGOGArray[intRow][intColumn].equals("P1Flag") || strGOGArray[intRow][intColumn].equals("P2Flag")){
+				}else if(strGOGArray[intRow][intColumn].equals("Flag")){
 					g.drawImage(imgFlag, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("P1Private") || strGOGArray[intRow][intColumn].equals("P2Private")){
+				}else if(strGOGArray[intRow][intColumn].equals("Private")){
 					g.drawImage(imgPrivate, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("P1Spy") || strGOGArray[intRow][intColumn].equals("P2Spy")){
+				}else if(strGOGArray[intRow][intColumn].equals("Spy")){
 					g.drawImage(imgSpies, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("P15*General") || strGOGArray[intRow][intColumn].equals("P25*General")){
+				}else if(strGOGArray[intRow][intColumn].equals("5*General")){
 					g.drawImage(imgGeneral5, 80+70*intColumn,80+70*intRow, null); 
 				}
 			}
@@ -197,11 +197,7 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 	}
 	
 	public void placePiece(String strPlayer){
-		if(strActivePiece.substring(0,2).equals("P1") || strActivePiece.substring(0,2).equals("P2")){
-			int intLength = strActivePiece.length();
-			strActivePiece=strActivePiece.substring(2,intLength);
-		}
-		strGOGArray[intNewRow][intNewClm]=strPlayer+strActivePiece;
+		strGOGArray[intNewRow][intNewClm]=strActivePiece;
 		if(strActivePiece.equals("Flag")){
 			intFlag--;
 		}else if(strActivePiece.equals("Private")){
