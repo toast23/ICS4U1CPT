@@ -89,10 +89,10 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 		}
 		
 		//Draw number of 3 star generals
-		g.drawString("x"+intGenerals+" 3 star general",720,700);
-		g.drawRect(720,715,0,70);
+		g.drawString("x"+intGenerals+" 3 star general",820,200);
+		g.drawRect(820,215,0,70);
 		if(intSpy>0){
-			g.drawImage(imgGeneral3,720,715,null);
+			g.drawImage(imgGeneral3,720,215,null);
 		}
 	}
 	public void paintPieces(Graphics g){
@@ -112,7 +112,9 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 				}else if(strGOGArray[intRow][intColumn].equals("P1Private") || strGOGArray[intRow][intColumn].equals("P2Private")){
 					g.drawImage(imgPrivate, 80+70*intColumn,80+70*intRow, null); 
 				}else if(strGOGArray[intRow][intColumn].equals("P1Spy") || strGOGArray[intRow][intColumn].equals("P2Spy")){
-					g.drawString("s",110+70*intColumn,120+70*intRow);
+					g.drawImage(imgSpies, 80+70*intColumn,80+70*intRow, null); 
+				}else if(strGOGArray[intRow][intColumn].equals("P15*General") || strGOGArray[intRow][intColumn].equals("P25*General")){
+					g.drawImage(imgGeneral5, 80+70*intColumn,80+70*intRow, null); 
 				}
 			}
 		}
@@ -155,15 +157,20 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 			
 		
 		//if they click on the private stock area, then...
-		}else if(intPosX>720 && intPosX<790 && intPosY>400 && intPosY<470 && intPrivate>0){
+		}else if(intPosX>720 && intPosX<790 && intPosY>300 && intPosY<370 && intPrivate>0){
 			this.strActivePiece="Private";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			
 		
 		//if they click on the spy stock area, then...
-		}else if(intPosX>720 && intPosX<790 && intPosY>600 && intPosY<670 && intSpy>0){
+		}else if(intPosX>720 && intPosX<790 && intPosY>400 && intPosY<470 && intSpy>0){
 			this.strActivePiece="Spy";
+			//We set the boolean active to true because we are now moving a block
+			this.blnActive=true;
+		
+		}else if(intPosX>720 && intPosX<790 && intPosY>500 && intPosY<570 && intSpy>0){
+			this.strActivePiece="5*General";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 		}
@@ -201,7 +208,9 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 			intPrivate--;
 		}else if(strActivePiece.equals("Spy")){
 			intSpy--;
-		} 
+		}else if(strActivePiece.equals("5*General")){
+			intGenerals--;
+		}  
 		intOGRow=0;
 		intOGClm=0;
 		intNewRow=0;
@@ -223,7 +232,9 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 			}else if(strActivePiece.equals("Private")){
 				g.drawImage(imgPrivate, intImgX, intImgY,null);
 			}else if(strActivePiece.equals("Spy")){
-				g.fillRect(intImgX,intImgY,70,70);
+				g.drawImage(imgSpies, intImgX, intImgY,null);
+			}else if(strActivePiece.equals("5*General")){
+				g.drawImage(imgGeneral5, intImgX, intImgY,null);
 			}else{
 				g.fillRect(intImgX,intImgY,70,70);
 			}
@@ -298,7 +309,7 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 		}
 		
 		try{
-			imgSpies = ImageIO.read(new File("General5.png"));
+			imgSpies = ImageIO.read(new File("General5.jpg"));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
