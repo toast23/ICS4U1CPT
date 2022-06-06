@@ -108,8 +108,18 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 			this.blnActive=true;
 			this.blnMovingStock=true;
 		
-		}else if(intPosX>720 && intPosX<790 && intPosY>500 && intPosY<570 && intSpy>0){
+		}else if(intPosX>720 && intPosX<790 && intPosY>500 && intPosY<570 && intGenerals>0){
 			this.strActivePiece="5*General";
+			//We set the boolean active to true because we are now moving a block
+			this.blnActive=true;
+			this.blnMovingStock=true;
+		}else if(intPosX>720 && intPosX<790 && intPosY>600 && intPosY<670 && intGenerals>0){
+			this.strActivePiece="4*General";
+			//We set the boolean active to true because we are now moving a block
+			this.blnActive=true;
+			this.blnMovingStock=true;
+		}else if(intPosX>820 && intPosX<890 && intPosY>200 && intPosY<270 && intGenerals>0){
+			this.strActivePiece="3*General";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
@@ -227,7 +237,7 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 		g.drawString("x"+intGenerals+" 3 star general",820,200);
 		g.drawRect(820,215,0,70);
 		if(intGenerals>0){
-			g.drawImage(imgGeneral3,720,215,null);
+			g.drawImage(imgGeneral3,820,215,null);
 		}
 	}
 	public void paintPieces(Graphics g){
@@ -250,16 +260,15 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 					g.drawImage(imgSpies, 80+70*intColumn,80+70*intRow, null); 
 				}else if(strGOGArray[intRow][intColumn].equals("5*General")){
 					g.drawImage(imgGeneral5, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("P14*General") || strGOGArray[intRow][intColumn].equals("P24*General")){
+				}else if(strGOGArray[intRow][intColumn].equals("4*General")){
 					g.drawImage(imgGeneral5, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("P13*General") || strGOGArray[intRow][intColumn].equals("P23*General")){
+				}else if(strGOGArray[intRow][intColumn].equals("3*General")){
 					g.drawImage(imgGeneral5, 80+70*intColumn,80+70*intRow, null); 
 				}
 			}
 		}
 	}
-<<<<<<< HEAD
-	
+
 	//When they press on an area with a block, we do the following...
 	public void checkBlock(int IntPosX, int IntPosY){
 		//Inside a certain row and column...
@@ -309,15 +318,15 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 		
-		}else if(intPosX>720 && intPosX<790 && intPosY>500 && intPosY<570 && intSpy>0){
+		}else if(intPosX>720 && intPosX<790 && intPosY>500 && intPosY<570 && intGenerals>0){
 			this.strActivePiece="5*General";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
-		}else if(intPosX>720 && intPosX<790 && intPosY>600 && intPosY<670 && intSpy>0){
+		}else if(intPosX>720 && intPosX<790 && intPosY>600 && intPosY<670 && intGenerals>0){
 			this.strActivePiece="4*General";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
-		}else if(intPosX>820 && intPosX<890 && intPosY>200 && intPosY<270 && intSpy>0){
+		}else if(intPosX>820 && intPosX<890 && intPosY>200 && intPosY<270 && intGenerals>0){
 			this.strActivePiece="3*General";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
@@ -359,6 +368,8 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 		}else if(strActivePiece.equals("5*General")){
 			intGenerals--;
 		}else if(strActivePiece.equals("4*General")){
+			intGenerals--; 
+		}else if(strActivePiece.equals("3*General")){
 			intGenerals--;
 		}    
 		intOGRow=0;
@@ -386,7 +397,9 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 			}else if(strActivePiece.equals("5*General")){
 				g.drawImage(imgGeneral5, intImgX, intImgY,null);
 			}else if(strActivePiece.equals("4*General")){
-				g.drawImage(imgGeneral5, intImgX, intImgY,null);
+				g.drawImage(imgGeneral4, intImgX, intImgY,null);
+			}else if(strActivePiece.equals("3*General")){
+				g.drawImage(imgGeneral3, intImgX, intImgY,null);
 			}else{
 				g.fillRect(intImgX,intImgY,70,70);
 			}
@@ -403,8 +416,7 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 		g.drawImage(imgBoard,80,80,null);
 	}
 	
-=======
->>>>>>> b54126dace8f71af4d34abb2ba3b152578855ced
+
 	public void paintCharacters(Graphics g){
 		g.setColor(Color.BLACK);
 		g.drawString("1",110+70*0,50);
