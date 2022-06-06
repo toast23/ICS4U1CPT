@@ -135,7 +135,11 @@ public class GOGPrepPanel extends JPanel {
 			intSpy--;
 		}else if(strActivePiece.equals("5*General")){
 			intGenerals--;
-		}  
+		}else if(strActivePiece.equals("4*General")){
+			intGenerals--;
+		}else if(strActivePiece.equals("3*General")){
+			intGenerals--;
+		}
 		intOGRow=0;
 		intOGClm=0;
 		intNewRow=0;
