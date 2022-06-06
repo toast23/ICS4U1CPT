@@ -14,7 +14,11 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 	public BufferedImage imgBoard = null;
 	public BufferedImage imgFlag = null;
 	public BufferedImage imgPrivate = null;
+	public BufferedImage imgSpies = null;
 	public BufferedImage imgFogOfWar = null;
+	public BufferedImage imgGeneral5 = null;
+	public BufferedImage imgGeneral4 = null;
+	public BufferedImage imgGeneral3 = null;
 	public JButton theReadyButton = new JButton("Ready");
 	
 	//Timer stuff
@@ -43,30 +47,52 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 	int intFlag=1;
 	int intPrivate=6;
 	int intSpy=2;
+	int intGenerals=1;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Method
 	public void paintStock(Graphics g){
 		//Draw number of flags
 		g.drawString("x"+intFlag+" Flags",720,200);
-		g.drawRect(720,200,70,70);
+		g.drawRect(720,215,70,70);
 		//If we have at least 1 flag left, then we draw it
 		if(intFlag>0){
-			g.drawImage(imgFlag,720,200,null);
+			g.drawImage(imgFlag,720,215,null);
 		}
 		
 		//Draw number of privates
-		g.drawString("x"+intPrivate+" Privates",720,400);
-		g.drawRect(720,400,70,70);
+		g.drawString("x"+intPrivate+" Privates",720,300);
+		g.drawRect(720,315,70,70);
 		if(intPrivate>0){
-			g.drawImage(imgPrivate,720,400,null);
+			g.drawImage(imgPrivate,720,315,null);
 		}
 		
-		//Draw number of flags
-		g.drawString("x"+intSpy+" Spies",720,600);
-		g.drawRect(720,600,0,70);
+		//Draw number of spies
+		g.drawString("x"+intSpy+" Spies",720,400);
+		g.drawRect(720,415,0,70);
 		if(intSpy>0){
-			g.drawImage(imgPrivate,720,600,null);
+			g.drawImage(imgSpies,720,415,null);
+		}
+		
+		//Draw number of 5 star generals
+		g.drawString("x"+intGenerals+" 5 star general",720,500);
+		g.drawRect(720,515,0,70);
+		if(intSpy>0){
+			g.drawImage(imgGeneral5,720,515,null);
+		}
+		
+		//Draw number of 4 star generals
+		g.drawString("x"+intGenerals+" 4 star general",720,600);
+		g.drawRect(720,615,0,70);
+		if(intSpy>0){
+			g.drawImage(imgGeneral4,720,615,null);
+		}
+		
+		//Draw number of 3 star generals
+		g.drawString("x"+intGenerals+" 3 star general",720,700);
+		g.drawRect(720,715,0,70);
+		if(intSpy>0){
+			g.drawImage(imgGeneral3,720,715,null);
 		}
 	}
 	public void paintPieces(Graphics g){
@@ -261,6 +287,30 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 		
 		try{
 			imgFogOfWar = ImageIO.read(new File("FogOfWar.png"));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		
+		try{
+			imgSpies = ImageIO.read(new File("Spies.png"));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		
+		try{
+			imgSpies = ImageIO.read(new File("General5.png"));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		
+		try{
+			imgSpies = ImageIO.read(new File("General4.png"));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		
+		try{
+			imgSpies = ImageIO.read(new File("General3.png"));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
