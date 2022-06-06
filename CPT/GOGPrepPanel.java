@@ -42,6 +42,7 @@ public class GOGPrepPanel extends JPanel {
 	
 	boolean blnPlayer1Ready=false;
 	boolean blnPlayer2Ready=false;
+	boolean blnMakingArray=false;
 	
 	int intFlag=1;
 	int intPrivate=6;
