@@ -9,7 +9,7 @@ import javax.imageio.*;
 import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-public class GOGPrepPanel extends JPanel implements ActionListener {  
+public class GOGPrepPanel extends JPanel {  
 	public String strGOGArray[][] = new String[8][9];
 	public BufferedImage imgBoard = null;
 	public BufferedImage imgFlag = null;
@@ -19,7 +19,6 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 	public BufferedImage imgGeneral5 = null;
 	public BufferedImage imgGeneral4 = null;
 	public BufferedImage imgGeneral3 = null;
-	public JButton theReadyButton = new JButton("Ready");
 	
 	//Timer stuff
 	
@@ -405,12 +404,6 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 			}
 		}
 	}
-	
-	public void actionPerformed(ActionEvent evt) {
-		if(evt.getSource() == theReadyButton) {
-			// temp print statement to test button activation
-		}
-	}
 
 	public void paintBoard(Graphics g){
 		g.drawImage(imgBoard,80,80,null);
@@ -495,16 +488,11 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 		this.setLayout(null);
 		this.setBackground(Color.WHITE);
 		
-		theReadyButton.setBounds(720,90,280,50);
-		theReadyButton.addActionListener(this);
-		this.add(theReadyButton);
-		
 		thePlayer1Label.setBounds(750,160,200,50);
 		this.add(thePlayer1Label);
 		
 		thePlayer2Label.setBounds(1040,160,200,50);
 		this.add(thePlayer2Label);
-		
 		
 	}
 

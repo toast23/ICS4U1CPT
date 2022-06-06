@@ -9,13 +9,12 @@ import javax.imageio.*;
 import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-public class gamePanel extends JPanel implements ActionListener {  
+public class gamePanel extends JPanel {  
 	public String strGOGArray[][] = new String[8][9];
 	public BufferedImage imgBoard = null;
 	public BufferedImage imgFlag = null;
 	public BufferedImage imgPrivate = null;
 	public BufferedImage imgFogOfWar = null;
-	public JButton theReadyButton = new JButton("Ready");
 	
 	//Timer stuff
 	public JLabel theGameClockLabel=new JLabel("Time");
@@ -168,15 +167,6 @@ public class gamePanel extends JPanel implements ActionListener {
 			}
 		}
 	}
-	
-	public void actionPerformed(ActionEvent evt) {
-		if (evt.getSource() == theReadyButton) {
-			// temp print statement to test button activation
-		}
-		if(evt.getSource()==theTextField){
-			blnMessageSending=true;
-		}
-	}
 
 	public void paintBoard(Graphics g){
 		g.drawImage(imgBoard,80,80,null);
@@ -250,10 +240,6 @@ public class gamePanel extends JPanel implements ActionListener {
 		theGameClockLabel.setBounds(960,50,200,50);
 		this.add(theGameClockLabel);
 		
-		theReadyButton.setBounds(720,90,280,50);
-		theReadyButton.addActionListener(this);
-		this.add(theReadyButton);
-		
 		thePlayer1Label.setBounds(750,160,200,50);
 		this.add(thePlayer1Label);
 		
@@ -265,7 +251,6 @@ public class gamePanel extends JPanel implements ActionListener {
 		theScroll.setBounds(720,200,550,350);
 		this.add(theScroll);
 		
-		theTextField.addActionListener(this);
 		theTextField.setBounds(720,550,550,100);
 		this.add(theTextField);
 	}

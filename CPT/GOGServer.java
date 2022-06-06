@@ -197,6 +197,11 @@ public class GOGServer extends GOGView implements ActionListener{
 		
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+		// If user sends a message 
+		if(evt.getSource()==theGamePanel.theTextField){
+			theGamePanel.blnMessageSending=true;
+		}
+		
 		//If the server button is clicked, then...
 		if(evt.getSource()==theServerButton){
 			//We will set up the supersocketmaster server
@@ -257,6 +262,11 @@ public class GOGServer extends GOGView implements ActionListener{
 			//Set up the panel with the marks
 			ranksSetup();
 		}
+		
+		if (evt.getSource() == theReadyButton) {
+			gameSetup();
+			System.out.println("clickd");
+		}
 	}
 	
 	//This method sets up the server based on the SSMType
@@ -314,6 +324,8 @@ public class GOGServer extends GOGView implements ActionListener{
 		theHelpReturnButton.addActionListener(this);	
 		theRanksReturnButton.addActionListener(this);	
 		theHelpRanksButton.addActionListener(this);
+		theReadyButton.addActionListener(this);
+		theGamePanel.theTextField.addActionListener(this);
 		
 		//We start the clock here
 		theTimer.start();

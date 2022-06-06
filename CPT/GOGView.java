@@ -30,6 +30,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	public JButton theServerButton = new JButton("Server");
 	public JButton theClientButton = new JButton("Client");	
 	public JButton theHelpRanksButton = new JButton("Ranks");
+	public JButton theReadyButton = new JButton("Ready");
 	public String panelToReturn = "lobby";
 	public String strPlayer;
 	
@@ -38,7 +39,6 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	//These methods mainly pertain to setting up and switching between panels
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		//image.paintIcon(this,g, 500, 400);
 	} 
 	public void lobbySetup() {
 		theFrame.requestFocus();
@@ -97,7 +97,6 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 			}
 		}
 	}
-	
 	public void mouseDragged(MouseEvent evt) {
 		//If they drag acorss the game panel, then...
 		if(evt.getSource()==theGamePanel){
@@ -230,6 +229,9 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		
 		theHelpRanksButton.setBounds(1100, 600, 120, 50);
 		theHelpPanel.add(theHelpRanksButton);
+		
+		theReadyButton.setBounds(720,90,280,50);
+		thePrepPanel.add(theReadyButton);
 		
 		theFrame.setContentPane(theViewPanel);
 		theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
