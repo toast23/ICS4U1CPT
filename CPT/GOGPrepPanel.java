@@ -184,6 +184,10 @@ public class GOGPrepPanel extends JPanel {
 				g.drawImage(imgSpies, intImgX, intImgY,null);
 			}else if(strActivePiece.equals("5*General")){
 				g.drawImage(imgGeneral5, intImgX, intImgY,null);
+			}else if(strActivePiece.equals("4*General")){
+				g.drawImage(imgGeneral4, intImgX, intImgY,null);
+			}else if(strActivePiece.equals("3*General")){
+				g.drawImage(imgGeneral3, intImgX, intImgY,null);
 			}else{
 				g.fillRect(intImgX,intImgY,70,70);
 			}

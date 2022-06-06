@@ -265,7 +265,7 @@ public class GOGServer extends GOGView implements ActionListener{
 		
 		if (evt.getSource() == theReadyButton) {
 			gameSetup();
-			System.out.println("clickd");
+			System.out.println("clicked");
 		}
 	}
 	
