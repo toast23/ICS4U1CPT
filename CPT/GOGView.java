@@ -190,13 +190,6 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 				thePrepPanel.blnActive=false;
 			}
 		}
-		/*System.out.println();
-		for (int i=0;i<theGamePanel.strGOGArray.length;i++) {
-			System.out.println();
-			for (int j=0;j<theGamePanel.strGOGArray[0].length;j++) {
-				System.out.print("|"+theGamePanel.strGOGArray[i][j]);
-			}
-		}*/
 	}
 	
 	//These are unused commands that we need to override

@@ -48,9 +48,144 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 	int intPrivate=6;
 	int intSpy=2;
 	int intGenerals=1;
+	
+	//We need to distinguish 
+	boolean blnMovingStock=false;
+	boolean blnMovingPiece=false;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Method
+	//When they press on an area with a block, we do the following...
+	public void checkBlock(int IntPosX, int IntPosY){
+		//Inside a certain row and column...
+		for(int intRow=5;intRow<8;intRow++){
+			for(int intClm=0;intClm<9;intClm++){
+				//if the x and y position is...
+				//-more than the left side wall
+				//-less than the right side wall
+				//-more than the top side wall
+				//-less than the bottom side wall
+				//then...
+				if(IntPosX>intClm*70+80 && IntPosX<(intClm+1)*70+80 && IntPosY>intRow*70+80 && IntPosY<(intRow+1)*70+80){
+					//If in that spot, there is already a block there(true), then...
+					if(this.strGOGArray[intRow][intClm]!=null && !this.strGOGArray[intRow][intClm].equals("")){
+						//Get rid of that block so we can replace it with an active block that we paint
+						this.strActivePiece=this.strGOGArray[intRow][intClm];
+						this.strGOGArray[intRow][intClm]=null;
+						//We set the boolean active to true because we are now moving a block
+						this.blnActive=true;
+						this.blnMovingPiece=true;
+						//We note the original row and column
+						intOGRow=intRow;
+						intOGClm=intClm;
+					}
+				}
+			}
+		}
+	}
+	
+	public void takeStock(int intPosX, int intPosY){
+		//if they click on the flag stock area, then...
+		if(intPosX>720 && intPosX<790 && intPosY>200 && intPosY<270 && intFlag>0){
+			this.strActivePiece="Flag";
+			//We set the boolean active to true because we are now moving a block
+			this.blnActive=true;
+			this.blnMovingStock=true;
+			
+		
+		//if they click on the private stock area, then...
+		}else if(intPosX>720 && intPosX<790 && intPosY>300 && intPosY<370 && intPrivate>0){
+			this.strActivePiece="Private";
+			//We set the boolean active to true because we are now moving a block
+			this.blnActive=true;
+			this.blnMovingStock=true;
+			
+		
+		//if they click on the spy stock area, then...
+		}else if(intPosX>720 && intPosX<790 && intPosY>400 && intPosY<470 && intSpy>0){
+			this.strActivePiece="Spy";
+			//We set the boolean active to true because we are now moving a block
+			this.blnActive=true;
+			this.blnMovingStock=true;
+		
+		}else if(intPosX>720 && intPosX<790 && intPosY>500 && intPosY<570 && intSpy>0){
+			this.strActivePiece="5*General";
+			//We set the boolean active to true because we are now moving a block
+			this.blnActive=true;
+			this.blnMovingStock=true;
+		}
+	}
+	
+	public void placePiece(){
+		strGOGArray[intNewRow][intNewClm]=strActivePiece;
+		if(strActivePiece.equals("Flag")){
+			intFlag--;
+		}else if(strActivePiece.equals("Private")){
+			intPrivate--;
+		}else if(strActivePiece.equals("Spy")){
+			intSpy--;
+		}else if(strActivePiece.equals("5*General")){
+			intGenerals--;
+		}  
+		intOGRow=0;
+		intOGClm=0;
+		intNewRow=0;
+		intNewClm=0;
+	}
+	
+	public void movePiece(){
+		
+	}
+	
+	//When they release their mouse, we use this method
+	public void getNewPosition(){	
+		//Inside a certain row and column...
+		for(int intRow=5;intRow<8;intRow++){
+			for(int intClm=0;intClm<9;intClm++){
+				//if the x and y position is...
+				//-more than the left side wall
+				//-less than the right side wall
+				//-more than the top side wall
+				//-less than the bottom side wall
+				//then...
+				if(intImgX+35>intClm*70+80 && intImgX+35<(intClm+1)*70+80 && intImgY+35>intRow*70+80 && intImgY+35<(intRow+1)*70+80){
+					//we note this new row and column
+					intNewRow=intRow;
+					intNewClm=intClm;
+				}
+			}
+		}
+	}
+	
+	//We call this in our repaint method
+	public void paintActiveBlock(Graphics g){
+		//If active is true, which means user is dragging, then we draw the moving block
+		if(blnActive==true){
+			//We draw the block
+			g.setColor(Color.BLACK);
+			if(strActivePiece.equals("Flag")){
+				g.drawImage(imgFlag, intImgX, intImgY,null);
+			}else if(strActivePiece.equals("Private")){
+				g.drawImage(imgPrivate, intImgX, intImgY,null);
+			}else if(strActivePiece.equals("Spy")){
+				g.drawImage(imgSpies, intImgX, intImgY,null);
+			}else if(strActivePiece.equals("5*General")){
+				g.drawImage(imgGeneral5, intImgX, intImgY,null);
+			}else{
+				g.fillRect(intImgX,intImgY,70,70);
+			}
+		}
+	}
+	
+	public void actionPerformed(ActionEvent evt) {
+		if(evt.getSource() == theReadyButton) {
+			// temp print statement to test button activation
+		}
+	}
+
+	public void paintBoard(Graphics g){
+		g.drawImage(imgBoard,80,80,null);
+	}
 	public void paintStock(Graphics g){
 		//Draw number of flags
 		g.drawString("x"+intFlag+" Flags",720,200);
@@ -119,134 +254,6 @@ public class GOGPrepPanel extends JPanel implements ActionListener {
 			}
 		}
 	}
-	
-	//When they press on an area with a block, we do the following...
-	public void checkBlock(int IntPosX, int IntPosY){
-		//Inside a certain row and column...
-		for(int intRow=5;intRow<8;intRow++){
-			for(int intClm=0;intClm<9;intClm++){
-				//if the x and y position is...
-				//-more than the left side wall
-				//-less than the right side wall
-				//-more than the top side wall
-				//-less than the bottom side wall
-				//then...
-				if(IntPosX>intClm*70+80 && IntPosX<(intClm+1)*70+80 && IntPosY>intRow*70+80 && IntPosY<(intRow+1)*70+80){
-					//If in that spot, there is already a block there(true), then...
-					if(this.strGOGArray[intRow][intClm]!=null && !this.strGOGArray[intRow][intClm].equals("")){
-						//Get rid of that block so we can replace it with an active block that we paint
-						this.strActivePiece=this.strGOGArray[intRow][intClm];
-						this.strGOGArray[intRow][intClm]=null;
-						//We set the boolean active to true because we are now moving a block
-						this.blnActive=true;
-						//We note the original row and column
-						intOGRow=intRow;
-						intOGClm=intClm;
-					}
-				}
-			}
-		}
-	}
-	
-	public void takeStock(int intPosX, int intPosY){
-		//if they click on the flag stock area, then...
-		if(intPosX>720 && intPosX<790 && intPosY>200 && intPosY<270 && intFlag>0){
-			this.strActivePiece="Flag";
-			//We set the boolean active to true because we are now moving a block
-			this.blnActive=true;
-			
-		
-		//if they click on the private stock area, then...
-		}else if(intPosX>720 && intPosX<790 && intPosY>300 && intPosY<370 && intPrivate>0){
-			this.strActivePiece="Private";
-			//We set the boolean active to true because we are now moving a block
-			this.blnActive=true;
-			
-		
-		//if they click on the spy stock area, then...
-		}else if(intPosX>720 && intPosX<790 && intPosY>400 && intPosY<470 && intSpy>0){
-			this.strActivePiece="Spy";
-			//We set the boolean active to true because we are now moving a block
-			this.blnActive=true;
-		
-		}else if(intPosX>720 && intPosX<790 && intPosY>500 && intPosY<570 && intSpy>0){
-			this.strActivePiece="5*General";
-			//We set the boolean active to true because we are now moving a block
-			this.blnActive=true;
-		}
-	}
-	
-	//When they release their mouse, we use this method
-	public void getNewPosition(){	
-		//Inside a certain row and column...
-		for(int intRow=5;intRow<8;intRow++){
-			for(int intClm=0;intClm<9;intClm++){
-				//if the x and y position is...
-				//-more than the left side wall
-				//-less than the right side wall
-				//-more than the top side wall
-				//-less than the bottom side wall
-				//then...
-				if(intImgX+35>intClm*70+80 && intImgX+35<(intClm+1)*70+80 && intImgY+35>intRow*70+80 && intImgY+35<(intRow+1)*70+80){
-					//we note this new row and column
-					intNewRow=intRow;
-					intNewClm=intClm;
-				}
-			}
-		}
-	}
-	
-	public void placePiece(String strPlayer){
-		strGOGArray[intNewRow][intNewClm]=strActivePiece;
-		if(strActivePiece.equals("Flag")){
-			intFlag--;
-		}else if(strActivePiece.equals("Private")){
-			intPrivate--;
-		}else if(strActivePiece.equals("Spy")){
-			intSpy--;
-		}else if(strActivePiece.equals("5*General")){
-			intGenerals--;
-		}  
-		intOGRow=0;
-		intOGClm=0;
-		intNewRow=0;
-		intNewClm=0;
-	}
-	
-	public void movePiece(String strPlayer){
-		
-	}
-	
-	//We call this in our repaint method
-	public void paintActiveBlock(Graphics g){
-		//If active is true, which means user is dragging, then we draw the moving block
-		if(blnActive==true){
-			//We draw the block
-			g.setColor(Color.BLACK);
-			if(strActivePiece.equals("Flag")){
-				g.drawImage(imgFlag, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("Private")){
-				g.drawImage(imgPrivate, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("Spy")){
-				g.drawImage(imgSpies, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("5*General")){
-				g.drawImage(imgGeneral5, intImgX, intImgY,null);
-			}else{
-				g.fillRect(intImgX,intImgY,70,70);
-			}
-		}
-	}
-	
-	public void actionPerformed(ActionEvent evt) {
-		if(evt.getSource() == theReadyButton) {
-			// temp print statement to test button activation
-		}
-	}
-
-	public void paintBoard(Graphics g){
-		g.drawImage(imgBoard,80,80,null);
-	}
-	
 	public void paintCharacters(Graphics g){
 		g.setColor(Color.BLACK);
 		g.drawString("1",110+70*0,50);
