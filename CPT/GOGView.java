@@ -89,11 +89,8 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 				thePrepPanel.intImgX = evt.getX()-35;
 				thePrepPanel.intImgY = evt.getY()-35;
 				
-				//if after all that, it's not being moved from a slot, we can
-				//check if we're taking from the stock
-				if(thePrepPanel.blnActive==false){
-					thePrepPanel.takeStock(evt.getX(), evt.getY());
-				}
+				//We can still check whether it's in the stock too
+				thePrepPanel.takeStock(evt.getX(), evt.getY());
 			}
 		}
 	}
@@ -164,28 +161,34 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		}else if(evt.getSource()==thePrepPanel){
 			//If a piece is actively being moved, then...
 			if(thePrepPanel.blnActive==true){
-				//get the new row and column in prep panel's row and column
 				thePrepPanel.getNewPosition();
-				//We will update the coordinates for the model here
-				System.out.println("OGRow:"+thePrepPanel.intOGRow);
-				System.out.println("OGClm:"+thePrepPanel.intOGClm);
-				System.out.println("NewRow:"+thePrepPanel.intNewRow);
-				System.out.println("NewClm:"+thePrepPanel.intNewRow);
-				System.out.println(thePrepPanel.strActivePiece);
-				//If the model has not moved from its original row to a new row and has not moved from its original column to a new column, then...
-				if(thePrepPanel.intOGRow==thePrepPanel.intNewRow && thePrepPanel.intOGClm==thePrepPanel.intNewClm){
-					//Don't change anything. 
-					thePrepPanel.strGOGArray[thePrepPanel.intOGRow][thePrepPanel.intOGClm]=thePrepPanel.strActivePiece;	
-				
-				//If there's a piece there, don't do anything
-				}else if(thePrepPanel.strGOGArray[thePrepPanel.intNewRow][thePrepPanel.intNewClm]!=null && !thePrepPanel.strGOGArray[thePrepPanel.intNewRow][thePrepPanel.intNewClm].equals(" ") && !thePrepPanel.strGOGArray[thePrepPanel.intNewRow][thePrepPanel.intNewClm].equals("")){
-					//thePrepPanel.strGOGArray[thePrepPanel.intOGRow][thePrepPanel.intOGClm]=thePrepPanel.strActivePiece;	
-				//If that isn't the case, then...
-				}else{
-					//Check where the piece has moved and make the appropriate edits to the
-					//model's array with the checkPieceMovement method
-					thePrepPanel.placePiece(strPlayer);
+				//If they move stock, then...
+				if(thePrepPanel.blnMovingStock==true){
+					//If there's already a piece there, don't do anything
+					if(thePrepPanel.strGOGArray[thePrepPanel.intNewRow][thePrepPanel.intNewClm]!=null){
+	
+					}else{
+						//Check where the piece has moved and make the appropriate edits to the
+						//model's array with the checkPieceMovement method
+						thePrepPanel.placePiece();
+					}	
+				}else if(thePrepPanel.blnMovingPiece==true){
+					//If the model has not moved from its original row to a new row and has not moved from its original column to a new column, then...
+					if(thePrepPanel.intOGRow==thePrepPanel.intNewRow && thePrepPanel.intOGClm==thePrepPanel.intNewClm){
+						//Don't change anything. 
+						thePrepPanel.strGOGArray[thePrepPanel.intOGRow][thePrepPanel.intOGClm]=thePrepPanel.strActivePiece;	
+					
+					//If there's a piece there, don't do anything
+					}else if(thePrepPanel.strGOGArray[thePrepPanel.intNewRow][thePrepPanel.intNewClm]!=null && !thePrepPanel.strGOGArray[thePrepPanel.intNewRow][thePrepPanel.intNewClm].equals(" ") && !thePrepPanel.strGOGArray[thePrepPanel.intNewRow][thePrepPanel.intNewClm].equals("")){
+						//thePrepPanel.strGOGArray[thePrepPanel.intOGRow][thePrepPanel.intOGClm]=thePrepPanel.strActivePiece;	
+						//If that isn't the case, then...
+						thePrepPanel.strGOGArray[thePrepPanel.intOGRow][thePrepPanel.intOGClm]=thePrepPanel.strActivePiece;
+					}else if(thePrepPanel.strGOGArray[thePrepPanel.intNewRow][thePrepPanel.intNewClm]==null || thePrepPanel.strGOGArray[thePrepPanel.intNewRow][thePrepPanel.intNewClm].equals(" ")){
+						thePrepPanel.movePiece();
+					}
 				}
+				thePrepPanel.blnMovingStock=false;
+				thePrepPanel.blnMovingPiece=false;
 				thePrepPanel.blnActive=false;
 			}
 		}

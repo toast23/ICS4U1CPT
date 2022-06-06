@@ -86,6 +86,9 @@ public class GOGServer extends GOGView implements ActionListener{
 				//blnReceiveArrayData variable off
 				ssm.sendText("Done Sending Data");
 			}
+			if(thePrepPanel.blnPlayer1Ready==true && thePrepPanel.blnPlayer2Ready==true){
+				
+			}
 		}
 		
 		//Ever second, we...
@@ -185,6 +188,10 @@ public class GOGServer extends GOGView implements ActionListener{
 					//We turn receivedata on
 					theModel.blnGetName=true;
 				//If none of this is the case, then we will put what is said in chatbox
+				}else if(strText.equals("P1 Ready")){
+					thePrepPanel.blnPlayer1Ready=true;
+				}else if(strText.equals("P2 Ready")){
+					thePrepPanel.blnPlayer2Ready=true;
 				}else{
 					if(strPlayer.equals("P1")){
 						theGamePanel.theTextArea.append(theModel.strPlayer2Name + "," + strText + "\n");
@@ -264,6 +271,12 @@ public class GOGServer extends GOGView implements ActionListener{
 		}
 		
 		if (evt.getSource() == theReadyButton) {
+			if(strPlayer.equals("P1")){
+				thePrepPanel.blnPlayer1Ready=true;
+			}else if(strPlayer.equals("P2")){
+				thePrepPanel.blnPlayer2Ready=true;
+			}
+			ssm.sendText(strPlayer+" Ready");
 			gameSetup();
 			System.out.println("clicked");
 		}
