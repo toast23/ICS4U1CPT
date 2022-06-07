@@ -164,10 +164,8 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 				thePrepPanel.getNewPosition();
 				//If they move stock, then...
 				if(thePrepPanel.blnMovingStock==true){
-					//If there's already a piece there, don't do anything
-					if(thePrepPanel.strGOGArray[thePrepPanel.intNewRow][thePrepPanel.intNewClm]!=null){
-	
-					}else{
+					//If there's no piece there, allow it to move
+					if(thePrepPanel.strGOGArray[thePrepPanel.intNewRow][thePrepPanel.intNewClm].equals(" ")){
 						//Check where the piece has moved and make the appropriate edits to the
 						//model's array with the checkPieceMovement method
 						thePrepPanel.placePiece();
@@ -179,11 +177,11 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 						thePrepPanel.strGOGArray[thePrepPanel.intOGRow][thePrepPanel.intOGClm]=thePrepPanel.strActivePiece;	
 					
 					//If there's a piece there, don't do anything
-					}else if(thePrepPanel.strGOGArray[thePrepPanel.intNewRow][thePrepPanel.intNewClm]!=null && !thePrepPanel.strGOGArray[thePrepPanel.intNewRow][thePrepPanel.intNewClm].equals(" ") && !thePrepPanel.strGOGArray[thePrepPanel.intNewRow][thePrepPanel.intNewClm].equals("")){
+					}else if(!thePrepPanel.strGOGArray[thePrepPanel.intNewRow][thePrepPanel.intNewClm].equals(" ")){
 						//thePrepPanel.strGOGArray[thePrepPanel.intOGRow][thePrepPanel.intOGClm]=thePrepPanel.strActivePiece;	
 						//If that isn't the case, then...
 						thePrepPanel.strGOGArray[thePrepPanel.intOGRow][thePrepPanel.intOGClm]=thePrepPanel.strActivePiece;
-					}else if(thePrepPanel.strGOGArray[thePrepPanel.intNewRow][thePrepPanel.intNewClm]==null || thePrepPanel.strGOGArray[thePrepPanel.intNewRow][thePrepPanel.intNewClm].equals(" ")){
+					}else if(thePrepPanel.strGOGArray[thePrepPanel.intNewRow][thePrepPanel.intNewClm].equals(" ")){
 						thePrepPanel.movePiece();
 					}
 				}

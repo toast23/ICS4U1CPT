@@ -226,7 +226,7 @@ public class GOGPrepPanel extends JPanel {
 		
 		for(int intRow=5;intRow<8;intRow++){
 			for(int intColumn=0;intColumn<9;intColumn++){
-				if(strGOGArray[intRow][intColumn] == null){
+				if(strGOGArray[intRow][intColumn].equals(" ")){
 				}else if(strGOGArray[intRow][intColumn].equals("Flag")){
 					g.drawImage(imgFlag, 80+70*intColumn,80+70*intRow, null); 
 				}else if(strGOGArray[intRow][intColumn].equals("Private")){
@@ -288,10 +288,10 @@ public class GOGPrepPanel extends JPanel {
 				//then...
 				if(IntPosX>intClm*70+80 && IntPosX<(intClm+1)*70+80 && IntPosY>intRow*70+80 && IntPosY<(intRow+1)*70+80){
 					//If in that spot, there is already a block there(true), then...
-					if(this.strGOGArray[intRow][intClm]!=null && !this.strGOGArray[intRow][intClm].equals("")){
+					if(!this.strGOGArray[intRow][intClm].equals(" ")){
 						//Get rid of that block so we can replace it with an active block that we paint
 						this.strActivePiece=this.strGOGArray[intRow][intClm];
-						this.strGOGArray[intRow][intClm]=null;
+						this.strGOGArray[intRow][intClm]=" ";
 						//We set the boolean active to true because we are now moving a block
 						this.blnActive=true;
 						this.blnMovingPiece=true;
@@ -463,6 +463,12 @@ public class GOGPrepPanel extends JPanel {
 	//Constructor
 	public GOGPrepPanel(){
 		super();
+		for(int intRow=0;intRow<8;intRow++){
+			for(int intClm=0;intClm<9;intClm++){
+				strGOGArray[intRow][intClm]=" ";
+			}
+		}
+		
 		try{
 			imgBoard = ImageIO.read(new File("board.png"));
 		}catch(IOException e){

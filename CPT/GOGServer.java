@@ -19,22 +19,20 @@ public class GOGServer extends GOGView implements ActionListener{
 			theViewPanel.repaint();
 			
 			
-			//If it's time to send a message, then.....
-			if(thePrepPanel.blnPlayer1Ready==true && thePrepPanel.blnPlayer2Ready==true){
-				thePrepPanel.blnMakingArray=true;
-				thePrepPanel.blnPlayer1Ready=false;
-				thePrepPanel.blnPlayer2Ready=false;
-				
-				ssm.sendText("Starting Array Formation");
+			//If both are ready and it's player 2, give half array to other player
+			if(thePrepPanel.blnPlayer1Ready==true && thePrepPanel.blnPlayer2Ready==true){				
 				if(strPlayer.equals("P2")){
 					int intReverseRow=0;
-					for(int intRow=7;intRow>4;intRow--){
+					for(int intRow=7;intRow>3;intRow--){
 						for(int intClm=0;intClm<9;intClm++){
-							ssm.sendText("MakingArray"+","+intReverseRow+","+intClm+","+thePrepPanel.strGOGArray[intRow][intClm]);
+							//If it isn't blank, then send it over
+							if(!thePrepPanel.strGOGArray[intRow][intClm].equals(" ")){
+								ssm.sendText("CurrentlySendingClientHalfOfArray"+","+intReverseRow+","+intClm+","+"P2"+thePrepPanel.strGOGArray[intRow][intClm]);
+							}
 						}
 						intReverseRow++;
 					}
-					ssm.sendText("Half done making model array");
+					ssm.sendText("DoneSendingClientHalfOfArray");
 					thePrepPanel.blnPlayer1Ready=false;
 					thePrepPanel.blnPlayer2Ready=false;
 				}
@@ -80,16 +78,16 @@ public class GOGServer extends GOGView implements ActionListener{
 			}else if(theGamePanel.blnMessageSending==true){
 				//Put that message in our chatbox
 				if(strPlayer.equals("P1")){
-					theGamePanel.theTextArea.append(theModel.strPlayer1Name + "," + theGamePanel.theTextField.getText() + "\n");
+					theGamePanel.theTextArea.append("Chat"+","+theModel.strPlayer1Name + "," + theGamePanel.theTextField.getText() + "\n");
 				}else if(strPlayer.equals("P2")){
-					theGamePanel.theTextArea.append(theModel.strPlayer2Name + "," + theGamePanel.theTextField.getText() + "\n");
+					theGamePanel.theTextArea.append("Chat"+","+theModel.strPlayer2Name + "," + theGamePanel.theTextField.getText() + "\n");
 				}
 				
 				//Then send the message inside the spot we entered
 				ssm.sendText(theGamePanel.theTextField.getText());
 				
 				//We'll also blank the text field after they clicked enter
-				theGamePanel.theTextField.setText("");
+				theGamePanel.theTextField.setText(" ");
 				
 				//After we sent the message, it's not time to send a message anymore
 				theGamePanel.blnMessageSending=false;
@@ -116,75 +114,54 @@ public class GOGServer extends GOGView implements ActionListener{
 			//We create a local variable that will help us store the sent message
 			String strText = ssm.readText();				
 			String[] strIndex = strText.split(",");
-			if(thePrepPanel.blnMakingArray==true){
-				if(strPlayer.equals("P1")){
-					if(strIndex[0].equals("MakingArray")){
-						theModel.intOGRow=Integer.parseInt(strIndex[1]);
-						theModel.intOGClm=Integer.parseInt(strIndex[2]);
-						theModel.strArray[theModel.intOGRow][theModel.intOGClm]="P2"+strIndex[3];
-						System.out.println(theModel.strArray[theModel.intOGRow][theModel.intOGClm]);
-						
-					}else if(strText.equals("Half done making model array")){
-						//load server half into array
-						for(int intRow=5;intRow<8;intRow++){
-							for(int intClm=0;intClm<9;intClm++){
-								theModel.strArray[intRow][intClm]="P1"+thePrepPanel.strGOGArray[intRow][intClm];
-							}
+			if(strIndex[0].equals("CurrentlySendingClientHalfOfArray")){
+				theModel.intOGRow=Integer.parseInt(strIndex[1]);
+				theModel.intOGClm=Integer.parseInt(strIndex[2]);
+				theModel.strArray[theModel.intOGRow][theModel.intOGClm]=strIndex[3];
+			}else if(strIndex[0].equals("DoneSendingClientHalfOfArray")){
+				//load server half into array
+				for(int intRow=5;intRow<8;intRow++){
+					for(int intClm=0;intClm<9;intClm++){
+						if(thePrepPanel.strGOGArray[intRow][intClm].equals(" ")){
+							theModel.strArray[intRow][intClm]=" ";
+						}else if(!thePrepPanel.strGOGArray[intRow][intClm].equals(" ")){
+							theModel.strArray[intRow][intClm]="P1"+thePrepPanel.strGOGArray[intRow][intClm];
 						}
-						//load stuff into the game panel array
-						theGamePanel.strGOGArray=theModel.strArray;
-						
-						//give my array to the other player
-						for(int intRow=0;intRow<8;intRow++){
-							for(int intClm=0;intClm<9;intClm++){
-								ssm.sendText("SendingPreparedArray"+","+intRow+","+intClm+","+theModel.strArray[intRow][intClm]);
-							}
-						}
-						gameSetup();
-						thePrepPanel.blnMakingArray=false;
-						ssm.sendText("Done making model array");
-					}
-				}else if(strPlayer.equals("P2")){
-					if(strIndex[0].equals("SendingPreparedArray")){
-						theModel.intOGRow=Integer.parseInt(strIndex[1]);
-						theModel.intOGClm=Integer.parseInt(strIndex[2]);
-						theModel.strArray[theModel.intOGRow][theModel.intOGClm]=strText;
-					
-					}else if(strText.equals("Done making model array")){
-						thePrepPanel.blnMakingArray=false;
-						
-						//Before we set up the game panel, we need to reverse it
-						String strTemporaryArray[][];
-						strTemporaryArray=theModel.strArray;
-						
-						int intReverseRow=7;
-						for(int intRow=0; intRow<8;intRow++){
-							for(int intClm=0; intClm<9;intClm++){
-								theModel.strArray[intReverseRow][intClm]=strTemporaryArray[intRow][intClm];
-							}
-							intReverseRow--;
-						}
-						theGamePanel.strGOGArray=theModel.strArray;
-						gameSetup();
 					}
 				}
-				//If it is time to receive array data information, then...
-			}else if(theModel.blnReceiveArrayData==true){
-				//We first store the send text inside strText
-				//If the sent message tell us that it is done sending info, then ...
-				if(strIndex[0].equals("SendArray")){
-					theModel.intOGRow=Integer.parseInt(strIndex[1]);
-					theModel.intOGClm=Integer.parseInt(strIndex[2]);
-					theModel.strArray[theModel.intOGRow][theModel.intOGClm]=strIndex[3];
-				}else if(strText.equals("Done Sending Data")){
-					//We now know that is is time to stop receiving information
-					theModel.blnReceiveArrayData=false;
+				//load stuff into the game panel array
+				theGamePanel.strGOGArray=theModel.strArray;
+				
+				
+				int intReverseRow=7;
+				//give my array to the other player
+				for(int intRow=0;intRow<8;intRow++){
+					for(int intClm=0;intClm<9;intClm++){
+						ssm.sendText("SendingPreparedArray"+","+intRow+","+intClm+","+theModel.strArray[intReverseRow][intClm]);
+					}
+					intReverseRow--;
 				}
+				gameSetup();
+				ssm.sendText("Done making model array");
+			
+			}else if(strIndex[0].equals("SendingPreparedArray")){
+				theModel.intOGRow=Integer.parseInt(strIndex[1]);
+				theModel.intOGClm=Integer.parseInt(strIndex[2]);
+				theModel.strArray[theModel.intOGRow][theModel.intOGClm]=strIndex[3];
+			}else if(strIndex[0].equals("Done making model array")){
+				theGamePanel.strGOGArray=theModel.strArray;
+				gameSetup();
+			//If it is time to receive array data information, then...
+			}else if(strIndex[0].equals("SendArray")){
+				theModel.intOGRow=Integer.parseInt(strIndex[1]);
+				theModel.intOGClm=Integer.parseInt(strIndex[2]);
+				theModel.strArray[theModel.intOGRow][theModel.intOGClm]=strIndex[3];
+			}else if(strIndex[0].equals("Done Sending Data")){
+				//We now know that is is time to stop receiving information
+				theModel.blnReceiveArrayData=false;
 			
 			//if it's time to get a name, then...
 			}else if(theModel.blnGetName==true){
-				//Load the name into a variable
-				strText = ssm.readText();
 				//If this is player 1, then...
 				if(strPlayer.equals("P1")){
 					//get player 2's name
@@ -206,42 +183,28 @@ public class GOGServer extends GOGView implements ActionListener{
 					//Now that the server is done getting a name, it falsifies
 					theModel.blnGetName=false;
 				}
-			}else{
-				//Read the text that was sent
-				strText = ssm.readText();
+			}else if(strIndex[0].equals("P1") || strText.equals("P2")){
+				//We update player turn here
+				theModel.strPlayerTurn=strText;
 				
-				//If it says P1 or P2, that means it is time to update the player turn
-				if(strText.equals("P1") || strText.equals("P2")){
-					//We update player turn here
-					theModel.strPlayerTurn=strText;
-					
-					//We will also tell the user in the chatbox that it is their turn now
-					theGamePanel.theTextArea.append(theModel.strPlayerTurn+" Turn now" + "\n");
-					
-				//If it says Sending Data, then it is time to receive data
-				}else if(strText.equals("Sending Data")){
-					//We turn receivedata on
-					theModel.blnReceiveArrayData=true;
-				//If none of this is the case, then we will put what is said in chatbox
-				}else if(strText.equals("Get Name")){
-					//We turn receivedata on
-					theModel.blnGetName=true;
-				//If none of this is the case, then we will put what is said in chatbox
-				}else if(strText.equals("P1 Ready")){
-					thePrepPanel.blnPlayer1Ready=true;
-				}else if(strText.equals("P2 Ready")){
-					thePrepPanel.blnPlayer2Ready=true;
-				}else if(strText.equals("Starting Array Formation")){
-					thePrepPanel.blnMakingArray=true;
-				}else if(strText.equals("Done making model array")){
-					thePrepPanel.blnMakingArray=false;
-				}else{
-					if(strPlayer.equals("P1")){
-						theGamePanel.theTextArea.append(theModel.strPlayer2Name + "," + strText + "\n");
-					} else if(strPlayer.equals("P2")){
-						theGamePanel.theTextArea.append(theModel.strPlayer1Name + "," + strText + "\n");
-					}
-				}
+				//We will also tell the user in the chatbox that it is their turn now
+				theGamePanel.theTextArea.append(theModel.strPlayerTurn+" Turn now" + "\n");
+				
+			//If it says Sending Data, then it is time to receive data
+			}else if(strIndex[0].equals("Sending Data")){
+				//We turn receivedata on
+				theModel.blnReceiveArrayData=true;
+			//If none of this is the case, then we will put what is said in chatbox
+			}else if(strIndex[0].equals("Get Name")){
+				//We turn receivedata on
+				theModel.blnGetName=true;
+			//If none of this is the case, then we will put what is said in chatbox
+			}else if(strIndex[0].equals("P1 Ready")){
+				thePrepPanel.blnPlayer1Ready=true;
+			}else if(strIndex[0].equals("P2 Ready")){
+				thePrepPanel.blnPlayer2Ready=true;
+			}else if(strIndex[0].equals("Chat")){
+				theGamePanel.theTextArea.append(strIndex[1]+","+strIndex[2]);
 			}
 		}
 		

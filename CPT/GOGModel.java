@@ -1,6 +1,6 @@
 public class GOGModel{
 	//Properties
-	public String strArray[][];
+	public String strArray[][]= new String[8][9];
 	public String strRankArray[][];
 	public int intOGClm;
 	public int intOGRow;
@@ -36,7 +36,7 @@ public class GOGModel{
 		strNextPositionPiece=strArray[intNewRow][intNewClm];
 		//update array file
 		//if it is not null, then we check length
-		if(strNextPositionPiece!=null && !strNextPositionPiece.equals(" ")){
+		if(!strNextPositionPiece.equals(" ")){
 			//If both are the same team, don't let it move
 			if( (strNextPositionPiece.substring(0,2)).equals(strPlayerTurn.substring(0,2)) ){
 				blnOnSameTeam=true;
@@ -73,7 +73,11 @@ public class GOGModel{
 	}
 	//Constructor
 	public GOGModel(){
-		this.strArray = GOGUtilities.loadPieceArray("Board.csv");
+		for(int intRow=0; intRow<8;intRow++){
+			for(int intClm=0; intClm<9;intClm++){
+				strArray[intRow][intClm]=" ";
+			}
+		}
 		this.strRankArray = GOGUtilities.loadDataArray("RankingData.csv");
 	}
 }
