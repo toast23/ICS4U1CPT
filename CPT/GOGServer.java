@@ -20,25 +20,24 @@ public class GOGServer extends GOGView implements ActionListener{
 			
 			
 			//If it's time to send a message, then.....
-			if(theGamePanel.blnMessageSending==true){
-				//Put that message in our chatbox
-				if(strPlayer.equals("P1")){
-					theGamePanel.theTextArea.append(theModel.strPlayer1Name + "," + theGamePanel.theTextField.getText() + "\n");
-				}else if(strPlayer.equals("P2")){
-					theGamePanel.theTextArea.append(theModel.strPlayer2Name + "," + theGamePanel.theTextField.getText() + "\n");
+			if(thePrepPanel.blnPlayer1Ready==true && thePrepPanel.blnPlayer2Ready==true){
+				thePrepPanel.blnMakingArray=true;
+				thePrepPanel.blnPlayer1Ready=false;
+				thePrepPanel.blnPlayer2Ready=false;
+				
+				ssm.sendText("Starting Array Formation");
+				if(strPlayer.equals("P2")){
+					int intReverseRow=0;
+					for(int intRow=7;intRow>4;intRow--){
+						for(int intClm=0;intClm<9;intClm++){
+							ssm.sendText("MakingArray"+","+intReverseRow+","+intClm+","+thePrepPanel.strGOGArray[intRow][intClm]);
+						}
+						intReverseRow++;
+					}
+					ssm.sendText("Half done making model array");
+					thePrepPanel.blnPlayer1Ready=false;
+					thePrepPanel.blnPlayer2Ready=false;
 				}
-				
-				//Then send the message inside the spot we entered
-				ssm.sendText(theGamePanel.theTextField.getText());
-				
-				//We'll also blank the text field after they clicked enter
-				theGamePanel.theTextField.setText("");
-				
-				//After we sent the message, it's not time to send a message anymore
-				theGamePanel.blnMessageSending=false;
-				
-				
-			//If it's time to switch turns, then...
 			}else if(theGamePanel.blnSwitchTurn==true){
 				//Say it's time to switch turns in chatbox
 				theGamePanel.theTextArea.append(theModel.strPlayerTurn+" Turn now" + "\n");
@@ -66,12 +65,8 @@ public class GOGServer extends GOGView implements ActionListener{
 				int intClm;
 				for(intRow=0;intRow<8;intRow++){
 					for(intClm=0;intClm<9;intClm++){
-						//For them to know which index it is, we send the row and column to
-						//pinpoint the location in the array
-						ssm.sendText("Row:"+intRow);
-						ssm.sendText("Clm:"+intClm);
-						//then we send them information
-						ssm.sendText("Index:"+theModel.strArray[intRowInverse][intClm]);
+						//send them something they can split
+						ssm.sendText("SendArray,"+","+intRow+","+intClm+","+theModel.strArray[intRowInverse][intClm]);
 					}
 					intRowInverse--;
 				}
@@ -82,26 +77,25 @@ public class GOGServer extends GOGView implements ActionListener{
 				//We send this message which activates a command that turns the other player's
 				//blnReceiveArrayData variable off
 				ssm.sendText("Done Sending Data");
-			}else if(thePrepPanel.blnPlayer1Ready==true && thePrepPanel.blnPlayer2Ready==true){
-				thePrepPanel.blnMakingArray=true;
-				thePrepPanel.blnPlayer1Ready=false;
-				thePrepPanel.blnPlayer2Ready=false;
-				
-				ssm.sendText("Starting Array Formation");
-				if(strPlayer.equals("P2")){
-					int intReverseRow=0;
-					for(int intRow=7;intRow>4;intRow--){
-						for(int intClm=0;intClm<9;intClm++){
-							ssm.sendText("Row:"+intReverseRow);
-							ssm.sendText("Clm:"+intClm);
-							ssm.sendText("P2"+thePrepPanel.strGOGArray[intRow][intClm]);
-						}
-						intReverseRow++;
-					}
-					ssm.sendText("Half done making model array");
-					thePrepPanel.blnPlayer1Ready=false;
-					thePrepPanel.blnPlayer2Ready=false;
+			}else if(theGamePanel.blnMessageSending==true){
+				//Put that message in our chatbox
+				if(strPlayer.equals("P1")){
+					theGamePanel.theTextArea.append(theModel.strPlayer1Name + "," + theGamePanel.theTextField.getText() + "\n");
+				}else if(strPlayer.equals("P2")){
+					theGamePanel.theTextArea.append(theModel.strPlayer2Name + "," + theGamePanel.theTextField.getText() + "\n");
 				}
+				
+				//Then send the message inside the spot we entered
+				ssm.sendText(theGamePanel.theTextField.getText());
+				
+				//We'll also blank the text field after they clicked enter
+				theGamePanel.theTextField.setText("");
+				
+				//After we sent the message, it's not time to send a message anymore
+				theGamePanel.blnMessageSending=false;
+				
+				
+			//If it's time to switch turns, then...
 			}
 		}
 		
@@ -120,14 +114,15 @@ public class GOGServer extends GOGView implements ActionListener{
 		//This is used for receiving network messages
 		if(evt.getSource() == ssm){
 			//We create a local variable that will help us store the sent message
-			String strText;
+			String strText = ssm.readText();				
+			String[] strIndex = strText.split(",");
 			if(thePrepPanel.blnMakingArray==true){
-				strText=ssm.readText();
 				if(strPlayer.equals("P1")){
-					if(strText.substring(0,4).equals("Row:")){
-						theModel.intOGRow=Integer.parseInt(strText.substring(4,5));
-					}else if(strText.substring(0,4).equals("Clm:")){
-						theModel.intOGClm=Integer.parseInt(strText.substring(4,5));
+					if(strIndex[0].equals("MakingArray")){
+						theModel.intOGRow=Integer.parseInt(strIndex[1]);
+						theModel.intOGClm=Integer.parseInt(strIndex[2]);
+						theModel.strArray[theModel.intOGRow][theModel.intOGClm]=strIndex[3];
+						
 					}else if(strText.equals("Half done making model array")){
 						//load server half into array
 						for(int intRow=5;intRow<8;intRow++){
@@ -138,30 +133,21 @@ public class GOGServer extends GOGView implements ActionListener{
 						//load stuff into the game panel array
 						theGamePanel.strGOGArray=theModel.strArray;
 						
-						//give my thing to the other player
+						//give my array to the other player
 						for(int intRow=0;intRow<8;intRow++){
 							for(int intClm=0;intClm<9;intClm++){
-								ssm.sendText("Row:"+intRow);
-								ssm.sendText("Clm:"+intClm);
-								if(!theModel.strArray[intRow][intClm].equals("P1") && !theModel.strArray[intRow][intClm].equals("P2")){
-									ssm.sendText(theModel.strArray[intRow][intClm]);
-								}
+								ssm.sendText("SendingPreparedArray"+","+intRow+","+intClm+","+theModel.strArray[intRow][intClm]);
 							}
 						}
 						gameSetup();
 						thePrepPanel.blnMakingArray=false;
 						ssm.sendText("Done making model array");
-					}else{
-						if(strText.length()>2){
-							theModel.strArray[theModel.intOGRow][theModel.intOGClm]=strText;
-						}
 					}
 				}else if(strPlayer.equals("P2")){
-					if(strText.length()<4){
-					}else if(strText.substring(0,4).equals("Row:")){
-						theModel.intOGRow=Integer.parseInt(strText.substring(4,5));
-					}else if(strText.substring(0,4).equals("Clm:")){
-						theModel.intOGClm=Integer.parseInt(strText.substring(4,5));
+					if(strIndex[0].equals("SendingPreparedArray")){
+						theModel.intOGRow=Integer.parseInt(strIndex[1]);
+						theModel.intOGClm=Integer.parseInt(strIndex[2]);
+						theModel.strArray[theModel.intOGRow][theModel.intOGClm]=strText;
 					
 					}else if(strText.equals("Done making model array")){
 						thePrepPanel.blnMakingArray=false;
@@ -172,49 +158,29 @@ public class GOGServer extends GOGView implements ActionListener{
 						
 						int intReverseRow=7;
 						int intReverseClm=8;
-						
 						for(int intRow=0; intRow<8;intRow++){
 							for(int intClm=0; intClm<9;intClm++){
 								theModel.strArray[intReverseRow][intReverseClm]=strTemporaryArray[intRow][intClm];
 								intReverseClm--;
 							}
 							intReverseRow--;
+							intReverseClm=8;
 						}
 						theGamePanel.strGOGArray=theModel.strArray;
 						gameSetup();
-					}else{
-						theModel.strArray[theModel.intOGRow][theModel.intOGClm]=strText;
 					}
 				}
 				//If it is time to receive array data information, then...
 			}else if(theModel.blnReceiveArrayData==true){
 				//We first store the send text inside strText
-				strText = ssm.readText();
-				
 				//If the sent message tell us that it is done sending info, then ...
-				if(strText.equals("Done Sending Data")){
+				if(strIndex[0].equals("SendArray")){
+					theModel.intOGRow=Integer.parseInt(strIndex[1]);
+					theModel.intOGClm=Integer.parseInt(strIndex[2]);
+					theModel.strArray[theModel.intOGRow][theModel.intOGClm]=strIndex[3];
+				}else if(strText.equals("Done Sending Data")){
 					//We now know that is is time to stop receiving information
 					theModel.blnReceiveArrayData=false;
-					
-				//If the first 4 characters day row:, then...
-				}else if(strText.substring(0,4).equals("Row:")){
-					//We can use intOGRow to store the row
-					theModel.intOGRow=Integer.parseInt(strText.substring(4,5));
-					
-				
-				//If the first 4 characters day clm:, then...
-				}else if(strText.substring(0,4).equals("Clm:")){
-					//We can use intOGClm to store the clm
-					theModel.intOGClm=Integer.parseInt(strText.substring(4,5));
-				
-				//If neither of those are the case, then it means this is a piece
-				}else{
-					//We may read the length
-					int intLength=strText.length();
-					
-					//We store the index in the strArray
-					theModel.strArray[theModel.intOGRow][theModel.intOGClm]=strText.substring(6,intLength);
-					theGamePanel.strGOGArray[theModel.intOGRow][theModel.intOGClm]=strText.substring(6,intLength);
 				}
 			
 			//if it's time to get a name, then...
