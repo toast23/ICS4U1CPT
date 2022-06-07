@@ -121,7 +121,8 @@ public class GOGServer extends GOGView implements ActionListener{
 					if(strIndex[0].equals("MakingArray")){
 						theModel.intOGRow=Integer.parseInt(strIndex[1]);
 						theModel.intOGClm=Integer.parseInt(strIndex[2]);
-						theModel.strArray[theModel.intOGRow][theModel.intOGClm]=strIndex[3];
+						theModel.strArray[theModel.intOGRow][theModel.intOGClm]="P2"+strIndex[3];
+						System.out.println(theModel.strArray[theModel.intOGRow][theModel.intOGClm]);
 						
 					}else if(strText.equals("Half done making model array")){
 						//load server half into array
@@ -157,14 +158,11 @@ public class GOGServer extends GOGView implements ActionListener{
 						strTemporaryArray=theModel.strArray;
 						
 						int intReverseRow=7;
-						int intReverseClm=8;
 						for(int intRow=0; intRow<8;intRow++){
 							for(int intClm=0; intClm<9;intClm++){
-								theModel.strArray[intReverseRow][intReverseClm]=strTemporaryArray[intRow][intClm];
-								intReverseClm--;
+								theModel.strArray[intReverseRow][intClm]=strTemporaryArray[intRow][intClm];
 							}
 							intReverseRow--;
-							intReverseClm=8;
 						}
 						theGamePanel.strGOGArray=theModel.strArray;
 						gameSetup();
