@@ -36,7 +36,7 @@ public class GOGServer extends GOGView implements ActionListener{
 				}
 				thePrepPanel.blnPlayer1Ready=false;
 				thePrepPanel.blnPlayer2Ready=false;
-			}else if(theGamePanel.blnSwitchTurn==true){
+			}else if(theModel.blnSwitchTurn==true){
 				//Say it's time to switch turns in chatbox
 				theGamePanel.theTextArea.append(theModel.strPlayerTurn+" Turn now" + "\n");
 				
@@ -44,7 +44,7 @@ public class GOGServer extends GOGView implements ActionListener{
 				ssm.sendText("SwitchTurn,"+theModel.strPlayerTurn);
 				
 				//After this, we no longer need to switch a turn since it's already switched so falsify
-				theGamePanel.blnSwitchTurn=false;
+				theModel.blnSwitchTurn=false;
 				
 				//After we switch turns, we should also update the array. If we switch turns, then
 				//We're also the ones sending data so blnSendArrayData becomes true.

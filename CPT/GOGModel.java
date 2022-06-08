@@ -9,6 +9,7 @@ public class GOGModel{
 	public int intP1TimeLeft=600;
 	public int intP2TimeLeft=600;
 	public String strPlayerTurn="P1";
+	public boolean blnSwitchTurn = false;
 	public String strVictor = " ";
 	public String strActivePiece;
 	public String strNextPositionPiece;
@@ -60,6 +61,13 @@ public class GOGModel{
 					strArray = GOGUtilities.spyMovement(       strArray,strPlayerTurn,intOGClm,intOGRow,intNewClm,intNewRow,strActivePiece,strNextPositionPiece);
 				}else{
 					strArray = GOGUtilities.otherPieceMovement(strArray,strPlayerTurn,intOGClm,intOGRow,intNewClm,intNewRow,strActivePiece,strNextPositionPiece);
+				}
+				blnSwitchTurn=true;
+				//After their turn, switch player turn
+				if(this.strPlayerTurn.equals("P1")){
+					this.strPlayerTurn="P2";
+				}else if(this.strPlayerTurn.equals("P2")){
+					this.strPlayerTurn="P1";
 				}
 			}else{
 				strArray[intOGRow][intOGClm]=strActivePiece;

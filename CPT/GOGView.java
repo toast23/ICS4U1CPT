@@ -174,16 +174,6 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 					//Check where the piece has moved and make the appropriate edits to the
 					//model's array with the checkPieceMovement method
 					theModel.checkPieceMovement();
-					
-					//After their turn, switch player turn
-					if(theModel.strPlayerTurn.equals("P1")){
-						theModel.strPlayerTurn="P2";
-					}else if(theModel.strPlayerTurn.equals("P2")){
-						theModel.strPlayerTurn="P1";
-					}
-					
-					//Because it is time to switch turns, we make blnSwitchTurn true
-					theGamePanel.blnSwitchTurn=true;
 				}
 				//At the end of the day, we make the game panel's array the same as the model's array
 				theGamePanel.strGOGArray=theModel.strArray;
