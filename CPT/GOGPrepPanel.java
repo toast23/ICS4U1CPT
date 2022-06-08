@@ -1,4 +1,4 @@
-//We import necessary libraries for functionality
+//We will import necessary libraries for functionality
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.color.*;
