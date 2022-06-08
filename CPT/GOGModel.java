@@ -35,7 +35,7 @@ public class GOGModel{
 	public void checkPieceMovement(){
 		strNextPositionPiece=strArray[intNewRow][intNewClm];
 		//update array file
-		//if it is not empty, then we check length
+		//if it is not empty, then...
 		if(!strNextPositionPiece.equals(" ")){
 			//If both are the same team, don't let it move
 			if( (strNextPositionPiece.substring(0,2)).equals(strPlayerTurn.substring(0,2)) ){
@@ -43,7 +43,7 @@ public class GOGModel{
 			}else{
 				blnOnSameTeam=false;
 			}
-		//if it null, then not on same team
+		//if it is empty, then not on same team
 		}else{
 			blnOnSameTeam=false;
 		}
@@ -61,6 +61,8 @@ public class GOGModel{
 				}else{
 					strArray = GOGUtilities.otherPieceMovement(strArray,strPlayerTurn,intOGClm,intOGRow,intNewClm,intNewRow,strActivePiece,strNextPositionPiece);
 				}
+			}else{
+				strArray[intOGRow][intOGClm]=strActivePiece;
 			}
 		}
 	}

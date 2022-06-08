@@ -162,6 +162,17 @@ public class gamePanel extends JPanel {
 	public void paintBoard(Graphics g){
 		g.drawImage(imgBoard,80,80,null);
 	}
+	public void drawNewTime(String strPlayerTurn, int intP1TimeLeft, int intP2TimeLeft){
+		if(strPlayerTurn.equals("P1")){
+			int intMinutes = intP1TimeLeft/60;
+			int intSeconds = intP1TimeLeft%60;
+			theGameClockLabel.setText("Player 1 Time: "+intMinutes+":"+intSeconds);
+		}else if(strPlayerTurn.equals("P2")){
+			int intMinutes = intP2TimeLeft/60;
+			int intSeconds = intP2TimeLeft%60;
+			theGameClockLabel.setText("Player 2 Time: "+intMinutes+":"+intSeconds);
+		}
+	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//When they press on an area with a block, we do the following...
@@ -227,18 +238,6 @@ public class gamePanel extends JPanel {
 					this.blnActive=false;
 				}
 			}
-		}
-	}
-	
-	public void drawNewTime(String strPlayerTurn, int intP1TimeLeft, int intP2TimeLeft){
-		if(strPlayerTurn.equals("P1")){
-			int intMinutes = intP1TimeLeft/60;
-			int intSeconds = intP1TimeLeft%60;
-			theGameClockLabel.setText("Player 1 Time: "+intMinutes+":"+intSeconds);
-		}else if(strPlayerTurn.equals("P2")){
-			int intMinutes = intP2TimeLeft/60;
-			int intSeconds = intP2TimeLeft%60;
-			theGameClockLabel.setText("Player 2 Time: "+intMinutes+":"+intSeconds);
 		}
 	}
 	
