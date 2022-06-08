@@ -61,6 +61,9 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		theFrame.requestFocus();
 		card.show(theViewPanel, "ranks");
 	}
+	public void gameOver() {
+		
+	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//These methods pertain mouse interaction in the game panel 
@@ -220,7 +223,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		theLobbyHelpButton.setBounds(490,500,300,50);
 		theLobbyPanel.add(theLobbyHelpButton);
 		
-		theGameHelpButton.setBounds(1000,90,280,50);
+		theGameHelpButton.setBounds(750,100,480,50);
 		theGamePanel.add(theGameHelpButton);
 		
 		theHelpReturnButton.setBounds(1100, 20, 120, 50);
