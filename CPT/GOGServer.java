@@ -62,7 +62,6 @@ public class GOGServer extends GOGView implements ActionListener{
 				
 				//Now that we are done updating the other player's array, we can stop sending data
 				theModel.blnSendArrayData=false;
-				System.out.println("uwu");
 			}else if(theGamePanel.blnMessageSending==true){
 				//Put that message in our chatbox
 				if(strPlayer.equals("P1")){

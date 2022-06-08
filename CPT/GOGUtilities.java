@@ -1,56 +1,5 @@
 import java.io.*;
 public interface GOGUtilities{
-	public static String[][] loadPieceArray(String strCSVFile){
-		String strArray[][];
-		String strTempArray[];
-		String strLine;
-		int intCnt;
-		int intCnt2;
-		int intRow=0;
-		BufferedReader csv = null;
-		
-		//Count number of rows
-		try{
-			csv = new BufferedReader(new FileReader(strCSVFile));
-		}catch(FileNotFoundException e){
-			System.out.println("No such csv file exists!");
-		}
-		try{
-			while(csv.readLine()!=null){
-				intRow++;
-			}
-		}catch(IOException e){
-			System.out.println("Input Error");
-		}
-		try{
-			csv.close();
-		}catch(IOException e){
-			System.out.println("Unable to print");
-		}
-		strArray = new String[intRow][9];
-		strTempArray = new String[8];
-		//Load it
-		try{
-			csv = new BufferedReader(new FileReader(strCSVFile));
-		}catch(FileNotFoundException e){
-			System.out.println("No such csv file exists!");
-		}
-		
-		for(intCnt = 0; intCnt < intRow; intCnt++){
-			try{
-				strTempArray = csv.readLine().split(",");;
-			}catch(IOException e){
-				System.out.println("Invalid Input");
-				for(intCnt = 0; intCnt < 8; intCnt++){
-					 strTempArray[intCnt] = "0";
-				 }
-			}
-			for(intCnt2 = 0; intCnt2 < 9; intCnt2++){
-				strArray[intCnt][intCnt2] = strTempArray[intCnt2];
-			}
-		}
-		return strArray;
-	}
 	public static String[][] loadDataArray(String strCSVFile){
 		String strArray[][];
 		String strTempArray[];

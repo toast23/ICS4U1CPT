@@ -34,7 +34,7 @@ public class gamePanel extends JPanel {
 	
 	//This variable tells us that no piece movement is currently happening
 	boolean blnActive=false;
-	String strActivePiece;
+	String strActivePiece=" ";
 	
 	//This will help us determine whether we can move to new row or not
 	int intOGRow;
