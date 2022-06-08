@@ -1,56 +1,5 @@
 import java.io.*;
 public interface GOGUtilities{
-	public static String[][] loadPieceArray(String strCSVFile){
-		String strArray[][];
-		String strTempArray[];
-		String strLine;
-		int intCnt;
-		int intCnt2;
-		int intRow=0;
-		BufferedReader csv = null;
-		
-		//Count number of rows
-		try{
-			csv = new BufferedReader(new FileReader(strCSVFile));
-		}catch(FileNotFoundException e){
-			System.out.println("No such csv file exists!");
-		}
-		try{
-			while(csv.readLine()!=null){
-				intRow++;
-			}
-		}catch(IOException e){
-			System.out.println("Input Error");
-		}
-		try{
-			csv.close();
-		}catch(IOException e){
-			System.out.println("Unable to print");
-		}
-		strArray = new String[intRow][9];
-		strTempArray = new String[8];
-		//Load it
-		try{
-			csv = new BufferedReader(new FileReader(strCSVFile));
-		}catch(FileNotFoundException e){
-			System.out.println("No such csv file exists!");
-		}
-		
-		for(intCnt = 0; intCnt < intRow; intCnt++){
-			try{
-				strTempArray = csv.readLine().split(",");;
-			}catch(IOException e){
-				System.out.println("Invalid Input");
-				for(intCnt = 0; intCnt < 8; intCnt++){
-					 strTempArray[intCnt] = "0";
-				 }
-			}
-			for(intCnt2 = 0; intCnt2 < 9; intCnt2++){
-				strArray[intCnt][intCnt2] = strTempArray[intCnt2];
-			}
-		}
-		return strArray;
-	}
 	public static String[][] loadDataArray(String strCSVFile){
 		String strArray[][];
 		String strTempArray[];
@@ -104,9 +53,7 @@ public interface GOGUtilities{
 	}
 	public static int rankConversion(String strPiece){
 		int intRank=0;
-		/*if(strPiece==null){
-			intRank = 0;
-		}else*/ if(strPiece.equals("P1Flag") || strPiece.equals("P2Flag")){
+		if(strPiece.equals("P1Flag") || strPiece.equals("P2Flag")){
 			intRank = 0;
 		}else if(strPiece.equals("P1Private") || strPiece.equals("P2Private")){
 			intRank = 1;
@@ -143,24 +90,24 @@ public interface GOGUtilities{
 	}
 	public static String[][] flagMovement(String strArray[][],       String strPlayerTurn, int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY, String strActivePiece, String strNextPositionPiece){
 		//If it's null, it crashes so the first if statement checks if you say null
-		if(strActivePiece==null){
+		if(strActivePiece.equals(" ")){
 		}else if(strActivePiece.equals(strPlayerTurn+"Flag")){
 			//If it's moves in any of the cardinal directions, move the pices
 			//if there's nothing in the way, let flag go to new position
-			if(strArray[intNewPosY][intNewPosX]==null || strArray[intNewPosY][intNewPosX].equals(" ")){
+			if(strArray[intNewPosY][intNewPosX].equals(" ")){
 				//remove flag from previous spot
-				strArray[intOGPosY][intOGPosX]=null;
+				strArray[intOGPosY][intOGPosX]=" ";
 				//make the flag move to new position
 				strArray[intNewPosY][intNewPosX]=strActivePiece;
 			//if the enemy flag(value of 0) is in the way, kill it
 			}else if(rankConversion(strActivePiece) == rankConversion(strNextPositionPiece)){
 				//remove flag from previous spot
-				strArray[intOGPosY][intOGPosX]=null;
+				strArray[intOGPosY][intOGPosX]=" ";
 				//make the flag move to new position
 				strArray[intNewPosY][intNewPosX]=strActivePiece;
 			//if there's ANYTHING ELSE there, kill the flag
 			}else if(rankConversion(strActivePiece)<rankConversion(strNextPositionPiece)){
-				strArray[intOGPosY][intOGPosX]=null;
+				strArray[intOGPosY][intOGPosX]=" ";
 			}
 			System.out.println("flag");
 		}
@@ -168,34 +115,34 @@ public interface GOGUtilities{
 	}
 	public static String[][] privateMovement(String strArray[][],    String strPlayerTurn, int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY, String strActivePiece, String strNextPositionPiece){
 		//If it's null, it crashes so the first if statement checks if you say null
-		if(strActivePiece==null){
+		if(strActivePiece.equals(" ")){
 		}else if(strActivePiece.equals(strPlayerTurn+"Private")){
 			//If it's moves in any of the cardinal directions, move the pices
 			//if there's nothing in the way, let private go to new position
-			if(strArray[intNewPosY][intNewPosX]==null || strArray[intNewPosY][intNewPosX].equals(" ")){
+			if(strArray[intNewPosY][intNewPosX].equals(" ")){
 				//remove pawn from previous spot
-				strArray[intOGPosY][intOGPosX]=null;
+				strArray[intOGPosY][intOGPosX]=" ";
 				//make the pawn move to new position
 				strArray[intNewPosY][intNewPosX]=strActivePiece;
 			//if the flag is there, kill it
 			}else if(rankConversion(strNextPositionPiece)==0){
 				//remove pawn from previous spot
-				strArray[intOGPosY][intOGPosX]=null;
+				strArray[intOGPosY][intOGPosX]=" ";
 				//make the pawn move to new position
 				strArray[intNewPosY][intNewPosX]=strActivePiece;
 			//if there's a private there, kill both
 			}else if(rankConversion(strActivePiece) == rankConversion(strNextPositionPiece)){
-				strArray[intOGPosY][intOGPosX]=null;
-				strArray[intNewPosY][intNewPosX]=null;
+				strArray[intOGPosY][intOGPosX]=" ";
+				strArray[intNewPosY][intNewPosX]=" ";
 			//if there's a spy(value of 2) there, kill the spy!
 			}else if(rankConversion(strNextPositionPiece) == 2){
 				//remove pawn from previous spot
-				strArray[intOGPosY][intOGPosX]=null;
+				strArray[intOGPosY][intOGPosX]=" ";
 				//make the pawn move to new position
 				strArray[intNewPosY][intNewPosX]=strActivePiece;
 			//if there's anything of higher rank, kill the private
 			}else if(rankConversion(strArray[intOGPosY][intOGPosX]) < rankConversion(strNextPositionPiece)){
-				strArray[intOGPosY][intOGPosX]=null;
+				strArray[intOGPosY][intOGPosX]=" ";
 			}
 			System.out.println(strArray[intNewPosY][intNewPosX]);
 		}
@@ -203,24 +150,24 @@ public interface GOGUtilities{
 	}
 	public static String[][] spyMovement(String strArray[][],        String strPlayerTurn, int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY, String strActivePiece, String strNextPositionPiece){
 		//If it's null, it crashes so the first if statement checks if you say null
-		if(strActivePiece==null){
+		if(strActivePiece.equals(" ")){
 		}else if(strActivePiece.equals(strPlayerTurn+"Spy")){
 			//If it's moves in any of the cardinal directions, move the pices
 			//if there's nothing in the way, let spy go to new position
-			if(strArray[intNewPosY][intNewPosX]==null || strArray[intNewPosY][intNewPosX].equals(" ")){
+			if(strArray[intNewPosY][intNewPosX].equals(" ")){
 				//remove spy from previous spot
-				strArray[intOGPosY][intOGPosX]=null;
+				strArray[intOGPosY][intOGPosX]=" ";
 				//make the spy move to new position
 				strArray[intNewPosY][intNewPosX]=strPlayerTurn+"Spy";
 			//if another spy is there, both die
 			}else if(rankConversion(strNextPositionPiece)==2){
 				//remove pawn from previous spot
-				strArray[intOGPosY][intOGPosX]=null;
+				strArray[intOGPosY][intOGPosX]=" ";
 				//make the pawn move to new position
-				strArray[intNewPosY][intNewPosX]=null;
+				strArray[intNewPosY][intNewPosX]=" ";
 			//if there's anything else is there, kill it
 			}else if(16 > rankConversion(strNextPositionPiece)){
-				strArray[intOGPosY][intOGPosX]=null;
+				strArray[intOGPosY][intOGPosX]=" ";
 				strArray[intNewPosY][intNewPosX]=strPlayerTurn+"Spy";
 			}
 			System.out.println("spy");
@@ -229,29 +176,29 @@ public interface GOGUtilities{
 	}
 	public static String[][] otherPieceMovement(String strArray[][], String strPlayerTurn, int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY, String strActivePiece, String strNextPositionPiece){
 		//If it's null, it crashes so the first if statement checks if you say null
-		if(strActivePiece==null){
+		if(strActivePiece.equals(" ")){
 		}else if(!strActivePiece.equals(strPlayerTurn+"Flag") && !strActivePiece.equals(strPlayerTurn+"Private") && strActivePiece.equals(strPlayerTurn+"Spy")){
 			//If it's moves in any of the cardinal directions, move the pices
 			//if there's nothing in the way, let the piece go to new position
-			if(strArray[intNewPosY][intNewPosX]==null || strArray[intNewPosY][intNewPosX].equals(" ")){
+			if(strArray[intNewPosY][intNewPosX].equals(" ")){
 				strArray[intNewPosY][intNewPosX]=strActivePiece;
-				strArray[intOGPosY][intOGPosX]=null;
+				strArray[intOGPosY][intOGPosX]=" ";
 				System.out.println(strArray[intNewPosY][intNewPosX]);
 			//if there's a spy there, kill the piece
 			}else if(rankConversion(strNextPositionPiece)==2){
 				//remove piece from spot
-				strArray[intOGPosY][intOGPosX]=null;
+				strArray[intOGPosY][intOGPosX]=" ";
 			//if there's a piece higher than you, it dies
 			}else if(rankConversion(strActivePiece) < rankConversion(strNextPositionPiece)){
-				strArray[intOGPosY][intOGPosX]=null;
+				strArray[intOGPosY][intOGPosX]=" ";
 			//if there's the same rank, both die
 			}else if(rankConversion(strActivePiece) == rankConversion(strNextPositionPiece)){
-				strArray[intOGPosY][intOGPosX]=null;
-				strArray[intNewPosY][intNewPosX]=null;
+				strArray[intOGPosY][intOGPosX]=" ";
+				strArray[intNewPosY][intNewPosX]=" ";
 			//if there's anything of lower rank, kill it
 			}else if(rankConversion(strActivePiece) > rankConversion(strNextPositionPiece)){
 				strArray[intNewPosY][intNewPosX]=strActivePiece;
-				strArray[intOGPosY][intOGPosX]=null;
+				strArray[intOGPosY][intOGPosX]=" ";
 			}
 			System.out.println("Moving other pieces");
 		}
