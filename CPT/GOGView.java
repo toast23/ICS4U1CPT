@@ -25,6 +25,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	//Button Stuff
 	public JButton theLobbyHelpButton = new JButton("Help!");
 	public JButton theGameHelpButton = new JButton("Help!");
+	public JButton thePrepHelpButton = new JButton("Help!");
 	public JButton theHelpReturnButton = new JButton("Return");
 	public JButton theRanksReturnButton = new JButton("Return");
 	public JButton theServerButton = new JButton("Server");
@@ -46,6 +47,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	}
 	public void prepSetup() {
 		theFrame.requestFocus();
+		panelToReturn = "prep";
 		card.show(theViewPanel, "prep");
 	}
 	public void gameSetup() {
@@ -62,7 +64,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		card.show(theViewPanel, "ranks");
 	}
 	public void gameOver() {
-		
+	    // show victory and defeat images
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -226,6 +228,9 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		theGameHelpButton.setBounds(750,100,480,50);
 		theGamePanel.add(theGameHelpButton);
 		
+		thePrepHelpButton.setBounds(1000,90,270,50);
+		thePrepPanel.add(thePrepHelpButton);
+		
 		theHelpReturnButton.setBounds(1100, 20, 120, 50);
 		theHelpPanel.add(theHelpReturnButton);
 		
@@ -235,7 +240,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		theHelpRanksButton.setBounds(1100, 600, 120, 50);
 		theHelpPanel.add(theHelpRanksButton);
 		
-		theReadyButton.setBounds(720,90,280,50);
+		theReadyButton.setBounds(720,90,260,50);
 		thePrepPanel.add(theReadyButton);
 		
 		theFrame.setContentPane(theViewPanel);

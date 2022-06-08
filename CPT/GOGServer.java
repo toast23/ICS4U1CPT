@@ -236,7 +236,7 @@ public class GOGServer extends GOGView implements ActionListener{
 		}
 		
 		//If they click the help button, switch the screen to the help panel
-		if (evt.getSource() == theLobbyHelpButton || evt.getSource() == theGameHelpButton) {
+		if (evt.getSource() == theLobbyHelpButton || evt.getSource() == theGameHelpButton || evt.getSource() == thePrepHelpButton) {
 			helpSetup();
 		}
 		
@@ -244,6 +244,9 @@ public class GOGServer extends GOGView implements ActionListener{
 		if (evt.getSource() == theHelpReturnButton || evt.getSource() == theRanksReturnButton) {
 			if (panelToReturn.equals("lobby")) {
 				lobbySetup();
+			}
+			else if (panelToReturn.equals("prep")) {
+				prepSetup();
 			}
 			else if (panelToReturn.equals("game")) {
 				gameSetup();
@@ -321,6 +324,7 @@ public class GOGServer extends GOGView implements ActionListener{
 		theClientButton.addActionListener(this);
 		theLobbyHelpButton.addActionListener(this);
 		theGameHelpButton.addActionListener(this);
+		thePrepHelpButton.addActionListener(this);
 		theHelpReturnButton.addActionListener(this);	
 		theRanksReturnButton.addActionListener(this);	
 		theHelpRanksButton.addActionListener(this);
