@@ -55,8 +55,7 @@ public class gamePanel extends JPanel {
 			for(int intColumn=0;intColumn<9;intColumn++){
 				//if it's player 1, paint player 2 pieces foggy
 				if(strPiecesToPaint.equals("P1")){
-					if(strGOGArray[intRow][intColumn].equals(" ")){
-					}else if(strGOGArray[intRow][intColumn].equals("P1Flag")){
+					if(strGOGArray[intRow][intColumn].equals("P1Flag")){
 						g.drawImage(imgFlag, 80+70*intColumn,80+70*intRow, null); 
 					}else if(strGOGArray[intRow][intColumn].equals("P1Private")){
 						g.drawImage(imgPrivate, 80+70*intColumn,80+70*intRow, null); 
