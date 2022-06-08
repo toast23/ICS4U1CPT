@@ -10,7 +10,7 @@ import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class GOGView extends JPanel implements MouseMotionListener, MouseListener {
 	//Properties
-	
+	Font theGOGFont = null;
 	//Frame and Window Stuff
 	public JFrame theFrame = new JFrame("Game of the Generals");
 	public CardLayout card = new CardLayout(); 
@@ -65,6 +65,35 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	}
 	public void gameOver() {
 	    // show victory and defeat images
+	}
+	public Font loadFont(String strFileName, int intSize){    
+		Font theFont = null;
+		// Try to load the font
+		try{
+			theFont = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream(strFileName)); 
+			return theFont.deriveFont(Font.PLAIN, intSize);
+		}catch(Exception e){
+		//System.out.println(e.toString());
+		}
+    
+		// Then try to load the font from the local filesystem
+		try{
+			theFont = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(strFileName)); 
+			return theFont.deriveFont(Font.PLAIN, intSize);
+		}catch(Exception e){
+			//System.out.println(e.toString());
+			System.out.println("Unable to load font file \""+strFileName+"\". Setting default font"); 
+		}
+    
+		// Then load the default font if all else fails
+		try{
+			theFont = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream("Hack-Regular.ttf")); 
+			return theFont.deriveFont(Font.PLAIN, 20);
+		}catch(Exception e){
+			//System.out.println(e.toString());
+			System.out.println("Unable to load default font file \"Hack-Regular.tff\".  Will default to Java's native font for your OS");
+		}
+		return theFont;
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -206,7 +235,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	//Constructor
 	public GOGView(){
 		super();
-		theViewPanel.setLayout(card); 
+		theViewPanel.setLayout(card);
 		theViewPanel.add(theLobbyPanel, "lobby");
 		theViewPanel.add(thePrepPanel, "prep");
 		theViewPanel.add(theGamePanel, "game");
@@ -214,30 +243,41 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		theViewPanel.add(theRanksPanel, "ranks");
 		theViewPanel.setPreferredSize(new Dimension(1280,720));
 		
+		theGOGFont = this.loadFont("BEARPAW.TTF",40);
+		
+		theServerButton.setFont(theGOGFont);
 		theServerButton.setBounds(10,10,200,50);
 		theLobbyPanel.add(theServerButton);
 		
+		theClientButton.setFont(theGOGFont);
 		theClientButton.setBounds(1070,10,200,50);
 		theLobbyPanel.add(theClientButton);
 		
+		theLobbyHelpButton.setFont(theGOGFont);
 		theLobbyHelpButton.setBounds(490,500,300,50);
 		theLobbyPanel.add(theLobbyHelpButton);
 		
+		theGameHelpButton.setFont(theGOGFont);
 		theGameHelpButton.setBounds(750,100,480,50);
 		theGamePanel.add(theGameHelpButton);
 		
+		thePrepHelpButton.setFont(theGOGFont);
 		thePrepHelpButton.setBounds(1000,90,270,50);
 		thePrepPanel.add(thePrepHelpButton);
 		
+		theHelpReturnButton.setFont(theGOGFont);
 		theHelpReturnButton.setBounds(1100, 20, 120, 50);
 		theHelpPanel.add(theHelpReturnButton);
 		
+		theRanksReturnButton.setFont(theGOGFont);
 		theRanksReturnButton.setBounds(1100, 20, 120, 50);
 		theRanksPanel.add(theRanksReturnButton);
 		
+		theHelpRanksButton.setFont(theGOGFont);
 		theHelpRanksButton.setBounds(1100, 600, 120, 50);
 		theHelpPanel.add(theHelpRanksButton);
 		
+		theReadyButton.setFont(theGOGFont);
 		theReadyButton.setBounds(720,90,260,50);
 		thePrepPanel.add(theReadyButton);
 		
