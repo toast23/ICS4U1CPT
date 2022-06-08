@@ -431,42 +431,41 @@ public class GOGPrepPanel extends JPanel {
 		}
 	}
 	public void placePiece(){
-		strGOGArray[intNewRow][intNewClm]=strActivePiece;
-		if(strActivePiece.equals("Flag")){
-			intFlag--;
-		}else if(strActivePiece.equals("Private")){
-			intPrivate--;
-		}else if(strActivePiece.equals("Spy")){
-			intSpy--;
-		}else if(strActivePiece.equals("5*General")){
-			intGeneral5--;
-		}else if(strActivePiece.equals("4*General")){
-			intGeneral4--; 
-		}else if(strActivePiece.equals("3*General")){
-			intGeneral3--;
-		}else if(strActivePiece.equals("2*General")){
-			intGeneral2--;
-		}else if(strActivePiece.equals("1*General")){
-			intGeneral1--;
-		}else if(strActivePiece.equals("Colonel")){
-			intColonel--;
-		}else if(strActivePiece.equals("L.Colonel")){
-			intLColonel--;
-		}else if(strActivePiece.equals("Major")){
-			intMajor--;
-		}else if(strActivePiece.equals("Captain")){
-			intCaptain--;
-		}else if(strActivePiece.equals("1st Lieutenant")){
-			intLieutenant1--;
-		}else if(strActivePiece.equals("2nd Lieutenant")){
-			intLieutenant2--;
-		}else if(strActivePiece.equals("Sergeant")){
-			intSergeant--;
+		//If it's in the correct rows, then go for it
+		if(intNewRow>4){
+			strGOGArray[intNewRow][intNewClm]=strActivePiece;
+			if(strActivePiece.equals("Flag")){
+				intFlag--;
+			}else if(strActivePiece.equals("Private")){
+				intPrivate--;
+			}else if(strActivePiece.equals("Spy")){
+				intSpy--;
+			}else if(strActivePiece.equals("5*General")){
+				intGeneral5--;
+			}else if(strActivePiece.equals("4*General")){
+				intGeneral4--; 
+			}else if(strActivePiece.equals("3*General")){
+				intGeneral3--;
+			}else if(strActivePiece.equals("2*General")){
+				intGeneral2--;
+			}else if(strActivePiece.equals("1*General")){
+				intGeneral1--;
+			}else if(strActivePiece.equals("Colonel")){
+				intColonel--;
+			}else if(strActivePiece.equals("L.Colonel")){
+				intLColonel--;
+			}else if(strActivePiece.equals("Major")){
+				intMajor--;
+			}else if(strActivePiece.equals("Captain")){
+				intCaptain--;
+			}else if(strActivePiece.equals("1st Lieutenant")){
+				intLieutenant1--;
+			}else if(strActivePiece.equals("2nd Lieutenant")){
+				intLieutenant2--;
+			}else if(strActivePiece.equals("Sergeant")){
+				intSergeant--;
+			}
 		}
-		intOGRow=0;
-		intOGClm=0;
-		intNewRow=0;
-		intNewClm=0;
 	}
 	
 	public void movePiece(){

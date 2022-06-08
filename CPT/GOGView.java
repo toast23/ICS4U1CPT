@@ -191,7 +191,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 						//Check where the piece has moved and make the appropriate edits to the
 						//model's array with the checkPieceMovement method
 						thePrepPanel.placePiece();
-					}	
+					}
 				}else if(thePrepPanel.blnMovingPiece==true){
 					//If the model has not moved from its original row to a new row and has not moved from its original column to a new column, then...
 					if(thePrepPanel.intOGRow==thePrepPanel.intNewRow && thePrepPanel.intOGClm==thePrepPanel.intNewClm){
