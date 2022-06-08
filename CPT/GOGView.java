@@ -149,10 +149,8 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 					//After their turn, switch player turn
 					if(theModel.strPlayerTurn.equals("P1")){
 						theModel.strPlayerTurn="P2";
-						System.out.println("Just switched to p2");
 					}else if(theModel.strPlayerTurn.equals("P2")){
 						theModel.strPlayerTurn="P1";
-						System.out.println("Just switched to p1");
 					}
 					
 					//Because it is time to switch turns, we make blnSwitchTurn true

@@ -109,7 +109,6 @@ public interface GOGUtilities{
 			}else if(rankConversion(strActivePiece)<rankConversion(strNextPositionPiece)){
 				strArray[intOGPosY][intOGPosX]=" ";
 			}
-			System.out.println("flag");
 		}
 		return strArray;
 	}
@@ -203,5 +202,21 @@ public interface GOGUtilities{
 			System.out.println("Moving other pieces");
 		}
 		return strArray;
+	}
+	public static String checkWinCondition(String strArray[][], String strPlayerTurn, String strActivePiece, String strNextPositionPiece){
+		String strVictor=" ";
+		if(strActivePiece.equals(strPlayerTurn+"Flag")){
+			//If P1 Flag is about to move on P2 Flag, P1 wins
+			if(strPlayerTurn.equals("P1") && strNextPositionPiece.equals("P2Flag")){
+				strVictor="P1";
+				System.out.println("Player 1 Wins");
+				
+			//If P2 Flag is about to move on P1 Flag, P2 wins
+			}else if(strPlayerTurn.equals("P2") && strNextPositionPiece.equals("P1Flag")){
+				strVictor="P2";
+				System.out.println("Player 2 Wins");
+			}
+		}
+		return strVictor;
 	}
 }
