@@ -27,6 +27,7 @@ public class GOGPrepPanel extends JPanel {
 	public BufferedImage imgCaptain = null;
 	public BufferedImage imgLieutenant1 = null;
 	public BufferedImage imgLieutenant2 = null;
+	public BufferedImage imgSergeant = null;
 	
 	//Timer stuff
 	
@@ -66,6 +67,8 @@ public class GOGPrepPanel extends JPanel {
 	int intCaptain=1;
 	int intLieutenant1=1;
 	int intLieutenant2=1;
+	int intSergeant=1;
+	
 	
 	//We need to distinguish 
 	boolean blnMovingStock=false;
@@ -97,16 +100,18 @@ public class GOGPrepPanel extends JPanel {
 				g.drawImage(imgGeneral1, intImgX, intImgY,null);
 			}else if(strActivePiece.equals("Colonel")){
 				g.drawImage(imgColonel, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("Lieutenant Colonel")){
+			}else if(strActivePiece.equals("L.Colonel")){
 				g.drawImage(imgLColonel, intImgX, intImgY,null);
 			}else if(strActivePiece.equals("Major")){
 				g.drawImage(imgMajor, intImgX, intImgY,null);
 			}else if(strActivePiece.equals("Captain")){
 				g.drawImage(imgCaptain, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("1st Lieutenant ")){
+			}else if(strActivePiece.equals("1st Lieutenant")){
 				g.drawImage(imgLieutenant1, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("2nd Lieutenant ")){
+			}else if(strActivePiece.equals("2nd Lieutenant")){
 				g.drawImage(imgLieutenant2, intImgX, intImgY,null);
+			}else if(strActivePiece.equals("Sergeant")){
+				g.drawImage(imgSergeant, intImgX, intImgY,null);
 			}else{
 				g.fillRect(intImgX,intImgY,70,70);
 			}
@@ -133,21 +138,21 @@ public class GOGPrepPanel extends JPanel {
 		
 		//Draw number of spies
 		g.drawString("x"+intSpy+" Spies",720,400);
-		g.drawRect(720,415,0,70);
+		g.drawRect(720,415,70,70);
 		if(intSpy>0){
 			g.drawImage(imgSpies,720,415,null);
 		}
 		
 		//Draw number of 5 star generals
 		g.drawString("x"+intGeneral5+" 5 star general",720,500);
-		g.drawRect(720,515,0,70);
+		g.drawRect(720,515,70,70);
 		if(intGeneral5>0){
 			g.drawImage(imgGeneral5,720,515,null);
 		}
 		
 		//Draw number of 4 star generals
 		g.drawString("x"+intGeneral4+" 4 star general",720,600);
-		g.drawRect(720,615,0,70);
+		g.drawRect(720,615,70,70);
 		if(intGeneral4>0){
 			g.drawImage(imgGeneral4,720,615,null);
 		}
@@ -161,58 +166,65 @@ public class GOGPrepPanel extends JPanel {
 		
 		//Draw number of 2 star generals
 		g.drawString("x"+intGeneral2+" 2 star general",820,300);
-		g.drawRect(820,315,0,70);
+		g.drawRect(820,315,70,70);
 		if(intGeneral2>0){
 			g.drawImage(imgGeneral2,820,315,null);
 		}
 		
 		//Draw number of 1 star generals
 		g.drawString("x"+intGeneral1+" 1 star general",820,400);
-		g.drawRect(820,415,0,70);
+		g.drawRect(820,415,70,70);
 		if(intGeneral1>0){
 			g.drawImage(imgGeneral1,820,415,null);
 		}
 		
 		//Draw number of Colonel
 		g.drawString("x"+intColonel+" Colonel ",820,500);
-		g.drawRect(820,515,0,70);
+		g.drawRect(820,515,70,70);
 		if(intColonel>0){
 			g.drawImage(imgColonel,820,515,null);
 		}
 		
 		//Draw number of Lieutenant Colonel
-		g.drawString("x"+intLColonel+" Lieutenant Colonel ",820,600);
-		g.drawRect(820,615,0,70);
+		g.drawString("x"+intLColonel+" L.Colonel ",820,600);
+		g.drawRect(820,615,70,70);
 		if(intLColonel>0){
 			g.drawImage(imgLColonel,820,615,null);
 		}
 		
 		//Draw number of Major
 		g.drawString("x"+intMajor+" Major ",920,200);
-		g.drawRect(920,215,0,70);
+		g.drawRect(920,215,70,70);
 		if(intMajor>0){
 			g.drawImage(imgMajor,920,215,null);
 		}
 		
 		//Draw number of captain
 		g.drawString("x"+intCaptain+" Captain ",920,300);
-		g.drawRect(920,315,0,70);
+		g.drawRect(920,315,70,70);
 		if(intCaptain>0){
 			g.drawImage(imgCaptain,920,315,null);
 		}
 		
 		//Draw number of 1st Lieutenant
 		g.drawString("x"+intLieutenant1+" 1st Lieutenant ",920,400);
-		g.drawRect(920,415,0,70);
+		g.drawRect(920,415,70,70);
 		if(intLieutenant1>0){
 			g.drawImage(imgLieutenant1,920,415,null);
 		}
 		
 		//Draw number of 2nd Lieutenant
 		g.drawString("x"+intLieutenant2+" 2nd Lieutenant ",920,500);
-		g.drawRect(920,515,0,70);
+		g.drawRect(920,515,70,70);
 		if(intLieutenant2>0){
 			g.drawImage(imgLieutenant2,920,515,null);
+		}
+		
+		//Draw number of Sergeant
+		g.drawString("x"+intSergeant+" Sergeant ",920,600);
+		g.drawRect(920,615,70,70);
+		if(intSergeant>0){
+			g.drawImage(imgSergeant,920,615,null);
 		}
 	}
 	public void paintPieces(Graphics g){
@@ -245,7 +257,7 @@ public class GOGPrepPanel extends JPanel {
 					g.drawImage(imgGeneral1, 80+70*intColumn,80+70*intRow, null); 
 				}else if(strGOGArray[intRow][intColumn].equals("Colonel")){
 					g.drawImage(imgColonel, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("Lieutenant Colonel")){
+				}else if(strGOGArray[intRow][intColumn].equals("L.Colonel")){
 					g.drawImage(imgLColonel, 80+70*intColumn,80+70*intRow, null); 
 				}else if(strGOGArray[intRow][intColumn].equals("Major")){
 					g.drawImage(imgMajor, 80+70*intColumn,80+70*intRow, null); 
@@ -255,10 +267,12 @@ public class GOGPrepPanel extends JPanel {
 					g.drawImage(imgLieutenant1, 80+70*intColumn,80+70*intRow, null); 
 				}else if(strGOGArray[intRow][intColumn].equals("2nd Lieutenant")){
 					g.drawImage(imgLieutenant2, 80+70*intColumn,80+70*intRow, null); 
-				}
+				}else if(strGOGArray[intRow][intColumn].equals("Sergeant")){
+					g.drawImage(imgSergeant, 80+70*intColumn,80+70*intRow, null);
 			}
 		}
 	}
+}
 	
 	public void paintCharacters(Graphics g){
 		g.setColor(Color.BLACK);
@@ -358,7 +372,7 @@ public class GOGPrepPanel extends JPanel {
 			this.blnActive=true;
 			this.blnMovingStock=true;
 		}else if(intPosX>820 && intPosX<890 && intPosY>600 && intPosY<670 && intLColonel>0){
-			this.strActivePiece="Lieutenant Colonel";
+			this.strActivePiece="L.Colonel";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
@@ -382,8 +396,13 @@ public class GOGPrepPanel extends JPanel {
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
-		}
+		}else if(intPosX>920 && intPosX<990 && intPosY>600 && intPosY<670 && intSergeant>0){
+			this.strActivePiece="Sergeant";
+			//We set the boolean active to true because we are now moving a block
+			this.blnActive=true;
+			this.blnMovingStock=true;
 	}
+}
 	//When they release their mouse, we use this method
 	public void getNewPosition(){	
 		//Inside a certain row and column...
@@ -423,7 +442,7 @@ public class GOGPrepPanel extends JPanel {
 			intGeneral1--;
 		}else if(strActivePiece.equals("Colonel")){
 			intColonel--;
-		}else if(strActivePiece.equals("Lieutenant Colonel")){
+		}else if(strActivePiece.equals("L.Colonel")){
 			intLColonel--;
 		}else if(strActivePiece.equals("Major")){
 			intMajor--;
@@ -433,6 +452,8 @@ public class GOGPrepPanel extends JPanel {
 			intLieutenant1--;
 		}else if(strActivePiece.equals("2nd Lieutenant")){
 			intLieutenant2--;
+		}else if(strActivePiece.equals("Sergeant")){
+			intSergeant--;
 		}
 		intOGRow=0;
 		intOGClm=0;
@@ -565,6 +586,12 @@ public class GOGPrepPanel extends JPanel {
 			System.out.println("Error finding image");
 		}
 		
+		try{
+			imgSergeant = ImageIO.read(new File("Sergeant.png"));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+				
 		this.setLayout(null);
 		this.setBackground(Color.WHITE);
 		
