@@ -159,7 +159,7 @@ public class GOGPrepPanel extends JPanel {
 		
 		//Draw number of 3 star generals
 		g.drawString("x"+intGeneral3+" 3 star general",820,200);
-		g.drawRect(820,215,0,70);
+		g.drawRect(820,215,70,70);
 		if(intGeneral3>0){
 			g.drawImage(imgGeneral3,820,215,null);
 		}
