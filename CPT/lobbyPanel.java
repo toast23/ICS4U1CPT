@@ -54,34 +54,46 @@ public class lobbyPanel extends JPanel {
 		}
 		return theFont;
 	}
+	public void changeFont(){
+		theGOGFont = this.loadFont("BEARPAW.TTF",80);
+		
+		theNameLabel.setForeground(Color.RED);
+		theNameLabel.setFont(theGOGFont);
+		
+		thePortLabel.setForeground(Color.RED);
+		thePortLabel.setFont(theGOGFont);
+		
+		theIPAddressLabel.setForeground(Color.RED);
+		theIPAddressLabel.setFont(theGOGFont);
+		
+		theGOGFont = this.loadFont("BEARPAW.TTF",40);
+		theNameTextField.setForeground(Color.RED);
+		theNameTextField.setFont(theGOGFont);
+		thePortTextField.setForeground(Color.RED);
+		thePortTextField.setFont(theGOGFont);
+		theIPAddressTextField.setForeground(Color.RED);
+		theIPAddressTextField.setFont(theGOGFont);
+	}
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//Constructor
 	public lobbyPanel(){
 		this.setLayout(null);
-		//With the bigger font, we'll make the labels first
-		theGOGFont = this.loadFont("BEARPAW.TTF",80);
-		theNameLabel.setFont(theGOGFont);
 		theNameLabel.setBounds(400,150,600,55);
 		this.add(theNameLabel);
-		thePortLabel.setFont(theGOGFont);
 		thePortLabel.setBounds(300,270,800,55);
 		this.add(thePortLabel);	
-		theIPAddressLabel.setFont(theGOGFont);
 		theIPAddressLabel.setBounds(300,400,800,55);
 		this.add(theIPAddressLabel);
 		
-		//With the smaller font, we'll make the text fields	
-		theGOGFont = this.loadFont("BEARPAW.TTF",40);
-		theNameTextField.setFont(theGOGFont);
 		theNameTextField.setBounds(40,200,1200,50);
 		this.add(theNameTextField);
-		thePortTextField.setFont(theGOGFont);
 		thePortTextField.setBounds(40,325,1200,50);
 		this.add(thePortTextField);
-		theIPAddressTextField.setFont(theGOGFont);
 		theIPAddressTextField.setBounds(40,470,1200,50);
 		this.add(theIPAddressTextField);
+		
+		this.changeFont();
 	}
 } 

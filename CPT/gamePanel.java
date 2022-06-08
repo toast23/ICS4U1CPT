@@ -9,7 +9,8 @@ import javax.imageio.*;
 import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-public class gamePanel extends JPanel {  
+public class gamePanel extends JPanel { 
+	Font theGOGFont = null; 
 	public String strGOGArray[][] = new String[8][9];
 	public BufferedImage imgBoard = null;
 	public BufferedImage imgFlag = null;
@@ -47,7 +48,52 @@ public class gamePanel extends JPanel {
 	public boolean blnSwitchTurn = false;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-	//Method
+	//Methods for painting
+	public Font loadFont(String strFileName, int intSize){    
+		Font theFont = null;
+		// Try to load the font
+		try{
+			theFont = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream(strFileName)); 
+			return theFont.deriveFont(Font.PLAIN, intSize);
+		}catch(Exception e){
+		//System.out.println(e.toString());
+		}
+    
+		// Then try to load the font from the local filesystem
+		try{
+			theFont = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(strFileName)); 
+			return theFont.deriveFont(Font.PLAIN, intSize);
+		}catch(Exception e){
+			//System.out.println(e.toString());
+			System.out.println("Unable to load font file \""+strFileName+"\". Setting default font"); 
+		}
+    
+		// Then load the default font if all else fails
+		try{
+			theFont = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream("Hack-Regular.ttf")); 
+			return theFont.deriveFont(Font.PLAIN, 20);
+		}catch(Exception e){
+			//System.out.println(e.toString());
+			System.out.println("Unable to load default font file \"Hack-Regular.tff\".  Will default to Java's native font for your OS");
+		}
+		return theFont;
+	}
+	public void changeFont(){
+		theGameClockLabel.setFont(theGOGFont);
+		theGameClockLabel.setForeground(Color.RED);
+		
+		thePlayer1Label.setFont(theGOGFont);
+		thePlayer1Label.setForeground(Color.RED);
+		
+		thePlayer2Label.setFont(theGOGFont);
+		thePlayer2Label.setForeground(Color.BLUE);
+		
+		theTextArea.setFont(theGOGFont);
+		theTextArea.setForeground(Color.ORANGE);
+		
+		theTextField.setFont(theGOGFont);
+		theTextField.setForeground(Color.PINK);
+	}
 	public void paintPieces(Graphics g){
 		g.setColor(Color.WHITE);
 		
@@ -87,7 +133,37 @@ public class gamePanel extends JPanel {
 			}
 		}
 	}
-	
+	//We call this in our repaint method
+	public void paintActiveBlock(Graphics g){
+		//If active is true, which means user is dragging, then we draw the moving block
+		if(blnActive==true){
+			//We draw the block
+			g.setColor(Color.BLACK);
+			if(strActivePiece.equals("P1Flag") || strActivePiece.equals("P2Flag")){
+				g.drawImage(imgFlag, intImgX, intImgY,null);
+			}else if(strActivePiece.equals("P1Private") || strActivePiece.equals("P2Private")){
+				g.drawImage(imgPrivate, intImgX, intImgY,null);
+			}
+		}
+	}
+	public void paintCharacters(Graphics g){
+		g.setFont(theGOGFont);
+		g.setColor(Color.BLACK);
+		g.drawString("1",110+70*0,50);
+		g.drawString("2",110+70*1,50);
+		g.drawString("3",110+70*2,50);
+		g.drawString("4",110+70*3,50);
+		g.drawString("5",110+70*4,50);
+		g.drawString("6",110+70*5,50);
+		g.drawString("7",110+70*6,50);
+		g.drawString("8",110+70*7,50);
+		g.drawString("9",110+70*8,50);
+	}
+	public void paintBoard(Graphics g){
+		g.drawImage(imgBoard,80,80,null);
+	}
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
 	//When they press on an area with a block, we do the following...
 	public String checkBlock(int IntPosX, int IntPosY, String strPlayerTurn, String strPlayer){
 		int intClm;
@@ -153,36 +229,6 @@ public class gamePanel extends JPanel {
 			}
 		}
 	}
-	//We call this in our repaint method
-	public void paintActiveBlock(Graphics g){
-		//If active is true, which means user is dragging, then we draw the moving block
-		if(blnActive==true){
-			//We draw the block
-			g.setColor(Color.BLACK);
-			if(strActivePiece.equals("P1Flag") || strActivePiece.equals("P2Flag")){
-				g.drawImage(imgFlag, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("P1Private") || strActivePiece.equals("P2Private")){
-				g.drawImage(imgPrivate, intImgX, intImgY,null);
-			}
-		}
-	}
-
-	public void paintBoard(Graphics g){
-		g.drawImage(imgBoard,80,80,null);
-	}
-	
-	public void paintCharacters(Graphics g){
-		g.setColor(Color.BLACK);
-		g.drawString("1",110+70*0,50);
-		g.drawString("2",110+70*1,50);
-		g.drawString("3",110+70*2,50);
-		g.drawString("4",110+70*3,50);
-		g.drawString("5",110+70*4,50);
-		g.drawString("6",110+70*5,50);
-		g.drawString("7",110+70*6,50);
-		g.drawString("8",110+70*7,50);
-		g.drawString("9",110+70*8,50);
-	}
 	
 	public void drawNewTime(String strPlayerTurn, int intP1TimeLeft, int intP2TimeLeft){
 		if(strPlayerTurn.equals("P1")){
@@ -209,6 +255,7 @@ public class gamePanel extends JPanel {
 	//Constructor
 	public gamePanel(){
 		super();
+		theGOGFont = this.loadFont("BEARPAW.TTF", 20);
 		for(int intRow=0; intRow<8;intRow++){
 			for(int intClm=0; intClm<9;intClm++){
 				strGOGArray[intRow][intClm]=" ";
@@ -241,6 +288,8 @@ public class gamePanel extends JPanel {
 		this.setLayout(null);
 		this.setBackground(Color.WHITE);
 		
+		theGameClockLabel.setFont(theGOGFont);
+		theGameClockLabel.setForeground(Color.RED);
 		theGameClockLabel.setBounds(960,50,200,50);
 		this.add(theGameClockLabel);
 		

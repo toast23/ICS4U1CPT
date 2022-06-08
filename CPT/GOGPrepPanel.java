@@ -10,6 +10,7 @@ import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class GOGPrepPanel extends JPanel {  
+	Font theGOGFont = null;
 	public String strGOGArray[][] = new String[8][9];
 	public BufferedImage imgBoard = null;
 	public BufferedImage imgFlag = null;
@@ -78,6 +79,8 @@ public class GOGPrepPanel extends JPanel {
 	//Paint Background and Pieces Methods
 	//We call this in our repaint method
 	public void paintActiveBlock(Graphics g){
+		g.setFont(theGOGFont);
+		g.setColor(Color.BLUE);
 		//If active is true, which means user is dragging, then we draw the moving block
 		if(blnActive==true){
 			//We draw the block
@@ -121,6 +124,8 @@ public class GOGPrepPanel extends JPanel {
 		g.drawImage(imgBoard,80,80,null);
 	}
 	public void paintStock(Graphics g){
+		g.setFont(theGOGFont);
+		g.setColor(Color.BLUE);
 		//Draw number of flags
 		g.drawString("x"+intFlag+" Flags",720,200);
 		g.drawRect(720,215,70,70);
@@ -158,76 +163,77 @@ public class GOGPrepPanel extends JPanel {
 		}
 		
 		//Draw number of 3 star generals
-		g.drawString("x"+intGeneral3+" 3 star general",820,200);
-		g.drawRect(820,215,70,70);
+		g.drawString("x"+intGeneral3+" 3 star general",920,200);
+		g.drawRect(920,215,70,70);
 		if(intGeneral3>0){
-			g.drawImage(imgGeneral3,820,215,null);
+			g.drawImage(imgGeneral3,920,215,null);
 		}
 		
 		//Draw number of 2 star generals
-		g.drawString("x"+intGeneral2+" 2 star general",820,300);
-		g.drawRect(820,315,70,70);
+		g.drawString("x"+intGeneral2+" 2 star general",920,300);
+		g.drawRect(920,315,70,70);
 		if(intGeneral2>0){
-			g.drawImage(imgGeneral2,820,315,null);
+			g.drawImage(imgGeneral2,920,315,null);
 		}
 		
 		//Draw number of 1 star generals
-		g.drawString("x"+intGeneral1+" 1 star general",820,400);
-		g.drawRect(820,415,70,70);
+		g.drawString("x"+intGeneral1+" 1 star general",920,400);
+		g.drawRect(920,415,70,70);
 		if(intGeneral1>0){
-			g.drawImage(imgGeneral1,820,415,null);
+			g.drawImage(imgGeneral1,920,415,null);
 		}
 		
 		//Draw number of Colonel
-		g.drawString("x"+intColonel+" Colonel ",820,500);
-		g.drawRect(820,515,70,70);
+		g.drawString("x"+intColonel+" Colonel ",920,500);
+		g.drawRect(920,515,70,70);
 		if(intColonel>0){
-			g.drawImage(imgColonel,820,515,null);
+			g.drawImage(imgColonel,920,515,null);
 		}
 		
 		//Draw number of Lieutenant Colonel
-		g.drawString("x"+intLColonel+" L.Colonel ",820,600);
-		g.drawRect(820,615,70,70);
+		g.drawString("x"+intLColonel+" L.Colonel ",920,600);
+		g.drawRect(920,615,70,70);
 		if(intLColonel>0){
-			g.drawImage(imgLColonel,820,615,null);
+			g.drawImage(imgLColonel,920,615,null);
 		}
 		
 		//Draw number of Major
-		g.drawString("x"+intMajor+" Major ",920,200);
-		g.drawRect(920,215,70,70);
+		g.drawString("x"+intMajor+" Major ",1120,200);
+		g.drawRect(1120,215,70,70);
 		if(intMajor>0){
-			g.drawImage(imgMajor,920,215,null);
+			g.drawImage(imgMajor,1120,215,null);
 		}
 		
 		//Draw number of captain
-		g.drawString("x"+intCaptain+" Captain ",920,300);
-		g.drawRect(920,315,70,70);
+		g.drawString("x"+intCaptain+" Captain ",1120,300);
+		g.drawRect(1120,315,70,70);
 		if(intCaptain>0){
-			g.drawImage(imgCaptain,920,315,null);
+			g.drawImage(imgCaptain,1120,315,null);
 		}
 		
 		//Draw number of 1st Lieutenant
-		g.drawString("x"+intLieutenant1+" 1st Lieutenant ",920,400);
-		g.drawRect(920,415,70,70);
+		g.drawString("x"+intLieutenant1+" 1st Lieutenant ",1120,400);
+		g.drawRect(1120,415,70,70);
 		if(intLieutenant1>0){
-			g.drawImage(imgLieutenant1,920,415,null);
+			g.drawImage(imgLieutenant1,1120,415,null);
 		}
 		
 		//Draw number of 2nd Lieutenant
-		g.drawString("x"+intLieutenant2+" 2nd Lieutenant ",920,500);
-		g.drawRect(920,515,70,70);
+		g.drawString("x"+intLieutenant2+" 2nd Lieutenant ",1120,500);
+		g.drawRect(1120,515,70,70);
 		if(intLieutenant2>0){
-			g.drawImage(imgLieutenant2,920,515,null);
+			g.drawImage(imgLieutenant2,1120,515,null);
 		}
 		
 		//Draw number of Sergeant
-		g.drawString("x"+intSergeant+" Sergeant ",920,600);
-		g.drawRect(920,615,70,70);
+		g.drawString("x"+intSergeant+" Sergeant ",1120,600);
+		g.drawRect(1120,615,70,70);
 		if(intSergeant>0){
-			g.drawImage(imgSergeant,920,615,null);
+			g.drawImage(imgSergeant,1120,615,null);
 		}
 	}
 	public void paintPieces(Graphics g){
+		g.setFont(theGOGFont);
 		g.setColor(Color.WHITE);
 		//for the first 3 rows, just paint fog
 		for(int intRow=0;intRow<3;intRow++){
@@ -275,6 +281,8 @@ public class GOGPrepPanel extends JPanel {
 }
 	
 	public void paintCharacters(Graphics g){
+		g.setFont(theGOGFont);
+		g.setColor(Color.BLUE);
 		g.setColor(Color.BLACK);
 		g.drawString("1",110+70*0,50);
 		g.drawString("2",110+70*1,50);
@@ -351,52 +359,52 @@ public class GOGPrepPanel extends JPanel {
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
-		}else if(intPosX>820 && intPosX<890 && intPosY>200 && intPosY<270 && intGeneral3>0){
+		}else if(intPosX>920 && intPosX<990 && intPosY>200 && intPosY<270 && intGeneral3>0){
 			this.strActivePiece="3*General";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
-		}else if(intPosX>820 && intPosX<890 && intPosY>300 && intPosY<370 && intGeneral2>0){
+		}else if(intPosX>920 && intPosX<990 && intPosY>300 && intPosY<370 && intGeneral2>0){
 			this.strActivePiece="2*General";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
-		}else if(intPosX>820 && intPosX<890 && intPosY>400 && intPosY<470 && intGeneral1>0){
+		}else if(intPosX>920 && intPosX<990 && intPosY>400 && intPosY<470 && intGeneral1>0){
 			this.strActivePiece="1*General";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
-		}else if(intPosX>820 && intPosX<890 && intPosY>500 && intPosY<570 && intColonel>0){
+		}else if(intPosX>920 && intPosX<990 && intPosY>500 && intPosY<570 && intColonel>0){
 			this.strActivePiece="Colonel";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
-		}else if(intPosX>820 && intPosX<890 && intPosY>600 && intPosY<670 && intLColonel>0){
+		}else if(intPosX>920 && intPosX<990 && intPosY>600 && intPosY<670 && intLColonel>0){
 			this.strActivePiece="L.Colonel";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
-		}else if(intPosX>920 && intPosX<990 && intPosY>200 && intPosY<270 && intMajor>0){
+		}else if(intPosX>1120 && intPosX<1190 && intPosY>200 && intPosY<270 && intMajor>0){
 			this.strActivePiece="Major";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
-		}else if(intPosX>920 && intPosX<990 && intPosY>300 && intPosY<370 && intCaptain>0){
+		}else if(intPosX>1120 && intPosX<1190 && intPosY>300 && intPosY<370 && intCaptain>0){
 			this.strActivePiece="Captain";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
-		}else if(intPosX>920 && intPosX<990 && intPosY>400 && intPosY<470 && intLieutenant1>0){
+		}else if(intPosX>1120 && intPosX<1190 && intPosY>400 && intPosY<470 && intLieutenant1>0){
 			this.strActivePiece="1st Lieutenant";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
-		}else if(intPosX>920 && intPosX<990 && intPosY>500 && intPosY<570 && intLieutenant2>0){
+		}else if(intPosX>1120 && intPosX<1190 && intPosY>500 && intPosY<570 && intLieutenant2>0){
 			this.strActivePiece="2nd Lieutenant";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
-		}else if(intPosX>920 && intPosX<990 && intPosY>600 && intPosY<670 && intSergeant>0){
+		}else if(intPosX>1120 && intPosX<1190 && intPosY>600 && intPosY<670 && intSergeant>0){
 			this.strActivePiece="Sergeant";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
@@ -464,12 +472,36 @@ public class GOGPrepPanel extends JPanel {
 	public void movePiece(){
 		strGOGArray[intNewRow][intNewClm]=strActivePiece;
 	}
-	
-	/*public void actionPerformed(ActionEvent evt) {
-		if(evt.getSource() == theReadyButton) {
-			// temp print statement to test button activation
+	public Font loadFont(String strFileName, int intSize){    
+		Font theFont = null;
+		// Try to load the font
+		try{
+			theFont = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream(strFileName)); 
+			return theFont.deriveFont(Font.PLAIN, intSize);
+		}catch(Exception e){
+		//System.out.println(e.toString());
 		}
-	}*/	
+    
+		// Then try to load the font from the local filesystem
+		try{
+			theFont = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(strFileName)); 
+			return theFont.deriveFont(Font.PLAIN, intSize);
+		}catch(Exception e){
+			//System.out.println(e.toString());
+			System.out.println("Unable to load font file \""+strFileName+"\". Setting default font"); 
+		}
+    
+		// Then load the default font if all else fails
+		try{
+			theFont = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream("Hack-Regular.ttf")); 
+			return theFont.deriveFont(Font.PLAIN, 20);
+		}catch(Exception e){
+			//System.out.println(e.toString());
+			System.out.println("Unable to load default font file \"Hack-Regular.tff\".  Will default to Java's native font for your OS");
+		}
+		return theFont;
+	}
+
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		paintBoard(g);
@@ -484,6 +516,9 @@ public class GOGPrepPanel extends JPanel {
 	//Constructor
 	public GOGPrepPanel(){
 		super();
+		
+		theGOGFont = this.loadFont("BEARPAW.TTF", 20);
+		
 		for(int intRow=0;intRow<8;intRow++){
 			for(int intClm=0;intClm<9;intClm++){
 				strGOGArray[intRow][intClm]=" ";
