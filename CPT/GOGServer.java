@@ -156,9 +156,6 @@ public class GOGServer extends GOGView implements ActionListener{
 				theModel.intOGRow=Integer.parseInt(strIndex[1]);
 				theModel.intOGClm=Integer.parseInt(strIndex[2]);
 				theModel.strArray[theModel.intOGRow][theModel.intOGClm]=strIndex[3];
-			}else if(strIndex[0].equals("Done Sending Data")){
-				//We now know that is is time to stop receiving information
-				theModel.blnReceiveArrayData=false;
 			
 			//if it's time to get a name, then...
 			}else if(theModel.blnGetName==true){
@@ -191,9 +188,7 @@ public class GOGServer extends GOGView implements ActionListener{
 				theGamePanel.theTextArea.append(theModel.strPlayerTurn+" Turn now" + "\n");
 				
 			//If it says Sending Data, then it is time to receive data
-			}else if(strIndex[0].equals("Sending Data")){
-				//We turn receivedata on
-				theModel.blnReceiveArrayData=true;
+			
 			//If none of this is the case, then we will put what is said in chatbox
 			}else if(strIndex[0].equals("Get Name")){
 				//We turn receivedata on
