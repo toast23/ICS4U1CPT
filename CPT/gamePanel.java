@@ -55,7 +55,7 @@ public class gamePanel extends JPanel {
 			for(int intColumn=0;intColumn<9;intColumn++){
 				//if it's player 1, paint player 2 pieces foggy
 				if(strPiecesToPaint.equals("P1")){
-					if(strGOGArray[intRow][intColumn] == null){
+					if(strGOGArray[intRow][intColumn].equals(" ")){
 					}else if(strGOGArray[intRow][intColumn].equals("P1Flag")){
 						g.drawImage(imgFlag, 80+70*intColumn,80+70*intRow, null); 
 					}else if(strGOGArray[intRow][intColumn].equals("P1Private")){
@@ -70,7 +70,7 @@ public class gamePanel extends JPanel {
 						g.drawImage(imgFogOfWar, 80+70*intColumn,80+70*intRow, null); 
 					}
 				}else if(strPiecesToPaint.equals("P2")){
-					if(strGOGArray[intRow][intColumn] == null){
+					if(strGOGArray[intRow][intColumn].equals(" ")){
 					}else if(strGOGArray[intRow][intColumn].equals("P1Flag")){
 						g.drawImage(imgFogOfWar, 80+70*intColumn,80+70*intRow, null); 
 					}else if(strGOGArray[intRow][intColumn].equals("P1Private")){
@@ -105,10 +105,10 @@ public class gamePanel extends JPanel {
 				//then...
 				if(IntPosX>intClm*70+80 && IntPosX<(intClm+1)*70+80 && IntPosY>intRow*70+80 && IntPosY<(intRow+1)*70+80){
 					//If in that spot, there is already a block there(true), then...
-					if(this.strGOGArray[intRow][intClm]!=null && !this.strGOGArray[intRow][intClm].equals("")){
+					if(!this.strGOGArray[intRow][intClm].equals(" ")){
 						//Get rid of that block so we can replace it with an active block that we paint
 						this.strActivePiece=this.strGOGArray[intRow][intClm];
-						this.strGOGArray[intRow][intClm]=null;
+						this.strGOGArray[intRow][intClm]=" ";
 						//We set the boolean active to true because we are now moving a block
 						this.blnActive=true;
 						//We note the original row and column
@@ -119,7 +119,7 @@ public class gamePanel extends JPanel {
 			}
 		}
 		//if they try to move the enemy pieces, they aren't allowed to, then...
-		if(this.strActivePiece.equals(null) || this.strActivePiece==null || this.strActivePiece.equals(" ") || this.strActivePiece.equals("")){
+		if(this.strActivePiece.equals(" ")){
 			this.blnActive=false;
 			this.strGOGArray[intOGRow][intOGClm]=this.strActivePiece;
 		}else if(this.strActivePiece.substring(0,2).equals("P1") && strPlayerTurn.equals("P2") && strPlayer.equals("P2")){
@@ -210,6 +210,11 @@ public class gamePanel extends JPanel {
 	//Constructor
 	public gamePanel(){
 		super();
+		for(int intRow=0; intRow<8;intRow++){
+			for(int intClm=0; intClm<9;intClm++){
+				strGOGArray[intRow][intClm]=" ";
+			}
+		}
 		try{
 			imgBoard = ImageIO.read(new File("board.png"));
 		}catch(IOException e){

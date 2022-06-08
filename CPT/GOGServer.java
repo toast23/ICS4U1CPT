@@ -33,30 +33,21 @@ public class GOGServer extends GOGView implements ActionListener{
 						intReverseRow++;
 					}
 					ssm.sendText("DoneSendingClientHalfOfArray");
-					thePrepPanel.blnPlayer1Ready=false;
-					thePrepPanel.blnPlayer2Ready=false;
 				}
+				thePrepPanel.blnPlayer1Ready=false;
+				thePrepPanel.blnPlayer2Ready=false;
 			}else if(theGamePanel.blnSwitchTurn==true){
 				//Say it's time to switch turns in chatbox
 				theGamePanel.theTextArea.append(theModel.strPlayerTurn+" Turn now" + "\n");
 				
 				//Then send the updated player turn so it knows which turn it is
-				ssm.sendText(theModel.strPlayerTurn);
+				ssm.sendText("SwitchTurn,"+theModel.strPlayerTurn);
 				
 				//After this, we no longer need to switch a turn since it's already switched so falsify
 				theGamePanel.blnSwitchTurn=false;
 				
 				//After we switch turns, we should also update the array. If we switch turns, then
 				//We're also the ones sending data so blnSendArrayData becomes true.
-				theModel.blnSendArrayData=true;
-				
-				
-			//If it's time to update the other player's array, then...
-			}else if(theModel.blnSendArrayData==true){
-				//First, we will send this message that activates blnReceiveArrayData to true
-				//Which tells the receiver to receive array data.
-				ssm.sendText("Sending Data");
-				
 				//We create a loop that will send data in each column
 				int intRow;
 				int intRowInverse=7;
@@ -64,17 +55,14 @@ public class GOGServer extends GOGView implements ActionListener{
 				for(intRow=0;intRow<8;intRow++){
 					for(intClm=0;intClm<9;intClm++){
 						//send them something they can split
-						ssm.sendText("SendArray,"+","+intRow+","+intClm+","+theModel.strArray[intRowInverse][intClm]);
+						ssm.sendText("SendArray,"+intRow+","+intClm+","+theModel.strArray[intRowInverse][intClm]);
 					}
 					intRowInverse--;
 				}
 				
 				//Now that we are done updating the other player's array, we can stop sending data
 				theModel.blnSendArrayData=false;
-				
-				//We send this message which activates a command that turns the other player's
-				//blnReceiveArrayData variable off
-				ssm.sendText("Done Sending Data");
+				System.out.println("uwu");
 			}else if(theGamePanel.blnMessageSending==true){
 				//Put that message in our chatbox
 				if(strPlayer.equals("P1")){
@@ -180,9 +168,9 @@ public class GOGServer extends GOGView implements ActionListener{
 					//Now that the server is done getting a name, it falsifies
 					theModel.blnGetName=false;
 				}
-			}else if(strIndex[0].equals("P1") || strText.equals("P2")){
+			}else if(strIndex[0].equals("SwitchTurn")){
 				//We update player turn here
-				theModel.strPlayerTurn=strText;
+				theModel.strPlayerTurn=strIndex[1];
 				
 				//We will also tell the user in the chatbox that it is their turn now
 				theGamePanel.theTextArea.append(theModel.strPlayerTurn+" Turn now" + "\n");

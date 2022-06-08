@@ -185,11 +185,12 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 						thePrepPanel.movePiece();
 					}
 				}
-				thePrepPanel.blnMovingStock=false;
-				thePrepPanel.blnMovingPiece=false;
-				thePrepPanel.blnActive=false;
 			}
 		}
+		thePrepPanel.blnMovingStock=false;
+		thePrepPanel.blnMovingPiece=false;
+		thePrepPanel.blnActive=false;
+		theGamePanel.blnActive=false;
 	}
 	
 	//These are unused commands that we need to override
