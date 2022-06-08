@@ -39,8 +39,9 @@ public class GOGModel{
 		//if it is not empty, then...
 		if(!strNextPositionPiece.equals(" ")){
 			//If both are the same team, don't let it move
-			if( (strNextPositionPiece.substring(0,2)).equals(strPlayerTurn.substring(0,2)) ){
+			if(strNextPositionPiece.substring(0,2).equals(strPlayerTurn)){
 				blnOnSameTeam=true;
+				strArray[intOGRow][intOGClm]=strActivePiece;
 			}else{
 				blnOnSameTeam=false;
 			}
