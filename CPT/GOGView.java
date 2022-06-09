@@ -245,7 +245,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		theLobbyPanel.add(theClientButton);
 		
 		theLobbyHelpButton.setFont(theGOGFont);
-		theLobbyHelpButton.setBounds(490,500,300,50);
+		theLobbyHelpButton.setBounds(490,550,300,50);
 		theLobbyPanel.add(theLobbyHelpButton);
 		
 		theGameHelpButton.setFont(theGOGFont);
