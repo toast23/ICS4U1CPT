@@ -10,7 +10,7 @@ import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class GOGPrepPanel extends JPanel {  
-	Font theGOGFont = null;
+	Font theGOGFont = this.loadFont("BEARPAW.TTF", 20);
 	public String strGOGArray[][] = GOGUtilities.makeEmptyBoardArray();
 	public BufferedImage imgBoard = null;
 	public BufferedImage imgFlag = null;
@@ -609,8 +609,6 @@ public class GOGPrepPanel extends JPanel {
 	/** the GOGPrePanel method creates a panel that allows the user to prepare their pieces on */
 	public GOGPrepPanel(String[] strImageArray){
 		super();
-		
-		theGOGFont = this.loadFont("BEARPAW.TTF", 20);
 		
 		this.loadImages(strImageArray);
 		

@@ -11,7 +11,7 @@ import java.io.*;
 public class GOGView extends JPanel implements MouseMotionListener, MouseListener {
 	//Properties
 	String[] strImageArray = GOGUtilities.loadRankArray("ImageNames.csv");
-	Font theGOGFont = null;
+	Font theGOGFont = this.loadFont("BEARPAW.TTF",40);
 	//Frame and Window Stuff
 	public JFrame theFrame = new JFrame("Game of the Generals");
 	public CardLayout card = new CardLayout(); 
@@ -255,8 +255,6 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		theViewPanel.add(theHelpPanel, "help");
 		theViewPanel.add(theRanksPanel, "ranks");
 		theViewPanel.setPreferredSize(new Dimension(1280,720));
-		
-		theGOGFont = this.loadFont("BEARPAW.TTF",40);
 		
 		theServerButton.setFont(theGOGFont);
 		theServerButton.setBounds(10,10,200,50);

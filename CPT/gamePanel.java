@@ -10,7 +10,7 @@ import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class gamePanel extends JPanel { 
-	Font theGOGFont = null; 
+	Font theGOGFont = this.loadFont("BEARPAW.TTF", 20);	
 	public String strGOGArray[][] = GOGUtilities.makeEmptyBoardArray();
 	public BufferedImage imgBoard = null;
 	public BufferedImage imgFlag = null;
@@ -394,7 +394,6 @@ public class gamePanel extends JPanel {
 	/** The gamePanel constructor method allows us to create the game panel, which we can use during gameplay */
 	public gamePanel(String[] strImageArray){
 		super();
-		theGOGFont = this.loadFont("BEARPAW.TTF", 20);	
 		this.loadImages(strImageArray);
 		
 		this.setLayout(null);
