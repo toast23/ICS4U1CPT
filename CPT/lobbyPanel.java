@@ -25,6 +25,7 @@ public class lobbyPanel extends JPanel {
 	String strIPAddress = "";
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////
+	/** The loadFont method allows us to load a font from our folder into the an object in the font class */
 	public Font loadFont(String strFileName, int intSize){    
 		Font theFont = null;
 		// Try to load the font
@@ -54,6 +55,7 @@ public class lobbyPanel extends JPanel {
 		}
 		return theFont;
 	}
+	/** The changeFont method changes the font of labels and characters in text fields */
 	public void changeFont(){
 		theGOGFont = this.loadFont("BEARPAW.TTF",80);
 		
@@ -76,8 +78,7 @@ public class lobbyPanel extends JPanel {
 	}
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////
-
-	//Constructor
+	/** The lobbyPanel constructor method creates the lobby panel with the labels and textfields in them! */
 	public lobbyPanel(){
 		this.setLayout(null);
 		theNameLabel.setBounds(400,130,600,55);

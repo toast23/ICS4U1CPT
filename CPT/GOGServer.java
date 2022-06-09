@@ -12,6 +12,7 @@ public class GOGServer extends GOGView implements ActionListener{
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Methods
+	/** The actionPerformed method allows us to run the game at 60 frames per second and check for any conditions that may be true such as whether to end the game or send a message */
 	public void actionPerformed(ActionEvent evt){
 		//Ever 1/60th of a second, the timer goes off and we can repaint and do any checks
 		if(evt.getSource()==theTimer){
@@ -278,7 +279,7 @@ public class GOGServer extends GOGView implements ActionListener{
 		}
 	}
 	
-	//This method sets up the server based on the SSMType
+	/**The setSSM sets up the ssm object based on whether they clicked the server or client button to give an as well SSMType */
 	public void setSSM(String strSSMType) {
 		// Get the port number
 		try{
@@ -324,6 +325,7 @@ public class GOGServer extends GOGView implements ActionListener{
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+	/** The GOGServer Constructor allows us to add action listeners to buttons and make the game interactive */
 	public GOGServer() {
 		//Here, we set up action listeners
 		theServerButton.addActionListener(this);
@@ -343,7 +345,7 @@ public class GOGServer extends GOGView implements ActionListener{
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////	
-	//Main Method
+	/** The main Method allows us to start up and run the game! */
 	public static void main(String[] args){
 		new GOGServer();
 	}
