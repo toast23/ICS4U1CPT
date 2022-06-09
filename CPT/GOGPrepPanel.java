@@ -11,7 +11,7 @@ import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class GOGPrepPanel extends JPanel {  
 	Font theGOGFont = null;
-	public String strGOGArray[][] = new String[8][9];
+	public String strGOGArray[][] = GOGUtilities.makeEmptyBoardArray();
 	public BufferedImage imgBoard = null;
 	public BufferedImage imgFlag = null;
 	public BufferedImage imgPrivate = null;
@@ -77,6 +77,93 @@ public class GOGPrepPanel extends JPanel {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Paint Background and Pieces Methods
+	public void loadImages(String[] strImageArray){
+		try{
+			imgBoard = ImageIO.read(new File("board.png"));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgFlag = ImageIO.read(new File(strImageArray[0]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgPrivate = ImageIO.read(new File(strImageArray[1]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgSpies = ImageIO.read(new File(strImageArray[2]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgSergeant = ImageIO.read(new File(strImageArray[3]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgLieutenant2 = ImageIO.read(new File(strImageArray[4]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgLieutenant1 = ImageIO.read(new File(strImageArray[5]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgCaptain = ImageIO.read(new File(strImageArray[6]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgMajor = ImageIO.read(new File(strImageArray[7]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgLColonel = ImageIO.read(new File(strImageArray[8]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgColonel = ImageIO.read(new File(strImageArray[9]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgGeneral1 = ImageIO.read(new File(strImageArray[10]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgGeneral2 = ImageIO.read(new File(strImageArray[11]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgGeneral3 = ImageIO.read(new File(strImageArray[12]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgGeneral4 = ImageIO.read(new File(strImageArray[13]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgGeneral5 = ImageIO.read(new File(strImageArray[14]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgFogOfWar = ImageIO.read(new File(strImageArray[15]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+	}
 	//We call this in our repaint method
 	public void paintActiveBlock(Graphics g){
 		g.setFont(theGOGFont);
@@ -513,7 +600,7 @@ public class GOGPrepPanel extends JPanel {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Constructor
-	public GOGPrepPanel(){
+	public GOGPrepPanel(String[] strImageArray){
 		super();
 		
 		theGOGFont = this.loadFont("BEARPAW.TTF", 20);
@@ -523,109 +610,8 @@ public class GOGPrepPanel extends JPanel {
 				strGOGArray[intRow][intClm]=" ";
 			}
 		}
+		this.loadImages(strImageArray);
 		
-		try{
-			imgBoard = ImageIO.read(new File("board.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgPrivate = ImageIO.read(new File("private.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgFlag = ImageIO.read(new File("flag.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgFogOfWar = ImageIO.read(new File("FogOfWar.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgSpies = ImageIO.read(new File("Spies.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgGeneral5 = ImageIO.read(new File("General5.jpg"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgGeneral4 = ImageIO.read(new File("General4.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgGeneral3 = ImageIO.read(new File("General3.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgGeneral2 = ImageIO.read(new File("General2.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgGeneral1 = ImageIO.read(new File("General1.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgColonel = ImageIO.read(new File("Colonel.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgLColonel = ImageIO.read(new File("Lieutenant Colonel.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgMajor = ImageIO.read(new File("Major.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgCaptain = ImageIO.read(new File("Captain.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgLieutenant1 = ImageIO.read(new File("Lieutenant1.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgLieutenant2 = ImageIO.read(new File("Lieutenant2.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgSergeant = ImageIO.read(new File("Sergeant.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-				
 		this.setLayout(null);
 		this.setBackground(Color.WHITE);
 		

@@ -11,11 +11,24 @@ import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class gamePanel extends JPanel { 
 	Font theGOGFont = null; 
-	public String strGOGArray[][] = new String[8][9];
+	public String strGOGArray[][] = GOGUtilities.makeEmptyBoardArray();
 	public BufferedImage imgBoard = null;
 	public BufferedImage imgFlag = null;
 	public BufferedImage imgPrivate = null;
+	public BufferedImage imgSpies = null;
 	public BufferedImage imgFogOfWar = null;
+	public BufferedImage imgGeneral5 = null;
+	public BufferedImage imgGeneral4 = null;
+	public BufferedImage imgGeneral3 = null;
+	public BufferedImage imgGeneral2 = null;
+	public BufferedImage imgGeneral1 = null;
+	public BufferedImage imgColonel = null;
+	public BufferedImage imgLColonel = null;
+	public BufferedImage imgMajor = null;
+	public BufferedImage imgCaptain = null;
+	public BufferedImage imgLieutenant1 = null;
+	public BufferedImage imgLieutenant2 = null;
+	public BufferedImage imgSergeant = null;
 	
 	//Timer stuff
 	public JLabel theGameClockLabel=new JLabel("Time");
@@ -48,6 +61,93 @@ public class gamePanel extends JPanel {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Methods for painting
+	public void loadImages(String[] strImageArray){
+		try{
+			imgBoard = ImageIO.read(new File("board.png"));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgFlag = ImageIO.read(new File(strImageArray[0]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgPrivate = ImageIO.read(new File(strImageArray[1]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgSpies = ImageIO.read(new File(strImageArray[2]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgSergeant = ImageIO.read(new File(strImageArray[3]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgLieutenant2 = ImageIO.read(new File(strImageArray[4]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgLieutenant1 = ImageIO.read(new File(strImageArray[5]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgCaptain = ImageIO.read(new File(strImageArray[6]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgMajor = ImageIO.read(new File(strImageArray[7]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgLColonel = ImageIO.read(new File(strImageArray[8]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgColonel = ImageIO.read(new File(strImageArray[9]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgGeneral1 = ImageIO.read(new File(strImageArray[10]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgGeneral2 = ImageIO.read(new File(strImageArray[11]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgGeneral3 = ImageIO.read(new File(strImageArray[12]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgGeneral4 = ImageIO.read(new File(strImageArray[13]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgGeneral5 = ImageIO.read(new File(strImageArray[14]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+		try{
+			imgFogOfWar = ImageIO.read(new File(strImageArray[15]));
+		}catch(IOException e){
+			System.out.println("Error finding image");
+		}
+	}
 	public Font loadFont(String strFileName, int intSize){    
 		Font theFont = null;
 		// Try to load the font
@@ -251,37 +351,10 @@ public class gamePanel extends JPanel {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Constructor
-	public gamePanel(){
+	public gamePanel(String[] strImageArray){
 		super();
-		theGOGFont = this.loadFont("BEARPAW.TTF", 20);
-		for(int intRow=0; intRow<8;intRow++){
-			for(int intClm=0; intClm<9;intClm++){
-				strGOGArray[intRow][intClm]=" ";
-			}
-		}
-		try{
-			imgBoard = ImageIO.read(new File("board.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgPrivate = ImageIO.read(new File("private.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgFlag = ImageIO.read(new File("flag.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
-		
-		try{
-			imgFogOfWar = ImageIO.read(new File("FogOfWar.png"));
-		}catch(IOException e){
-			System.out.println("Error finding image");
-		}
+		theGOGFont = this.loadFont("BEARPAW.TTF", 20);	
+		this.loadImages(strImageArray);
 		
 		this.setLayout(null);
 		this.setBackground(Color.WHITE);

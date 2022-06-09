@@ -1,7 +1,6 @@
 public class GOGModel{
 	//Properties
-	public String strArray[][]= new String[8][9];
-	public String strRankArray[][];
+	public String strArray[][] = GOGUtilities.makeEmptyBoardArray();
 	public int intOGClm;
 	public int intOGRow;
 	public int intNewClm;
@@ -82,6 +81,5 @@ public class GOGModel{
 				strArray[intRow][intClm]=" ";
 			}
 		}
-		this.strRankArray = GOGUtilities.loadDataArray("RankingData.csv");
 	}
 }

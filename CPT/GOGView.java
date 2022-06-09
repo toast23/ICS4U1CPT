@@ -10,14 +10,15 @@ import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class GOGView extends JPanel implements MouseMotionListener, MouseListener {
 	//Properties
+	String[] strImageArray = GOGUtilities.loadRankArray("ImageNames.csv");
 	Font theGOGFont = null;
 	//Frame and Window Stuff
 	public JFrame theFrame = new JFrame("Game of the Generals");
 	public CardLayout card = new CardLayout(); 
 	public JPanel theViewPanel = new JPanel(); 
 	public lobbyPanel theLobbyPanel = new lobbyPanel();
-	public GOGPrepPanel thePrepPanel = new GOGPrepPanel();
-	public gamePanel theGamePanel = new gamePanel(); 
+	public GOGPrepPanel thePrepPanel = new GOGPrepPanel(strImageArray);
+	public gamePanel theGamePanel = new gamePanel(strImageArray); 
 	public helpPanel theHelpPanel = new helpPanel();
 	public ranksPanel theRanksPanel = new ranksPanel();
 	public GOGModel theModel = new GOGModel();

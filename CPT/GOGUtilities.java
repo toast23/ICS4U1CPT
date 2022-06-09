@@ -1,11 +1,18 @@
 import java.io.*;
 public interface GOGUtilities{
-	public static String[][] loadDataArray(String strCSVFile){
-		String strArray[][];
-		String strTempArray[];
+	public static String[][] makeEmptyBoardArray(){
+		String[][] strGOGArray = new String[8][9];
+		for(int intRow=0; intRow<8;intRow++){
+			for(int intClm=0; intClm<9;intClm++){
+				strGOGArray[intRow][intClm]=" ";
+			}
+		}
+		return strGOGArray;
+	}
+	public static String[] loadRankArray(String strCSVFile){
+		String strArray[];
 		String strLine;
 		int intCnt;
-		int intCnt2;
 		int intRow=0;
 		BufferedReader csv = null;
 		
@@ -27,8 +34,7 @@ public interface GOGUtilities{
 		}catch(IOException e){
 			System.out.println("Unable to print");
 		}
-		strArray = new String[intRow][3];
-		strTempArray = new String[intRow];
+		strArray = new String[intRow];
 		//Load it
 		try{
 			csv = new BufferedReader(new FileReader(strCSVFile));
@@ -38,15 +44,10 @@ public interface GOGUtilities{
 		
 		for(intCnt = 0; intCnt < intRow; intCnt++){
 			try{
-				strTempArray = csv.readLine().split(",");;
+				strArray[intCnt] = csv.readLine();
 			}catch(IOException e){
 				System.out.println("Invalid Input");
-				for(intCnt = 0; intCnt < 3; intCnt++){
-					 strTempArray[intCnt] = "0";
-				 }
-			}
-			for(intCnt2 = 0; intCnt2 < 3; intCnt2++){
-				strArray[intCnt][intCnt2] = strTempArray[intCnt2];
+				strArray[intCnt] = " ";
 			}
 		}
 		return strArray;
