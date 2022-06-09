@@ -362,10 +362,10 @@ public class GOGPrepPanel extends JPanel {
 					g.drawImage(imgLieutenant2, 80+70*intColumn,80+70*intRow, null); 
 				}else if(strGOGArray[intRow][intColumn].equals("Sergeant")){
 					g.drawImage(imgSergeant, 80+70*intColumn,80+70*intRow, null);
+				}
 			}
 		}
 	}
-}
 	
 	public void paintCharacters(Graphics g){
 		g.setFont(theGOGFont);

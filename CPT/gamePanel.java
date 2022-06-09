@@ -198,36 +198,43 @@ public class gamePanel extends JPanel {
 		
 		for(int intRow=0;intRow<8;intRow++){
 			for(int intColumn=0;intColumn<9;intColumn++){
-				//if it's player 1, paint player 2 pieces foggy
-				if(strPiecesToPaint.equals("P1")){
-					if(strGOGArray[intRow][intColumn].equals("P1Flag")){
-						g.drawImage(imgFlag, 80+70*intColumn,80+70*intRow, null); 
-					}else if(strGOGArray[intRow][intColumn].equals("P1Private")){
-						g.drawImage(imgPrivate, 80+70*intColumn,80+70*intRow, null); 
-					}else if(strGOGArray[intRow][intColumn].equals("P1Spy")){
-						g.drawString("s",110+70*intColumn,120+70*intRow);
-					}else if(strGOGArray[intRow][intColumn].equals("P2Flag")){
-						g.drawImage(imgFogOfWar, 80+70*intColumn,80+70*intRow, null); 
-					}else if(strGOGArray[intRow][intColumn].equals("P2Private")){
-						g.drawImage(imgFogOfWar, 80+70*intColumn,80+70*intRow, null); 
-					}else if(strGOGArray[intRow][intColumn].equals("P2Spy")){
-						g.drawImage(imgFogOfWar, 80+70*intColumn,80+70*intRow, null); 
-					}
-				}else if(strPiecesToPaint.equals("P2")){
-					if(strGOGArray[intRow][intColumn].equals(" ")){
-					}else if(strGOGArray[intRow][intColumn].equals("P1Flag")){
-						g.drawImage(imgFogOfWar, 80+70*intColumn,80+70*intRow, null); 
-					}else if(strGOGArray[intRow][intColumn].equals("P1Private")){
-						g.drawImage(imgFogOfWar, 80+70*intColumn,80+70*intRow, null); 
-					}else if(strGOGArray[intRow][intColumn].equals("P1Spy")){
-						g.drawImage(imgFogOfWar, 80+70*intColumn,80+70*intRow, null); 
-					}else if(strGOGArray[intRow][intColumn].equals("P2Flag")){
-						g.drawImage(imgFlag, 80+70*intColumn,80+70*intRow, null); 
-					}else if(strGOGArray[intRow][intColumn].equals("P2Private")){
-						g.drawImage(imgPrivate, 80+70*intColumn,80+70*intRow, null); 
-					}else if(strGOGArray[intRow][intColumn].equals("P2Spy")){
-						g.drawString("s",110+70*intColumn,120+70*intRow);
-					}
+				//if there's nothing in the way, then change nothing
+				if(strGOGArray[intRow][intColumn].equals(" ")){
+					
+				}else if(strGOGArray[intRow][intColumn].equals(strPiecesToPaint+"Flag")){
+					g.drawImage(imgFlag, 80+70*intColumn,80+70*intRow, null); 
+				}else if(strGOGArray[intRow][intColumn].equals(strPiecesToPaint+"Private")){
+					g.drawImage(imgPrivate, 80+70*intColumn,80+70*intRow, null); 
+				}else if(strGOGArray[intRow][intColumn].equals(strPiecesToPaint+"Spy")){
+					g.drawImage(imgSpies, 80+70*intColumn,80+70*intRow, null); 
+				}else if(strGOGArray[intRow][intColumn].equals(strPiecesToPaint+"Sergeant")){
+					g.drawImage(imgSergeant, 80+70*intColumn,80+70*intRow, null);
+				}else if(strGOGArray[intRow][intColumn].equals(strPiecesToPaint+"2nd Lieutenant")){
+					g.drawImage(imgLieutenant2, 80+70*intColumn,80+70*intRow, null); 
+				}else if(strGOGArray[intRow][intColumn].equals(strPiecesToPaint+"1st Lieutenant")){
+					g.drawImage(imgLieutenant1, 80+70*intColumn,80+70*intRow, null); 
+				}else if(strGOGArray[intRow][intColumn].equals(strPiecesToPaint+"Captain")){
+					g.drawImage(imgCaptain, 80+70*intColumn,80+70*intRow, null); 
+				}else if(strGOGArray[intRow][intColumn].equals(strPiecesToPaint+"Major")){
+					g.drawImage(imgMajor, 80+70*intColumn,80+70*intRow, null); 
+				}else if(strGOGArray[intRow][intColumn].equals(strPiecesToPaint+"L.Colonel")){
+					g.drawImage(imgLColonel, 80+70*intColumn,80+70*intRow, null); 
+				}else if(strGOGArray[intRow][intColumn].equals(strPiecesToPaint+"Colonel")){
+					g.drawImage(imgColonel, 80+70*intColumn,80+70*intRow, null); 
+				}else if(strGOGArray[intRow][intColumn].equals(strPiecesToPaint+"1*General")){
+					g.drawImage(imgGeneral1, 80+70*intColumn,80+70*intRow, null); 
+				}else if(strGOGArray[intRow][intColumn].equals(strPiecesToPaint+"2*General")){
+					g.drawImage(imgGeneral2, 80+70*intColumn,80+70*intRow, null); 
+				}else if(strGOGArray[intRow][intColumn].equals(strPiecesToPaint+"3*General")){
+					g.drawImage(imgGeneral3, 80+70*intColumn,80+70*intRow, null);
+				}else if(strGOGArray[intRow][intColumn].equals(strPiecesToPaint+"2*General")){
+					g.drawImage(imgGeneral2, 80+70*intColumn,80+70*intRow, null); 
+				}else if(strGOGArray[intRow][intColumn].equals(strPiecesToPaint+"4*General")){
+					g.drawImage(imgGeneral4, 80+70*intColumn,80+70*intRow, null); 
+				}else if(strGOGArray[intRow][intColumn].equals(strPiecesToPaint+"5*General")){
+					g.drawImage(imgGeneral5, 80+70*intColumn,80+70*intRow, null); 
+				}else{
+					g.drawImage(imgFogOfWar, 80+70*intColumn,80+70*intRow, null); 
 				}
 			}
 		}

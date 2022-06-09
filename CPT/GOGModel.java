@@ -14,7 +14,6 @@ public class GOGModel{
 	public String strNextPositionPiece;
 	public boolean blnOnSameTeam=false;
 	public boolean blnSendArrayData=false;
-	public boolean blnReceiveArrayData=false;
 	public boolean blnGetName=false;
 	public String strPlayer1Name;
 	public String strPlayer2Name;
