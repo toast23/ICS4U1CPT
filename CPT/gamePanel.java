@@ -63,87 +63,87 @@ public class gamePanel extends JPanel {
 	//Methods for painting
 	public void loadImages(String[] strImageArray){
 		try{
-			imgBoard = ImageIO.read(new File("board.png"));
+			imgBoard = ImageIO.read(this.getClass().getResourceAsStream("board.png"));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgFlag = ImageIO.read(new File(strImageArray[0]));
+			imgFlag = ImageIO.read(this.getClass().getResourceAsStream(strImageArray[0]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgPrivate = ImageIO.read(new File(strImageArray[1]));
+			imgPrivate = ImageIO.read(this.getClass().getResourceAsStream(strImageArray[1]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgSpies = ImageIO.read(new File(strImageArray[2]));
+			imgSpies = ImageIO.read(this.getClass().getResourceAsStream(strImageArray[2]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgSergeant = ImageIO.read(new File(strImageArray[3]));
+			imgSergeant = ImageIO.read(this.getClass().getResourceAsStream(strImageArray[3]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgLieutenant2 = ImageIO.read(new File(strImageArray[4]));
+			imgLieutenant2 = ImageIO.read(this.getClass().getResourceAsStream(strImageArray[4]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgLieutenant1 = ImageIO.read(new File(strImageArray[5]));
+			imgLieutenant1 = ImageIO.read(this.getClass().getResourceAsStream(strImageArray[5]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgCaptain = ImageIO.read(new File(strImageArray[6]));
+			imgCaptain = ImageIO.read(this.getClass().getResourceAsStream(strImageArray[6]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgMajor = ImageIO.read(new File(strImageArray[7]));
+			imgMajor = ImageIO.read(this.getClass().getResourceAsStream(strImageArray[7]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgLColonel = ImageIO.read(new File(strImageArray[8]));
+			imgLColonel = ImageIO.read(this.getClass().getResourceAsStream(strImageArray[8]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgColonel = ImageIO.read(new File(strImageArray[9]));
+			imgColonel = ImageIO.read(this.getClass().getResourceAsStream(strImageArray[9]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgGeneral1 = ImageIO.read(new File(strImageArray[10]));
+			imgGeneral1 = ImageIO.read(this.getClass().getResourceAsStream(strImageArray[10]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgGeneral2 = ImageIO.read(new File(strImageArray[11]));
+			imgGeneral2 = ImageIO.read(this.getClass().getResourceAsStream(strImageArray[11]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgGeneral3 = ImageIO.read(new File(strImageArray[12]));
+			imgGeneral3 = ImageIO.read(this.getClass().getResourceAsStream(strImageArray[12]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgGeneral4 = ImageIO.read(new File(strImageArray[13]));
+			imgGeneral4 = ImageIO.read(this.getClass().getResourceAsStream(strImageArray[13]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgGeneral5 = ImageIO.read(new File(strImageArray[14]));
+			imgGeneral5 = ImageIO.read(this.getClass().getResourceAsStream(strImageArray[14]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgFogOfWar = ImageIO.read(new File(strImageArray[15]));
+			imgFogOfWar = ImageIO.read(this.getClass().getResourceAsStream(strImageArray[15]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
@@ -295,13 +295,15 @@ public class gamePanel extends JPanel {
 	}
 	public void drawNewTime(String strPlayerTurn, int intP1TimeLeft, int intP2TimeLeft){
 		if(strPlayerTurn.equals("P1")){
-			int intMinutes = intP1TimeLeft/60;
+			int intHours = intP1TimeLeft/3600;
+			int intMinutes = (intP1TimeLeft-intHours*3600)/60;
 			int intSeconds = intP1TimeLeft%60;
-			theGameClockLabel.setText("Player 1 Time: "+intMinutes+":"+intSeconds);
+			theGameClockLabel.setText("Player 1 Time: "+intHours+":"+intMinutes+":"+intSeconds);
 		}else if(strPlayerTurn.equals("P2")){
-			int intMinutes = intP2TimeLeft/60;
+			int intHours = intP2TimeLeft/3600;
+			int intMinutes = (intP2TimeLeft-intHours*3600)/60;
 			int intSeconds = intP2TimeLeft%60;
-			theGameClockLabel.setText("Player 2 Time: "+intMinutes+":"+intSeconds);
+			theGameClockLabel.setText("Player 2 Time: "+intHours+":"+intMinutes+":"+intSeconds);
 		}
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////

@@ -35,6 +35,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	public JButton theReadyButton = new JButton("Ready");
 	public String panelToReturn = "lobby";
 	public String strPlayer;
+	public boolean blnGameEnd = false;
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,8 +65,18 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		theFrame.requestFocus();
 		card.show(theViewPanel, "ranks");
 	}
-	public void gameOver() {
-	    // show victory and defeat images
+	public void gameOver(String strVictor) {
+		if (!blnGameEnd) {
+			if (strVictor.equals("P1")) {
+				System.out.println("P1 won");
+				System.out.println("P2 lost");
+		}
+			else if (strVictor.equals("P2")) {
+				System.out.println("P2 won");
+				System.out.println("P1 lost");
+			}
+			blnGameEnd = true;
+		}
 	}
 	public Font loadFont(String strFileName, int intSize){    
 		Font theFont = null;
