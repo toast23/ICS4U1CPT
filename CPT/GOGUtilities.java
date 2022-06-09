@@ -60,32 +60,30 @@ public interface GOGUtilities{
 			intRank = 1;
 		}else if(strPiece.equals("P1Spy") || strPiece.equals("P2Spy")){
 			intRank = 2;
-		}else if(strPiece.equals("P1Seargent") || strPiece.equals("P1Seargent")){
+		}else if(strPiece.equals("P1Sergeant") || strPiece.equals("P2Sergeant")){
 			intRank = 3;
-		}else if(strPiece.equals("P12nd_Lieutenant") || strPiece.equals("P22nd_Lieutenant")){
+		}else if(strPiece.equals("P12nd Lieutenant") || strPiece.equals("P22nd Lieutenant")){
 			intRank = 4;
-		}else if(strPiece.equals("P11st_Lieutenant") || strPiece.equals("P21st_Lieutenant")){
+		}else if(strPiece.equals("P11st Lieutenant") || strPiece.equals("P21st Lieutenant")){
 			intRank = 5;
 		}else if(strPiece.equals("P1Captain") || strPiece.equals("P2Captain")){
 			intRank = 6;
 		}else if(strPiece.equals("P1Major") || strPiece.equals("P2Major")){
 			intRank = 7;
-		}else if(strPiece.equals("P1Lieutenant_Colonel") || strPiece.equals("P2Lieutenant_Colonel")){
+		}else if(strPiece.equals("P1L.Colonel") || strPiece.equals("P2L.Colonel")){
 			intRank = 8;
 		}else if(strPiece.equals("P1Colonel") || strPiece.equals("P2Colonel")){
 			intRank = 9;
-		}else if(strPiece.equals("P1Colonel") || strPiece.equals("P2Colonel")){
+		}else if(strPiece.equals("P11*General") || strPiece.equals("P21*General")){
 			intRank = 10;
-		}else if(strPiece.equals("P1Brigadier_General") || strPiece.equals("P2Brigadier_General")){
+		}else if(strPiece.equals("P12*General") || strPiece.equals("P22*General")){
 			intRank = 11;
-		}else if(strPiece.equals("P1Major_General") || strPiece.equals("P2Major_General")){
+		}else if(strPiece.equals("P13*General") || strPiece.equals("P23*General")){
 			intRank = 12;
-		}else if(strPiece.equals("P1Lieutenant") || strPiece.equals("P2Lieutenant")){
+		}else if(strPiece.equals("P14*General") || strPiece.equals("P24*General")){
 			intRank = 13;
-		}else if(strPiece.equals("P1General") || strPiece.equals("P2General")){
+		}else if(strPiece.equals("P15*General") || strPiece.equals("P25*General")){
 			intRank = 14;
-		}else if(strPiece.equals("P1General_of_the_Army") || strPiece.equals("P2General_of_the_Army")){
-			intRank = 15;
 		}
 		return intRank;
 	}
