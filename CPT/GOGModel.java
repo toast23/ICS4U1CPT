@@ -5,8 +5,8 @@ public class GOGModel{
 	public int intOGRow;
 	public int intNewClm;
 	public int intNewRow;
-	public int intP1TimeLeft=600;
-	public int intP2TimeLeft=600;
+	public int intP1TimeLeft=7200;
+	public int intP2TimeLeft=7200;
 	public String strPlayerTurn="P1";
 	public boolean blnSwitchTurn = false;
 	public String strVictor = " ";
