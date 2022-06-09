@@ -217,12 +217,12 @@ public interface GOGUtilities{
 			}
 		}
 		for (int intCol = 0; intCol < strArray[0].length; intCol++) {
-			if (strPlayerTurn.equals("P1Turn")) {
+			if (strPlayerTurn.equals("P1")) {
 				if (strArray[0][intCol].equals("P1Flag")) {
 					strVictor = "P1";
 				}
 			}
-			else if (strPlayerTurn.equals("P2Turn")) {
+			else if (strPlayerTurn.equals("P2")) {
 				if (strArray[0][intCol].equals("P2Flag")) {
 					strVictor = "P2";
 				}

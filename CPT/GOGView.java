@@ -73,7 +73,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		}
 			else if (strVictor.equals("P2")) {
 				System.out.println("P2 won");
-				System.out.println("P2 lost");
+				System.out.println("P1 lost");
 			}
 			blnGameEnd = true;
 		}
