@@ -18,6 +18,10 @@ public class GOGServer extends GOGView implements ActionListener{
 			//Repaint based on whichever panel we're on
 			theViewPanel.repaint();
 			
+			// check if there is a victor
+			if(!theModel.strVictor.equals(" ")) {
+				gameOver(theModel.strVictor);
+			}		
 			
 			//If both are ready and it's player 2, give half array to other player
 			if(thePrepPanel.blnPlayer1Ready==true && thePrepPanel.blnPlayer2Ready==true){				
@@ -82,6 +86,9 @@ public class GOGServer extends GOGView implements ActionListener{
 				
 			//If it's time to switch turns, then...
 			}
+			
+			// check for win condiiton
+			
 		}
 		
 		//Ever second, we...

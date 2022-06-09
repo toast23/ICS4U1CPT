@@ -80,7 +80,7 @@ public class lobbyPanel extends JPanel {
 	//Constructor
 	public lobbyPanel(){
 		this.setLayout(null);
-		theNameLabel.setBounds(400,150,600,55);
+		theNameLabel.setBounds(400,130,600,55);
 		this.add(theNameLabel);
 		thePortLabel.setBounds(300,270,800,55);
 		this.add(thePortLabel);	
