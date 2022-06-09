@@ -75,10 +75,5 @@ public class GOGModel{
 	}
 	//Constructor
 	public GOGModel(){
-		for(int intRow=0; intRow<8;intRow++){
-			for(int intClm=0; intClm<9;intClm++){
-				strArray[intRow][intClm]=" ";
-			}
-		}
 	}
 }

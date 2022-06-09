@@ -605,11 +605,6 @@ public class GOGPrepPanel extends JPanel {
 		
 		theGOGFont = this.loadFont("BEARPAW.TTF", 20);
 		
-		for(int intRow=0;intRow<8;intRow++){
-			for(int intClm=0;intClm<9;intClm++){
-				strGOGArray[intRow][intClm]=" ";
-			}
-		}
 		this.loadImages(strImageArray);
 		
 		this.setLayout(null);
