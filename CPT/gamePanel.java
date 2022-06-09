@@ -244,11 +244,36 @@ public class gamePanel extends JPanel {
 		//If active is true, which means user is dragging, then we draw the moving block
 		if(blnActive==true){
 			//We draw the block
-			g.setColor(Color.BLACK);
-			if(strActivePiece.equals("P1Flag") || strActivePiece.equals("P2Flag")){
+			if(strActivePiece.equals(strPiecesToPaint+"Flag")){
 				g.drawImage(imgFlag, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("P1Private") || strActivePiece.equals("P2Private")){
+			}else if(strActivePiece.equals(strPiecesToPaint+"Private")){
 				g.drawImage(imgPrivate, intImgX, intImgY,null);
+			}else if(strActivePiece.equals(strPiecesToPaint+"Spy")){
+				g.drawImage(imgSpies, intImgX, intImgY,null);
+			}else if(strActivePiece.equals(strPiecesToPaint+"Sergeant")){
+				g.drawImage(imgSergeant, intImgX, intImgY,null);
+			}else if(strActivePiece.equals(strPiecesToPaint+"2nd Lieutenant")){
+				g.drawImage(imgLieutenant2, intImgX, intImgY,null);
+			}else if(strActivePiece.equals(strPiecesToPaint+"1st Lieutenant")){
+				g.drawImage(imgLieutenant1, intImgX, intImgY,null);
+			}else if(strActivePiece.equals(strPiecesToPaint+"Captain")){
+				g.drawImage(imgCaptain, intImgX, intImgY,null);
+			}else if(strActivePiece.equals(strPiecesToPaint+"Major")){
+				g.drawImage(imgMajor, intImgX, intImgY,null);
+			}else if(strActivePiece.equals(strPiecesToPaint+"L.Colonel")){
+				g.drawImage(imgLColonel, intImgX, intImgY,null);
+			}else if(strActivePiece.equals(strPiecesToPaint+"Colonel")){
+				g.drawImage(imgColonel, intImgX, intImgY,null);
+			}else if(strActivePiece.equals(strPiecesToPaint+"1*General")){
+				g.drawImage(imgGeneral1, intImgX, intImgY,null);
+			}else if(strActivePiece.equals(strPiecesToPaint+"2*General")){
+				g.drawImage(imgGeneral2, intImgX, intImgY,null);
+			}else if(strActivePiece.equals(strPiecesToPaint+"3*General")){
+				g.drawImage(imgGeneral3, intImgX, intImgY,null);
+			}else if(strActivePiece.equals(strPiecesToPaint+"4*General")){
+				g.drawImage(imgGeneral4, intImgX, intImgY,null);
+			}else if(strActivePiece.equals(strPiecesToPaint+"5*General")){
+				g.drawImage(imgGeneral5, intImgX, intImgY,null);
 			}
 		}
 	}
