@@ -175,7 +175,7 @@ public interface GOGUtilities{
 	public static String[][] otherPieceMovement(String strArray[][], String strPlayerTurn, int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY, String strActivePiece, String strNextPositionPiece){
 		//If it's null, it crashes so the first if statement checks if you say null
 		if(strActivePiece.equals(" ")){
-		}else if(!strActivePiece.equals(strPlayerTurn+"Flag") && !strActivePiece.equals(strPlayerTurn+"Private") && strActivePiece.equals(strPlayerTurn+"Spy")){
+		}else if(!strActivePiece.equals(strPlayerTurn+"Flag") && !strActivePiece.equals(strPlayerTurn+"Private") && !strActivePiece.equals(strPlayerTurn+"Spy")){
 			//If it's moves in any of the cardinal directions, move the pices
 			//if there's nothing in the way, let the piece go to new position
 			if(strArray[intNewPosY][intNewPosX].equals(" ")){
