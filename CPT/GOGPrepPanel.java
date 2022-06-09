@@ -77,6 +77,7 @@ public class GOGPrepPanel extends JPanel {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Paint Background and Pieces Methods
+	/** The loadImages method allows us to use a specific font in our folder*/
 	public void loadImages(String[] strImageArray){
 		try{
 			imgBoard = ImageIO.read(this.getClass().getResourceAsStream("board.png"));
@@ -164,7 +165,7 @@ public class GOGPrepPanel extends JPanel {
 			System.out.println("Error finding image");
 		}
 	}
-	//We call this in our repaint method
+	/** The paintActiveBlock method allows us to paint the block while it's being dragged by the mouse */
 	public void paintActiveBlock(Graphics g){
 		g.setFont(theGOGFont);
 		g.setColor(Color.BLUE);
@@ -207,9 +208,11 @@ public class GOGPrepPanel extends JPanel {
 			}
 		}
 	}
+	/** The paintBoard method allows us to paint the board */
 	public void paintBoard(Graphics g){
 		g.drawImage(imgBoard,80,80,null);
 	}
+	/** The paintStock method allows us to paint the stock/inventory that they they can grab from the right side */
 	public void paintStock(Graphics g){
 		g.setFont(theGOGFont);
 		g.setColor(Color.BLUE);
@@ -319,6 +322,7 @@ public class GOGPrepPanel extends JPanel {
 			g.drawImage(imgSergeant,1120,615,null);
 		}
 	}
+	/** The paintPieces method allows us to paint pieces onto the board */
 	public void paintPieces(Graphics g){
 		g.setFont(theGOGFont);
 		g.setColor(Color.WHITE);
@@ -366,7 +370,7 @@ public class GOGPrepPanel extends JPanel {
 			}
 		}
 	}
-	
+	/** The paintCharacters method allows us to paint the grid's numbers */
 	public void paintCharacters(Graphics g){
 		g.setFont(theGOGFont);
 		g.setColor(Color.BLUE);
@@ -385,6 +389,7 @@ public class GOGPrepPanel extends JPanel {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//These methods are for interaction
 	//When they press on an area with a block, we do the following...
+	/** The checkBlock method allows us to check whether the user is grabbing at nothing or a piece in a specific row and column. */
 	public void checkBlock(int IntPosX, int IntPosY){
 		//Inside a certain row and column...
 		for(int intRow=5;intRow<8;intRow++){
@@ -412,7 +417,7 @@ public class GOGPrepPanel extends JPanel {
 			}
 		}
 	}
-	
+	/** The takeStock method checks whether we take inventory/stock from the right side*/
 	public void takeStock(int intPosX, int intPosY){
 		//if they click on the flag stock area, then...
 		if(intPosX>720 && intPosX<790 && intPosY>200 && intPosY<270 && intFlag>0){
@@ -498,7 +503,7 @@ public class GOGPrepPanel extends JPanel {
 			this.blnMovingStock=true;
 	}
 }
-	//When they release their mouse, we use this method
+	/** The getNewPosition method allows us to determine which new row and column that the piece was dropped into */
 	public void getNewPosition(){	
 		//Inside a certain row and column...
 		for(int intRow=5;intRow<8;intRow++){
@@ -517,6 +522,7 @@ public class GOGPrepPanel extends JPanel {
 			}
 		}
 	}
+	/** The placePiece method allows us to place down a piece if it was grabbed from the inventory and place it into an emptry row and column on the user's side of the screen */
 	public void placePiece(){
 		//If it's in the correct rows, then go for it
 		if(intNewRow>4){
@@ -554,10 +560,11 @@ public class GOGPrepPanel extends JPanel {
 			}
 		}
 	}
-	
+	/** the movePiece method allows us to move pieces on a board based on whether there is already a piece in the way yet */
 	public void movePiece(){
 		strGOGArray[intNewRow][intNewClm]=strActivePiece;
 	}
+	/** The loadFont method allows us to use a specific font in our folder*/
 	public Font loadFont(String strFileName, int intSize){    
 		Font theFont = null;
 		// Try to load the font
@@ -587,7 +594,7 @@ public class GOGPrepPanel extends JPanel {
 		}
 		return theFont;
 	}
-
+	/** the paintComponent method allows us to pain the board, pieces, and more onto the panel for user viewing */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		paintBoard(g);
@@ -599,7 +606,7 @@ public class GOGPrepPanel extends JPanel {
 		
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-	//Constructor
+	/** the GOGPrePanel method creates a panel that allows the user to prepare their pieces on */
 	public GOGPrepPanel(String[] strImageArray){
 		super();
 		

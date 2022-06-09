@@ -18,6 +18,7 @@ public class GOGModel{
 	public String strPlayer1Name;
 	public String strPlayer2Name;
 	//Methods
+	/** The updateTime method allows us to update the player time */
 	public void updateTime(){
 		if(strPlayerTurn.equals("P1")){
 			intP1TimeLeft--;
@@ -31,6 +32,7 @@ public class GOGModel{
 			strVictor = "P1";
 		}
 	}
+	/** The checkPieceMovement method allows us to check which piece moves during a match. It will update our array accordingly based on where it moves */
 	public void checkPieceMovement(){
 		strNextPositionPiece=strArray[intNewRow][intNewClm];
 		//update array file
@@ -74,6 +76,6 @@ public class GOGModel{
 		}
 	}
 	//Constructor
-	public GOGModel(){
-	}
+	/** the GOGModel constructor method allows us to create this whole class that we can use to order the array around */
+	public GOGModel(){}
 }

@@ -40,31 +40,38 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//These methods mainly pertain to setting up and switching between panels
+	/** The paintComponent method allows us to repaint based on the screen we are on */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 	} 
+	/** The lobbySetup method allows us to switch focus to the lobby panel */
 	public void lobbySetup() {
 		theFrame.requestFocus();
 		card.show(theViewPanel, "lobby");
 	}
+	/** The prepSetup method allows us to switch focus to the preparation panel */
 	public void prepSetup() {
 		theFrame.requestFocus();
 		panelToReturn = "prep";
 		card.show(theViewPanel, "prep");
 	}
+	/** The  gameSetup method allows us to switch focus to the game panel */
 	public void gameSetup() {
 		theFrame.requestFocus();
 		panelToReturn = "game";
 		card.show(theViewPanel, "game");
 	}
+	/** The  helpSetup method allows us to switch focus to the help panel */
 	public void helpSetup() {
 		theFrame.requestFocus();
 		card.show(theViewPanel, "help");
 	}
+	/** The  ranksSetup method allows us to switch focus to the ranks help panel */
 	public void ranksSetup() {
 		theFrame.requestFocus();
 		card.show(theViewPanel, "ranks");
 	}
+	/** The  gameover method allows us to decide when to end the game */
 	public void gameOver(String strVictor) {
 		if (!blnGameEnd) {
 			if (strVictor.equals("P1")) {
@@ -78,6 +85,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 			blnGameEnd = true;
 		}
 	}
+	/** This methods allows us to use a specific font in our folder*/
 	public Font loadFont(String strFileName, int intSize){    
 		Font theFont = null;
 		// Try to load the font
@@ -110,6 +118,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//These methods pertain mouse interaction in the game panel 
+	/** The mousePressed method allows us to detect mouse presses and act based on where they pressed */
 	public void mousePressed(MouseEvent evt){
 		//If they press the mouse in game panel, then...
 		if(evt.getSource()==theGamePanel){
@@ -140,6 +149,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 			}
 		}
 	}
+	/** The mouseDragged method allows us to get the x and y pixel positions of the pieces */
 	public void mouseDragged(MouseEvent evt) {
 		//If they drag acorss the game panel, then...
 		if(evt.getSource()==theGamePanel){
@@ -163,6 +173,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 			}
 		}
 	}
+	/** The mouseReleased method helps us decide when to stop being active(stop painting the piece) and put it down at the location */
 	public void mouseReleased(MouseEvent evt){
 		//If they release the mouse in the game panel, then...
 		if(evt.getSource()==theGamePanel){
@@ -234,7 +245,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	public void mouseEntered(MouseEvent evt){}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////	
-	//Constructor
+	/** The GOGView Constructor method allows us to switch between panels and use buttons */
 	public GOGView(){
 		super();
 		theViewPanel.setLayout(card);

@@ -1,5 +1,6 @@
 import java.io.*;
 public interface GOGUtilities{
+	/** The makeEmptyBoardArray method returns us a 9 rows by 8 columns array that is not null. It is " " */
 	public static String[][] makeEmptyBoardArray(){
 		String[][] strGOGArray = new String[8][9];
 		for(int intRow=0; intRow<8;intRow++){
@@ -9,6 +10,7 @@ public interface GOGUtilities{
 		}
 		return strGOGArray;
 	}
+	/** The loadRankArray method returns a 1 dimensional array filled with the names of images that we can use in other panels when initializing images */
 	public static String[] loadRankArray(String strCSVFile){
 		String strArray[];
 		String strLine;
@@ -52,6 +54,7 @@ public interface GOGUtilities{
 		}
 		return strArray;
 	}
+	/** The rankConversion method returns us the value or tier of the piece relative to the rank of other pieces on the board */
 	public static int rankConversion(String strPiece){
 		int intRank=0;
 		if(strPiece.equals("P1Flag") || strPiece.equals("P2Flag")){
@@ -87,6 +90,7 @@ public interface GOGUtilities{
 		}
 		return intRank;
 	}
+	/** The flagMovement method returns us an updated array when the moving piece is a flag*/
 	public static String[][] flagMovement(String strArray[][],       String strPlayerTurn, int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY, String strActivePiece, String strNextPositionPiece){
 		//If it's null, it crashes so the first if statement checks if you say null
 		if(strActivePiece.equals(" ")){
@@ -111,6 +115,7 @@ public interface GOGUtilities{
 		}
 		return strArray;
 	}
+	/** The privateMovement method returns us an updated array when the moving piece is a private*/
 	public static String[][] privateMovement(String strArray[][],    String strPlayerTurn, int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY, String strActivePiece, String strNextPositionPiece){
 		//If it's null, it crashes so the first if statement checks if you say null
 		if(strActivePiece.equals(" ")){
@@ -146,6 +151,7 @@ public interface GOGUtilities{
 		}
 		return strArray;
 	}
+	/** The spyMovement method returns us an updated array when the moving piece is a spy */
 	public static String[][] spyMovement(String strArray[][],        String strPlayerTurn, int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY, String strActivePiece, String strNextPositionPiece){
 		//If it's null, it crashes so the first if statement checks if you say null
 		if(strActivePiece.equals(" ")){
@@ -172,6 +178,7 @@ public interface GOGUtilities{
 		}
 		return strArray;
 	}
+	/** the otherPieceMovement method returns us an updated array when the moving piece is not a flag, private, or spy */
 	public static String[][] otherPieceMovement(String strArray[][], String strPlayerTurn, int intOGPosX, int intOGPosY, int intNewPosX, int intNewPosY, String strActivePiece, String strNextPositionPiece){
 		//If it's null, it crashes so the first if statement checks if you say null
 		if(strActivePiece.equals(" ")){
@@ -202,6 +209,7 @@ public interface GOGUtilities{
 		}
 		return strArray;
 	}
+	/** The checkWinCondition returns us the result as to whether a winner has been decided based on the pieces and the rows they are in */
 	public static String checkWinCondition(String strArray[][], String strPlayerTurn, String strActivePiece, String strNextPositionPiece){
 		String strVictor=" ";
 		if(strActivePiece.equals(strPlayerTurn+"Flag")){
