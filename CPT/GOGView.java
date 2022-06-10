@@ -20,7 +20,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	public GOGPrepPanel thePrepPanel = new GOGPrepPanel(strImageArray);
 	public gamePanel theGamePanel = new gamePanel(strImageArray); 
 	public helpPanel theHelpPanel = new helpPanel();
-	public ranksPanel theRanksPanel = new ranksPanel();
+	public ranksPanel theRanksPanel = new ranksPanel(strImageArray);
 	public GOGModel theModel = new GOGModel();
 	
 	//Button Stuff
