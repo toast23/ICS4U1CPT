@@ -60,16 +60,17 @@ public class helpPanel extends JPanel{
 		
 		//Then place the words on top
 		g.setColor(Color.BLACK);
-		g.drawString("Set Up:",100,100);
-		g.drawString("-Put your pieces in the first 3 rows of your side",100,140);
-		g.drawString("-You cannot see your enemy’s piece ranks and they cannot see yours",100,180);
+		g.drawString("Set Up:",110,100);
+		g.drawString("-Put your pieces in the first 3 rows of your side",110,140);
+		g.drawString("-You cannot see your enemy’s piece ranks and they cannot see yours",110,180);
 		
-		g.drawString("Gameplay:",100,300);
-		g.drawString("-Drag pieces up, down, left or right",100,340);
-		g.drawString("-The spy outranks everyone except the private and other spies",100,380);
+		g.drawString("Gameplay:",110,300);
+		g.drawString("-Drag pieces up, down, left or right",110,340);
+		g.drawString("-The spy outranks everyone except the private and other spies",110,380);
 		
-		g.drawString("Win Condition:",100,500);
-		g.drawString("Take down the Enemy Flag",100,540);
+		g.drawString("Win Condition:",110,500);
+		g.drawString("-Take down the Enemy Flag",110,540);
+		g.drawString("-Get your flag to other side",110,580);
 		
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
