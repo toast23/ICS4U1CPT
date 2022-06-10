@@ -22,12 +22,12 @@ public class GOGWinPanel extends JPanel{
 	//Constructor
 	public GOGWinPanel(){
 		try{
-			imgWin = ImageIO.read(this.getClass().getResourceAsStream("Win background.png"));
+			imgWin = ImageIO.read(this.getClass().getResourceAsStream("Win background.jpg"));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgLose = ImageIO.read(this.getClass().getResourceAsStream("Defeat.png"));
+			imgLose = ImageIO.read(this.getClass().getResourceAsStream("Defeat.jpg"));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
