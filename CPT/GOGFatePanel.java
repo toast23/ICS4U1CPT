@@ -8,19 +8,24 @@ import java.awt.image.*;
 import javax.imageio.*;
 import java.io.*;
 
-public class GOGWinPanel extends JPanel{
+public class GOGFatePanel extends JPanel{
 	//Properties
+	public String strFate = " ";
 	public BufferedImage imgWin = null;
 	public BufferedImage imgLose = null;
 	
 	//Methods
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		g.drawImage(imgWin,0,0,null);
+		if(strFate.equals("victory")){
+			g.drawImage(imgWin,0,0,null);
+		}else if(strFate.equals("defeat")){
+			g.drawImage(imgLose,0,0,null);
+		}
 	}
 	
 	//Constructor
-	public GOGWinPanel(){
+	public GOGFatePanel(){
 		try{
 			imgWin = ImageIO.read(this.getClass().getResourceAsStream("Win background.jpg"));
 		}catch(IOException e){

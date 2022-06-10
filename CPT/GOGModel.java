@@ -55,7 +55,6 @@ public class GOGModel{
 			if((intOGRow+1==intNewRow && intOGClm==intNewClm) || (intOGRow-1==intNewRow && intOGClm==intNewClm) || (intOGRow==intNewRow && intOGClm+1==intNewClm) || (intOGRow==intNewRow && intOGClm-1==intNewClm)){
 				if(strActivePiece.equalsIgnoreCase(strPlayerTurn+"Flag")){
 					strArray = GOGUtilities.flagMovement(      strArray,strPlayerTurn,intOGClm,intOGRow,intNewClm,intNewRow,strActivePiece,strNextPositionPiece);
-					
 				}else if(strActivePiece.equalsIgnoreCase(strPlayerTurn+"Private")){
 					strArray = GOGUtilities.privateMovement(strArray,strPlayerTurn,intOGClm,intOGRow,intNewClm,intNewRow,strActivePiece,strNextPositionPiece);
 				}else if(strActivePiece.equalsIgnoreCase(strPlayerTurn+"Spy")){

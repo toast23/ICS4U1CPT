@@ -85,13 +85,24 @@ public class GOGServer extends GOGView implements ActionListener{
 				theGamePanel.blnMessageSending=false;
 				
 				
-			//If it's time to switch turns, then...
+			//if a player has won, then...
+			}else if(theModel.strVictor.equals("P1") || theModel.strVictor.equals("P2")){
+				if(strPlayer.equals("P1") && theModel.strVictor.equals("P1")){
+					theFatePanel.strFate="victory";
+					ssm.sendText("Fate,P1");
+				}else if(strPlayer.equals("P1") && theModel.strVictor.equals("P2")){
+					theFatePanel.strFate="defeat";
+					ssm.sendText("Fate,P2");
+				}else if(strPlayer.equals("P2") && theModel.strVictor.equals("P2")){
+					theFatePanel.strFate="victory";
+					ssm.sendText("Fate,P2");
+				}else if(strPlayer.equals("P2") && theModel.strVictor.equals("P1")){
+					theFatePanel.strFate="defeat";
+					ssm.sendText("Fate,P1");
+				}
+				this.fateSetup();
+				theModel.strVictor=" ";
 			}
-			
-			// check for win condiiton
-			
-		}else if(theModel.strVictor.equals("P1") || theModel.strVictor.equals("P2")){
-			
 		}
 		
 		//Ever second, we...
@@ -197,6 +208,8 @@ public class GOGServer extends GOGView implements ActionListener{
 				thePrepPanel.blnPlayer2Ready=true;
 			}else if(strIndex[0].equals("Chat")){
 				theGamePanel.theTextArea.append(strIndex[1]+","+strIndex[2]);
+			}else if(strIndex[0].equals("Fate")){
+				theModel.strVictor=strIndex[1];
 			}
 		}
 		
