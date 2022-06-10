@@ -22,6 +22,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	public helpPanel theHelpPanel = new helpPanel();
 	public ranksPanel theRanksPanel = new ranksPanel(strImageArray);
 	public GOGModel theModel = new GOGModel();
+	public GOGWinPanel theWinPanel = new GOGWinPanel();
 	
 	//Button Stuff
 	public JButton theLobbyHelpButton = new JButton("Help!");
@@ -70,6 +71,10 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	public void ranksSetup() {
 		theFrame.requestFocus();
 		card.show(theViewPanel, "ranks");
+	}
+	public void winSetup() {
+		theFrame.requestFocus();
+		card.show(theWinPanel, "win");
 	}
 	/** The  gameover method allows us to decide when to end the game */
 	public void gameOver(String strVictor) {

@@ -90,6 +90,8 @@ public class GOGServer extends GOGView implements ActionListener{
 			
 			// check for win condiiton
 			
+		}else if(theModel.strVictor.equals("P1") || theModel.strVictor.equals("P2")){
+			
 		}
 		
 		//Ever second, we...
