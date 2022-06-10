@@ -212,7 +212,8 @@ public interface GOGUtilities{
 	/** The checkWinCondition returns us the result as to whether a winner has been decided based on the pieces and the rows they are in */
 	public static String checkWinCondition(String strArray[][], String strPlayerTurn, String strActivePiece, String strNextPositionPiece){
 		String strVictor=" ";
-		if(strActivePiece.equals(strPlayerTurn+"Flag")){
+		//Any piece on the board, as long it is a piece on the board, can take the flag and win the game. 
+		if(!strActivePiece.equals(" ")){
 			//If P1 Flag is about to move on P2 Flag, P1 wins
 			if(strPlayerTurn.equals("P1") && strNextPositionPiece.equals("P2Flag")){
 				strVictor="P1";
@@ -224,6 +225,7 @@ public interface GOGUtilities{
 				System.out.println("Player 2 Wins");
 			}
 		}
+
 		for (int intCol = 0; intCol < strArray[0].length; intCol++) {
 			if (strPlayerTurn.equals("P1")) {
 				if (strArray[0][intCol].equals("P1Flag")) {
