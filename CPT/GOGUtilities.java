@@ -170,6 +170,8 @@ public interface GOGUtilities{
 				//make the pawn move to new position
 				strArray[intNewPosY][intNewPosX]=" ";
 			//if there's anything else is there, kill it
+			}else if(rankConversion(strNextPositionPiece)==1){
+				strArray[intOGPosY][intOGPosX]=" ";
 			}else if(16 > rankConversion(strNextPositionPiece)){
 				strArray[intOGPosY][intOGPosX]=" ";
 				strArray[intNewPosY][intNewPosX]=strPlayerTurn+"Spy";
