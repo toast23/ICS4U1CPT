@@ -11,7 +11,7 @@ import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class helpPanel extends JPanel{  
 	//Text area stuff
-	Font theGOGFont = this.loadFont("BEARPAW.TTF", 30);
+	Font theGOGFont = this.loadFont("BEARPAW.TTF", 45);
 	public JTextArea theTextArea;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,18 +59,20 @@ public class helpPanel extends JPanel{
 		g.fillRect(100,450,1080,180);
 		
 		//Then place the words on top
-		g.setColor(Color.BLACK);
-		g.drawString("Set Up:",110,100);
+		g.setColor(Color.ORANGE);
+		g.drawString("Set Up:",110,90);
 		g.drawString("-Put your pieces in the first 3 rows of your side",110,140);
-		g.drawString("-You cannot see your enemy’s piece ranks and they cannot see yours",110,180);
+		g.drawString("-You cannot see your enemy’s piece ranks and they cannot see yours",110,190);
 		
-		g.drawString("Gameplay:",110,300);
+		g.setColor(Color.YELLOW);
+		g.drawString("Gameplay:",110,290);
 		g.drawString("-Drag pieces up, down, left or right",110,340);
-		g.drawString("-The spy outranks everyone except the private and other spies",110,380);
+		g.drawString("-The spy outranks everyone except the private and other spies",110,390);
 		
-		g.drawString("Win Condition:",110,500);
+		g.setColor(Color.GREEN);
+		g.drawString("Win Condition:",110,490);
 		g.drawString("-Take down the Enemy Flag",110,540);
-		g.drawString("-Get your flag to other side",110,580);
+		g.drawString("-Get your flag to other side",110,590);
 		
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////

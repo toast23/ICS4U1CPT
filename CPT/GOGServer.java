@@ -285,12 +285,28 @@ public class GOGServer extends GOGView implements ActionListener{
 		}
 		
 		if (evt.getSource() == theReadyButton) {
-			if(strPlayer.equals("P1")){
-				thePrepPanel.blnPlayer1Ready=true;
-			}else if(strPlayer.equals("P2")){
-				thePrepPanel.blnPlayer2Ready=true;
+			if(thePrepPanel.intFlag==0 
+			&& thePrepPanel.intPrivate==0 
+			&& thePrepPanel.intSpy==0 
+			&& thePrepPanel.intSergeant==0
+			&& thePrepPanel.intLieutenant2==0  
+			&& thePrepPanel.intLieutenant1==0  
+			&& thePrepPanel.intCaptain==0 
+			&& thePrepPanel.intMajor==0 
+			&& thePrepPanel.intLColonel==0 
+			&& thePrepPanel.intColonel==0 
+			&& thePrepPanel.intGeneral1==0 
+			&& thePrepPanel.intGeneral2==0 
+			&& thePrepPanel.intGeneral3==0 
+			&& thePrepPanel.intGeneral4==0 
+			&& thePrepPanel.intGeneral5==0){
+				if(strPlayer.equals("P1")){
+					thePrepPanel.blnPlayer1Ready=true;
+				}else if(strPlayer.equals("P2")){
+					thePrepPanel.blnPlayer2Ready=true;
+				}
+				ssm.sendText(strPlayer+" Ready");
 			}
-			ssm.sendText(strPlayer+" Ready");
 		}
 	}
 	
