@@ -306,6 +306,9 @@ public class GOGServer extends GOGView implements ActionListener{
 					thePrepPanel.blnPlayer2Ready=true;
 				}
 				ssm.sendText(strPlayer+" Ready");
+			}else{
+				thePrepPanel.theWarningLabel.setForeground(Color.RED);
+				thePrepPanel.theWarningLabel.setText("Put all pieces down");
 			}
 		}
 	}

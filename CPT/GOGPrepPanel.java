@@ -74,6 +74,8 @@ public class GOGPrepPanel extends JPanel {
 	//We need to distinguish 
 	boolean blnMovingStock=false;
 	boolean blnMovingPiece=false;
+	
+	JLabel theWarningLabel = new JLabel(" ");
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Paint Background and Pieces Methods
@@ -620,6 +622,9 @@ public class GOGPrepPanel extends JPanel {
 		
 		thePlayer2Label.setBounds(1040,160,200,50);
 		this.add(thePlayer2Label);
+		
+		theWarningLabel.setBounds(800, 140,200,50);
+		this.add(theWarningLabel);
 		
 	}
 
