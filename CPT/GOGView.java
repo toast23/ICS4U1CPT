@@ -191,26 +191,24 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 				theModel.intOGRow=theGamePanel.intOGRow;
 				theModel.intNewClm=theGamePanel.intNewClm;
 				theModel.intNewRow=theGamePanel.intNewRow;
+				theModel.strNextPositionPiece=theModel.strArray[theModel.intNewRow][theModel.intNewClm];
 				
-				//If the model has not moved from its original row to a new row and has not moved from its original column to a new column, then...
-				if(theModel.intOGRow==theModel.intNewRow && theModel.intOGClm==theModel.intNewClm){
-					//Don't change anything. Just restore removed block to previous spot
+				theModel.checkWarnings();
+				
+				if(theModel.strWarning.equals("SameTeamWarning")){
+					theGamePanel.theTextArea.append("Robot Referee, Warning, Cannot attack pieces on same team \n");
 					theGamePanel.strGOGArray[theGamePanel.intOGRow][theGamePanel.intOGClm]=theGamePanel.strActivePiece;
-				
-				//If they moved only by 1 tile, let them pass
-				}else if((theModel.intOGRow==theModel.intNewRow && theModel.intOGClm+1==theModel.intNewClm)
-				|| (theModel.intOGRow==theModel.intNewRow && theModel.intOGClm-1==theModel.intNewClm)
-				|| (theModel.intOGRow+1==theModel.intNewRow && theModel.intOGClm==theModel.intNewClm)
-				|| (theModel.intOGRow-1==theModel.intNewRow && theModel.intOGClm==theModel.intNewClm)
-				){
+				}else if(theModel.strWarning.equals("MovementWarning")){
+					theGamePanel.theTextArea.append("Robot Referee, Warning, Cannot move further than 1 tile \n");
+					theGamePanel.strGOGArray[theGamePanel.intOGRow][theGamePanel.intOGClm]=theGamePanel.strActivePiece;
+				}else if(theModel.strWarning.equals("NoMovementWarning")){
+					theGamePanel.theTextArea.append("Robot Referee, Warning, Cannot move to same spot \n");
+					theGamePanel.strGOGArray[theGamePanel.intOGRow][theGamePanel.intOGClm]=theGamePanel.strActivePiece;
+				//If that isn't the case, then...
+				}else{
 					//Check where the piece has moved and make the appropriate edits to the
 					//model's array with the checkPieceMovement method
 					theModel.checkPieceMovement();
-					
-				//If neither of the above are the case, then we tell them they can't do that
-				}else{
-					theGamePanel.theTextArea.append("Robot Referee, Warning, Cannot move by more than 1 tile \n");
-					theModel.strArray[theModel.intOGRow][theModel.intOGClm]=theModel.strActivePiece;
 				}
 				//At the end of the day, we make the game panel's array the same as the model's array
 				theGamePanel.strGOGArray=theModel.strArray;
@@ -250,6 +248,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		thePrepPanel.blnMovingPiece=false;
 		thePrepPanel.blnActive=false;
 		theGamePanel.blnActive=false;
+		theModel.strWarning=" ";
 	}
 	
 	//These are unused commands that we need to override

@@ -17,6 +17,7 @@ public class GOGModel{
 	public boolean blnGetName=false;
 	public String strPlayer1Name;
 	public String strPlayer2Name;
+	String strWarning=" ";
 	//Methods
 	/** The updateTime method allows us to update the player time */
 	public void updateTime(){
@@ -34,7 +35,6 @@ public class GOGModel{
 	}
 	/** The checkPieceMovement method allows us to check which piece moves during a match. It will update our array accordingly based on where it moves */
 	public void checkPieceMovement(){
-		strNextPositionPiece=strArray[intNewRow][intNewClm];
 		//update array file
 		//if it is not empty, then...
 		if(!strNextPositionPiece.equals(" ")){
@@ -74,6 +74,29 @@ public class GOGModel{
 				strArray[intOGRow][intOGClm]=strActivePiece;
 			}
 		}
+	}
+	/** The checkWarnings method tells the program whether the player should be allowed to move the piece or be warned */
+	public void checkWarnings(){
+		//if they move to an impossible spot
+		
+		
+		if(!(intOGRow==intNewRow && intOGClm+1==intNewClm)
+			&& !(intOGRow==intNewRow && intOGClm-1==intNewClm)
+			&& !(intOGRow+1==intNewRow && intOGClm==intNewClm)
+			&& !(intOGRow-1==intNewRow && intOGClm==intNewClm)
+		){
+			strWarning = "MovementWarning";
+			
+		//If they move nowhere
+		}else if(intOGRow==intNewRow && intOGClm==intNewClm){
+			strWarning = "NoMovementWarning";
+		}
+		
+		if(strNextPositionPiece.equals(" ")){
+			
+		}else if(strNextPositionPiece.substring(0,2).equals(strPlayerTurn)){
+			strWarning = "SameTeamWarning";
+		} 
 	}
 	//Constructor
 	/** the GOGModel constructor method allows us to create this whole class that we can use to order the array around */
