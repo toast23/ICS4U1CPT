@@ -197,11 +197,20 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 					//Don't change anything. Just restore removed block to previous spot
 					theGamePanel.strGOGArray[theGamePanel.intOGRow][theGamePanel.intOGClm]=theGamePanel.strActivePiece;
 				
-				//If that isn't the case, then...
-				}else{
+				//If they moved only by 1 tile, let them pass
+				}else if((theModel.intOGRow==theModel.intNewRow && theModel.intOGClm+1==theModel.intNewClm)
+				|| (theModel.intOGRow==theModel.intNewRow && theModel.intOGClm-1==theModel.intNewClm)
+				|| (theModel.intOGRow+1==theModel.intNewRow && theModel.intOGClm==theModel.intNewClm)
+				|| (theModel.intOGRow-1==theModel.intNewRow && theModel.intOGClm==theModel.intNewClm)
+				){
 					//Check where the piece has moved and make the appropriate edits to the
 					//model's array with the checkPieceMovement method
 					theModel.checkPieceMovement();
+					
+				//If neither of the above are the case, then we tell them they can't do that
+				}else{
+					theGamePanel.theTextArea.append("Robot Referee, Warning, Cannot move by more than 1 tile \n");
+					theModel.strArray[theModel.intOGRow][theModel.intOGClm]=theModel.strActivePiece;
 				}
 				//At the end of the day, we make the game panel's array the same as the model's array
 				theGamePanel.strGOGArray=theModel.strArray;
