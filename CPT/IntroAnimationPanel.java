@@ -134,7 +134,7 @@ public class IntroAnimationPanel extends JPanel{
 			g.drawImage(imgPhoenix,intPhoenixX,110,null);
 			
 			//Move the picture 10 pixels to the right per frame
-			intFrameCount+=10;
+			intFrameCount+=20;
 			intPhoenixX=intFrameCount;
 		}
 	}
@@ -164,8 +164,8 @@ public class IntroAnimationPanel extends JPanel{
 			g.drawString("N",1000,340);
 			g.drawString("C.",1060,340);
 			
-			intPhoenixX-=10;
-			intFrameCount+=10;
+			intPhoenixX-=20;
+			intFrameCount+=20;
 			//We draw the phoenix looking back
 			g.drawImage(imgPhoenix,intPhoenixX,110,null);
 		}
@@ -197,7 +197,7 @@ public class IntroAnimationPanel extends JPanel{
 			g.drawString("C.",1060,340);
 			//We draw the phoenix looking back
 			g.drawImage(imgPhoenix,intPhoenixX,110,null);
-			intFrameCount+=10;
+			intFrameCount+=20;
 		}
 	}
 	
@@ -351,8 +351,8 @@ public class IntroAnimationPanel extends JPanel{
 			g.drawImage(imgFireball,intFireBallX,235,null);
 			
 			//Here, we put the movement of the fireball
-			intFireBallX-=10;
-			intFrameCount+=10;
+			intFireBallX-=20;
+			intFrameCount+=20;
 		}
 	}
 	
@@ -381,7 +381,7 @@ public class IntroAnimationPanel extends JPanel{
 			g.drawString("N",1000,340);
 			g.drawString("C.",1060,340);
 			g.drawImage(imgPhoenix,intPhoenixX,110,null);
-			intFrameCount+=10;
+			intFrameCount+=20;
 		}
 	}
 	
@@ -533,8 +533,8 @@ public class IntroAnimationPanel extends JPanel{
 			g.drawImage(imgNebulaball,intNebulaBallX,235,null);
 			
 			//Here, we put the movement of the nebula ball and frame count increases
-			intNebulaBallX-=10;
-			intFrameCount+=10;
+			intNebulaBallX-=20;
+			intFrameCount+=20;
 		}
 	}
 	
@@ -580,7 +580,7 @@ public class IntroAnimationPanel extends JPanel{
 			g.setColor(Color.RED);
 			g.drawString("C.",1060,340);
 			g.drawImage(imgPhoenix,intPhoenixX,110,null);
-			intFrameCount+=10;
+			intFrameCount+=20;
 		}
 	}
 	
@@ -631,7 +631,7 @@ public class IntroAnimationPanel extends JPanel{
 			Color fadingColor = new Color(intRed,intGreen,intBlue);
 			g.setColor(fadingColor);
 			g.fillRect(0,0,1280,720);
-			intFrameCount+=10;
+			intFrameCount+=20;
 		}
 	}
 	
