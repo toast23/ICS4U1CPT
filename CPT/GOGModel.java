@@ -1,6 +1,7 @@
 public class GOGModel{
 	//Properties
 	public String strArray[][] = GOGUtilities.makeEmptyBoardArray();
+	public String strInfoArray[][] = GOGUtilities.loadArray("ImageNames.csv");
 	public int intOGClm;
 	public int intOGRow;
 	public int intNewClm;
@@ -54,13 +55,13 @@ public class GOGModel{
 		if(blnOnSameTeam == false){
 			if((intOGRow+1==intNewRow && intOGClm==intNewClm) || (intOGRow-1==intNewRow && intOGClm==intNewClm) || (intOGRow==intNewRow && intOGClm+1==intNewClm) || (intOGRow==intNewRow && intOGClm-1==intNewClm)){
 				if(strActivePiece.equalsIgnoreCase(strPlayerTurn+"Flag")){
-					strArray = GOGUtilities.flagMovement(      strArray,strPlayerTurn,intOGClm,intOGRow,intNewClm,intNewRow,strActivePiece,strNextPositionPiece);
+					strArray = GOGUtilities.flagMovement(      strArray,strPlayerTurn,intOGClm,intOGRow,intNewClm,intNewRow,strActivePiece,strNextPositionPiece,strInfoArray);
 				}else if(strActivePiece.equalsIgnoreCase(strPlayerTurn+"Private")){
-					strArray = GOGUtilities.privateMovement(strArray,strPlayerTurn,intOGClm,intOGRow,intNewClm,intNewRow,strActivePiece,strNextPositionPiece);
+					strArray = GOGUtilities.privateMovement(strArray,strPlayerTurn,intOGClm,intOGRow,intNewClm,intNewRow,strActivePiece,strNextPositionPiece,strInfoArray);
 				}else if(strActivePiece.equalsIgnoreCase(strPlayerTurn+"Spy")){
-					strArray = GOGUtilities.spyMovement(       strArray,strPlayerTurn,intOGClm,intOGRow,intNewClm,intNewRow,strActivePiece,strNextPositionPiece);
+					strArray = GOGUtilities.spyMovement(       strArray,strPlayerTurn,intOGClm,intOGRow,intNewClm,intNewRow,strActivePiece,strNextPositionPiece,strInfoArray);
 				}else{
-					strArray = GOGUtilities.otherPieceMovement(strArray,strPlayerTurn,intOGClm,intOGRow,intNewClm,intNewRow,strActivePiece,strNextPositionPiece);
+					strArray = GOGUtilities.otherPieceMovement(strArray,strPlayerTurn,intOGClm,intOGRow,intNewClm,intNewRow,strActivePiece,strNextPositionPiece,strInfoArray);
 				}
 				strVictor=GOGUtilities.checkWinCondition(strArray, strPlayerTurn, strActivePiece,strNextPositionPiece);
 				blnSwitchTurn=true;
