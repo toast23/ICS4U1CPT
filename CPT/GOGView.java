@@ -10,7 +10,7 @@ import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class GOGView extends JPanel implements MouseMotionListener, MouseListener {
 	//Properties
-	String[] strImageArray = GOGUtilities.loadRankArray("ImageNames.csv");
+	String[][] strImageArray = GOGUtilities.loadArray("ImageNames.csv");
 	Font theGOGFont = this.loadFont("BEARPAW.TTF",40);
 	//Frame and Window Stuff
 	public JFrame theFrame = new JFrame("Game of the Generals");
