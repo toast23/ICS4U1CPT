@@ -21,6 +21,7 @@ public class GOGServer extends GOGView implements ActionListener{
 			
 			if(theIntroAnimationPanel.intFrameCount==6300){
 				lobbySetup();
+				theIntroAnimationPanel.intFrameCount++;
 			}
 			
 			// check if there is a victor
