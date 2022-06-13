@@ -52,6 +52,7 @@ public class GOGPrepPanel extends JPanel {
 	
 	boolean blnPlayer1Ready=false;
 	boolean blnPlayer2Ready=false;
+	boolean blnUpdatingPrepArray=false;
 	boolean blnMakingArray=false;
 	
 	int intFlag=1;
@@ -74,6 +75,9 @@ public class GOGPrepPanel extends JPanel {
 	//We need to distinguish 
 	boolean blnMovingStock=false;
 	boolean blnMovingPiece=false;
+	
+	String strPlayer;
+	String strOtherPlayer;
 	
 	JLabel theWarningLabel = new JLabel(" ");
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -175,35 +179,35 @@ public class GOGPrepPanel extends JPanel {
 		if(blnActive==true){
 			//We draw the block
 			g.setColor(Color.BLACK);
-			if(strActivePiece.equals("Flag")){
+			if(strActivePiece.equals(strPlayer+"Flag")){
 				g.drawImage(imgFlag, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("Private")){
+			}else if(strActivePiece.equals(strPlayer+"Private")){
 				g.drawImage(imgPrivate, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("Spy")){
+			}else if(strActivePiece.equals(strPlayer+"Spy")){
 				g.drawImage(imgSpies, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("5*General")){
+			}else if(strActivePiece.equals(strPlayer+"5*General")){
 				g.drawImage(imgGeneral5, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("4*General")){
+			}else if(strActivePiece.equals(strPlayer+"4*General")){
 				g.drawImage(imgGeneral4, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("3*General")){
+			}else if(strActivePiece.equals(strPlayer+"3*General")){
 				g.drawImage(imgGeneral3, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("2*General")){
+			}else if(strActivePiece.equals(strPlayer+"2*General")){
 				g.drawImage(imgGeneral2, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("1*General")){
+			}else if(strActivePiece.equals(strPlayer+"1*General")){
 				g.drawImage(imgGeneral1, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("Colonel")){
+			}else if(strActivePiece.equals(strPlayer+"Colonel")){
 				g.drawImage(imgColonel, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("L.Colonel")){
+			}else if(strActivePiece.equals(strPlayer+"L.Colonel")){
 				g.drawImage(imgLColonel, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("Major")){
+			}else if(strActivePiece.equals(strPlayer+"Major")){
 				g.drawImage(imgMajor, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("Captain")){
+			}else if(strActivePiece.equals(strPlayer+"Captain")){
 				g.drawImage(imgCaptain, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("1st Lieutenant")){
+			}else if(strActivePiece.equals(strPlayer+"1st Lieutenant")){
 				g.drawImage(imgLieutenant1, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("2nd Lieutenant")){
+			}else if(strActivePiece.equals(strPlayer+"2nd Lieutenant")){
 				g.drawImage(imgLieutenant2, intImgX, intImgY,null);
-			}else if(strActivePiece.equals("Sergeant")){
+			}else if(strActivePiece.equals(strPlayer+"Sergeant")){
 				g.drawImage(imgSergeant, intImgX, intImgY,null);
 			}else{
 				g.fillRect(intImgX,intImgY,70,70);
@@ -328,46 +332,41 @@ public class GOGPrepPanel extends JPanel {
 	public void paintPieces(Graphics g){
 		g.setFont(theGOGFont);
 		g.setColor(Color.WHITE);
-		//for the first 3 rows, just paint fog
-		for(int intRow=0;intRow<3;intRow++){
-			for(int intColumn=0;intColumn<9;intColumn++){
-				g.drawImage(imgFogOfWar, 80+70*intColumn,80+70*intRow, null); 
-			}
-		}
-		
-		for(int intRow=5;intRow<8;intRow++){
+		for(int intRow=0;intRow<8;intRow++){
 			for(int intColumn=0;intColumn<9;intColumn++){
 				if(strGOGArray[intRow][intColumn].equals(" ")){
-				}else if(strGOGArray[intRow][intColumn].equals("Flag")){
+				}else if(strGOGArray[intRow][intColumn].equals(strPlayer+"Flag")){
 					g.drawImage(imgFlag, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("Private")){
+				}else if(strGOGArray[intRow][intColumn].equals(strPlayer+"Private")){
 					g.drawImage(imgPrivate, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("Spy")){
+				}else if(strGOGArray[intRow][intColumn].equals(strPlayer+"Spy")){
 					g.drawImage(imgSpies, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("5*General")){
+				}else if(strGOGArray[intRow][intColumn].equals(strPlayer+"5*General")){
 					g.drawImage(imgGeneral5, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("4*General")){
+				}else if(strGOGArray[intRow][intColumn].equals(strPlayer+"4*General")){
 					g.drawImage(imgGeneral4, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("3*General")){
+				}else if(strGOGArray[intRow][intColumn].equals(strPlayer+"3*General")){
 					g.drawImage(imgGeneral3, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("2*General")){
+				}else if(strGOGArray[intRow][intColumn].equals(strPlayer+"2*General")){
 					g.drawImage(imgGeneral2, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("1*General")){
+				}else if(strGOGArray[intRow][intColumn].equals(strPlayer+"1*General")){
 					g.drawImage(imgGeneral1, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("Colonel")){
+				}else if(strGOGArray[intRow][intColumn].equals(strPlayer+"Colonel")){
 					g.drawImage(imgColonel, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("L.Colonel")){
+				}else if(strGOGArray[intRow][intColumn].equals(strPlayer+"L.Colonel")){
 					g.drawImage(imgLColonel, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("Major")){
+				}else if(strGOGArray[intRow][intColumn].equals(strPlayer+"Major")){
 					g.drawImage(imgMajor, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("Captain")){
+				}else if(strGOGArray[intRow][intColumn].equals(strPlayer+"Captain")){
 					g.drawImage(imgCaptain, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("1st Lieutenant")){
+				}else if(strGOGArray[intRow][intColumn].equals(strPlayer+"1st Lieutenant")){
 					g.drawImage(imgLieutenant1, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("2nd Lieutenant")){
+				}else if(strGOGArray[intRow][intColumn].equals(strPlayer+"2nd Lieutenant")){
 					g.drawImage(imgLieutenant2, 80+70*intColumn,80+70*intRow, null); 
-				}else if(strGOGArray[intRow][intColumn].equals("Sergeant")){
+				}else if(strGOGArray[intRow][intColumn].equals(strPlayer+"Sergeant")){
 					g.drawImage(imgSergeant, 80+70*intColumn,80+70*intRow, null);
+				}else{
+					g.drawImage(imgFogOfWar, 80+70*intColumn,80+70*intRow, null);
 				}
 			}
 		}
@@ -423,7 +422,7 @@ public class GOGPrepPanel extends JPanel {
 	public void takeStock(int intPosX, int intPosY){
 		//if they click on the flag stock area, then...
 		if(intPosX>720 && intPosX<790 && intPosY>200 && intPosY<270 && intFlag>0){
-			this.strActivePiece="Flag";
+			this.strActivePiece=strPlayer+"Flag";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
@@ -431,75 +430,75 @@ public class GOGPrepPanel extends JPanel {
 		
 		//if they click on the private stock area, then...
 		}else if(intPosX>720 && intPosX<790 && intPosY>300 && intPosY<370 && intPrivate>0){
-			this.strActivePiece="Private";
+			this.strActivePiece=strPlayer+"Private";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
 		
 		//if they click on the spy stock area, then...
 		}else if(intPosX>720 && intPosX<790 && intPosY>400 && intPosY<470 && intSpy>0){
-			this.strActivePiece="Spy";
+			this.strActivePiece=strPlayer+"Spy";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
 		
 		}else if(intPosX>720 && intPosX<790 && intPosY>500 && intPosY<570 && intGeneral5>0){
-			this.strActivePiece="5*General";
+			this.strActivePiece=strPlayer+"5*General";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
 		}else if(intPosX>720 && intPosX<790 && intPosY>600 && intPosY<670 && intGeneral4>0){
-			this.strActivePiece="4*General";
+			this.strActivePiece=strPlayer+"4*General";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
 		}else if(intPosX>920 && intPosX<990 && intPosY>200 && intPosY<270 && intGeneral3>0){
-			this.strActivePiece="3*General";
+			this.strActivePiece=strPlayer+"3*General";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
 		}else if(intPosX>920 && intPosX<990 && intPosY>300 && intPosY<370 && intGeneral2>0){
-			this.strActivePiece="2*General";
+			this.strActivePiece=strPlayer+"2*General";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
 		}else if(intPosX>920 && intPosX<990 && intPosY>400 && intPosY<470 && intGeneral1>0){
-			this.strActivePiece="1*General";
+			this.strActivePiece=strPlayer+"1*General";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
 		}else if(intPosX>920 && intPosX<990 && intPosY>500 && intPosY<570 && intColonel>0){
-			this.strActivePiece="Colonel";
+			this.strActivePiece=strPlayer+"Colonel";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
 		}else if(intPosX>920 && intPosX<990 && intPosY>600 && intPosY<670 && intLColonel>0){
-			this.strActivePiece="L.Colonel";
+			this.strActivePiece=strPlayer+"L.Colonel";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
 		}else if(intPosX>1120 && intPosX<1190 && intPosY>200 && intPosY<270 && intMajor>0){
-			this.strActivePiece="Major";
+			this.strActivePiece=strPlayer+"Major";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
 		}else if(intPosX>1120 && intPosX<1190 && intPosY>300 && intPosY<370 && intCaptain>0){
-			this.strActivePiece="Captain";
+			this.strActivePiece=strPlayer+"Captain";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
 		}else if(intPosX>1120 && intPosX<1190 && intPosY>400 && intPosY<470 && intLieutenant1>0){
-			this.strActivePiece="1st Lieutenant";
+			this.strActivePiece=strPlayer+"1st Lieutenant";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
 		}else if(intPosX>1120 && intPosX<1190 && intPosY>500 && intPosY<570 && intLieutenant2>0){
-			this.strActivePiece="2nd Lieutenant";
+			this.strActivePiece=strPlayer+"2nd Lieutenant";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
 		}else if(intPosX>1120 && intPosX<1190 && intPosY>600 && intPosY<670 && intSergeant>0){
-			this.strActivePiece="Sergeant";
+			this.strActivePiece=strPlayer+"Sergeant";
 			//We set the boolean active to true because we are now moving a block
 			this.blnActive=true;
 			this.blnMovingStock=true;
@@ -529,35 +528,35 @@ public class GOGPrepPanel extends JPanel {
 		//If it's in the correct rows, then go for it
 		if(intNewRow>4){
 			strGOGArray[intNewRow][intNewClm]=strActivePiece;
-			if(strActivePiece.equals("Flag")){
+			if(strActivePiece.equals(strPlayer+"Flag")){
 				intFlag--;
-			}else if(strActivePiece.equals("Private")){
+			}else if(strActivePiece.equals(strPlayer+"Private")){
 				intPrivate--;
-			}else if(strActivePiece.equals("Spy")){
+			}else if(strActivePiece.equals(strPlayer+"Spy")){
 				intSpy--;
-			}else if(strActivePiece.equals("5*General")){
+			}else if(strActivePiece.equals(strPlayer+"5*General")){
 				intGeneral5--;
-			}else if(strActivePiece.equals("4*General")){
+			}else if(strActivePiece.equals(strPlayer+"4*General")){
 				intGeneral4--; 
-			}else if(strActivePiece.equals("3*General")){
+			}else if(strActivePiece.equals(strPlayer+"3*General")){
 				intGeneral3--;
-			}else if(strActivePiece.equals("2*General")){
+			}else if(strActivePiece.equals(strPlayer+"2*General")){
 				intGeneral2--;
-			}else if(strActivePiece.equals("1*General")){
+			}else if(strActivePiece.equals(strPlayer+"1*General")){
 				intGeneral1--;
-			}else if(strActivePiece.equals("Colonel")){
+			}else if(strActivePiece.equals(strPlayer+"Colonel")){
 				intColonel--;
-			}else if(strActivePiece.equals("L.Colonel")){
+			}else if(strActivePiece.equals(strPlayer+"L.Colonel")){
 				intLColonel--;
-			}else if(strActivePiece.equals("Major")){
+			}else if(strActivePiece.equals(strPlayer+"Major")){
 				intMajor--;
-			}else if(strActivePiece.equals("Captain")){
+			}else if(strActivePiece.equals(strPlayer+"Captain")){
 				intCaptain--;
-			}else if(strActivePiece.equals("1st Lieutenant")){
+			}else if(strActivePiece.equals(strPlayer+"1st Lieutenant")){
 				intLieutenant1--;
-			}else if(strActivePiece.equals("2nd Lieutenant")){
+			}else if(strActivePiece.equals(strPlayer+"2nd Lieutenant")){
 				intLieutenant2--;
-			}else if(strActivePiece.equals("Sergeant")){
+			}else if(strActivePiece.equals(strPlayer+"Sergeant")){
 				intSergeant--;
 			}
 		}

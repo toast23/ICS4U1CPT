@@ -107,6 +107,18 @@ public class GOGServer extends GOGView implements ActionListener{
 				}
 				this.fateSetup();
 				theModel.strVictor=" ";
+			}else if(thePrepPanel.blnUpdatingPrepArray==true){
+				int intReverseRow=0;
+				for(int intRow=7;intRow>3;intRow--){
+					for(int intClm=0;intClm<9;intClm++){
+						//If it isn't blank, then send it over
+						if(!thePrepPanel.strGOGArray[intRow][intClm].equals(" ")){
+							ssm.sendText("UpdatingPrepArray"+","+intReverseRow+","+intClm+","+thePrepPanel.strGOGArray[intRow][intClm]);
+						}
+					}
+					intReverseRow++;
+				}
+				thePrepPanel.blnUpdatingPrepArray=false;
 			}
 		}
 		
@@ -127,7 +139,9 @@ public class GOGServer extends GOGView implements ActionListener{
 			//We create a local variable that will help us store the sent message
 			String strText = ssm.readText();				
 			String[] strIndex = strText.split(",");
-			if(strIndex[0].equals("CurrentlySendingClientHalfOfArray")){
+			if(strIndex[0].equals("UpdatingPrepArray")){
+				thePrepPanel.strGOGArray[Integer.parseInt(strIndex[1])][Integer.parseInt(strIndex[2])]=strIndex[3];
+			}else if(strIndex[0].equals("CurrentlySendingClientHalfOfArray")){
 				theModel.intOGRow=Integer.parseInt(strIndex[1]);
 				theModel.intOGClm=Integer.parseInt(strIndex[2]);
 				theModel.strArray[theModel.intOGRow][theModel.intOGClm]=strIndex[3];
@@ -250,24 +264,39 @@ public class GOGServer extends GOGView implements ActionListener{
 					
 		
 			//Last, the server is always player 1
-			strPlayer="P1";
+			this.strPlayer="P1";
+			thePrepPanel.strPlayer="P1";
 			theGamePanel.strPiecesToPaint="P1";
 		}
 		
 		//If the client button is clicked
 		else if(evt.getSource()==theClientButton){
-			//We will set up the supersocketmaster client
-			setSSM("client");
+			boolean blnValidNum; 
+			try{
+				theLobbyPanel.intPortNumber = Integer.parseInt(theLobbyPanel.thePortTextField.getText());
+				blnValidNum = true;
+				
+			}
+			catch(NumberFormatException e){
+				System.out.println("number format exception");
+				blnValidNum = false;
+			}
 			
-			//We will also switch to game panel
-			prepSetup();
-			//gameSetup();
+			if(blnValidNum==true){
+				//We will set up the supersocketmaster client
+				setSSM("client");
+				
+				//We will also switch to game panel
+				prepSetup();
+				//gameSetup();
+			}
 			
 			//We will also make the game panel's array board the same as the model's
 			this.theGamePanel.strGOGArray=(theModel.strArray);
 			
 			//Last, the client is always player 2
-			strPlayer="P2";
+			this.strPlayer="P2";
+			thePrepPanel.strPlayer="P2";
 			theGamePanel.strPiecesToPaint="P2";
 		}
 		

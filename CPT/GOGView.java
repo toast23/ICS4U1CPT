@@ -250,6 +250,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 				}
 			}
 		}
+		thePrepPanel.blnUpdatingPrepArray=true;
 		thePrepPanel.blnMovingStock=false;
 		thePrepPanel.blnMovingPiece=false;
 		thePrepPanel.blnActive=false;
