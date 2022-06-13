@@ -227,19 +227,28 @@ public class GOGServer extends GOGView implements ActionListener{
 		
 		//If the server button is clicked, then...
 		if(evt.getSource()==theServerButton){
-			//We will set up the supersocketmaster server
-			setSSM("server");
+			boolean blnValidNum; 
+			try{
+				theLobbyPanel.intPortNumber = Integer.parseInt(theLobbyPanel.thePortTextField.getText());
+				blnValidNum = true;
+				
+			}
+			catch(NumberFormatException e){
+				System.out.println("number format exception");
+				blnValidNum = false;
+			}
 			
-			//We will also switch to game panel
-			prepSetup();
-			//gameSetup();
+			if (blnValidNum) {
+				//We will set up the supersocketmaster server
+				setSSM("server");
+				//We will also switch to game panel
+				prepSetup();
+			}
 			
 			//We will also make the game panel's array board the same as the model's
 			this.theGamePanel.strGOGArray=this.theModel.strArray;
-			
-			//we also get the name of the player
-			
-			
+					
+		
 			//Last, the server is always player 1
 			strPlayer="P1";
 			theGamePanel.strPiecesToPaint="P1";
@@ -319,15 +328,7 @@ public class GOGServer extends GOGView implements ActionListener{
 	}
 	
 	/**The setSSM sets up the ssm object based on whether they clicked the server or client button to give an as well SSMType */
-	public void setSSM(String strSSMType) {
-		// Get the port number
-		try{
-			theLobbyPanel.intPortNumber = Integer.parseInt(theLobbyPanel.thePortTextField.getText());
-		}
-		catch(NumberFormatException e){
-			theLobbyPanel.thePortTextField.setText("Invalid Number");
-		}
-		
+	public void setSSM(String strSSMType) {		
 		//If this is a server, then...
 		if (strSSMType.equals("server")) {
 			//set up the server using the port number
@@ -346,7 +347,7 @@ public class GOGServer extends GOGView implements ActionListener{
 				theLobbyPanel.strIPAddress = theLobbyPanel.theIPAddressTextField.getText();
 			}
 			catch(NumberFormatException e){
-				theLobbyPanel.thePortTextField.setText("Invalid Number");
+				System.out.println("number format exception");
 			}
 			//Set up the client using the port number and IP Address
 			ssm = new SuperSocketMaster(theLobbyPanel.strIPAddress, theLobbyPanel.intPortNumber, this);
