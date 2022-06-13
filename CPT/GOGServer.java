@@ -31,19 +31,10 @@ public class GOGServer extends GOGView implements ActionListener{
 			
 			//If both are ready and it's player 2, give half array to other player
 			if(thePrepPanel.blnPlayer1Ready==true && thePrepPanel.blnPlayer2Ready==true){				
-				if(strPlayer.equals("P2")){
-					int intReverseRow=0;
-					for(int intRow=7;intRow>3;intRow--){
-						for(int intClm=0;intClm<9;intClm++){
-							//If it isn't blank, then send it over
-							if(!thePrepPanel.strGOGArray[intRow][intClm].equals(" ")){
-								ssm.sendText("CurrentlySendingClientHalfOfArray"+","+intReverseRow+","+intClm+","+"P2"+thePrepPanel.strGOGArray[intRow][intClm]);
-							}
-						}
-						intReverseRow++;
-					}
-					ssm.sendText("DoneSendingClientHalfOfArray");
-				}
+				//load stuff into the game panel array
+				theGamePanel.strGOGArray=theModel.strArray=thePrepPanel.strGOGArray;
+				gameSetup();
+				
 				thePrepPanel.blnPlayer1Ready=false;
 				thePrepPanel.blnPlayer2Ready=false;
 			}else if(theModel.blnSwitchTurn==true){
@@ -141,43 +132,7 @@ public class GOGServer extends GOGView implements ActionListener{
 			String[] strIndex = strText.split(",");
 			if(strIndex[0].equals("UpdatingPrepArray")){
 				thePrepPanel.strGOGArray[Integer.parseInt(strIndex[1])][Integer.parseInt(strIndex[2])]=strIndex[3];
-			}else if(strIndex[0].equals("CurrentlySendingClientHalfOfArray")){
-				theModel.intOGRow=Integer.parseInt(strIndex[1]);
-				theModel.intOGClm=Integer.parseInt(strIndex[2]);
-				theModel.strArray[theModel.intOGRow][theModel.intOGClm]=strIndex[3];
-			}else if(strIndex[0].equals("DoneSendingClientHalfOfArray")){
-				//load server half into array
-				for(int intRow=5;intRow<8;intRow++){
-					for(int intClm=0;intClm<9;intClm++){
-						if(thePrepPanel.strGOGArray[intRow][intClm].equals(" ")){
-							theModel.strArray[intRow][intClm]=" ";
-						}else if(!thePrepPanel.strGOGArray[intRow][intClm].equals(" ")){
-							theModel.strArray[intRow][intClm]="P1"+thePrepPanel.strGOGArray[intRow][intClm];
-						}
-					}
-				}
-				//load stuff into the game panel array
-				theGamePanel.strGOGArray=theModel.strArray;
-				
-				
-				int intReverseRow=7;
-				//give my array to the other player
-				for(int intRow=0;intRow<8;intRow++){
-					for(int intClm=0;intClm<9;intClm++){
-						ssm.sendText("SendingPreparedArray"+","+intRow+","+intClm+","+theModel.strArray[intReverseRow][intClm]);
-					}
-					intReverseRow--;
-				}
-				gameSetup();
-				ssm.sendText("Done making model array");
 			
-			}else if(strIndex[0].equals("SendingPreparedArray")){
-				theModel.intOGRow=Integer.parseInt(strIndex[1]);
-				theModel.intOGClm=Integer.parseInt(strIndex[2]);
-				theModel.strArray[theModel.intOGRow][theModel.intOGClm]=strIndex[3];
-			}else if(strIndex[0].equals("Done making model array")){
-				theGamePanel.strGOGArray=theModel.strArray;
-				gameSetup();
 			//If it is time to receive array data information, then...
 			}else if(strIndex[0].equals("SendArray")){
 				theModel.intOGRow=Integer.parseInt(strIndex[1]);
