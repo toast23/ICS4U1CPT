@@ -1,16 +1,16 @@
-Flag.png
-Private.png
-Spies.png
-Sergeant.png
-Lieutenant2.png
-Lieutenant1.png
-Captain.png
-Major.png
-Lieutenant Colonel.png
-Colonel.png
-General1.png
-General2.png
-General3.png
-General4.png
-General5.png
-FogOfWar.png
+Flag,0,Flag.png
+Private,1,Private.png
+Spy,2,Spies.png
+Sergeant,3,Sergeant.png
+2nd Lieutenant,4,Lieutenant2.png
+1st Lieutenant,5,Lieutenant1.png
+Captain,6,Captain.png
+Major,7,Major.png
+L.Colonel,8,Lieutenant Colonel.png
+Colonel,9,Colonel.png
+1*General,10,General1.png
+2*General,11,General2.png
+3*General,12,General3.png
+4*General,13,General4.png
+5*General,14,General5.png
+FogOfWar,0,FogOfWar.png

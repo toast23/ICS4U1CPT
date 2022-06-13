@@ -31,84 +31,84 @@ public class ranksPanel extends JPanel{
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Method
-	public void loadImages(String[] strImageArray){
+	public void loadImages(String[][] strImageArray){
 		try{
-			imgFlag = ImageIO.read(new File(strImageArray[0]));
+			imgFlag = ImageIO.read(new File(strImageArray[0][2]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgPrivate = ImageIO.read(new File(strImageArray[1]));
+			imgPrivate = ImageIO.read(new File(strImageArray[1][2]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgSpies = ImageIO.read(new File(strImageArray[2]));
+			imgSpies = ImageIO.read(new File(strImageArray[2][2]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgSergeant = ImageIO.read(new File(strImageArray[3]));
+			imgSergeant = ImageIO.read(new File(strImageArray[3][2]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgLieutenant2 = ImageIO.read(new File(strImageArray[4]));
+			imgLieutenant2 = ImageIO.read(new File(strImageArray[4][2]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgLieutenant1 = ImageIO.read(new File(strImageArray[5]));
+			imgLieutenant1 = ImageIO.read(new File(strImageArray[5][2]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgCaptain = ImageIO.read(new File(strImageArray[6]));
+			imgCaptain = ImageIO.read(new File(strImageArray[6][2]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgMajor = ImageIO.read(new File(strImageArray[7]));
+			imgMajor = ImageIO.read(new File(strImageArray[7][2]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgLColonel = ImageIO.read(new File(strImageArray[8]));
+			imgLColonel = ImageIO.read(new File(strImageArray[8][2]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgColonel = ImageIO.read(new File(strImageArray[9]));
+			imgColonel = ImageIO.read(new File(strImageArray[9][2]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgGeneral1 =ImageIO.read(new File(strImageArray[10]));
+			imgGeneral1 =ImageIO.read(new File(strImageArray[10][2]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgGeneral2 = ImageIO.read(new File(strImageArray[11]));
+			imgGeneral2 = ImageIO.read(new File(strImageArray[11][2]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgGeneral3 = ImageIO.read(new File(strImageArray[12]));
+			imgGeneral3 = ImageIO.read(new File(strImageArray[12][2]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgGeneral4 = ImageIO.read(new File(strImageArray[13]));
+			imgGeneral4 = ImageIO.read(new File(strImageArray[13][2]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgGeneral5 = ImageIO.read(new File(strImageArray[14]));
+			imgGeneral5 = ImageIO.read(new File(strImageArray[14][2]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
 		try{
-			imgFogOfWar = ImageIO.read(new File(strImageArray[15]));
+			imgFogOfWar = ImageIO.read(new File(strImageArray[15][2]));
 		}catch(IOException e){
 			System.out.println("Error finding image");
 		}
@@ -199,7 +199,7 @@ public class ranksPanel extends JPanel{
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Constructor
 	/** This method constructs the panel that will allow us to see the ranks*/
-	public ranksPanel(String[] strImageArray){
+	public ranksPanel(String[][] strImageArray){
 		super();
 		this.setLayout(null);
 		this.setBackground(Color.WHITE);

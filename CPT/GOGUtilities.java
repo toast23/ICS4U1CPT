@@ -11,10 +11,10 @@ public interface GOGUtilities{
 		return strGOGArray;
 	}
 	/** The loadRankArray method returns a 1 dimensional array filled with the names of images that we can use in other panels when initializing images */
-	public static String[] loadRankArray(String strCSVFile){
-		String strArray[];
+	public static String[][] loadArray(String strCSVFile){
+		String strArray[][];
+		String strTempArray[];
 		String strLine;
-		int intCnt;
 		int intRow=0;
 		BufferedReader csv = null;
 		
@@ -34,9 +34,9 @@ public interface GOGUtilities{
 		try{
 			csv.close();
 		}catch(IOException e){
-			System.out.println("Unable to print");
+			System.out.println("Unable to close");
 		}
-		strArray = new String[intRow];
+		strArray = new String[intRow][3];
 		//Load it
 		try{
 			csv = new BufferedReader(new FileReader(strCSVFile));
@@ -44,12 +44,17 @@ public interface GOGUtilities{
 			System.out.println("No such csv file exists!");
 		}
 		
-		for(intCnt = 0; intCnt < intRow; intCnt++){
+		for(int intCnt = 0; intCnt < intRow; intCnt++){
 			try{
-				strArray[intCnt] = csv.readLine();
+				strTempArray = csv.readLine().split(",");
+				for(int intCnt2 = 0; intCnt2 < 3; intCnt2++){
+					strArray[intCnt][intCnt2] = strTempArray[intCnt2];
+				}
 			}catch(IOException e){
 				System.out.println("Invalid Input");
-				strArray[intCnt] = " ";
+				strArray[intCnt][0] = " ";
+				strArray[intCnt][1] = " ";
+				strArray[intCnt][2] = " ";
 			}
 		}
 		return strArray;
