@@ -16,6 +16,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	public JFrame theFrame = new JFrame("Game of the Generals");
 	public CardLayout card = new CardLayout(); 
 	public JPanel theViewPanel = new JPanel(); 
+	public IntroAnimationPanel theIntroAnimationPanel = new IntroAnimationPanel();
 	public lobbyPanel theLobbyPanel = new lobbyPanel();
 	public GOGPrepPanel thePrepPanel = new GOGPrepPanel(strImageArray);
 	public gamePanel theGamePanel = new gamePanel(strImageArray); 
@@ -45,6 +46,11 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 	} 
+	/** The introSetup method allows us to go to intro animtion panel*/
+	public void introSetup() {
+		theFrame.requestFocus();
+		card.show(theViewPanel, "intro");
+	}
 	/** The lobbySetup method allows us to switch focus to the lobby panel */
 	public void lobbySetup() {
 		theFrame.requestFocus();
@@ -262,6 +268,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	public GOGView(){
 		super();
 		theViewPanel.setLayout(card);
+		theViewPanel.add(theIntroAnimationPanel,"intro");
 		theViewPanel.add(theLobbyPanel, "lobby");
 		theViewPanel.add(thePrepPanel, "prep");
 		theViewPanel.add(theGamePanel, "game");

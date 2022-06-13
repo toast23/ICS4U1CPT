@@ -19,6 +19,10 @@ public class GOGServer extends GOGView implements ActionListener{
 			//Repaint based on whichever panel we're on
 			theViewPanel.repaint();
 			
+			if(theIntroAnimationPanel.intFrameCount==6300){
+				lobbySetup();
+			}
+			
 			// check if there is a victor
 			if(!theModel.strVictor.equals(" ")) {
 				gameOver(theModel.strVictor);
