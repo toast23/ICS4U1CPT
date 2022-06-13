@@ -164,8 +164,8 @@ public class IntroAnimationPanel extends JPanel{
 			g.drawString("N",1000,340);
 			g.drawString("C.",1060,340);
 			
-			intPhoenixX-=10;
-			intFrameCount+=10;
+			intPhoenixX-=20;
+			intFrameCount+=20;
 			//We draw the phoenix looking back
 			g.drawImage(imgPhoenix,intPhoenixX,110,null);
 		}
