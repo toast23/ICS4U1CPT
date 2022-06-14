@@ -103,10 +103,8 @@ public class GOGServer extends GOGView implements ActionListener{
 				int intReverseRow=0;
 				for(int intRow=7;intRow>3;intRow--){
 					for(int intClm=0;intClm<9;intClm++){
-						//If it isn't blank, then send it over
-						if(!thePrepPanel.strGOGArray[intRow][intClm].equals(" ")){
-							ssm.sendText("UpdatingPrepArray"+","+intReverseRow+","+intClm+","+thePrepPanel.strGOGArray[intRow][intClm]);
-						}
+						//Send over my side
+						ssm.sendText("UpdatingPrepArray"+","+intReverseRow+","+intClm+","+thePrepPanel.strGOGArray[intRow][intClm]);
 					}
 					intReverseRow++;
 				}
