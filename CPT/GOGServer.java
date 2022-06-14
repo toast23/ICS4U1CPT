@@ -67,12 +67,13 @@ public class GOGServer extends GOGView implements ActionListener{
 				//Put that message in our chatbox
 				if(strPlayer.equals("P1")){
 					theGamePanel.theTextArea.append("Chat"+","+theModel.strPlayer1Name + "," + theGamePanel.theTextField.getText() + "\n");
+					//Then send the message inside the spot we entered
+					ssm.sendText("Chat"+","+theModel.strPlayer1Name+","+theGamePanel.theTextField.getText());
 				}else if(strPlayer.equals("P2")){
 					theGamePanel.theTextArea.append("Chat"+","+theModel.strPlayer2Name + "," + theGamePanel.theTextField.getText() + "\n");
+					ssm.sendText("Chat"+","+theModel.strPlayer2Name+","+theGamePanel.theTextField.getText());
 				}
 				
-				//Then send the message inside the spot we entered
-				ssm.sendText("Chat"+","+strPlayer+","+theGamePanel.theTextField.getText());
 				
 				//We'll also blank the text field after they clicked enter
 				theGamePanel.theTextField.setText(" ");
