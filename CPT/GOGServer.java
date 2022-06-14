@@ -66,11 +66,11 @@ public class GOGServer extends GOGView implements ActionListener{
 			}else if(theGamePanel.blnMessageSending==true){
 				//Put that message in our chatbox
 				if(strPlayer.equals("P1")){
-					theGamePanel.theTextArea.append("Chat"+","+theModel.strPlayer1Name + "," + theGamePanel.theTextField.getText() + "\n");
+					theGamePanel.theTextArea.append(theModel.strPlayer1Name + "," + theGamePanel.theTextField.getText() + "\n");
 					//Then send the message inside the spot we entered
 					ssm.sendText("Chat"+","+theModel.strPlayer1Name+","+theGamePanel.theTextField.getText());
 				}else if(strPlayer.equals("P2")){
-					theGamePanel.theTextArea.append("Chat"+","+theModel.strPlayer2Name + "," + theGamePanel.theTextField.getText() + "\n");
+					theGamePanel.theTextArea.append(theModel.strPlayer2Name + "," + theGamePanel.theTextField.getText() + "\n");
 					ssm.sendText("Chat"+","+theModel.strPlayer2Name+","+theGamePanel.theTextField.getText());
 				}
 				
@@ -182,7 +182,7 @@ public class GOGServer extends GOGView implements ActionListener{
 			}else if(strIndex[0].equals("P2 Ready")){
 				thePrepPanel.blnPlayer2Ready=true;
 			}else if(strIndex[0].equals("Chat")){
-				theGamePanel.theTextArea.append(strIndex[1]+","+strIndex[2]);
+				theGamePanel.theTextArea.append(strIndex[1]+","+strIndex[2]+"\n");
 			}else if(strIndex[0].equals("Fate")){
 				theModel.strVictor=strIndex[1];
 			}
