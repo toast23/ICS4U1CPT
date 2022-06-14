@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import java.util.Arrays;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class GOGServer extends GOGView implements ActionListener{
@@ -225,24 +226,48 @@ public class GOGServer extends GOGView implements ActionListener{
 		
 		//If the client button is clicked
 		else if(evt.getSource()==theClientButton){
-			boolean blnValidNum; 
+			String[] IPArray;
+			boolean blnValidPort = false;
+			boolean blnValidIP = false;
+			int intTemp = 0;
+			int intCount = 0;
+	
 			try{
 				theLobbyPanel.intPortNumber = Integer.parseInt(theLobbyPanel.thePortTextField.getText());
-				blnValidNum = true;
-				
+				blnValidPort = true;
 			}
 			catch(NumberFormatException e){
 				System.out.println("number format exception");
-				blnValidNum = false;
 			}
 			
-			if(blnValidNum==true){
+			IPArray = theLobbyPanel.theIPAddressTextField.getText().split("[.]");
+			System.out.println(Arrays.toString(IPArray));
+			
+			// IP must have 4 octets
+			if (IPArray.length == 4) {
+				blnValidIP = true;
+			}
+			
+			// check if each octet is valid (is int)
+			while(intCount < IPArray.length) {
+				try {
+					intTemp = Integer.parseInt(IPArray[intCount]);
+				}
+				catch(NumberFormatException e) {
+					System.out.println("Number format exception");
+					blnValidIP = false;
+					break;
+				}
+				intCount++;
+			}
+					
+			// if port and ip numbers are valid	
+			if(blnValidPort && blnValidIP){
 				//We will set up the supersocketmaster client
 				setSSM("client");
 				
 				//We will also switch to game panel
 				prepSetup();
-				//gameSetup();
 			}
 			
 			//We will also make the game panel's array board the same as the model's
