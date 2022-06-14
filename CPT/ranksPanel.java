@@ -11,7 +11,9 @@ import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class ranksPanel extends JPanel{  
 	//Properties
+	// The font used for the Ranks page of the game
 	Font theGOGFont = this.loadFont("BEARPAW.TTF",50);
+	//Images used in the rank file
 	public BufferedImage imgFlag = null;
 	public BufferedImage imgPrivate = null;
 	public BufferedImage imgSpies = null;
@@ -31,6 +33,7 @@ public class ranksPanel extends JPanel{
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Method
+	// Load images in an Array and catch execptions for the images
 	public void loadImages(String[][] strImageArray){
 		try{
 			imgFlag = ImageIO.read(new File(strImageArray[0][2]));
@@ -146,7 +149,7 @@ public class ranksPanel extends JPanel{
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-	/** This method will paint the first half of the pieces */
+	 //This method will paint the first half of the pieces 
 	public void drawFirstHalf(Graphics g){
 		g.drawString("Pieces                            Ranks",50,50);
 		
@@ -166,7 +169,7 @@ public class ranksPanel extends JPanel{
 		g.drawImage(imgCaptain, 500, 640,null);
 	}
 	
-	/** This method will paint the second half of the pieces */
+	//This method will paint the second half of the pieces 
 	public void drawSecondHalf(Graphics g){
 		g.drawString("Pieces                            Ranks",690,85);
 		g.drawString("Major                               8",690,130);
@@ -187,7 +190,7 @@ public class ranksPanel extends JPanel{
 		g.drawImage(imgGeneral5,1200,625,null);
 	}
 	
-	/** This method allows us to draw the piece names, ranks, and images */
+	// This method allows us to draw the piece names, ranks, and images 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		g.setFont(theGOGFont);
@@ -198,7 +201,7 @@ public class ranksPanel extends JPanel{
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Constructor
-	/** This method constructs the panel that will allow us to see the ranks*/
+	// This method constructs the panel that will allow us to see the ranks
 	public ranksPanel(String[][] strImageArray){
 		super();
 		this.setLayout(null);

@@ -10,6 +10,7 @@ import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class gamePanel extends JPanel { 
+	//Font for the game Panel
 	Font theGOGFont = this.loadFont("BEARPAW.TTF", 20);	
 	public String strGOGArray[][] = GOGUtilities.makeEmptyBoardArray();
 	public BufferedImage imgBoard = null;
@@ -30,14 +31,14 @@ public class gamePanel extends JPanel {
 	public BufferedImage imgLieutenant2 = null;
 	public BufferedImage imgSergeant = null;
 	
-	//Timer stuff
+	//Timer for the game 
 	public JLabel theGameClockLabel=new JLabel("Time");
 	
 	//Information about player names
 	public JLabel thePlayer1Label = new JLabel("Player 1:");
 	public JLabel thePlayer2Label = new JLabel("Player 2:");
 	
-	//Text area stuff
+	//Text area 
 	public JTextArea theTextArea;
 	public JScrollPane theScroll;
 	public JTextField theTextField=new JTextField("Enter Code here");
@@ -61,7 +62,7 @@ public class gamePanel extends JPanel {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Methods for painting
-	/** The loadImages method allows us to use a specific font in our folder*/
+	//The loadImages method allows us to use a specific font in our folder
 	public void loadImages(String[][] strImageArray){
 		try{
 			imgBoard = ImageIO.read(new File("board.png"));
@@ -196,7 +197,7 @@ public class gamePanel extends JPanel {
 		theTextField.setFont(theGOGFont);
 		theTextField.setForeground(Color.PINK);
 	}
-	/** The paintPieces method allows us to paint privates, spies, flags, and other pieces onto the screen */
+	// The paintPieces method allows us to paint privates, spies, flags, and other pieces onto the screen 
 	public void paintPieces(Graphics g){
 		g.setColor(Color.WHITE);
 		
@@ -281,7 +282,7 @@ public class gamePanel extends JPanel {
 			}
 		}
 	}
-	/** The paintCharacters method allows us to paint the numbers on the top of the screen */
+	// The paintCharacters method allows us to paint the numbers on the top of the screen 
 	public void paintCharacters(Graphics g){
 		g.setFont(theGOGFont);
 		g.setColor(Color.BLACK);
@@ -295,11 +296,11 @@ public class gamePanel extends JPanel {
 		g.drawString("8",110+70*7,50);
 		g.drawString("9",110+70*8,50);
 	}
-	/** The paintBoard method allows us to paint the 9 row by 8 column array on the panel */
+	// The paintBoard method allows us to paint the 9 row by 8 column array on the panel
 	public void paintBoard(Graphics g){
 		g.drawImage(imgBoard,80,80,null);
 	}
-	/** the drawNewTime method allows us to update the time in hours, minutes, and seconds for the clock label */
+	// the drawNewTime method allows us to update the time in hours, minutes, and seconds for the clock label 
 	public void drawNewTime(String strPlayerTurn, int intP1TimeLeft, int intP2TimeLeft){
 		if(strPlayerTurn.equals("P1")){
 			int intHours = intP1TimeLeft/3600;
@@ -316,7 +317,7 @@ public class gamePanel extends JPanel {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//When they press on an area with a block, we do the following...
-	/** The checkBlock method allows us to check whether the point that was pressed is empty or contains a piece on the same team as you, which subsequently tells the panel to be active */
+	// The checkBlock method allows us to check whether the point that was pressed is empty or contains a piece on the same team as you, which subsequently tells the panel to be active */
 	public String checkBlock(int IntPosX, int IntPosY, String strPlayerTurn, String strPlayer){
 		int intClm;
 		int intRow;
@@ -360,7 +361,7 @@ public class gamePanel extends JPanel {
 		}
 		return strActivePiece;
 	}	
-	/** The getNewPosition method allows us to get the row and column that is determined based on coordinates */
+	// The getNewPosition method allows us to get the row and column that is determined based on coordinates 
 	public void getNewPosition(){	
 		//Inside a certain row and column...
 		for(int intRow=0;intRow<8;intRow++){
@@ -380,7 +381,7 @@ public class gamePanel extends JPanel {
 			}
 		}
 	}
-	/** The paintComponent command alloss us to paint the board, pieces, and characters onto the panel */
+	// The paintComponent command alloss us to paint the board, pieces, and characters onto the panel 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		paintBoard(g);	
@@ -391,30 +392,36 @@ public class gamePanel extends JPanel {
 		
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-	/** The gamePanel constructor method allows us to create the game panel, which we can use during gameplay */
+	// The gamePanel constructor method allows us to create the game panel, which we can use during gameplay 
 	public gamePanel(String[][] strImageArray){
 		super();
 		this.loadImages(strImageArray);
 		
+		//Set the background to White
 		this.setLayout(null);
 		this.setBackground(Color.WHITE);
 		
+		//The color of the font for the timer will be red and placed above the chat area
 		theGameClockLabel.setFont(theGOGFont);
 		theGameClockLabel.setForeground(Color.RED);
 		theGameClockLabel.setBounds(960,50,200,50);
 		this.add(theGameClockLabel);
 		
+		//Player 1's name
 		thePlayer1Label.setBounds(750,160,200,50);
 		this.add(thePlayer1Label);
 		
+		//Player 2's name
 		thePlayer2Label.setBounds(1040,160,200,50);
 		this.add(thePlayer2Label);
 		
+		//Chat Box and command box
 		theTextArea = new JTextArea();
 		theScroll = new JScrollPane(theTextArea);
 		theScroll.setBounds(720,200,550,350);
 		this.add(theScroll);
 		
+		// Boundaries for the text in the chat and command box 
 		theTextField.setBounds(720,550,550,100);
 		this.add(theTextField);
 	}
