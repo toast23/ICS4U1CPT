@@ -72,7 +72,7 @@ public class GOGServer extends GOGView implements ActionListener{
 				}
 				
 				//Then send the message inside the spot we entered
-				ssm.sendText(theGamePanel.theTextField.getText());
+				ssm.sendText("Chat"+","+strPlayer+","+theGamePanel.theTextField.getText());
 				
 				//We'll also blank the text field after they clicked enter
 				theGamePanel.theTextField.setText(" ");
