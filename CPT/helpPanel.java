@@ -16,7 +16,7 @@ public class helpPanel extends JPanel{
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Method
-	/** The loadFont method allows us to use a specific font in our folder*/
+	// The loadFont method allows us to use a specific font in our folder
 	public Font loadFont(String strFileName, int intSize){    
 		Font theFont = null;
 		// Try to load the font
@@ -48,7 +48,7 @@ public class helpPanel extends JPanel{
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-	/** The paintComponent method draws the instructions that can be given */
+	// The paintComponent method draws the instructions that can be given 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		//Draw boxes
