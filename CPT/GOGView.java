@@ -12,7 +12,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	//Properties
 	String[][] strImageArray = GOGUtilities.loadArray("ImageNames.csv");
 	Font theGOGFont = this.loadFont("BEARPAW.TTF",40);
-	//Frame and Window Stuff
+	/**Frame and Window Stuff*/
 	public JFrame theFrame = new JFrame("Game of the Generals");
 	public CardLayout card = new CardLayout(); 
 	public JPanel theViewPanel = new JPanel(); 
@@ -25,7 +25,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	public GOGModel theModel = new GOGModel();
 	public GOGFatePanel theFatePanel = new GOGFatePanel();
 	
-	//Button Stuff
+	/**Buttons used in the First Screen*/
 	public JButton theLobbyHelpButton = new JButton("Help!");
 	public JButton theGameHelpButton = new JButton("Help!");
 	public JButton thePrepHelpButton = new JButton("Help!");
@@ -107,16 +107,15 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		//System.out.println(e.toString());
 		}
     
-		// Then try to load the font from the local filesystem
+		/** Then load the font from the local filesystem*/
 		try{
 			theFont = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(strFileName)); 
 			return theFont.deriveFont(Font.PLAIN, intSize);
 		}catch(Exception e){
-			//System.out.println(e.toString());
 			System.out.println("Unable to load font file \""+strFileName+"\". Setting default font"); 
 		}
     
-		// Then load the default font if all else fails
+		/** If the font does not load, we load the default font*/
 		try{
 			theFont = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream("Hack-Regular.ttf")); 
 			return theFont.deriveFont(Font.PLAIN, 20);
@@ -258,7 +257,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		theModel.strWarning=" ";
 	}
 	
-	//These are unused commands that we need to override
+	/**These are unused commands that we need to override*/
 	public void mouseClicked(MouseEvent evt){}
 	public void mouseMoved(MouseEvent evt) {}
 	public void mouseExited(MouseEvent evt){}
@@ -268,6 +267,8 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 	/** The GOGView Constructor method allows us to switch between panels and use buttons */
 	public GOGView(){
 		super();
+		
+	/**The layout of the View Panel, the location of where everything is*/
 		theViewPanel.setLayout(card);
 		theViewPanel.add(theIntroAnimationPanel,"intro");
 		theViewPanel.add(theLobbyPanel, "lobby");
@@ -278,38 +279,48 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		theViewPanel.add(theFatePanel, "fate");
 		theViewPanel.setPreferredSize(new Dimension(1280,720));
 		
+		/**The Buttons in the panel*/
+		//Server Button
 		theServerButton.setFont(theGOGFont);
 		theServerButton.setBounds(10,10,200,50);
 		theLobbyPanel.add(theServerButton);
 		
+		//Client Button
 		theClientButton.setFont(theGOGFont);
 		theClientButton.setBounds(1070,10,200,50);
 		theLobbyPanel.add(theClientButton);
 		
+		//Help Button (in the First Screen)
 		theLobbyHelpButton.setFont(theGOGFont);
 		theLobbyHelpButton.setBounds(490,550,300,50);
 		theLobbyPanel.add(theLobbyHelpButton);
 		
+		//Help Button (When the server and client connect)
 		theGameHelpButton.setFont(theGOGFont);
 		theGameHelpButton.setBounds(750,100,480,50);
 		theGamePanel.add(theGameHelpButton);
 		
+		//Prepare Help button
 		thePrepHelpButton.setFont(theGOGFont);
 		thePrepHelpButton.setBounds(1000,90,270,50);
 		thePrepPanel.add(thePrepHelpButton);
 		
+		//Return Button (Help screen to the game)
 		theHelpReturnButton.setFont(theGOGFont);
 		theHelpReturnButton.setBounds(1100, 20, 120, 50);
 		theHelpPanel.add(theHelpReturnButton);
 		
+		//Rank Return Button (from rank screen to the help screen)
 		theRanksReturnButton.setFont(theGOGFont);
 		theRanksReturnButton.setBounds(1100, 20, 120, 50);
 		theRanksPanel.add(theRanksReturnButton);
 		
+		//The Rank Button (Shows the rank for the game)
 		theHelpRanksButton.setFont(theGOGFont);
 		theHelpRanksButton.setBounds(1100, 600, 120, 50);
 		theHelpPanel.add(theHelpRanksButton);
 		
+		//Ready button to start the game
 		theReadyButton.setFont(theGOGFont);
 		theReadyButton.setBounds(720,90,260,50);
 		thePrepPanel.add(theReadyButton);
@@ -320,6 +331,7 @@ public class GOGView extends JPanel implements MouseMotionListener, MouseListene
 		theFrame.setResizable(false);
 		theFrame.setVisible(true);
 		
+		//Adding Mouse and Motion Listeners for both the game and prep panel
 		theGamePanel.addMouseMotionListener(this);
 		theGamePanel.addMouseListener(this);
 		thePrepPanel.addMouseMotionListener(this);
