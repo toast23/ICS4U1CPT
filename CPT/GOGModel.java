@@ -37,7 +37,7 @@ public class GOGModel{
 	/** The checkPieceMovement method allows us to check which piece moves during a match. It will update our array accordingly based on where it moves */
 	public void checkPieceMovement(){
 		//update array file
-		//if it is not empty, then...
+		/**if the array file is not empty, run this*/
 		if(!strNextPositionPiece.equals(" ")){
 			//If both are the same team, don't let it move
 			if(strNextPositionPiece.substring(0,2).equals(strPlayerTurn)){
@@ -46,12 +46,12 @@ public class GOGModel{
 			}else{
 				blnOnSameTeam=false;
 			}
-		//if it is empty, then not on same team
+		/**if it is empty, then the pieces are not on same team*/
 		}else{
 			blnOnSameTeam=false;
 		}
 		
-		//if they're not on the same team, then compare and move
+		/**if they're not on the same team, then compare and move*/
 		if(blnOnSameTeam == false){
 			if((intOGRow+1==intNewRow && intOGClm==intNewClm) || (intOGRow-1==intNewRow && intOGClm==intNewClm) || (intOGRow==intNewRow && intOGClm+1==intNewClm) || (intOGRow==intNewRow && intOGClm-1==intNewClm)){
 				if(strActivePiece.equalsIgnoreCase(strPlayerTurn+"Flag")){

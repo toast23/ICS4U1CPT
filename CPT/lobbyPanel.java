@@ -11,10 +11,10 @@ import java.io.*;
 public class lobbyPanel extends JPanel {  
 	//Properties
 	
-	//We want cool looking words
+	/**The font used in the panel*/
 	Font theGOGFont = null;
 	
-	//This set of JComponents is for labels and ipAddress
+	/**This set of JComponents is for labels and ipAddress*/
 	JLabel theNameLabel = new JLabel("Enter Name Below");
 	TextField theNameTextField = new TextField("");
 	JLabel thePortLabel = new JLabel("Enter Port Number Below");
@@ -81,20 +81,26 @@ public class lobbyPanel extends JPanel {
 	/** The lobbyPanel constructor method creates the lobby panel with the labels and textfields in them! */
 	public lobbyPanel(){
 		this.setLayout(null);
+		//Name (Label)
 		theNameLabel.setBounds(400,130,600,55);
 		this.add(theNameLabel);
+		//Port Number (Label)
 		thePortLabel.setBounds(300,270,800,55);
 		this.add(thePortLabel);	
+		//IP Address (Label)
 		theIPAddressLabel.setBounds(300,400,800,55);
 		this.add(theIPAddressLabel);
 		
+		//Input your name
 		theNameTextField.setBounds(40,200,1200,50);
 		this.add(theNameTextField);
+		//Input the port number
 		thePortTextField.setBounds(40,325,1200,50);
 		this.add(thePortTextField);
+		//Input your IP Address
 		theIPAddressTextField.setBounds(40,470,1200,50);
 		this.add(theIPAddressTextField);
-		
+		//Change the font of the all the things in the lobby
 		this.changeFont();
 	}
 } 
