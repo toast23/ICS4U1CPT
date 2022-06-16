@@ -11,6 +11,7 @@ import java.io.*;
 /**The GOGFatePanel creates a win and lose screen at the end of each game*/
 public class GOGFatePanel extends JPanel{
 	//Properties
+	/**This is the String command where the text "win" or "lose" is printed*/
 	public String strFate = " ";
 	/**This is the image for the Win*/
 	public BufferedImage imgWin = null;

@@ -1,4 +1,5 @@
 //We import necessary libraries for functionality
+// 55 57 58 61 62 63 415 340 323 384 85 319 305 220 
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.color.*;
@@ -9,6 +10,7 @@ import javax.imageio.*;
 import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+/**The gamePanel where the game pieces and mechanics are made*/
 public class gamePanel extends JPanel { 
 	//Font for the game Panel
 	/**The font used for the Ranks page of the game*/
@@ -51,15 +53,21 @@ public class gamePanel extends JPanel {
 	public BufferedImage imgSergeant = null;
 	
 	//Timer for the game 
+	/**This is the Label for the Timer in the game*/
 	public JLabel theGameClockLabel=new JLabel("Time");
 	
 	//Information about player names
+	/**This is the Label for Player 1*/
 	public JLabel thePlayer1Label = new JLabel("Player 1:");
+	/**This is the Label for Player 2*/
 	public JLabel thePlayer2Label = new JLabel("Player 2:");
 	
 	//Text area 
+	/**This is to define the area of where the text will be shown*/
 	public JTextArea theTextArea;
+	/**This is for when the text area gets too long and needs to be scrolled up and down*/
 	public JScrollPane theScroll;
+	/**This is the textfield where the messages of the players will be typed*/
 	public JTextField theTextField=new JTextField("Enter Code here");
 	
 	int intImgX;
@@ -76,7 +84,7 @@ public class gamePanel extends JPanel {
 	int intNewRow;
 	int intNewClm;
 	String strPiecesToPaint;
-
+	/**This is to show messages are being send at the beginning of the command*/
 	public boolean blnMessageSending = false;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
