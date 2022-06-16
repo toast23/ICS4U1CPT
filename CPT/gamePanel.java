@@ -1,5 +1,4 @@
 //We import necessary libraries for functionality
-// 55 57 58 61 62 63 415 340 323 384 85 319 305 220 
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.color.*;
@@ -90,6 +89,7 @@ public class gamePanel extends JPanel {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//Methods for painting
 	//The loadImages method allows us to use a specific font in our folder
+	/**This is used to load the images into the array*/
 	public void loadImages(String[][] strImageArray){
 		try{
 			imgBoard = ImageIO.read(new File("board.png"));
@@ -224,7 +224,7 @@ public class gamePanel extends JPanel {
 		theTextField.setFont(theGOGFont);
 		theTextField.setForeground(Color.PINK);
 	}
-	// The paintPieces method allows us to paint privates, spies, flags, and other pieces onto the screen 
+	/** The paintPieces method allows us to paint privates, spies, flags, and other pieces onto the screen */
 	public void paintPieces(Graphics g){
 		g.setColor(Color.WHITE);
 		
@@ -309,7 +309,7 @@ public class gamePanel extends JPanel {
 			}
 		}
 	}
-	// The paintCharacters method allows us to paint the numbers on the top of the screen 
+	/** The paintCharacters method allows us to paint the numbers on the top of the screen */
 	public void paintCharacters(Graphics g){
 		g.setFont(theGOGFont);
 		g.setColor(Color.BLACK);
@@ -323,11 +323,11 @@ public class gamePanel extends JPanel {
 		g.drawString("8",110+70*7,50);
 		g.drawString("9",110+70*8,50);
 	}
-	// The paintBoard method allows us to paint the 9 row by 8 column array on the panel
+	/** The paintBoard method allows us to paint the 9 row by 8 column array on the panel*/
 	public void paintBoard(Graphics g){
 		g.drawImage(imgBoard,80,80,null);
 	}
-	// the drawNewTime method allows us to update the time in hours, minutes, and seconds for the clock label 
+	/** the drawNewTime method allows us to update the time in hours, minutes, and seconds for the clock label*/
 	public void drawNewTime(String strPlayerTurn, int intP1TimeLeft, int intP2TimeLeft){
 		if(strPlayerTurn.equals("P1")){
 			int intHours = intP1TimeLeft/3600;
@@ -388,7 +388,7 @@ public class gamePanel extends JPanel {
 		}
 		return strActivePiece;
 	}	
-	// The getNewPosition method allows us to get the row and column that is determined based on coordinates 
+	/** The getNewPosition method allows us to get the row and column that is determined based on coordinates */
 	public void getNewPosition(){	
 		//Inside a certain row and column...
 		for(int intRow=0;intRow<8;intRow++){
@@ -419,7 +419,7 @@ public class gamePanel extends JPanel {
 		
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-	// The gamePanel constructor method allows us to create the game panel, which we can use during gameplay 
+	/** The gamePanel constructor method allows us to create the game panel, which we can use during gameplay */
 	public gamePanel(String[][] strImageArray){
 		super();
 		this.loadImages(strImageArray);
