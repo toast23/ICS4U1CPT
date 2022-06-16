@@ -1,3 +1,10 @@
+/*	PROGRAM HEADER
+*Name of Project: ICS4U1B Grade 12 Final CPT Game of the Generals
+*Creator/Author: John Lu, Nicholas Kwok, Tony Yao
+*Date Last Edited: June 16, 2022
+*Version Number: 5.78
+*/
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
