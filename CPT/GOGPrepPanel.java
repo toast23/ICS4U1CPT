@@ -63,44 +63,75 @@ public class GOGPrepPanel extends JPanel {
 	
 	
 	//This variable tells us that no piece movement is currently happening
+	/** The blnActive variable tells us whether a piece is being dragged or not */
 	boolean blnActive=false;
+	/** The strActivePiece tells us the name of the piece that is being dragged */
 	String strActivePiece=null;
 	
 	//This will help us determine whether we can move to new row or not
-	int intOGRow=0;
-	int intOGClm=0;
-	int intNewRow=0;
-	int intNewClm=0;
+	/** The intOGRow  */
+	/** the ingOGClm variable is used to keep track of the original column the piece that is picked up was in */
+	public int intOGClm=0;
+	/** the intOGRow variable is used to keep track of the original row the piece that is picked up was in */
+	public int intOGRow=0;
+	/** the ingNewClm variable is used to keep track of the new column the piece that is dropped in */
+	public int intNewClm=0;
+	/** the ingNewRow variable is used to keep track of the new row the piece that is dropped in */
+	public int intNewRow=0;
 	
+	/** The blnPlayer1Ready variable tells us whether player 1 is ready or not */
 	boolean blnPlayer1Ready=false;
+	/** The blnPlayer2Ready variable tells us whether player 2 is ready or not */
 	boolean blnPlayer2Ready=false;
+	/** The blnUpdatingPrepArray variable tells us whether it is time to start updating the prepared array */
 	boolean blnUpdatingPrepArray=false;
+	/** The blnMakingArray variable tells us whether we should finalize and make the array or not */
 	boolean blnMakingArray=false;
 	
+	/** The ingFlag variable tells us how many flag pieces are in the inventory */
 	int intFlag=1;
+	/** The intPrivate variable tells us how many Private pieces are in the inventory */
 	int intPrivate=6;
+	/** The intSpy variable tells us how many Spy pieces are in the inventory */
 	int intSpy=2;
+	/** The intGeneral5 variable tells us how many 5 star general pieces are in the inventory */
 	int intGeneral5=1;
+	/** The intGeneral4 variable tells us how many 4 star general pieces are in the inventory */
 	int intGeneral4=1;
+	/** The intGeneral3 variable tells us how many 3 star general pieces are in the inventory */
 	int intGeneral3=1;
+	/** The intGeneral2 variable tells us how many 2 star general pieces are in the inventory */
 	int intGeneral2=1;
+	/** The intGeneral1 variable tells us how many 1 star general pieces are in the inventory */
 	int intGeneral1=1;
+	/** The intColonel variable tells us how many colonel pieces are in the inventory */
 	int intColonel=1;
+	/** The intLColonel variable tells us how many lieutenant colonel pieces are in the inventory */
 	int intLColonel=1;
+	/** The intMajor variable tells us how many major pieces are in the inventory */
 	int intMajor=1;
+	/** The intCaptain variable tells us how many captan pieces are in the inventory */
 	int intCaptain=1;
+	/** The intLieutenant1 variable tells us how many first lieutenant pieces are in the inventory */
 	int intLieutenant1=1;
+	/** The intLieutenant2 variable tells us how many second lieutenant pieces are in the inventory */
 	int intLieutenant2=1;
+	/** The sergeant variable tells us how many sergeant pieces are in the inventory */
 	int intSergeant=1;
 	
 	
 	//We need to distinguish 
+	/** The blnMovingStock variable tells us if we are moving a piece from the inventory */
 	boolean blnMovingStock=false;
+	/** The blnMovingPiece variable tells us if we are moving a piece from the board to another part of the board */
 	boolean blnMovingPiece=false;
 	
+	/** The strPlayer variable stores info on whether it's player 1 or 2 */
 	String strPlayer;
+	/** The strOtherPlayer variable stores info on whether the other player is player 1 or 2 */
 	String strOtherPlayer;
 	
+	/** The theWarningLabel variable stores info on what type of warning we should be giving*/
 	JLabel theWarningLabel = new JLabel(" ");
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
