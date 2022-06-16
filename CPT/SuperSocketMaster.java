@@ -18,15 +18,7 @@ import java.util.Enumeration;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * <h1>SuperSocketMaster</h1>
- * This class gives Java students the ability to quickly open a Java network socket<p>
- * They can then send outgoing text over the socket<p>
- * They can recieve incoming text over the socket<p>
- * Incoming text triggers an ActionEvent<p>
- * This class is meant to be used in Java Swing/AWT programs
- * @author  Alfred Cadawas
- * @version 2.0
- * @since   2016-04-21 
+ SuperSocketMaster class gives Java students the ability to quickly open a Java network socket. They can then send outgoing text over the socket. They can recieve incoming text over the socket. Incoming text triggers an ActionEvent. This class is meant to be used in Java Swing/AWT programs @author  Alfred Cadawas @version 2.0 @since   2016-04-21 
  */
 public class SuperSocketMaster{
   // Properties
