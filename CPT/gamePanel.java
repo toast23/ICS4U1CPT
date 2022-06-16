@@ -11,24 +11,43 @@ import java.io.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class gamePanel extends JPanel { 
 	//Font for the game Panel
+	/**The font used for the Ranks page of the game*/
 	Font theGOGFont = this.loadFont("BEARPAW.TTF", 20);	
+	/** This is the array*/
 	public String strGOGArray[][] = GOGUtilities.makeEmptyBoardArray();
+	/**This is the image for the Board*/
 	public BufferedImage imgBoard = null;
+	/**This is the image for the Flag*/
 	public BufferedImage imgFlag = null;
+	/**This is the image for the Private*/
 	public BufferedImage imgPrivate = null;
+	/**This is the image for the Spies*/
 	public BufferedImage imgSpies = null;
+	/**This is the image for the Fog so that the player cannot see the pieces of the opponent*/
 	public BufferedImage imgFogOfWar = null;
+	/**This is the image for the 5 star general*/
 	public BufferedImage imgGeneral5 = null;
+	/**This is the image for the 4 star general*/
 	public BufferedImage imgGeneral4 = null;
+	/**This is the image for the 3 star general*/
 	public BufferedImage imgGeneral3 = null;
+	/**This is the image for the 2 star general*/
 	public BufferedImage imgGeneral2 = null;
+	/**This is the image for the 1 star general*/
 	public BufferedImage imgGeneral1 = null;
+	/**This is the image for the Colonel*/
 	public BufferedImage imgColonel = null;
+	/**This is the image for the Lieutenant Colonel*/
 	public BufferedImage imgLColonel = null;
+	/**This is the image for the major*/
 	public BufferedImage imgMajor = null;
+	/**This is the image for the Captain*/
 	public BufferedImage imgCaptain = null;
+	/**This is the image for the 1st Lieutenant*/
 	public BufferedImage imgLieutenant1 = null;
+	/**This is the image for the 2nd Lieutenant*/
 	public BufferedImage imgLieutenant2 = null;
+	/**This is the image for the Sergeant*/
 	public BufferedImage imgSergeant = null;
 	
 	//Timer for the game 
