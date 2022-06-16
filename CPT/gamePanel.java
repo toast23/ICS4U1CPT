@@ -344,7 +344,7 @@ public class gamePanel extends JPanel {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	//When they press on an area with a block, we do the following...
-	// The checkBlock method allows us to check whether the point that was pressed is empty or contains a piece on the same team as you, which subsequently tells the panel to be active */
+	/** The checkBlock method allows us to check whether the point that was pressed is empty or contains a piece on the same team as you, which subsequently tells the panel to be active */
 	public String checkBlock(int IntPosX, int IntPosY, String strPlayerTurn, String strPlayer){
 		int intClm;
 		int intRow;
