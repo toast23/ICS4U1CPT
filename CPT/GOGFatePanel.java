@@ -8,10 +8,13 @@ import java.awt.image.*;
 import javax.imageio.*;
 import java.io.*;
 
+/**The GOGFatePanel creates a win and lose screen at the end of each game*/
 public class GOGFatePanel extends JPanel{
 	//Properties
 	public String strFate = " ";
+	/**This is the image for the Win*/
 	public BufferedImage imgWin = null;
+	/**This is the image for the Lose*/
 	public BufferedImage imgLose = null;
 	
 	//Methods
@@ -28,6 +31,7 @@ public class GOGFatePanel extends JPanel{
 	}
 	
 	//Constructor
+	/**This is used to construct the GOGFatePanel*/
 	public GOGFatePanel(){
 		/**Exceptions for the images used for the win and lose screen at the end of the game*/
 		try{
